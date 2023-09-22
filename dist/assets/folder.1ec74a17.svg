@@ -1,0 +1,7 @@
+<svg id="vuesax_bold_folder" data-name="vuesax/bold/folder" xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38">
+  <g id="folder">
+    <path id="Vector" d="M31.144,11.479H0V7A7,7,0,0,1,7,0h3.673a4.538,4.538,0,0,1,4.418,2.217l2.217,2.945c.491.649.554.728,1.472.728H23.2A8.447,8.447,0,0,1,31.144,11.479Z" transform="translate(3.167 3.167)" fill="#094e81"/>
+    <path id="Vector-2" data-name="Vector" d="M31.635,0l.032,9.342A8.48,8.48,0,0,1,23.2,17.813H8.471A8.48,8.48,0,0,1,0,9.342V0Z" transform="translate(3.167 17.02)" fill="#094e81"/>
+    <path id="Vector-3" data-name="Vector" d="M0,0H38V38H0Z" transform="translate(38 38) rotate(180)" fill="none" opacity="0"/>
+  </g>
+</svg>

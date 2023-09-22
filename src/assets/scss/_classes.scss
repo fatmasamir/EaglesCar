@@ -1,0 +1,85 @@
+.bg-red {
+  background-color: var(--first-color) !important;
+}
+
+.p-5p {
+  padding: 5px !important;
+}
+.p-40 {
+  padding: 40px !important;
+}
+
+.m-5p {
+  margin: 5px !important;
+}
+.mt-70 {
+  margin-top: 70px;
+}
+.hf-70 {
+  min-height: calc(100vh - 70px) !important;
+}
+.h-full {
+  min-height: 100vh !important;
+}
+.text-red {
+  color: var(--text-red-color) !important;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--first-color);
+}
+
+/* global styling */
+input[type="file"] {
+  height: auto;
+  opacity: 0;
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+input[type="checkbox"] {
+  vertical-align: middle;
+  accent-color: forestgreen !important;
+}
+textarea {
+  overflow: auto !important;
+}
+form {
+  .star::after {
+    content: "*";
+  }
+}
+.title_page {
+  padding: 10px 0px 5px;
+  font-size: 20px;
+  font-weight: bolder;
+}
+.card {
+  border: 0px !important;
+}
+.font-bold {
+  font-weight: bold;
+}
+.form-select:focus {
+  box-shadow: none !important;
+}
+a {
+  text-decoration: none !important;
+}
+.row {
+  max-width: 100% !important;
+  width: 100% !important;
+  overflow-x: hidden;
+}
