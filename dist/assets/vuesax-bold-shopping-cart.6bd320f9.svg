@@ -1,9 +1,0 @@
-<svg id="vuesax_bold_shopping-cart" data-name="vuesax/bold/shopping-cart" xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
-  <g id="shopping-cart">
-    <path id="Vector" d="M0,0H60V60H0Z" fill="none" opacity="0"/>
-    <path id="Vector-2" data-name="Vector" d="M8.75,4.375A4.375,4.375,0,1,1,4.375,0,4.375,4.375,0,0,1,8.75,4.375Z" transform="translate(36.25 47.5)" fill="#094e81"/>
-    <path id="Vector-3" data-name="Vector" d="M8.75,4.375A4.375,4.375,0,1,1,4.375,0,4.375,4.375,0,0,1,8.75,4.375Z" transform="translate(16.25 47.5)" fill="#094e81"/>
-    <path id="Vector-4" data-name="Vector" d="M8.975,6.725l-.5,6.125a1.983,1.983,0,0,0,2,2.15H48.75a2,2,0,0,0,2-1.85,7.393,7.393,0,0,0-7.475-8.025H12.55A6.817,6.817,0,0,0,11.025,2.1,6.648,6.648,0,0,0,6.225,0H1.875A1.889,1.889,0,0,0,0,1.875,1.889,1.889,0,0,0,1.875,3.75h4.35a2.744,2.744,0,0,1,2.75,2.975Z" transform="translate(3.125 3.125)" fill="#094e81"/>
-    <path id="Vector-5" data-name="Vector" d="M41.275,0H2.925a2.011,2.011,0,0,0-2,1.825L.025,12.7A7.306,7.306,0,0,0,7.3,20.625H35.1A7.494,7.494,0,0,0,42.425,13.8L43.25,2.125A1.956,1.956,0,0,0,41.275,0Z" transform="translate(10 21.875)" fill="#094e81"/>
-  </g>
-</svg>

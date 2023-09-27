@@ -33,35 +33,39 @@ let date = new Date();
 //   password.value = value;
 // };
 
-// handel submit
-const handelSubmit = async () => {
-  try {
-    const formData = new URLSearchParams();
-    formData.append("email", email.value!);
-    formData.append("password", password.value!);
-    await authStore.login(formData).then(() => {
-      if (authStore.is_auth) {
-        setTimeout(() => {
-          router.push("/Dashboard");
-        }, 1000);
-        authStore.is_waiting = false;
-      }
-    });
-  } catch (err) {
-    error.value = err as number;
-  }
-};
+// show/hide new password
 const switchVisibility = () => {
   passwordFieldType.value =
     passwordFieldType.value === "password" ? "text" : "password";
 };
+
+// handel submit
+const handelSubmit = async () => {
+  // try {
+  //   const formData = new URLSearchParams();
+  //   formData.append("email", email.value!);
+  //   formData.append("password", password.value!);
+  //   await authStore.login(formData).then(() => {
+  //     if (authStore.is_auth) {
+  //       setTimeout(() => {
+  //         router.push("/Dashboard");
+  //       }, 1000);
+  //       authStore.is_waiting = false;
+  //     }
+  //   });
+  // } catch (err) {
+  //   error.value = err as number;
+  // }
+  console.log("Login ");
+};
+
 onMounted(() => {
   AOS.init();
 });
 </script>
 
 <template>
-  <section class="login-form">
+  <section class="auth-form">
     <div class="row">
       <div class="col-lg-7 col-12 m-0 p-0 logo_box">
         <div
@@ -83,7 +87,7 @@ onMounted(() => {
         data-aos-easing="ease-in-out"
       >
         <div class="middle">
-          <div class="login_header text-start">
+          <div class="auth_header text-start">
             <h3>{{ t("Login") }}</h3>
             <p>{{ t("login_msg") }}</p>
             <div class="ContinueWith">
@@ -101,7 +105,7 @@ onMounted(() => {
               <p>{{ t("OR") }}</p>
             </div>
           </div>
-          <div class="form mx-3">
+          <div class="form mt-4">
             <div
               class="col-md-12 mt-3"
               data-aos="zoom-in-up"
@@ -202,271 +206,5 @@ onMounted(() => {
   </section>
 </template>
 <style lang="scss" scoped>
-@import "../../../assets/scss/_variables.scss";
-
-/* login-form */
-.login-form {
-  /* main-box */
-  .main-box {
-    height: 100vh;
-    max-width: 100%;
-    max-height: 100vh;
-    background: var(--white-color);
-    padding: 100px 40px 50px 60px;
-    border-radius: var(--main-border-radius);
-    &::-webkit-scrollbar {
-      width: 5px;
-    }
-    &::-webkit-scrollbar-track {
-      box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: transparent;
-      outline: 1px solid transparent;
-    }
-    .login_header {
-      h3,
-      p {
-        margin: 0;
-      }
-      h3 {
-        font-weight: 700;
-        margin: {
-          bottom: 10px;
-        }
-      }
-      p {
-        color: var(--second-text-color);
-        padding: 0px;
-      }
-    }
-
-    /* simple-input */
-    .simple-input {
-      label {
-        margin-bottom: 0;
-      }
-      text-align: initial;
-      input,
-      select {
-        height: 55px !important;
-        text-align: left;
-        background: #f9f9f9;
-      }
-    }
-    /* simple-button.send button */
-    .simple-button.send button {
-      width: 100%;
-      background: var(--orange-text-color);
-      height: 55px !important;
-    }
-    /* passwordField */
-    .passwordField {
-      position: relative;
-      /* pass_icon */
-      .pass_icon {
-        position: absolute;
-        right: 10px;
-        bottom: 15px;
-        cursor: pointer;
-        width: 24px;
-        height: 24px;
-      }
-    }
-    .domin_group {
-      .input-group-text {
-        background-color: rgba(
-          $color: var(--orange-text-color),
-          $alpha: 0.1
-        ) !important;
-        text-transform: lowercase;
-        border: 1px solid #dcddeb;
-        padding: 0 5px;
-        // border-top-left-radius: 8px !important;
-        // border-bottom-left-radius: 8px !important;
-        border-radius: 8px !important;
-        margin: 0 5px;
-        // order: 3;
-      }
-    }
-    /* ContinueWith */
-    .ContinueWith {
-      display: flex;
-      justify-content: start;
-      align-items: center;
-      margin: 10px 0px 30px;
-      margin-right: 50px;
-      a.card {
-        display: flex;
-        padding: 15px 14px;
-        justify-content: space-around;
-        background: #e5ecf3 !important;
-        cursor: pointer;
-        margin: 0px 10px;
-        width: max-content;
-        flex-direction: row;
-        align-items: center;
-        cursor: pointer;
-        margin: 0px 10px;
-        color: #2f3b48;
-        p {
-          margin: 0px 5px;
-        }
-        img {
-          width: 29px;
-          height: 29px;
-        }
-        &:first-child {
-          background: (229, 236, 243, 1);
-        }
-        &:hover {
-          background: #d4effe;
-        }
-      }
-    }
-    /* Or */
-    .Or {
-      p {
-        color: var(--orange-text-color);
-      }
-    }
-    /* register */
-    .register {
-      display: flex;
-      justify-content: center;
-      align-items: top;
-      p {
-        margin: 0px;
-      }
-      a {
-        color: var(--orange-text-color);
-      }
-    }
-    /* forget_remember */
-    .forget_remember {
-      display: flex;
-      justify-content: space-between;
-      align-content: center;
-      a {
-        color: #f4a71d !important;
-      }
-    }
-  }
-  /* logo_box */
-  .logo_box {
-    background: white;
-    margin: 0px;
-    padding: 0px;
-    position: relative;
-
-    /* logo */
-    .logo {
-      position: absolute;
-      top: 50px;
-      left: 50px;
-      right: auto;
-      color: white;
-      z-index: 2;
-    }
-
-    /* logo_box_img */
-    .logo_box_img {
-      width: 95%;
-      margin-right: 5%;
-      background: url(../../../assets/images/global/icons/global/Carbackground.svg)
-        no-repeat right center;
-      background-size: cover;
-      height: 100%;
-      img {
-        width: 100%;
-        height: 100%;
-        display: none;
-      }
-    }
-  }
-}
-
-/*media query */
-
-@media screen and (max-width: 1240px) {
-  .login-form .main-box .ContinueWith {
-    margin-right: 0px;
-    a.card {
-      margin-bottom: 20px;
-    }
-  }
-}
-@media screen and (max-width: 1078px) {
-  .login-form .main-box .ContinueWith {
-    a.card {
-      margin: 0px 5px;
-      padding: 8px;
-      p {
-        display: none;
-      }
-    }
-  }
-}
-@media screen and (max-width: 991px) {
-  .login-form .main-box {
-    width: 90%;
-    margin: auto;
-    .login_header {
-      p {
-        margin-right: 10px;
-      }
-    }
-    .forget_remember,
-    .register {
-      flex-direction: column;
-      text-align: center;
-    }
-  }
-  .login-form .logo_box .logo_box_img {
-    background: none;
-    img {
-      display: block;
-      width: 90%;
-      height: 100%;
-    }
-  }
-}
-@media screen and (max-width: 494px) {
-  .login-form .main-box {
-    padding: 60px 25px 50px;
-  }
-}
-</style>
-<style lang="scss">
-/*ar version */
-.is-ar {
-  .login-form {
-    .logo_box {
-      .logo {
-        position: absolute;
-        top: 50px;
-        right: 50px;
-        left: auto;
-      }
-      .logo_box_img {
-        transform: scaleX(-1);
-        -webkit-transform: scaleX(-1);
-        -ms-transform: scaleX(-1);
-        -o-transform: scaleX(-1);
-        margin-right: 0px;
-        margin-left: 5%;
-      }
-    }
-    .main-box .passwordField .pass_icon {
-      right: auto;
-      left: 10px;
-    }
-  }
-  .text-start,
-  .login-form .main-box .simple-input input[data-v-2ad4f39d],
-  .login-form .main-box .simple-input select[data-v-2ad4f39d] {
-    text-align: right !important;
-  }
-}
+@import "./AuthSyling.scss";
 </style>

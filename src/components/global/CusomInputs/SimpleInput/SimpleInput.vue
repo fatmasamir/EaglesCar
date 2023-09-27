@@ -38,7 +38,9 @@
     transition: var(--main-transition);
 
     &:focus {
-      border-color: var(--second-color);
+      border-color: var(--orange-text-color);
+      background: white !important;
+      box-shadow: none;
     }
     /* Chrome, Safari, Edge, Opera */
     &::-webkit-outer-spin-button,

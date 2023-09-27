@@ -12,10 +12,10 @@ const props = defineProps<{
 .simple-button {
   button,
   .btn {
-    min-width: 100px;
-    padding: 10px;
+    min-width: max-content;
+    padding: 15px;
     border: none;
-    border-radius: var(--main-border-radius);
+    border-radius: 3px;
     svg {
       width: 18px;
       height: 20px;
@@ -25,9 +25,9 @@ const props = defineProps<{
   &.send_blue {
     button,
     .btn {
-      background: var(--first-color);
+      background: var(--orange-text-color);
       color: var(--white-color);
-      min-width: 170px;
+      min-width: max-content;
     }
   }
   &.send_blue {
@@ -41,16 +41,16 @@ const props = defineProps<{
     .btn {
       background: var(--second-background);
       color: var(--text-gray-color);
-      min-width: 170px;
+      min-width: max-content;
     }
   }
   &.sub_button {
     button,
     .btn {
       background-color: transparent;
-      color: var(--first-color);
+      color: var(--orange-text-color);
       border: 1px solid;
-      min-width: 170px;
+      min-width: max-content;
     }
   }
 }
