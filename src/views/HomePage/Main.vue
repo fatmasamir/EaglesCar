@@ -8,9 +8,11 @@ import Rental from "@/components/pages/Hompage/Rental/index.vue";
 import Blogs from "@/components/pages/Hompage/Blogs/index.vue";
 import ClientsTestimonials from "@/components/pages/Hompage/ClientsTestimonials/index.vue";
 import FAQ from "@/components/pages/Hompage/FAQ/index.vue";
+import DownloadApp from "@/components/pages/Hompage/DownloadApp/index.vue";
+import Footer from "@/components/global/Footer/index.vue";
 </script>
 <template>
-  <section class="HomePage">
+  <section class="Pages">
     <NavBar></NavBar>
     <Header></Header>
     <Plan></Plan>
@@ -20,6 +22,8 @@ import FAQ from "@/components/pages/Hompage/FAQ/index.vue";
     <Blogs></Blogs>
     <ClientsTestimonials></ClientsTestimonials>
     <FAQ></FAQ>
+    <DownloadApp></DownloadApp>
+    <Footer></Footer>
   </section>
 </template>
 <style lang="scss">

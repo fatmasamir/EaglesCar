@@ -100,52 +100,34 @@ onMounted(() => {
               data-aos-easing="linear"
               data-aos-duration="500"
             >
-              <div class="col-md-6">
-                <!-- <SimpleInput>
-                  <input
-                    type="checkbox"
-                    id="Borrower"
-                    name="Borrower"
-                    :placeholder="t('Borrower')"
-                    required
-                    v-model="FormData.type"
-                    :checked="FormData.type == 'Borrower'"
-                  />
-                </SimpleInput> -->
-                <div
-                  class="image_chooes"
-                  :class="FormData.type == 'Borrower' ? 'active' : ''"
-                  @click="FormData.type = 'Borrower'"
-                >
-                  <img src="@/assets/images/global/icons/global/rental.svg" />
+              <div class="col-md-6 p-0">
+                <div class="content_Borrower">
+                  <div
+                    class="image_chooes"
+                    :class="FormData.type == 'Borrower' ? 'active' : ''"
+                    @click="FormData.type = 'Borrower'"
+                  >
+                    <img src="@/assets/images/global/icons/global/rental.svg" />
+                  </div>
+                  <p class="text-center">{{ t("Borrower") }}</p>
                 </div>
-                <p class="text-center">{{ t("Borrower") }}</p>
               </div>
-              <div class="col-md-6">
-                <!-- <SimpleInput>
-                  <input
-                    type="checkbox"
-                    id="Carrental"
-                    name="Carrental"
-                    :placeholder="t('Car_rental')"
-                    required
-                    v-model="FormData.type"
-                    :checked="FormData.type == 'Carrental'"
-                  />
-                </SimpleInput> -->
-                <div
-                  class="image_chooes"
-                  :class="FormData.type == 'Carrental' ? 'active' : ''"
-                  @click="FormData.type = 'Carrental'"
-                >
-                  <img
-                    src="@/assets/images/global/icons/global/car-rental.svg"
-                  />
+              <div class="col-md-6 p-0">
+                <div class="content_Car_rental">
+                  <div
+                    class="image_chooes"
+                    :class="FormData.type == 'Carrental' ? 'active' : ''"
+                    @click="FormData.type = 'Carrental'"
+                  >
+                    <img
+                      src="@/assets/images/global/icons/global/car-rental.svg"
+                    />
+                  </div>
+                  <p class="text-center">{{ t("Car_rental") }}</p>
                 </div>
-                <p class="text-center">{{ t("Car_rental") }}</p>
               </div>
             </div>
-            <div class="col-12 mt-2">
+            <div class="col-12 mt-2 mx-1">
               <SimpleButton type="send" class="register_lab">
                 <button
                   type="submit"
@@ -177,6 +159,17 @@ onMounted(() => {
 .auth-form {
   /* main-box */
   .main-box {
+    .content_Car_rental,
+    .content_Borrower {
+      margin: 0px;
+      padding: 0px;
+      &:first-child {
+        padding-left: 5px;
+      }
+      &:last-child {
+        padding-right: 5px;
+      }
+    }
     .image_chooes {
       background: #c4c4c43d;
       width: 100%;

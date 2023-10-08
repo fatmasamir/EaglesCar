@@ -150,7 +150,7 @@ onMounted(() => {
               </div>
             </div>
             <div
-              class="col-md-12 mt-3 passwordField"
+              class="col-md-12 mt-2 passwordField"
               data-aos="zoom-in-up"
               data-aos-easing="linear"
               data-aos-duration="700"
@@ -168,7 +168,7 @@ onMounted(() => {
               </SimpleInput>
             </div>
             <div
-              class="col-md-12 mt-3 passwordField"
+              class="col-md-12 mt-2 passwordField"
               data-aos="zoom-in-up"
               data-aos-easing="linear"
               data-aos-duration="700"
@@ -213,14 +213,14 @@ onMounted(() => {
                 />
               </SimpleInput>
             </div>
-            <div class="col-md-12 mt-3 forget_remember">
+            <div class="col-md-12 mt-1 mb-4 forget_remember">
               <div class="d-flex align-items-center">
                 <input type="checkbox" value="lsRememberMe" id="rememberMe" />
                 <label for="rememberMe" class="mx-2">
                   {{ t("Iaccept_conditions1") }}
-                  <span class="color-main">{{
+                  <router-link to="/privacy-policy" class="color-main">{{
                     t("Iaccept_conditions2")
-                  }}</span></label
+                  }}</router-link></label
                 >
               </div>
             </div>
@@ -257,6 +257,9 @@ onMounted(() => {
   /* main-box */
   .main-box {
     height: 100%;
+  }
+  a {
+    cursor: pointer;
   }
 }
 </style>

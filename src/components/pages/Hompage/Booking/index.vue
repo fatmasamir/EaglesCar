@@ -52,6 +52,15 @@ onMounted(() => {
           <div class="col-lg-4">
             <h2>{{ t("carName") }}</h2>
             <p>{{ t("bookingparagrah") }}</p>
+            <div class="flex my-4">
+              <router-link to="/" class="Nissan"
+                ><img
+                  src="../../../../assets/images/global/icons/global/Homepage/Nissan.svg"
+              /></router-link>
+              <router-link to="/" type="submit" class="Available_now">
+                {{ t("Available_now") }}
+              </router-link>
+            </div>
             <SimpleButton type="send">
               <router-link to="/" type="submit" class="btn">
                 {{ t("learn_more") }}
@@ -70,6 +79,7 @@ onMounted(() => {
   background: url("../../../../assets/images/global/icons/global/Homepage/background_booking.svg")
     no-repeat left center;
   .container {
+    overflow-y: hidden;
     h3 {
       font-weight: 700;
       margin-bottom: 50px;
@@ -99,7 +109,33 @@ onMounted(() => {
         margin-top: 10px;
       }
     }
+    .Nissan {
+      background: #efefef;
+      border-radius: 8px;
+      padding: 18px 50px;
+      margin-right: 10px;
+    }
+    .Available_now {
+      background: #44c308;
+      color: white;
+      padding: 15px;
+      border-radius: 6px;
+    }
   }
 }
 /*media" */
+
+/*ar version */
+.is-ar {
+  .booking .container .bookingSec {
+    text-align: right;
+  }
+  .booking .container .Nissan {
+    margin-right: 0px;
+    margin-left: 10px;
+  }
+  .booking .container .bookingSec .simple-button.send .btn img {
+    transform: scaleX(-1);
+  }
+}
 </style>

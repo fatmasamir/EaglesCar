@@ -11,6 +11,39 @@ import Register from "../views/auth/Register.vue";
 
 //Hompage
 import HomePage from "../views/HomePage/Main.vue";
+
+//Blogs page
+import Blogs from "../views/Blogs/Main.vue";
+
+//AboutUs page
+import AboutUs from "../views/AboutUs/Main.vue";
+
+//ContactUs page
+import ContactUs from "../views/ContactUs/Main.vue";
+
+//PrivacyPolicy page
+import PrivacyPolicy from "../views/PrivacyPolicy/Main.vue";
+
+//MostFaster page
+import MostFaster from "../views/MostFaster/Main.vue";
+
+//Support page
+import Support from "../views/Support/Main.vue";
+
+//Terms_conditions page
+import Terms_conditions from "../views/Terms_conditions/Main.vue";
+
+//HowItWorks page
+import HowItWorks from "../views/HowItWorks/Main.vue";
+
+//FavouritCar page
+import FavouritCar from "../views/FavouritCar/Main.vue";
+
+//CarRental page
+import CarRental from "../views/CarRental/Main.vue";
+
+//CarDetailes page
+import CarDetailes from "../views/CarDetailes/Main.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -116,6 +149,72 @@ const routes: Array<RouteRecordRaw> = [
     //     return `/Dashboard`;
     //   }
     // },
+  },
+  {
+    //Blogs
+    path: "/blogs",
+    name: "Blogs",
+    component: Blogs,
+  },
+  {
+    //AboutUs
+    path: "/about-us",
+    name: "AboutUs",
+    component: AboutUs,
+  },
+  {
+    //AboutUs
+    path: "/contact-us",
+    name: "ContactUs",
+    component: ContactUs,
+  },
+  {
+    //MostFaster
+    path: "/most-faster",
+    name: "MostFaster",
+    component: MostFaster,
+  },
+  {
+    //PrivacyPolicy
+    path: "/privacy-policy",
+    name: "PrivacyPolicy",
+    component: PrivacyPolicy,
+  },
+  {
+    //Terms_conditions
+    path: "/terms_conditions",
+    name: "Terms_conditions",
+    component: Terms_conditions,
+  },
+  {
+    //Support
+    path: "/support",
+    name: "Support",
+    component: Support,
+  },
+  {
+    //HowItWorks
+    path: "/how-it-works",
+    name: "HowItWorks",
+    component: HowItWorks,
+  },
+  {
+    //FavouritCar
+    path: "/favourit-car",
+    name: "FavouritCar",
+    component: FavouritCar,
+  },
+  {
+    //CarRental
+    path: "/car-rental",
+    name: "CarRental",
+    component: CarRental,
+  },
+  {
+    //CardsDetailes
+    path: "/car-detalies",
+    name: "CarDetailes",
+    component: CarDetailes,
   },
   {
     path: "/login",

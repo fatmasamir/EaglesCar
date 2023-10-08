@@ -111,7 +111,7 @@ onMounted(() => {
               data-aos-easing="linear"
               data-aos-duration="1100"
             >
-              <SimpleButton type="send" class="register_lab mx-3">
+              <SimpleButton type="send" class="register_lab">
                 <button
                   type="submit"
                   @click="handelSubmit"

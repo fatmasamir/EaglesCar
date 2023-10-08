@@ -27,22 +27,22 @@ let Links = ref<Link[]>([
   },
   {
     id: 2,
-    name: "Home",
+    name: "AboutUs",
     title: "About_us",
   },
   {
     id: 3,
-    name: "ForgetPassword",
+    name: "CarRental",
     title: "Car_rental",
   },
   {
     id: 4,
-    name: "Home",
+    name: "Blogs",
     title: "Blogs",
   },
   {
     id: 5,
-    name: "Home",
+    name: "ContactUs",
     title: "Contact_us",
   },
 ]);
@@ -60,6 +60,10 @@ let changeLang = (lang_targe: string) => {
   lang.value = lang_targe;
   console.log("  lang.value", lang.value);
   Language.changeLayout();
+};
+let changeshowMobile = () => {
+  console.log("changeshowMobile");
+  showMobileList.value = false;
 };
 </script>
 
@@ -84,7 +88,13 @@ let changeLang = (lang_targe: string) => {
         :lang="lang"
         @changeLang="changeLang"
         :class="showMobileList ? 'show' : ''"
+        @changeshowMobile="changeshowMobile()"
       />
+      <div class="light">
+        <div class="open">
+          <img src="../../../assets/images/global/icons/global/light.svg" />
+        </div>
+      </div>
     </div>
   </nav>
 </template>

@@ -51,7 +51,6 @@ onMounted(() => {
   </section>
 </template>
 <style scoped lang="scss">
-/****media****/
 .about-company {
   .row {
     padding-left: 7%;
@@ -76,11 +75,12 @@ onMounted(() => {
         border-radius: 8px;
       }
       .whatsapp {
-        position: absolute;
+        position: fixed;
         bottom: 10px;
         right: 20px;
         width: 60px;
         height: 60px;
+        z-index: 999;
       }
       .video {
         background: #f4a71d;
@@ -122,6 +122,35 @@ onMounted(() => {
     img {
       width: 40px;
       height: 40px;
+    }
+  }
+}
+
+/*ar version */
+.is-ar {
+  .about-company .row {
+    padding-left: 0%;
+    padding-right: 7%;
+    h2 {
+      padding-right: 0px;
+      padding-left: 50px;
+    }
+    .about-sec-img {
+      img {
+        margin-left: 0px;
+        margin-right: auto;
+      }
+      .video {
+        right: 15%;
+        left: auto;
+      }
+      .whatsapp {
+        right: auto;
+        left: 20px;
+      }
+    }
+    .simple-button.send .btn img {
+      transform: scaleX(-1);
     }
   }
 }

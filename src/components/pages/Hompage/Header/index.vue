@@ -14,7 +14,7 @@ onMounted(() => {
     <div class="container">
       <h1
         data-aos="fade-right"
-        data-aos-offset="300"
+        data-aos-offset="600"
         data-aos-easing="ease-in-out"
       >
         {{ t("save") }} <span class="color-main">{{ t("time") }}</span>
@@ -23,12 +23,7 @@ onMounted(() => {
         }}</span>
         {{ t("car_rental") }}
       </h1>
-      <div
-        class="card p-3 mt-4"
-        data-aos="fade-up"
-        data-aos-offset="300"
-        data-aos-easing="ease-in-out"
-      >
+      <div class="card p-3 mt-4">
         <h4>{{ t("Book_car") }}</h4>
         <div class="row flex">
           <div class="col-lg-4">
@@ -48,7 +43,7 @@ onMounted(() => {
           <div class="col-lg-3">
             <label
               ><img
-                src="../../../../assets/images/global/icons/global/Homepage/date.svg"
+                src="../../../../assets/images/global/icons/global/date.svg"
               />{{ t("Pick_up") }}</label
             >
             <SimpleInput
@@ -58,7 +53,7 @@ onMounted(() => {
           <div class="col-lg-3">
             <label
               ><img
-                src="../../../../assets/images/global/icons/global/Homepage/date.svg"
+                src="../../../../assets/images/global/icons/global/date.svg"
               />{{ t("Drop_of") }}</label
             >
             <SimpleInput
@@ -79,7 +74,7 @@ onMounted(() => {
       <div
         class="carImage"
         data-aos="fade-left"
-        data-aos-offset="300"
+        data-aos-offset="600"
         data-aos-easing="ease-in-out"
       >
         <img
@@ -89,7 +84,7 @@ onMounted(() => {
     </div>
   </header>
 </template>
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../../../../assets/scss/variables";
 header {
   background: url(../../../../assets/images/global/icons/global/Homepage/background_home.svg)
@@ -97,58 +92,67 @@ header {
   background-size: cover;
   height: max-content;
   width: 100%;
-  height: 100vh;
+  height: 746px;
   position: relative;
-  h1 {
-    color: white;
-    padding-top: 15%;
-    font-size: 50px;
-    line-height: 1.5;
-    font-weight: 700;
-  }
-  h4 {
-    font-weight: 700;
-    font-size: 26px;
-    margin: 20px 0px;
-  }
-  .card {
-    width: 75%;
-    .row.flex {
-      align-items: center;
-      label {
-        vertical-align: middle;
-        font-weight: 600;
-        margin-bottom: 10px;
-        img {
-          margin-right: 5px;
-          display: inline-block;
-          vertical-align: unset;
+  .container {
+    overflow-y: hidden;
+    h1 {
+      color: white;
+      padding-top: 16%;
+      font-size: 50px;
+      line-height: 1.5;
+      font-weight: 700;
+      padding-bottom: 20px;
+    }
+    h4 {
+      font-weight: 700;
+      font-size: 26px;
+      margin: 0px 0px 20px;
+    }
+    .card {
+      width: 73%;
+      .row.flex {
+        align-items: center;
+        label {
+          vertical-align: middle;
+          font-weight: 600;
+          margin-bottom: 10px;
+          img {
+            margin-right: 5px;
+            display: inline-block;
+            vertical-align: unset;
+          }
         }
-      }
-      input {
-        text-align: left;
-      }
-      button {
-        text-align: center;
-        padding: 10px 20px;
-        img {
-          margin-right: 5px;
-          display: inline-block;
-          width: 24px;
-          height: 24px;
-          margin: 0px 10px;
+        input {
+          text-align: left;
+          border-radius: 0px;
+          height: 47px;
+        }
+        button {
+          text-align: center;
+          padding: 10px 20px;
+          box-shadow: 0px 10px 50px 0px #f4a71e69;
+          border-radius: 0px;
+
+          img {
+            margin-right: 5px;
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            margin: 0px 10px;
+          }
         }
       }
     }
-  }
-  .carImage {
-    position: absolute;
-    z-index: 2;
-    right: 10px;
-    top: 63%;
-    img {
-      width: 100%;
-      height: 100%;
+    .carImage {
+      position: absolute;
+      z-index: 2;
+      right: -10px;
+      top: 59%;
+      img {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 }
@@ -165,13 +169,32 @@ header {
     }
   }
 }
+@media screen and (max-width: 1210px) {
+  header {
+    .container {
+      .card {
+        width: 95%;
+        margin: auto;
+      }
+    }
+  }
+}
 @media screen and (max-width: 992px) {
   header {
     padding-bottom: 150px;
     height: auto;
-    h1 {
-      padding-top: 25%;
-      font-size: 30px;
+    .container {
+      .card {
+        width: 95%;
+        margin: auto;
+      }
+      .carImage {
+        position: relative;
+      }
+      h1 {
+        padding-top: 25%;
+        font-size: 30px;
+      }
     }
   }
 }
@@ -192,7 +215,10 @@ header {
   header .carImage {
     left: 10px;
     right: auto;
-    transform: scaleX(-1);
+    img {
+      transform: scaleX(-1);
+      -webkit-transform: scaleX(-1);
+    }
   }
 }
 </style>

@@ -42,7 +42,7 @@ onMounted(() => {
   <section class="Blogs">
     <div class="container">
       <div class="row">
-        <h6 class="color-main p-0">{{ t("BookNow") }}</h6>
+        <h6 class="color-main p-0">{{ t("New_information") }}</h6>
         <h3>{{ t("Our_blogs") }}</h3>
         <ul class="blogs_list row">
           <li class="col-lg-3 col-md-6" v-for="list in Lists" :key="list.id">
@@ -70,6 +70,7 @@ onMounted(() => {
   .container {
     max-width: 95%;
     .row {
+      overflow-x: hidden;
       margin: 0px !important;
       h3 {
         font-weight: 700;
@@ -83,7 +84,7 @@ onMounted(() => {
         li {
           margin: auto;
           position: relative;
-          padding: 5px;
+          padding-left: 0px;
           img {
             width: 100%;
             object-fit: contain;
@@ -139,11 +140,18 @@ onMounted(() => {
           height: auto;
         }
       }
+      .row .blogs_list li .info {
+        width: 100%;
+      }
     }
   }
 }
 
 /*ar version */
 .is-ar {
+  .Blogs .container .row .blogs_list li {
+    padding-right: 5px;
+    padding-left: 0px;
+  }
 }
 </style>

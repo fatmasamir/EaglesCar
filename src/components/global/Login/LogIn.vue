@@ -15,7 +15,7 @@ const router = useRouter();
 const authStore = useAuthStore();
 
 // input
-const email = ref<string>("user@app.com");
+const email = ref<string>("");
 const password = ref<string>("");
 // input password type
 const passwordFieldType = ref<string>("password");
@@ -25,8 +25,6 @@ const { t } = useI18n();
 
 // error
 const error = ref<number>();
-
-let date = new Date();
 
 // update password
 // const updatePassword = (value: string) => {
@@ -115,17 +113,17 @@ onMounted(() => {
               <SimpleInput>
                 <!-- <label>Email <span class="text-red">*</span> </label> -->
                 <input
-                  type="number"
-                  id="file-name"
-                  name="file-name"
-                  :placeholder="t('number')"
+                  type="email"
+                  id="email"
+                  name="email"
+                  :placeholder="t('email')"
                   required
-                  v-model="Number"
+                  v-model="email"
                 />
               </SimpleInput>
             </div>
             <div
-              class="col-md-12 mt-3 passwordField"
+              class="col-md-12 mt-2 passwordField"
               data-aos="zoom-in-up"
               data-aos-easing="linear"
               data-aos-duration="700"
@@ -153,7 +151,7 @@ onMounted(() => {
               </SimpleInput>
             </div>
             <div
-              class="col-md-12 mt-3 forget_remember"
+              class="col-md-12 mt-1 mb-4 forget_remember"
               data-aos="zoom-in-up"
               data-aos-easing="linear"
               data-aos-duration="900"

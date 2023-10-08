@@ -129,11 +129,13 @@ onMounted(() => {
   .fquestion {
     width: 70%;
     margin: auto;
+    overflow: hidden;
     margin-left: 10%;
     .accordion-item {
       margin-bottom: 20px;
       border: 0px;
       box-shadow: 0px 3px 6px 0px #0000000d;
+      text-align: left;
     }
     .accordion-button:not(.collapsed) {
       color: white;
@@ -143,6 +145,7 @@ onMounted(() => {
       background-image: url("../../../../assets/images/global/icons/global/Homepage/arrow_top.svg");
       width: 20px;
       height: 20px;
+      transform: scaleX(-1);
     }
   }
   .img_faq img {
@@ -157,10 +160,14 @@ onMounted(() => {
 }
 @media screen and (max-width: 992px) {
   .FAQ {
-    .fquestion {
-      width: 100%;
-      .accordion {
-        width: 90%;
+    .row {
+      overflow-y: hidden;
+      .fquestion {
+        width: 95%;
+        margin: auto;
+        .accordion {
+          width: 90%;
+        }
       }
     }
     .img_faq img {
@@ -171,5 +178,14 @@ onMounted(() => {
 
 /*ar version */
 .is-ar {
+  .FAQ {
+    .img_faq img {
+      transform: scalex(-1);
+    }
+  }
+  .accordion-button::after {
+    position: absolute;
+    left: 10px;
+  }
 }
 </style>

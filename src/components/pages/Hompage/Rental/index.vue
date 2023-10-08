@@ -41,6 +41,7 @@ onMounted(() => {
 .rental {
   height: auto;
   .row {
+    overflow-y: hidden;
     margin: 0px !important;
     background: #2d2d2d;
     .imageRental {

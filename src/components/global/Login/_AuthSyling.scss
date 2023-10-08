@@ -50,7 +50,7 @@
       text-align: initial;
       input,
       select {
-        height: 55px !important;
+        height: 60px !important;
         text-align: left;
         background: #f9f9f9;
         width: 100%;
@@ -59,8 +59,9 @@
     /* simple-button.send button */
     .simple-button.send button {
       width: 100%;
-      height: 55px !important;
+      height: 64px !important;
       margin-top: 5px;
+      border-radius: 8px;
       min-width: auto;
       &:disabled {
         background: #dbdbdb;

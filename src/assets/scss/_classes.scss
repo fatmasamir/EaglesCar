@@ -43,7 +43,6 @@
 /* global styling */
 body {
   overflow-x: hidden;
-  padding-bottom: 150px;
 }
 input[type="file"] {
   height: auto;
@@ -89,6 +88,9 @@ a {
 .row {
   max-width: 100% !important;
   width: 100% !important;
+  overflow-x: hidden;
+}
+.container {
   overflow-x: hidden;
 }
 .color-main {

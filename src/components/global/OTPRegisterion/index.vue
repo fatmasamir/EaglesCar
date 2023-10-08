@@ -112,7 +112,7 @@ onMounted(() => {
               data-aos-easing="linear"
               data-aos-duration="1100"
             >
-              <SimpleButton type="send" class="register_lab mx-3">
+              <SimpleButton type="send" class="register_lab">
                 <button
                   type="submit"
                   @click="handelSubmit"
@@ -145,73 +145,5 @@ onMounted(() => {
 </template>
 <style lang="scss">
 @import "../Login/AuthSyling.scss";
-
-/* otp-form */
-.otp-form {
-  /* main-box */
-  .main-box {
-    padding: 100px 0px 70px;
-    /* otp-input  */
-    .style_otp {
-      flex-direction: row;
-      display: flex;
-      .otp-input {
-        width: 65%;
-        height: 40px;
-        padding: 5px;
-        margin: 0 10px;
-        font-size: 20px;
-        border-radius: 4px;
-        border: 1px solid rgba(0, 0, 0, 0.3);
-        text-align: center;
-        padding: 8px;
-        outline: none;
-        height: 55px !important;
-        background: #f9f9f9;
-        border: 1px solid var(--second-gray-border-color);
-      }
-      /* Background colour of an input field with value */
-
-      .otp-input.is-complete {
-        background-color: #e4e4e4;
-      }
-      .otp-input::-webkit-inner-spin-button,
-      .otp-input::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-      }
-      input::placeholder {
-        font-size: 15px;
-        text-align: center;
-        font-weight: 600;
-      }
-    }
-  }
-}
-
-/*media query */
-@media screen and (max-width: 991px) {
-  .auth-form .main-box {
-    width: 80%;
-    margin: auto;
-    .forget-header {
-      p {
-        margin-right: 10px;
-      }
-    }
-  }
-}
-@media screen and (max-width: 494px) {
-  .auth-form .main-box {
-    padding: 50px 5px;
-    .col-4 {
-      margin: 0px;
-      padding: 5px;
-    }
-  }
-  .otp-form .main-box .style_otp .otp-input {
-    margin: 0px;
-    width: 85%;
-  }
-}
+@import "../OTP/stylingOtp.scss";
 </style>
