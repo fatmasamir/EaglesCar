@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
 import { onMounted } from "vue";
-import LookingFor from "./LookingFor/index.vue";
+import FillterHeader from "../../global/FillterHeader/index.vue";
 import Fillter from "./Fillter/index.vue";
 import CardsDetailes from "./CardsDetailes/index.vue";
 import AOS from "aos";
@@ -13,7 +13,7 @@ onMounted(() => {
 <template>
   <section class="CarRental">
     <div class="container">
-      <div class="LookingFor"><LookingFor /></div>
+      <div class="LookingFor"><FillterHeader /></div>
       <div class="row">
         <div class="col-lg-4"><Fillter /></div>
         <div class="col-lg-8"><CardsDetailes /></div>
@@ -23,13 +23,12 @@ onMounted(() => {
 </template>
 <style scoped lang="scss">
 .CarRental {
-  padding-top: 150px;
+  padding-top: 200px;
   position: relative;
   .LookingFor {
     position: absolute;
-    width: 100%;
     top: -120px;
-    left: 0px;
+    width: 100%;
   }
 }
 /*media" */

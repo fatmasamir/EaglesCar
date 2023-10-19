@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import SimpleInput from "@/components/global/CusomInputs/SimpleInput/SimpleInput.vue";
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
-
 import AOS from "aos";
+
+//useI18n
 const { t } = useI18n();
+
+//Driver
+const Driver = ref(true);
+
+//onMounted
 onMounted(() => {
   AOS.init();
 });
@@ -14,6 +20,21 @@ onMounted(() => {
   <section class="Fillter">
     <h4>{{ t("Search_filter") }}</h4>
     <div class="row">
+      <div class="col-lg-12">
+        <label
+          ><img
+            src="../../../../assets/images/global/icons/global/Homepage/location.svg"
+          />{{ t("Car_condition") }}</label
+        >
+        <div class="choose_Car_condition">
+          <div :class="Driver ? 'active' : ''" @click="Driver = true">
+            With driver
+          </div>
+          <div :class="!Driver ? 'active' : ''" @click="Driver = false">
+            Without driver
+          </div>
+        </div>
+      </div>
       <div class="col-lg-12">
         <label
           ><img
@@ -133,6 +154,27 @@ onMounted(() => {
   }
   .row {
     margin: auto;
+    /* choose_Car_condition */
+    .choose_Car_condition {
+      display: flex;
+      margin-bottom: 15px;
+      text-align: center;
+      cursor: pointer;
+      > div {
+        text-align: center;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #757575;
+        width: 50%;
+        &:first-child {
+          margin-right: 10px;
+        }
+      }
+      .active {
+        border: 1px solid #f4a71d;
+        color: #f4a71d;
+      }
+    }
     /* Rate */
     .rate {
       width: 100%;

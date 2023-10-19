@@ -2,9 +2,7 @@
 import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useAuthStore } from "@/stores/auth";
-import NicePassword from "@/components/global/CusomInputs/NicePassword/NicePassword.vue";
 import { useRouter } from "vue-router";
-import SimpleInput from "@/components/global/CusomInputs/SimpleInput/SimpleInput.vue";
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
 import AOS from "aos";
 import VOtpInput from "vue3-otp-input";
@@ -18,9 +16,6 @@ const authStore = useAuthStore();
 // i18n
 const { t } = useI18n();
 
-// date
-let date = new Date();
-
 // otpInput
 const otpInput = ref<InstanceType<typeof VOtpInput> | null>(null);
 const bindModal = ref("");
@@ -32,26 +27,17 @@ const handleOnComplete = (value: string) => {
 
 // handel submit
 const handelSubmit = async () => {
-  // try {
-  //   const formData = new URLSearchParams();
-  //   formData.append("email", email.value!);
-  //   formData.append("password", password.value!);
-  //   await authStore.login(formData).then(() => {
-  //     if (authStore.is_auth) {
-  //       setTimeout(() => {
-  //         router.push("/Dashboard");
-  //       }, 1000);
-  //       authStore.is_waiting = false;
-  //     }
-  //   });
-  // } catch (err) {
-  //   error.value = err as number;
-  // }
-  console.log("OTP changed: ", bindModal.value);
+  authStore.resetPassword.otp = bindModal.value;
+  console.log("authStore.resetPassword.login", authStore.resetPassword);
   router.push("/reset-password");
 };
 onMounted(() => {
   AOS.init();
+  if (!authStore.resetPassword.login) {
+    setTimeout(() => {
+      router.push("/forget-password");
+    }, 2000);
+  }
 });
 </script>
 
@@ -82,7 +68,14 @@ onMounted(() => {
             <h3>{{ t("OTPTitle") }}</h3>
             <p>{{ t("forget_msg") }}</p>
           </div>
-          <div class="form mt-5">
+          <div class="form mt-3">
+            <div
+              class="alert alert-danger mb-4"
+              role="alert"
+              v-if="!authStore.resetPassword.login"
+            >
+              You Must Have phone Number
+            </div>
             <div class="style_otp">
               <v-otp-input
                 ref="otpInput"

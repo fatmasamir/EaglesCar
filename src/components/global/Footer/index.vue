@@ -13,7 +13,11 @@ onMounted(() => {
     <div class="container">
       <div class="row">
         <div class="col-lg-4">
-          <div class="Logo"><router-link to="#">Logo</router-link></div>
+          <div class="Logo">
+            <router-link to="#">
+              <img src="../../../assets//images//global/icons/global/logo.svg"
+            /></router-link>
+          </div>
           <p>
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry's standard dummy text
@@ -56,7 +60,7 @@ onMounted(() => {
           <h5>{{ t("About") }}</h5>
           <ul class="about_us">
             <li>
-              <router-link to="#">
+              <router-link to="/about-us">
                 <img
                   src="../../../assets/images/global/icons/global/Homepage/icons/Frame.svg"
                 />
@@ -69,6 +73,14 @@ onMounted(() => {
                   src="../../../assets/images/global/icons/global/Homepage/icons/Frame.svg"
                 />
                 {{ t("Terms_conditions") }}</router-link
+              >
+            </li>
+            <li>
+              <router-link to="/privacy-policy">
+                <img
+                  src="../../../assets/images/global/icons/global/Homepage/icons/Frame.svg"
+                />
+                {{ t("privacy_policy") }}</router-link
               >
             </li>
             <li>

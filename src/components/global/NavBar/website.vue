@@ -1,17 +1,38 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
-import { defineProps, defineEmits } from "vue";
-
+import { useAuthStore } from "@/stores/auth";
+import signoutGoogle from "./signoutGoogle.vue";
+import LogoutFacebook from "../ContinueSocial/logoutFacebook.vue";
+import { defineProps, defineEmits, ref, watch, onMounted } from "vue";
 // props
 let props = defineProps(["Links", "lang"]);
-let emit = defineEmits(["changeLang"]);
+let emit = defineEmits(["changeLang", "Logout"]);
+
+// auth store
+const authStore = useAuthStore();
+
 // i18n
 const { t } = useI18n();
 
+//Login
+const Login = ref();
+
+//type
+const type = localStorage.getItem("type");
+
+//Logout
+const LogoutFun = () => {
+  emit("Logout");
+};
+//changeLangEmit
 const changeLangEmit = (lang_targe: String) => {
   emit("changeLang", lang_targe);
 };
+//onMounted page
+onMounted(() => {
+  Login.value = localStorage.getItem("access_token");
+});
 </script>
 
 <template>
@@ -34,12 +55,16 @@ const changeLangEmit = (lang_targe: String) => {
     <div
       class="navbar-btns navbar-btns-icons navbar-btns-icons-authonticaTION d-flex align-items-center"
     >
+      <!-- register button -->
       <SimpleButton type="send">
-        <router-link to="/register" class="btn btn-main">
+        <router-link to="/register" class="btn btn-main" v-if="!Login">
           {{ t("Signup") }}
         </router-link></SimpleButton
       >
-      <router-link to="/login" class="btn mx-4">{{ t("Login") }}</router-link>
+      <!-- login button -->
+      <router-link to="/login" class="btn mx-4" v-if="!Login">{{
+        t("Login")
+      }}</router-link>
       <!-- lang -->
       <div class="lang">
         <button v-if="props.lang == 'ar'" @click="changeLangEmit('en')">
@@ -48,6 +73,29 @@ const changeLangEmit = (lang_targe: String) => {
         <button v-else @click="changeLangEmit('ar')">
           <img src="@/assets//images/global/icons/global/flag-eng.svg" />
         </button>
+      </div>
+      <!-- light button -->
+      <div class="light">
+        <div class="open">
+          <img src="../../../assets/images/global/icons/global/light.svg" />
+        </div>
+      </div>
+
+      <!--if Login-->
+
+      <div v-if="Login">
+        <!--if signin or login by google-->
+        <signoutGoogle v-if="type == 'Google'" />
+
+        <!--if signin or login by facebook-->
+        <LogoutFacebook v-if="type == 'facebook'" />
+
+        <!--if signin or login by account-->
+        <SimpleButton type="send" v-if="type == 'account'">
+          <button class="btn logout" @click="LogoutFun">
+            {{ t("Logout") }}
+          </button>
+        </SimpleButton>
       </div>
     </div>
   </div>

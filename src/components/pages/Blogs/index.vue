@@ -1,7 +1,13 @@
 <script lang="ts" setup>
 import { ref, onMounted, watch } from "vue";
 import AOS from "aos";
+import { defineProps } from "vue";
 
+// props
+let props = defineProps(["Bloges"]);
+
+// data
+let data = ref();
 //page
 let page = ref(1);
 
@@ -9,113 +15,36 @@ let page = ref(1);
 let perPage = 10;
 
 //data
-let data = ref([
-  {
-    id: 1,
-    date: "18 May 2022",
-    name: "Article name",
-    image: new URL(`./images/blog1.png`, import.meta.url).href,
-    paragraph: "Here it will include the data about this article",
-  },
-  {
-    id: 2,
-    date: "18 May 2022",
-    name: "Article name",
-    image: new URL(`./images/blog2.png`, import.meta.url).href,
-    paragraph: "Here it will include the data about this article",
-  },
-  {
-    id: 3,
-    date: "18 May 2022",
-    name: "Article name",
-    image: new URL(`./images/blog3.png`, import.meta.url).href,
-    paragraph: "Here it will include the data about this article",
-  },
-  {
-    id: 4,
-    date: "18 May 2022",
-    name: "Article name",
-    image: new URL(`./images/blog4.png`, import.meta.url).href,
-    paragraph: "Here it will include the data about this article",
-  },
-  {
-    id: 5,
-    date: "18 May 2022",
-    name: "Article name",
-    image: new URL(`./images/blog4.png`, import.meta.url).href,
-    paragraph: "Here it will include the data about this article",
-  },
-  {
-    id: 6,
-    date: "18 May 2022",
-    name: "Article name",
-    image: new URL(`./images/blog4.png`, import.meta.url).href,
-    paragraph: "Here it will include the data about this article",
-  },
-  {
-    id: 7,
-    date: "18 May 2022",
-    name: "Article name",
-    image: new URL(`./images/blog4.png`, import.meta.url).href,
-    paragraph: "Here it will include the data about this article",
-  },
-  {
-    id: 8,
-    date: "18 May 2022",
-    name: "Article name",
-    image: new URL(`./images/blog4.png`, import.meta.url).href,
-    paragraph: "Here it will include the data about this article",
-  },
-  {
-    id: 9,
-    date: "18 May 2022",
-    name: "Article name",
-    image: new URL(`./images/blog4.png`, import.meta.url).href,
-    paragraph: "Here it will include the data about this article",
-  },
-  {
-    id: 10,
-    date: "18 May 2022",
-    name: "Article name",
-    image: new URL(`./images/blog4.png`, import.meta.url).href,
-    paragraph: "Here it will include the data about this article",
-  },
-  {
-    id: 11,
-    date: "18 May 2022",
-    name: "Article name",
-    image: new URL(`./images/blog4.png`, import.meta.url).href,
-    paragraph: "Here it will include the data about this article",
-  },
-  {
-    id: 12,
-    date: "18 May 2022",
-    name: "Article name",
-    image: new URL(`./images/blog4.png`, import.meta.url).href,
-    paragraph: "Here it will include the data about this article",
-  },
-  {
-    id: 14,
-    date: "18 May 2022",
-    name: "Article name",
-    image: new URL(`./images/blog4.png`, import.meta.url).href,
-    paragraph: "Here it will include the data about this article",
-  },
-  {
-    id: 15,
-    date: "18 May 2022",
-    name: "Article name",
-    image: new URL(`./images/blog4.png`, import.meta.url).href,
-    paragraph: "Here it will include the data about this article",
-  },
-  {
-    id: 16,
-    date: "18 May 2022",
-    name: "Article name",
-    image: new URL(`./images/blog4.png`, import.meta.url).href,
-    paragraph: "Here it will include the data about this article",
-  },
-]);
+// let data = ref([
+//   {
+//     id: 1,
+//     date: "18 May 2022",
+//     name: "Article name",
+//     image: new URL(`./images/blog1.png`, import.meta.url).href,
+//     paragraph: "Here it will include the data about this article",
+//   },
+//   {
+//     id: 2,
+//     date: "18 May 2022",
+//     name: "Article name",
+//     image: new URL(`./images/blog2.png`, import.meta.url).href,
+//     paragraph: "Here it will include the data about this article",
+//   },
+//   {
+//     id: 3,
+//     date: "18 May 2022",
+//     name: "Article name",
+//     image: new URL(`./images/blog2.png`, import.meta.url).href,
+//     paragraph: "Here it will include the data about this article",
+//   },
+//   {
+//     id: 4,
+//     date: "18 May 2022",
+//     name: "Article name",
+//     image: new URL(`./images/blog2.png`, import.meta.url).href,
+//     paragraph: "Here it will include the data about this article",
+//   },
+// ]);
 
 //paginatedData
 let paginatedData = ref([]);
@@ -143,8 +72,9 @@ let goToPage = (numPage) => {
 //onMounted
 onMounted(() => {
   //AOS
+  data.value = props.Bloges;
   AOS.init();
-
+  console.log("props.Bloges =", data.value);
   //paginatedData
   paginatedData.value = data.value.slice(
     (page.value - 1) * perPage,
@@ -154,7 +84,6 @@ onMounted(() => {
 
 //watch page
 watch(page, (newpage) => {
-  console.log("newpage", newpage);
   paginatedData.value = data.value.slice(
     (newpage - 1) * perPage,
     newpage * perPage
@@ -165,23 +94,24 @@ watch(page, (newpage) => {
   <!--blogs_list-->
 
   <div class="container">
-    <ul class="blogs_list row">
+    <ul class="blogs_list row" v-if="props.Bloges.length != 0">
       <li
         v-for="item in paginatedData"
         :key="item.index"
         class="list col-lg-3 col-md-4"
       >
-        <router-link to="/most-faster">
-          <img :src="item.image" />
+        <router-link :to="'/blog-detailes/' + item.slug">
+          <!-- <img :src="item.image" /> -->
+          <img src="./images/blog1.png" />
           <div
             class="info"
             data-aos="zoom-in-up"
             data-aos-offset="300"
             data-aos-easing="ease-in-out"
           >
-            <span>{{ item.date }}</span>
-            <h5>{{ item.name }}</h5>
-            <p>{{ item.paragraph }}</p>
+            <!-- <span>{{ item.date }}</span> -->
+            <h5>{{ item.title }}</h5>
+            <p>{{ item.short_description }}</p>
           </div></router-link
         >
       </li>
@@ -189,7 +119,7 @@ watch(page, (newpage) => {
 
     <!--pagination-->
 
-    <div class="pagination">
+    <div class="pagination" v-if="paginatedData.length >= 10">
       <button
         @click="backPage"
         :class="page !== 1 ? 'show' : 'hidden'"
@@ -218,11 +148,11 @@ watch(page, (newpage) => {
 .blogs_list {
   margin: auto;
   margin-top: 150px;
+  margin-bottom: 150px;
   padding: 0px;
   list-style-type: none;
   overflow: hidden;
   li {
-    margin-bottom: 20px;
     position: relative;
     padding: 5px;
     img {

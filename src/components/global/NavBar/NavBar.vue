@@ -2,14 +2,20 @@
 import { ref } from "@vue/runtime-core";
 import type { Link } from "./interface";
 import { useI18n } from "vue-i18n";
-import type Forms from "../register/interface/forms";
-import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
 import { useLang } from "@/stores/lang";
-import router from "@/router";
+// import router from "@/router";
 import Mobile from "./Mobile.vue";
 import Website from "./Website.vue";
+import { useAuthStore } from "@/stores/auth";
+import { useRouter } from "vue-router";
+
 // i18n
 const { t } = useI18n();
+
+// auth store
+const authStore = useAuthStore();
+// router
+const router = useRouter();
 
 // Language
 const Language = useLang();
@@ -65,6 +71,11 @@ let changeshowMobile = () => {
   console.log("changeshowMobile");
   showMobileList.value = false;
 };
+//Logout
+const Logout = () => {
+  authStore.logOut();
+  router.push("/login");
+};
 </script>
 
 <template>
@@ -72,10 +83,15 @@ let changeshowMobile = () => {
   <nav class="navbar navbar-expand-lg py-2">
     <div class="container">
       <router-link to="/" class="navbar-brand">
-        <h4>Logo</h4>
+        <img src="../../../assets//images//global/icons/global/logo.svg" />
       </router-link>
 
-      <Website :Links="Links" :lang="lang" @changeLang="changeLang" />
+      <Website
+        :Links="Links"
+        :lang="lang"
+        @changeLang="changeLang"
+        @Logout="Logout"
+      />
       <button
         class="navbar-toggler"
         type="button"
@@ -90,11 +106,6 @@ let changeshowMobile = () => {
         :class="showMobileList ? 'show' : ''"
         @changeshowMobile="changeshowMobile()"
       />
-      <div class="light">
-        <div class="open">
-          <img src="../../../assets/images/global/icons/global/light.svg" />
-        </div>
-      </div>
     </div>
   </nav>
 </template>

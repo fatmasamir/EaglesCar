@@ -39,25 +39,19 @@ onMounted(() => {
       <div class="row list">
         <div class="col-lg-4">
           <div class="content">
-            <img
-              src="../../../assets/images/global/icons/global/carRental/turbo.svg"
-            />
+            <span>Power:</span>
             {{ data.turbo }}
           </div>
         </div>
         <div class="col-lg-4">
           <div class="content">
-            <img
-              src="../../../assets/images/global/icons/global/carRental/turbo2.svg"
-            />
+            <span>Bag:</span>
             {{ data.turbo2 }}
           </div>
         </div>
         <div class="col-lg-4">
           <div class="content">
-            <img
-              src="../../../assets/images/global/icons/global/carRental/baby-car-seat.svg"
-            />
+            <span>Seat:</span>
             {{ data.babyCarSeat }}
           </div>
         </div>

@@ -1,4 +1,4 @@
-import callServer from "@/assets/scripts/callServer/callServer";
+import callServer from "@/assets/scripts/callServer/callServer.1";
 import { defineStore } from "pinia";
 import { reactive, ref } from "vue";
 import { useToast } from "vue-toastification";
@@ -44,7 +44,7 @@ export const UseBrand = defineStore("Brand", () => {
 
     if (response.ok) {
       console.log("success");
-      toast.success("تم الإضافه بنجاح")
+      toast.success("تم الإضافه بنجاح");
     } else {
       console.log("error");
     }
@@ -59,8 +59,7 @@ export const UseBrand = defineStore("Brand", () => {
     });
 
     if (response.ok) {
-  
-      toast.success("تم تعديل بنجاح")
+      toast.success("تم تعديل بنجاح");
     } else {
       console.log("error");
     }
@@ -73,7 +72,7 @@ export const UseBrand = defineStore("Brand", () => {
     });
 
     if (response.ok) {
-      toast.success("تم الحذف بنجاح")
+      toast.success("تم الحذف بنجاح");
     } else {
       console.log("error");
     }

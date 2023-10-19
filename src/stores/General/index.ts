@@ -1,4 +1,4 @@
-import callServer from "@/assets/scripts/callServer/callServer";
+import callServer from "@/assets/scripts/callServer/callServer.1";
 import { defineStore } from "pinia";
 import { reactive, ref } from "vue";
 
@@ -32,7 +32,9 @@ export const UseGeneral = defineStore("General", () => {
     }
   }
   return {
-    get_country,get_city,
-    countries,cities
+    get_country,
+    get_city,
+    countries,
+    cities,
   };
 });

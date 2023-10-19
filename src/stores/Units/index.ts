@@ -1,4 +1,4 @@
-import callServer from "@/assets/scripts/callServer/callServer";
+import callServer from "@/assets/scripts/callServer/callServer.1";
 import { defineStore } from "pinia";
 import { reactive, ref } from "vue";
 import { useToast } from "vue-toastification";
@@ -29,7 +29,7 @@ export const UseUnit = defineStore("Unit", () => {
       url: "stock/unit/" + id,
       auth: true,
     });
-    
+
     if (response.ok) {
       response.json().then((data) => {
         showUnit.value = data.data;
@@ -50,12 +50,13 @@ export const UseUnit = defineStore("Unit", () => {
       is_error.value = true;
       await response.json().then((data) => {
         errors.value = data.errors;
-        for(let key in errors.value){
-            toast.error(errors.value[key][0]);}
+        for (let key in errors.value) {
+          toast.error(errors.value[key][0]);
+        }
       });
     } else {
       is_error.value = false;
-       errors.value = [];
+      errors.value = [];
       toast.success("تم الإضافه بنجاح");
     }
   }
@@ -68,17 +69,17 @@ export const UseUnit = defineStore("Unit", () => {
       auth: true,
     });
 
-  
     if (!response.ok) {
       is_error.value = true;
       await response.json().then((data) => {
         errors.value = data.errors;
-        for(let key in errors.value){
-            toast.error(errors.value[key][0]);}
+        for (let key in errors.value) {
+          toast.error(errors.value[key][0]);
+        }
       });
     } else {
       is_error.value = false;
-       errors.value = [];
+      errors.value = [];
       toast.success("تم تعديل بنجاح");
     }
   }
@@ -89,17 +90,17 @@ export const UseUnit = defineStore("Unit", () => {
       auth: true,
     });
 
-  
     if (!response.ok) {
       is_error.value = true;
       await response.json().then((data) => {
         errors.value = data.errors;
-        for(let key in errors.value){
-            toast.error(errors.value[key][0]);}
+        for (let key in errors.value) {
+          toast.error(errors.value[key][0]);
+        }
       });
     } else {
       is_error.value = false;
-       errors.value = [];
+      errors.value = [];
       toast.success("تم الحذف بنجاح");
     }
   }
@@ -111,6 +112,6 @@ export const UseUnit = defineStore("Unit", () => {
     showUnit,
     EditUnit,
     DeleteUnit,
-    is_error
+    is_error,
   };
 });

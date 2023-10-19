@@ -106,3 +106,6 @@ button:focus:not(:focus-visible) {
 p {
   color: #817f91;
 }
+.form-control:focus {
+  box-shadow: none !important;
+}

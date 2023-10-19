@@ -18,9 +18,6 @@ const authStore = useAuthStore();
 // i18n
 const { t } = useI18n();
 
-// date
-let date = new Date();
-
 // otpInput
 const otpInput = ref<InstanceType<typeof VOtpInput> | null>(null);
 const bindModal = ref("");
@@ -32,26 +29,32 @@ const handleOnComplete = (value: string) => {
 
 // handel submit
 const handelSubmit = async () => {
-  // try {
-  //   const formData = new URLSearchParams();
-  //   formData.append("email", email.value!);
-  //   formData.append("password", password.value!);
-  //   await authStore.login(formData).then(() => {
-  //     if (authStore.is_auth) {
-  //       setTimeout(() => {
-  //         router.push("/Dashboard");
-  //       }, 1000);
-  //       authStore.is_waiting = false;
-  //     }
-  //   });
-  // } catch (err) {
-  //   error.value = err as number;
-  // }
-
-  console.log("OTP changed: ", bindModal.value);
+  try {
+    authStore.verifyRegister.otp = bindModal.value;
+    authStore.verifyRegister.login = authStore.registertion.phone;
+    await authStore
+      .Verify(JSON.stringify(authStore.verifyRegister))
+      .then(() => {
+        if (authStore.is_auth) {
+          setTimeout(() => {
+            router.push("/Dashboard");
+          }, 1000);
+          authStore.is_waiting = false;
+        }
+      });
+  } catch (err) {
+    console.log("Error Verify");
+  }
 };
 onMounted(() => {
   AOS.init();
+  if (!authStore.registertion.phone) {
+    if (!authStore.registerSocialMedia.access_token) {
+      setTimeout(() => {
+        router.push("/register");
+      }, 2000);
+    }
+  }
 });
 </script>
 

@@ -1,4 +1,4 @@
-import callServer from "@/assets/scripts/callServer/callServer";
+import callServer from "@/assets/scripts/callServer/callServer.1";
 import { defineStore } from "pinia";
 import { reactive, ref } from "vue";
 import { useToast } from "vue-toastification";
@@ -47,12 +47,13 @@ export const UseSupplier = defineStore("Suppliers", () => {
       is_error.value = true;
       await response.json().then((data) => {
         errors.value = data.errors;
-        for(let key in errors.value){
-            toast.error(errors.value[key][0]);}
+        for (let key in errors.value) {
+          toast.error(errors.value[key][0]);
+        }
       });
     } else {
       is_error.value = false;
-       errors.value = [];
+      errors.value = [];
       toast.success("تم تعديل بنجاح");
     }
   }
@@ -69,12 +70,13 @@ export const UseSupplier = defineStore("Suppliers", () => {
       is_error.value = true;
       await response.json().then((data) => {
         errors.value = data.errors;
-        for(let key in errors.value){
-            toast.error(errors.value[key][0]);}
+        for (let key in errors.value) {
+          toast.error(errors.value[key][0]);
+        }
       });
     } else {
       is_error.value = false;
-       errors.value = [];
+      errors.value = [];
       toast.success("تم الإضافه بنجاح");
     }
   }
@@ -89,12 +91,13 @@ export const UseSupplier = defineStore("Suppliers", () => {
       is_error.value = true;
       await response.json().then((data) => {
         errors.value = data.errors;
-        for(let key in errors.value){
-            toast.error(errors.value[key][0]);}
+        for (let key in errors.value) {
+          toast.error(errors.value[key][0]);
+        }
       });
     } else {
       is_error.value = false;
-       errors.value = [];
+      errors.value = [];
       toast.success("تم الحذف بنجاح");
     }
   }
@@ -106,6 +109,6 @@ export const UseSupplier = defineStore("Suppliers", () => {
     showSupplier,
     EditSupplier,
     DeleteSupplier,
-    is_error
+    is_error,
   };
 });

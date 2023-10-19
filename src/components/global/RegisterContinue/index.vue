@@ -3,66 +3,83 @@ import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useAuthStore } from "@/stores/auth";
 import NicePassword from "@/components/global/CusomInputs/NicePassword/NicePassword.vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import SimpleInput from "@/components/global/CusomInputs/SimpleInput/SimpleInput.vue";
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
 import AOS from "aos";
 // router
 const router = useRouter();
+// router
+const route = useRoute();
 
 // auth store
 const authStore = useAuthStore();
 
 // input
-let FormData = ref<{
-  type: String;
-}>({
-  type: "",
-});
-// input password type
-const passwordFieldType = ref<string>("password");
+let is_lender = ref(true);
+
+// input
+let ErrorMessage = ref(false);
 
 // i18n
 const { t } = useI18n();
 
-// error
-const error = ref<number>();
-
-let date = new Date();
-
-// update password
-// const updatePassword = (value: string) => {
-//   password.value = value;
-// };
-
-// show/hide new password
-const switchVisibility = () => {
-  passwordFieldType.value =
-    passwordFieldType.value === "password" ? "text" : "password";
-};
-
 // handel submit
 const handelSubmit = async () => {
-  // try {
-  //   const formData = new URLSearchParams();
-  //   formData.append("email", email.value!);
-  //   formData.append("password", password.value!);
-  //   await authStore.login(formData).then(() => {
-  //     if (authStore.is_auth) {
-  //       setTimeout(() => {
-  //         router.push("/Dashboard");
-  //       }, 1000);
-  //       authStore.is_waiting = false;
-  //     }
-  //   });
-  // } catch (err) {
-  //   error.value = err as number;
-  // }
-  router.push("/otp-registerion");
+  console.log("is_lender", JSON.stringify(authStore.registertion));
+  if (authStore.registertion.phone) {
+    try {
+      authStore.registertion.is_lender = is_lender.value ? 1 : 0;
+      await authStore
+        .register(JSON.stringify(authStore.registertion))
+        .then(() => {
+          router.push("/otp-registerion");
+        });
+    } catch (err) {
+      console.log("error");
+    }
+  } else if (authStore.registerSocialMedia.access_token) {
+    try {
+      authStore.registerSocialMedia.is_lender = is_lender.value ? 1 : 0;
+      if (route.params.nameRegister == "Google") {
+        await authStore
+          .registerGoogle(JSON.stringify(authStore.registerSocialMedia))
+          .then(() => {
+            if (authStore.is_auth) {
+              setTimeout(() => {
+                router.push("/");
+              }, 1000);
+              authStore.is_waiting = false;
+            }
+          });
+      } else if (route.params.nameRegister == "Facebook") {
+        await authStore
+          .registerFacebook(JSON.stringify(authStore.registerSocialMedia))
+          .then(() => {
+            if (authStore.is_auth) {
+              setTimeout(() => {
+                router.push("/");
+              }, 1000);
+              authStore.is_waiting = false;
+            }
+          });
+      }
+    } catch (err) {
+      error.value = err as number;
+    }
+  }
 };
 
 onMounted(() => {
   AOS.init();
+  if (!authStore.registertion.phone) {
+    if (!authStore.registerSocialMedia.access_token) {
+      setTimeout(() => {
+        router.push("/register");
+      }, 2000);
+      ErrorMessage.value = true;
+    }
+  }
 });
 </script>
 
@@ -94,6 +111,9 @@ onMounted(() => {
             <p>{{ t("Register_msg") }}</p>
           </div>
           <div class="form mt-4">
+            <div class="alert alert-danger" role="alert" v-if="ErrorMessage">
+              You Must Have Otp Number
+            </div>
             <div
               class="row mt-3 mx-0 px-0"
               data-aos="zoom-in-up"
@@ -104,8 +124,8 @@ onMounted(() => {
                 <div class="content_Borrower">
                   <div
                     class="image_chooes"
-                    :class="FormData.type == 'Borrower' ? 'active' : ''"
-                    @click="FormData.type = 'Borrower'"
+                    :class="is_lender ? 'active' : ''"
+                    @click="is_lender = true"
                   >
                     <img src="@/assets/images/global/icons/global/rental.svg" />
                   </div>
@@ -116,8 +136,8 @@ onMounted(() => {
                 <div class="content_Car_rental">
                   <div
                     class="image_chooes"
-                    :class="FormData.type == 'Carrental' ? 'active' : ''"
-                    @click="FormData.type = 'Carrental'"
+                    :class="!is_lender ? 'active' : ''"
+                    @click="is_lender = false"
                   >
                     <img
                       src="@/assets/images/global/icons/global/car-rental.svg"
@@ -187,6 +207,9 @@ onMounted(() => {
     }
     .active {
       background: #d4effe;
+    }
+    .simple-button.send button {
+      width: 98%;
     }
   }
 }

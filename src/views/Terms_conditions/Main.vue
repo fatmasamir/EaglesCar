@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import NavBar from "@/components/global/NavBar/NavBar.vue";
 import Header from "@/components/global/Header/index.vue";
-import PrivacyPolicy from "@/components/pages/PrivacyPolicy/index.vue";
+import Terms_conditions from "@/components/pages/Terms_conditions/index.vue";
 import Footer from "@/components/global/Footer/index.vue";
 </script>
 <template>
   <section class="Pages">
     <NavBar></NavBar>
     <Header TiltePage="Terms_conditions"></Header>
-    <PrivacyPolicy></PrivacyPolicy>
+    <Terms_conditions></Terms_conditions>
     <Footer></Footer>
   </section>
 </template>

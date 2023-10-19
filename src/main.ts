@@ -44,29 +44,59 @@ import "vueperslides/dist/vueperslides.css";
 
 // Bootstrap Vue
 import BootstrapVue3 from "bootstrap-vue-3";
+import VueSocialSharing from "vue-social-sharing";
 
 // Table
 import Vue3EasyDataTable from "vue3-easy-data-table";
 import "vue3-easy-data-table/dist/style.css";
 import "aos/dist/aos.css";
+import gAuthPlugin from "vue3-google-oauth2";
+const app = createApp(App);
+let gauthClientId =
+  "1000867907516-rjttlrh40jpvaf9cp4oi4ltukdrm1jo4.apps.googleusercontent.com";
 
+import Vue3ReactiveTelInput from "vue3-reactive-tel-input";
+
+// setup fake backend
+import { fakeBackend } from "@/_helpers";
+fakeBackend();
+
+import { initFacebookSdk, jwtInterceptor, errorInterceptor } from "@/_helpers";
+
+// enable interceptors for http requests
+jwtInterceptor();
+errorInterceptor();
+
+//wait for facebook sdk to start app
+initFacebookSdk().then(startApp);
+//pinia
 const pinia = createPinia();
-
 pinia.use(({ store }) => {
   store.router = markRaw(router);
 });
-
-createApp(App)
-  .use(router)
-  .use(pinia)
-  .use(i18n)
-  .use(Vue3Lottie)
-  .use(BootstrapVue3)
-  .use(Toast, {
-    // Setting the global default position
-    position: POSITION.TOP_LEFT,
-  })
-  .component("InlineSvg", InlineSvg)
-  .component("DataTable", Vue3EasyDataTable)
-  .component("v-select", vSelect)
-  .mount("#app");
+//768834812579-ivi0oopbkqe05cg6t41p83t7gteekut6.apps.googleusercontent.com
+//302001231533-2n3la83qa8po429m21hkhhl1udq15tbj.apps.googleusercontent.com
+function startApp() {
+  createApp(App)
+    .use(router)
+    .use(pinia)
+    .use(i18n)
+    .use(Vue3Lottie)
+    .use(BootstrapVue3)
+    .use(Vue3ReactiveTelInput)
+    .use(VueSocialSharing)
+    .use(gAuthPlugin, {
+      clientId: gauthClientId,
+      scope: "email",
+      prompt: "consent",
+      fetch_basic_profile: false,
+    })
+    .use(Toast, {
+      // Setting the global default position
+      position: POSITION.TOP_LEFT,
+    })
+    .component("InlineSvg", InlineSvg)
+    .component("DataTable", Vue3EasyDataTable)
+    .component("v-select", vSelect)
+    .mount("#app");
+}

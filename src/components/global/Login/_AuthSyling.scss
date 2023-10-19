@@ -10,7 +10,6 @@
   .main-box {
     height: 100vh;
     max-width: 100%;
-    // max-height: 100vh;
     background: var(--white-color);
     padding: 100px 40px 50px 60px;
     border-radius: var(--main-border-radius);
@@ -44,6 +43,7 @@
 
     /* simple-input */
     .simple-input {
+      margin-bottom: 25px !important;
       label {
         margin-bottom: 0;
       }
@@ -54,6 +54,7 @@
         text-align: left;
         background: #f9f9f9;
         width: 100%;
+        margin-bottom: 0px !important;
       }
     }
     /* simple-button.send button */
@@ -63,6 +64,8 @@
       margin-top: 5px;
       border-radius: 8px;
       min-width: auto;
+      position: relative;
+      z-index: 0;
       &:disabled {
         background: #dbdbdb;
         color: black;
@@ -71,6 +74,7 @@
     /* passwordField */
     .passwordField {
       position: relative;
+      z-index: 1;
       /* pass_icon */
       .pass_icon {
         position: absolute;
@@ -104,7 +108,8 @@
       align-items: center;
       margin: 20px 0px;
       margin-right: 50px;
-      a.card {
+      .card {
+        position: relative;
         display: flex;
         padding: 10px 10px;
         justify-content: space-around;
@@ -133,6 +138,17 @@
             color: black;
           }
         }
+        .SignInButton {
+          position: absolute;
+          top: 0px;
+          right: auto;
+          width: 100%;
+          opacity: 0;
+          button {
+            width: 100%;
+            height: 47px;
+          }
+        }
       }
     }
     /* Or */
@@ -141,21 +157,11 @@
         color: var(--orange-text-color);
       }
     }
-    /* register */
-    .register {
-      display: flex;
-      justify-content: center;
-      align-items: top;
-      p {
-        margin: 0px;
-      }
-      a {
-        color: var(--orange-text-color);
-      }
-    }
     /* forget_remember */
     .forget_remember {
       display: flex;
+      position: relative;
+      z-index: 0;
       justify-content: space-between;
       align-content: center;
       a {
@@ -195,6 +201,32 @@
       }
     }
   }
+  /* register */
+  .register {
+    display: flex;
+    justify-content: center;
+    align-items: top;
+    text-align: center;
+    width: 100%;
+    p {
+      margin: 0px;
+    }
+    a {
+      color: var(--orange-text-color);
+    }
+  }
+  .vue3-reactive-tel-input {
+    border-radius: 8px !important;
+    padding: 0px 2px;
+    border: 1px solid #dcddeb !important;
+    input {
+      border: 0px !important;
+      direction: ltr;
+    }
+  }
+}
+.simple-input .vti__dropdown .vti__dropdown-list.below {
+  top: -140px !important;
 }
 /*media query */
 
@@ -207,14 +239,14 @@
 @media screen and (max-width: 1240px) {
   .auth-form .main-box .ContinueWith {
     margin-right: 0px;
-    a.card {
+    .card {
       margin-bottom: 20px;
     }
   }
 }
 @media screen and (max-width: 1078px) {
   .auth-form .main-box .ContinueWith {
-    a.card {
+    .card {
       margin: 0px 5px;
       padding: 8px;
       p {
@@ -230,6 +262,7 @@
     margin: auto;
     margin-top: -100px;
     box-shadow: 0px 0px 28px #aaa;
+    padding: 0px;
     .middle {
       margin-bottom: 50px;
       padding: 40px;
@@ -243,9 +276,10 @@
     .register {
       flex-direction: column;
       text-align: center;
+      width: 100%;
       a {
-        margin-top: 20px;
-        text-align: start;
+        margin-top: 10px;
+        text-align: center;
       }
     }
     .simple-button.send {
@@ -314,6 +348,11 @@
   .auth-form .main-box .simple-input input[data-v-2ad4f39d],
   .auth-form .main-box .simple-input select[data-v-2ad4f39d] {
     text-align: right !important;
+  }
+  .vue3-reactive-tel-input {
+    input {
+      direction: rtl;
+    }
   }
 }
 

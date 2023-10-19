@@ -182,6 +182,12 @@ const ar = {
   Car_details: "تفاصيل السيارة",
   Send_request: "ارسل طلب",
   Show_more: "",
+  requiredFiled: "هذالحقل مطلوب",
+  requiredFiledemail: "",
+  phone: "الهاتف",
+  Logout: "تسجيل خروج",
+  Return_point: "Return_point",
+  Car_condition: "Car_condition",
 };
 
 export default ar;

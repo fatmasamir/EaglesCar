@@ -1,15 +1,10 @@
-export interface User {
-    id: number;
-    name: string;
-    username: string;
-    email: string;
-    avatar: string;
-    phone: string;
-    country_code: string;
-    address: string;
-    created_at: string;
-    hasPhoto: boolean;
-    hasVideo: boolean;
-    hasVector: boolean;
-    verified: number;
-}
+// export interface ResetPassword {
+//   id: Number;
+//   email: string;
+//   first_name: string;
+//   last_name: string;
+//   password: string;
+//   password_confirmation: string;
+//   is_lender: string;
+//   phone: string;
+// }

@@ -6,56 +6,62 @@ import NicePassword from "@/components/global/CusomInputs/NicePassword/NicePassw
 import { useRouter } from "vue-router";
 import SimpleInput from "@/components/global/CusomInputs/SimpleInput/SimpleInput.vue";
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
+import { useForm } from "vee-validate";
+import * as Yup from "yup";
 import AOS from "aos";
-
-// router
-const router = useRouter();
-
-// auth store
-const authStore = useAuthStore();
-
-// input
-const email = ref<string>("user@app.com");
-const password = ref<string>("");
-// input password type
-const passwordFieldType = ref<string>("password");
 
 // i18n
 const { t } = useI18n();
 
+// router
+const router = useRouter();
+
+// loading
+const loading = ref(false);
+
+// auth store
+const authStore = useAuthStore();
+
 // error
 const error = ref<number>();
 
-let date = new Date();
+// meta
+const { meta } = useForm();
 
-// update password
-// const updatePassword = (value: string) => {
-//   password.value = value;
-// };
+// formLogin
+const { errors, handleSubmit, defineInputBinds } = useForm({
+  validationSchema: Yup.object({
+    login: Yup.string().required(),
+  }),
+});
+
+// login defineInputBinds
+const login = defineInputBinds("login");
 
 // handel submit
-const handelSubmit = async () => {
-  // try {
-  //   const formData = new URLSearchParams();
-  //   formData.append("email", email.value!);
-  //   formData.append("password", password.value!);
-  //   await authStore.login(formData).then(() => {
-  //     if (authStore.is_auth) {
-  //       setTimeout(() => {
-  //         router.push("/Dashboard");
-  //       }, 1000);
-  //       authStore.is_waiting = false;
-  //     }
-  //   });
-  // } catch (err) {
-  //   error.value = err as number;
-  // }
-  router.push("/otp-authentication");
-};
-const switchVisibility = () => {
-  passwordFieldType.value =
-    passwordFieldType.value === "password" ? "text" : "password";
-};
+let onSubmit = handleSubmit((values) => {
+  loading.value = true;
+  console.log("values", JSON.stringify(values));
+  if (values) {
+    try {
+      authStore.forgetPassword(JSON.stringify(values)).then(() => {
+        authStore.resetPassword.login = values.login;
+        console.log(
+          "authStore.resetPassword.login",
+          authStore.resetPassword.login
+        );
+        if (authStore.is_auth) {
+          setTimeout(() => {
+            router.push("/otp-authentication");
+          }, 1000);
+          authStore.is_waiting = false;
+        }
+      });
+    } catch (err) {
+      error.value = err as number;
+    }
+  }
+});
 onMounted(() => {
   AOS.init();
 });
@@ -88,45 +94,48 @@ onMounted(() => {
             <h3>{{ t("Forgetpassword") }}</h3>
             <p>{{ t("forget_msg") }}</p>
           </div>
-          <div class="form mt-4">
-            <div
-              class="col-md-12 mt-3"
-              data-aos="zoom-in-up"
-              data-aos-easing="linear"
-              data-aos-duration="500"
-            >
-              <SimpleInput>
-                <!-- <label>Email <span class="text-red">*</span> </label> -->
-                <input
-                  type="Number"
-                  id="Number"
-                  name="Number"
-                  :placeholder="t('Number')"
-                  required
-                  v-model="Number"
-                />
-              </SimpleInput>
+          <form @submit.prevent="onSubmit">
+            <div class="form mt-4">
+              <div
+                class="col-md-12 mt-3"
+                data-aos="zoom-in-up"
+                data-aos-easing="linear"
+                data-aos-duration="500"
+              >
+                <SimpleInput>
+                  <!-- <label>Email <span class="text-red">*</span> </label> -->
+
+                  <vue3-reactive-tel-input
+                    :rootStyle="{ backgroundColor: '#f9f9f9' }"
+                    :inputStyle="{ backgroundColor: '#f9f9f9' }"
+                    :listStyle="{ backgroundColor: '#f9f9f9' }"
+                    :dropdownStyle="{ backgroundColor: '#f9f9f9' }"
+                    :class="{ 'is-invalid': errors.login }"
+                    v-bind="login"
+                  />
+                </SimpleInput>
+              </div>
+              <div
+                class="col-12 mt-3"
+                data-aos="zoom-in-up"
+                data-aos-easing="linear"
+                data-aos-duration="1100"
+              >
+                <SimpleButton type="send" class="register_lab">
+                  <button
+                    type="submit"
+                    @click="handelSubmit"
+                    v-if="!authStore.is_loading"
+                  >
+                    {{ t("send") }}
+                  </button>
+                  <button type="submit" disabled v-else>
+                    {{ t("wait") }} ...
+                  </button>
+                </SimpleButton>
+              </div>
             </div>
-            <div
-              class="col-12 mt-3"
-              data-aos="zoom-in-up"
-              data-aos-easing="linear"
-              data-aos-duration="1100"
-            >
-              <SimpleButton type="send" class="register_lab">
-                <button
-                  type="submit"
-                  @click="handelSubmit"
-                  v-if="!authStore.is_loading"
-                >
-                  {{ t("send") }}
-                </button>
-                <button type="submit" disabled v-else>
-                  {{ t("wait") }} ...
-                </button>
-              </SimpleButton>
-            </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

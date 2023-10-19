@@ -40,6 +40,7 @@ const en = {
   ResetPassword: "Reset Password",
   Newpassword: "New password",
   Rewrite_new_password: "Rewrite new password",
+  privacy_policy: "privacy Policy",
 
   //Homepage
   Home: "Home",
@@ -180,6 +181,12 @@ expectations.`,
   Car_details: "Car details",
   Send_request: "Send request",
   Show_more: "Show more",
+  requiredFiled: "this Filed is required",
+  requiredFiledemail: "this filed must be email",
+  phone: "phone",
+  Logout: "Log out",
+  Return_point: "Return point",
+  Car_condition: "Car Condition",
 };
 
 export default en;

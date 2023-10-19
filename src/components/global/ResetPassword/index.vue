@@ -2,22 +2,40 @@
 import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useAuthStore } from "@/stores/auth";
-import NicePassword from "@/components/global/CusomInputs/NicePassword/NicePassword.vue";
 import { useRouter } from "vue-router";
 import SimpleInput from "@/components/global/CusomInputs/SimpleInput/SimpleInput.vue";
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
+import { useForm } from "vee-validate";
+import * as Yup from "yup";
 import AOS from "aos";
 
 // router
 const router = useRouter();
 
+// loading
+const loading = ref(false);
+
 // auth store
 const authStore = useAuthStore();
+// formRef
+const formRef = ref(null);
 
-// input
-const Newpassword = ref<string>("");
-// input password type
-const ComfirmPass = ref<string>("");
+// meta
+const { meta } = useForm();
+// formLogin
+const { errors, handleSubmit, defineInputBinds } = useForm({
+  validationSchema: Yup.object({
+    password: Yup.string().min(6).required(),
+    password_confirmation: Yup.string()
+      .required()
+      .oneOf([Yup.ref("password")], "Passwords do not match"),
+  }),
+});
+
+//login ,password
+const password = defineInputBinds("password");
+const password_confirmation = defineInputBinds("password_confirmation");
+
 // input password type
 const passwordFieldType = ref<string>("password");
 // input password type
@@ -49,26 +67,37 @@ const switchVisibilityComfirm = () => {
 // };
 
 // handel submit
-const handelSubmit = async () => {
-  // try {
-  //   const formData = new URLSearchParams();
-  //   formData.append("email", email.value!);
-  //   formData.append("password", password.value!);
-  //   await authStore.login(formData).then(() => {
-  //     if (authStore.is_auth) {
-  //       setTimeout(() => {
-  //         router.push("/Dashboard");
-  //       }, 1000);
-  //       authStore.is_waiting = false;
-  //     }
-  //   });
-  // } catch (err) {
-  //   error.value = err as number;
-  // }
-  // router.push("/otp-authentication");
-};
+let onSubmit = handleSubmit((values) => {
+  loading.value = true;
+  if (values) {
+    console.log("values", JSON.stringify(values));
+    authStore.resetPassword.password = values.password;
+    authStore.resetPassword.password_confirmation =
+      values.password_confirmation;
+    console.log("authStore.resetPassword.login", authStore.resetPassword);
+    try {
+      authStore
+        .PasswordReset(JSON.stringify(authStore.resetPassword))
+        .then(() => {
+          if (authStore.is_auth) {
+            setTimeout(() => {
+              router.push("/login");
+            }, 1000);
+            authStore.is_waiting = false;
+          }
+        });
+    } catch (err) {
+      error.value = err as number;
+    }
+  }
+});
 onMounted(() => {
   AOS.init();
+  if (!authStore.resetPassword.otp) {
+    setTimeout(() => {
+      router.push("/otp-authentication");
+    }, 2000);
+  }
 });
 </script>
 
@@ -99,83 +128,94 @@ onMounted(() => {
             <h3>{{ t("ResetPassword") }}</h3>
             <p>{{ t("OTPmessage") }}</p>
           </div>
-          <div class="form mt-4">
-            <div
-              class="col-md-12 mt-3 passwordField"
-              data-aos="zoom-in-up"
-              data-aos-easing="linear"
-              data-aos-duration="500"
-            >
-              <SimpleInput>
-                <!-- <label>Email <span class="text-red">*</span> </label> -->
-                <input
-                  :type="passwordFieldType"
-                  id="NewpasswComfirmPassord"
-                  name="Newpassword"
-                  :placeholder="t('Newpassword')"
-                  required
-                  v-model="Newpassword"
-                /><img
-                  src="@/assets/images/global/icons/global/eye-svgrepo.svg"
-                  @click="switchVisibility"
-                  class="pass_icon"
-                  v-if="passwordFieldType == 'password'"
-                /><img
-                  src="@/assets/images/global/icons/global/eye-slash.svg"
-                  @click="switchVisibility"
-                  class="pass_icon"
-                  v-else
-                />
-              </SimpleInput>
+          <form @submit.prevent="onSubmit">
+            <div class="form mt-4">
+              <div
+                class="alert alert-danger"
+                role="alert"
+                v-if="!authStore.resetPassword.otp"
+              >
+                You Must Have Otp Number
+              </div>
+              <div
+                class="col-md-12 mt-3 passwordField"
+                data-aos="zoom-in-up"
+                data-aos-easing="linear"
+                data-aos-duration="500"
+              >
+                <SimpleInput>
+                  <!-- <label>Email <span class="text-red">*</span> </label> -->
+                  <input
+                    :type="passwordFieldType"
+                    id="NewpasswComfirmPassord"
+                    name="Newpassword"
+                    :placeholder="t('Newpassword')"
+                    required
+                    v-bind="password"
+                    :class="{ 'is-invalid': errors.password }"
+                  /><img
+                    src="@/assets/images/global/icons/global/eye-svgrepo.svg"
+                    @click="switchVisibility"
+                    class="pass_icon"
+                    v-if="passwordFieldType == 'password'"
+                  /><img
+                    src="@/assets/images/global/icons/global/eye-slash.svg"
+                    @click="switchVisibility"
+                    class="pass_icon"
+                    v-else
+                  />
+                  <div class="invalid-feedback">{{ errors.password }}</div>
+                </SimpleInput>
+              </div>
+              <div
+                class="col-md-12 mt-3 passwordField"
+                data-aos="zoom-in-up"
+                data-aos-easing="linear"
+                data-aos-duration="600"
+              >
+                <SimpleInput>
+                  <!-- <label>Email <span class="text-red">*</span> </label> -->
+                  <input
+                    :type="passwordFieldTypeComfirm"
+                    id="ComfirmPass"
+                    name="ComfirmPass"
+                    :placeholder="t('Rewrite_new_password')"
+                    required
+                    v-bind="password_confirmation"
+                    :class="{ 'is-invalid': errors.password_confirmation }"
+                  /><img
+                    src="@/assets/images/global/icons/global/eye-svgrepo.svg"
+                    @click="switchVisibilityComfirm"
+                    class="pass_icon"
+                    v-if="passwordFieldTypeComfirm == 'password'"
+                  /><img
+                    src="@/assets/images/global/icons/global/eye-slash.svg"
+                    @click="switchVisibilityComfirm"
+                    class="pass_icon"
+                    v-else
+                  />
+                  <div class="invalid-feedback">
+                    {{ errors.password_confirmation }}
+                  </div>
+                </SimpleInput>
+              </div>
+              <div
+                class="col-12 mt-3"
+                data-aos="zoom-in-up"
+                data-aos-easing="linear"
+                data-aos-duration="1100"
+              >
+                <SimpleButton type="send" class="register_lab">
+                  <button type="submit" v-if="!authStore.is_loading">
+                    {{ t("send") }}
+                  </button>
+                  <button type="submit" disabled v-else>
+                    {{ t("wait") }} ...
+                  </button>
+                </SimpleButton>
+              </div>
             </div>
-            <div
-              class="col-md-12 mt-3 passwordField"
-              data-aos="zoom-in-up"
-              data-aos-easing="linear"
-              data-aos-duration="600"
-            >
-              <SimpleInput>
-                <!-- <label>Email <span class="text-red">*</span> </label> -->
-                <input
-                  :type="passwordFieldTypeComfirm"
-                  id="ComfirmPass"
-                  name="ComfirmPass"
-                  :placeholder="t('Rewrite_new_password')"
-                  required
-                  v-model="ComfirmPass"
-                /><img
-                  src="@/assets/images/global/icons/global/eye-svgrepo.svg"
-                  @click="switchVisibilityComfirm"
-                  class="pass_icon"
-                  v-if="passwordFieldTypeComfirm == 'password'"
-                /><img
-                  src="@/assets/images/global/icons/global/eye-slash.svg"
-                  @click="switchVisibilityComfirm"
-                  class="pass_icon"
-                  v-else
-                />
-              </SimpleInput>
-            </div>
-            <div
-              class="col-12 mt-3"
-              data-aos="zoom-in-up"
-              data-aos-easing="linear"
-              data-aos-duration="1100"
-            >
-              <SimpleButton type="send" class="register_lab">
-                <button
-                  type="submit"
-                  @click="handelSubmit"
-                  v-if="!authStore.is_loading"
-                >
-                  {{ t("send") }}
-                </button>
-                <button type="submit" disabled v-else>
-                  {{ t("wait") }} ...
-                </button>
-              </SimpleButton>
-            </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

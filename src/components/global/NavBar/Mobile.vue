@@ -2,12 +2,19 @@
 import { useI18n } from "vue-i18n";
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
 import { defineProps, defineEmits } from "vue";
+import signoutGoogle from "./signoutGoogle.vue";
 
 // props
 let props = defineProps(["Links", "lang"]);
 
+//Login
+const Login = localStorage.getItem("access_token");
+
+//type
+const type = localStorage.getItem("type");
+
 // emit
-let emit = defineEmits(["changeLang", "changeshowMobile"]);
+let emit = defineEmits(["changeLang", "changeshowMobile", "Logout"]);
 // i18n
 const { t } = useI18n();
 
@@ -16,6 +23,9 @@ const changeLangEmit = (lang_targe: String) => {
 };
 const showMobile = () => {
   emit("changeshowMobile");
+}; //Logout
+const LogoutFun = () => {
+  emit("Logout");
 };
 </script>
 
@@ -43,12 +53,12 @@ const showMobile = () => {
         </div>
       </div>
       <div class="navbar-btns">
-        <SimpleButton type="send">
+        <SimpleButton type="send" v-if="!Login">
           <router-link to="/register" class="btn">
             {{ t("Signup") }}
           </router-link></SimpleButton
         >
-        <router-link to="/login" class="btn btn-main">{{
+        <router-link to="/login" class="btn btn-main" v-if="!Login">{{
           t("Login")
         }}</router-link>
         <!-- lang -->
@@ -59,6 +69,25 @@ const showMobile = () => {
           <button v-else @click="changeLangEmit('ar')">
             <img src="@/assets//images/global/icons/global/flag-eng.svg" />
           </button>
+          <!-- light button -->
+          <div class="light">
+            <div class="open">
+              <img src="../../../assets/images/global/icons/global/light.svg" />
+            </div>
+          </div>
+          <!--if Login-->
+          <div v-if="Login">
+            <!--if signin or login by google-->
+            <signoutGoogle v-if="type == 'Google'" />
+            <!--if signin or login by facebook-->
+            <LogoutFacebook v-if="type == 'facebook'" />
+            <!--if signin or login by account-->
+            <SimpleButton type="send" v-if="type == 'account'">
+              <button class="btn logout" @click="LogoutFun">
+                {{ t("Logout") }}
+              </button>
+            </SimpleButton>
+          </div>
         </div>
       </div>
     </div>
