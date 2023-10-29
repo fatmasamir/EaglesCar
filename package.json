@@ -13,7 +13,6 @@
     "@dvuckovic/vue3-bootstrap-icons": "^1.0.6",
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
     "@fortawesome/vue-fontawesome": "^3.0.0-5",
-    "@mathieustan/vue-datepicker": "^0.2.11",
     "@popperjs/core": "^2.11.7",
     "@vuelidate/core": "^2.0.0",
     "@vuelidate/validators": "^2.0.0",
