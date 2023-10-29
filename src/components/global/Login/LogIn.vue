@@ -63,7 +63,9 @@ onMounted(() => {
           data-aos-offset="300"
           data-aos-easing="ease-in-out"
         >
-          <h4>Logo</h4>
+          <router-link to="/">
+            <img src="../../../assets/images/global/icons/global/logo.svg"
+          /></router-link>
         </div>
         <div class="logo_box_img">
           <img src="@/assets/images/global/icons/global/Carbackground.svg" />
@@ -86,10 +88,12 @@ onMounted(() => {
           </div>
           <ul class="tab row">
             <li @click="ShowLoginEmail = true" class="col-sm-6">
-              <p :class="ShowLoginEmail ? 'active' : ''">Email</p>
+              <p :class="ShowLoginEmail ? 'active' : ''">{{ t("Email") }}</p>
             </li>
             <li class="col-sm-6" @click="ShowLoginEmail = false">
-              <p :class="!ShowLoginEmail ? 'active' : ''">Phone number</p>
+              <p :class="!ShowLoginEmail ? 'active' : ''">
+                {{ t("Phone_number") }}
+              </p>
             </li>
           </ul>
           <LoginEmail v-if="ShowLoginEmail" @OnSubmitFun="OnSubmitFun" />
@@ -110,11 +114,13 @@ onMounted(() => {
 .tab {
   padding: 0px;
   list-style-type: none;
-  width: 85% !important;
+  width: 82% !important;
   margin: 0px;
   padding: 0px;
   li {
     margin: 10px 0px;
+    padding: 0px;
+    padding-right: 10px;
     text-align: center;
     p {
       background: #f9f9f9;
@@ -136,7 +142,7 @@ onMounted(() => {
 .auth-form {
   /* main-box */
   .main-box {
-    height: 100%;
+    height: 100vh;
     margin-bottom: 50px;
   }
   .register {

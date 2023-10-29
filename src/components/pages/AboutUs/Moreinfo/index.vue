@@ -17,10 +17,10 @@ onMounted(() => {
         data-aos-easing="ease-in-out"
       >
         <h6 class="color-main">{{ t("More_info") }}</h6>
-        <h2 class="header_title">{{ t("About_us") }}</h2>
+        <h2 class="header_title">{{ t("about_us_page") }}</h2>
         <h5 class="header_title my-3">
-          <span class="color-main"> {{ t("Eagles_Car") }} </span
-          >{{ t("messabout1") }}
+          <span class="color-main"> {{ t("Eagles_Car") }} </span>
+          {{ t("messabout1") }}
         </h5>
         <p>{{ t("paragabout1") }}</p>
         <h5>{{ t("paraabout2") }}</h5>

@@ -11,6 +11,18 @@ const { t } = useI18n();
 //Return_point
 const Return_pointLong_term = ref(false);
 
+//Return_point
+const openLoc = ref(false);
+
+//openLocation{z
+const openLocation = (e) => {
+  console.log("e.target.value", e.target.value);
+  if (e.target.value) {
+    openLoc.value = true;
+  } else {
+    openLoc.value = false;
+  }
+};
 //onMounted
 onMounted(() => {
   AOS.init();
@@ -35,9 +47,10 @@ onMounted(() => {
             :placeholder="t('Location')"
             class="form-control"
             name="Location"
+            @input="openLocation($event)"
         /></SimpleInput>
       </div>
-      <div v-if="Return_pointLong_term">
+      <div v-if="Return_pointLong_term" class="Return_point">
         <label
           ><img
             src="@//assets/images/global/icons/global/Homepage/location.svg"
@@ -87,8 +100,28 @@ onMounted(() => {
       @click="Return_pointLong_term = true"
       v-if="!Return_pointLong_term"
     >
-      + Return point
+      + {{ t("return_point") }}
     </h6>
+    <div class="The_location" v-if="openLoc">
+      <hr />
+      <p>
+        <img src="@//assets/images/global/icons/global/Homepage/location.svg" />
+        Your location
+      </p>
+      <h5>Popular location</h5>
+      <p>
+        <img src="@//assets/images/global/icons/global/Homepage/location.svg" />
+        Eltera street
+      </p>
+      <p>
+        <img src="@//assets/images/global/icons/global/Homepage/location.svg" />
+        Elsanawyea street
+      </p>
+      <p>
+        <img src="@//assets/images/global/icons/global/Homepage/location.svg" />
+        Elgomhoria street
+      </p>
+    </div>
   </div>
 </template>
 <style lang="scss" scoped>

@@ -29,6 +29,7 @@ onMounted(() => {
     position: absolute;
     top: -120px;
     width: 100%;
+    left: 0px;
   }
 }
 /*media" */
@@ -46,5 +47,17 @@ onMounted(() => {
 
 /*ar version */
 .is-ar {
+}
+</style>
+<style lang="scss">
+.LookingFor .FillterHeader {
+  width: 84%;
+  margin: auto;
+  .withReturn_point,
+  .card,
+  .tab {
+    max-width: 100%;
+    width: 100%;
+  }
 }
 </style>

@@ -6,6 +6,7 @@ const toast = useToast();
 export const UseBloges = defineStore("Bloges", () => {
   let Bloges = ref([]);
   let Blog = ref({});
+  let unfouned = ref(false);
 
   //Get Bloges
   async function get_Bloges() {
@@ -16,6 +17,9 @@ export const UseBloges = defineStore("Bloges", () => {
     if (response.ok) {
       response.json().then((data) => {
         Bloges.value = data.data;
+        if (Bloges.value.length == 0) {
+          unfouned.value = true;
+        }
         console.log("Bloges.value", Bloges.value);
       });
     } else {
@@ -45,5 +49,6 @@ export const UseBloges = defineStore("Bloges", () => {
     Bloges,
     get_Blog,
     Blog,
+    unfouned,
   };
 });

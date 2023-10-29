@@ -111,7 +111,9 @@ onMounted(() => {
           data-aos-offset="300"
           data-aos-easing="ease-in-out"
         >
-          <h4>Logo</h4>
+          <router-link to="/">
+            <img src="../../../assets/images/global/icons/global/logo.svg"
+          /></router-link>
         </div>
         <div class="logo_box_img">
           <img src="@/assets/images/global/icons/global/Carbackground.svg" />

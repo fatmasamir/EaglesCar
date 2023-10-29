@@ -31,13 +31,13 @@ const handleOnComplete = (value: string) => {
 const handelSubmit = async () => {
   try {
     authStore.verifyRegister.otp = bindModal.value;
-    authStore.verifyRegister.login = authStore.registertion.phone;
+    authStore.verifyRegister.login = authStore.registertion.phone; //authStore.registertion.phone
     await authStore
       .Verify(JSON.stringify(authStore.verifyRegister))
       .then(() => {
         if (authStore.is_auth) {
           setTimeout(() => {
-            router.push("/Dashboard");
+            router.push("/");
           }, 1000);
           authStore.is_waiting = false;
         }
@@ -48,13 +48,13 @@ const handelSubmit = async () => {
 };
 onMounted(() => {
   AOS.init();
-  if (!authStore.registertion.phone) {
-    if (!authStore.registerSocialMedia.access_token) {
-      setTimeout(() => {
-        router.push("/register");
-      }, 2000);
-    }
-  }
+  // if (!authStore.registertion.phone) {
+  //   if (!authStore.registerSocialMedia.access_token) {
+  //     setTimeout(() => {
+  //       router.push("/register");
+  //     }, 2000);
+  //   }
+  // }
 });
 </script>
 
@@ -68,7 +68,9 @@ onMounted(() => {
           data-aos-offset="300"
           data-aos-easing="ease-in-out"
         >
-          <h4>Logo</h4>
+          <router-link to="/">
+            <img src="../../../assets/images/global/icons/global/logo.svg"
+          /></router-link>
         </div>
         <div class="logo_box_img">
           <img src="@/assets/images/global/icons/global/Carbackground.svg" />
@@ -83,7 +85,7 @@ onMounted(() => {
         <div class="middle">
           <div class="auth_header text-start">
             <h3>{{ t("OTP") }}</h3>
-            <p>{{ t("forget_msg") }}</p>
+            <p>{{ t("Check_phone_msg") }}</p>
           </div>
           <div class="form mt-5">
             <div class="style_otp">

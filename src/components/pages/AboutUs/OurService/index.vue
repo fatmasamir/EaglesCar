@@ -76,7 +76,8 @@ onMounted(() => {
   }
   .info {
     margin: 50px 0px 100px;
-    padding-left: 10%;
+    padding-left: 8%;
+    padding-right: 2%;
     ul {
       padding: 0px;
       margin-top: 50px;
@@ -117,8 +118,12 @@ onMounted(() => {
 .is-ar {
   .Our_Service {
     .info {
-      padding-left: 0%;
+      padding-left: 2%;
       padding-right: 10%;
+      ul li img {
+        margin-right: 0px;
+        margin-left: 10px;
+      }
     }
   }
 }

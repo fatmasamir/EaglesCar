@@ -2,6 +2,7 @@ const en = {
   //Register page
   Register: "Register",
   Register_msg: "Create new account today.",
+  Check_phone_msg: "Check your email to view the code that we send",
   fristName: "Frist name",
   lastName: "Last name",
   Iaccept_conditions1: "I accept the ",
@@ -29,7 +30,7 @@ const en = {
 
   //forgetPass page
   Forgetpassword: "Forget password",
-  forget_msg: "Enter your email to change your password",
+  forget_msg: "Enter your phone number to change your password",
   SendAgain: "Send again",
 
   //otp page
@@ -58,30 +59,48 @@ const en = {
   Pick_up: "Pick up",
   Drop_of: "Drop of",
   Search: "Search",
+  long_term: "Long Term",
+  short_term: "Short Term",
+  return_point: "Return point",
   PlanTitle: "Plan your trip now",
   headerTitle: "Quick & easy car rental",
+  par1: "You can find a huge variety of cars you can select from them",
+  par2: "Our 24 h call center team will contact with you to get your magic car",
+  par3: "This is your time to get a high quality car",
+  Select_Car: "Select Car",
+  Contact_Operator: "Contact Operator",
+  Let_Drive: "Let's Drive",
   about: "About company",
   aboutTitle: "You start the engine and your adventure begins",
-  aboutparagrah:
-    "Certain but she but shyness why cottage. Guy the put instrument sir entreaties affronting. Pretended exquisite see cordially the you. Weeks quiet do vexed or whose. Motionless if no to affronting imprudence no precaution. My indulged as disposal strongly attended.",
+  aboutparagrah: `We Have Specialists with More Than Ten Years Of Experience in
+    Supplying Cars for Renting.
+    Our company aims to provide high quality services Through our
+    experienced and skilled consultants in the local markets, where our
+    services cover huge areas inside Egypt and UEA`,
   learn_more: "learn more",
   carName: "car name",
   BookNow: "Book now",
   RentDream: "Rent your dream car",
   bookingparagrah:
-    "Certain but she but shyness why cottage. Guy the put instrument sir entreaties affronting. Pretended exquisite see cordially the you. Weeks quiet do vexed or whose. ",
-  rentaltitle: "Save Time with our rental cycle ",
+    "Hyundai Motor Group established a new vision, “Together for a better future.” in order to fulfill its role and responsibility as a trusted global firm. Hyundai Motor Company defined its vision",
+  rentaltitle: "Save Time with our Eagles car rental ",
   rentalMessage: "Top Airports. Local Suppliers. 24/7 Support.",
   book_ride: "Book Ride",
   New_information: "New information",
   Our_blogs: "Our blogs",
   Reviewed_People: "Reviewed by People",
   Clients_testimonials: "Clients' Testimonials",
+  Clients_reviews:
+    "It is always a positive experience when renting from your 5th street location. The staff is very professional and efficient and always smiling. And I always feel welcome and appreciated. The management is always prompt to solve any issue at any moment. Their efficiency and professionalism makes it my number one choice.",
   FAQ: "FAQ",
   Frequently_Questions: "Frequently Asked Questions",
   FQUMessage:
     "Use securing confined his shutters. Delightful as he it acceptance an solicitude discretion reasonably.Carriage we husbands advanced an perceive greatest.",
-
+  qus1: "Should You Get Your Car Checked Before A Long Trip?",
+  qus2: "How old do I need to be to rent a car?",
+  qus3: "How do I find such low rental car prices?",
+  answerQue:
+    "The last thing anyone wants when they are going on a road trip is a mechanical failure of their vehicle. Being broken down in unfamiliar surroundings is the worst. Taking your vehicle in for a quick inspection from a qualified mechanic can save you a major headache down the line. A mechanic will quickly look over your tires, brakes, battery, fluids, engine, lights, and wipers to make sure everything is running smoothly.",
   //DownloadTitle
   DownloadTitle: "Download our app to get most out of it",
   Downloadparagrah:
@@ -92,7 +111,7 @@ const en = {
   Privacy_policy: "Privacy policy",
   How_works: "How it works",
   Support: "Support",
-  Top_cars: "Top cars",
+  Top_cars: "Top Cars Brands",
   Nissan: "Nissan",
   BMW: "BMW",
   Honda: "Honda",
@@ -112,6 +131,7 @@ const en = {
 
   //about us
   More_info: "More info",
+  about_us_page: "Our Company",
   Eagles_Car: "Eagles Car",
   messabout1: "Was Established on December 2015 by a group of cars Suppliers.",
   paragabout1:
@@ -164,6 +184,8 @@ expectations.`,
   Contact_Info: "Contact Info",
   Phone_number: "Phone number",
   Email: "Email",
+  I_accept: "I accept the",
+  facebook: "facebook",
   Social_media_contacts: "Social media contacts",
   Available: "Available",
   What_looking: "What are you looking for?",
@@ -187,6 +209,10 @@ expectations.`,
   Logout: "Log out",
   Return_point: "Return point",
   Car_condition: "Car Condition",
+  paraFooter:
+    "Specialists with More Than Ten Years Of Experience in Supplying Cars for Renting.",
+  with_driver: "With driver",
+  Without_driver: "Without driver",
 };
 
 export default en;

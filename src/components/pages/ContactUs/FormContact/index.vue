@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
-import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
 import { onMounted } from "vue";
 import AOS from "aos";
+import Form_Detailes from "./Form_Detailes/index.vue";
+import Contact_Info from "./Contact_Info/index.vue";
 const { t } = useI18n();
 onMounted(() => {
   AOS.init();
@@ -11,37 +12,15 @@ onMounted(() => {
 <template>
   <div class="FormContact">
     <div class="card">
+      <h3 class="mt-5 mb-4">{{ t("Keep_touch") }}</h3>
       <div class="row">
         <div class="col-lg-7">
-          <h2>Keep in touch with us</h2>
-          <form>
-            <div class="mb-3">
-              <input
-                type="email"
-                class="form-control"
-                id="exampleFormControlInput1"
-                placeholder="Name"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="exampleFormControlTextarea1" class="form-label"
-                >Example textarea</label
-              >
-              <textarea
-                class="form-control"
-                id="exampleFormControlTextarea1"
-                rows="3"
-              ></textarea>
-            </div>
-          </form>
+          <Form_Detailes />
         </div>
-        <div class="col-lg-5">saasdsd</div>
+        <div class="col-lg-5">
+          <Contact_Info />
+        </div>
       </div>
-      <SimpleButton type="send">
-        <button to="/" type="submit" class="btn">
-          {{ t("View") }}
-        </button></SimpleButton
-      >
     </div>
   </div>
 </template>
@@ -54,7 +33,10 @@ onMounted(() => {
     width: 90%;
     margin: auto;
     margin-top: -150px;
-    padding: 15px 30px;
+    padding: 15px 30px 50px !important;
+    h3 {
+      font-weight: 700;
+    }
   }
 }
 
@@ -65,6 +47,9 @@ onMounted(() => {
 @media screen and (max-width: 1210px) {
 }
 @media screen and (max-width: 992px) {
+  .FormContact {
+    margin: 100px 0px;
+  }
 }
 
 /*ar version */

@@ -45,25 +45,4 @@ onMounted(() => {
 <style lang="scss" scoped>
 @import "../../../../assets/scss/variables";
 @import "./Header.scss";
-.tab {
-  margin-bottom: 0px;
-  padding: 0px;
-  li {
-    background: white;
-    color: black;
-    padding: 15px;
-    cursor: pointer;
-    display: inline-block;
-    &:first-child {
-      border-top-left-radius: 8px;
-    }
-    &:last-child {
-      border-top-right-radius: 8px;
-    }
-  }
-  .active {
-    background-color: #f4a71d;
-    color: white;
-  }
-}
 </style>

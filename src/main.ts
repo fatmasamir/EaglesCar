@@ -89,6 +89,7 @@ function startApp() {
       clientId: gauthClientId,
       scope: "email",
       prompt: "consent",
+      plugin_name: "put anything here",
       fetch_basic_profile: false,
     })
     .use(Toast, {

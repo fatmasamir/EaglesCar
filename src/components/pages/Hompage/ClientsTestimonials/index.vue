@@ -9,36 +9,15 @@ const { t } = useI18n();
 const slides = [
   {
     author: "Ahmed ali",
-    content: `
-          It is always a positive experience when renting from your 5th street
-          location. The staff is very 
-          professional and efficient and always smiling. And I always feel
-          welcome and appreciated. The 
-          management is always prompt to solve any issue at any moment. Their
-          efficiency and
-          professionalism makes it my number one choice.`,
+    content: "Clients_reviews",
   },
   {
     author: "Ahmed ali",
-    content: `
-          It is always a positive experience when renting from your 5th street
-          location. The staff is very 
-          professional and efficient and always smiling. And I always feel
-          welcome and appreciated. The 
-          management is always prompt to solve any issue at any moment. Their
-          efficiency and
-          professionalism makes it my number one choice.`,
+    content: "Clients_reviews",
   },
   {
     author: "Ahmed ali",
-    content: `
-          It is always a positive experience when renting from your 5th street
-          location. The staff is very 
-          professional and efficient and always smiling. And I always feel
-          welcome and appreciated. The 
-          management is always prompt to solve any issue at any moment. Their
-          efficiency and
-          professionalism makes it my number one choice.`,
+    content: "Clients_reviews",
   },
 ];
 onMounted(() => {
@@ -71,7 +50,7 @@ onMounted(() => {
                 <label for="star1" title="1">1 star</label>
               </div> -->
 
-              <p>{{ slide.content }}</p>
+              <p>{{ t(slide.content) }}</p>
               <h5>- {{ slide.author }}</h5>
             </div>
           </slide>

@@ -12,6 +12,7 @@ const { t } = useI18n();
 </script>
 
 <template>
+  <GoogleLogin :callback="callback" />
   <div class="ContinueWith">
     <p>{{ t("ContinueWith") }} :</p>
     <div class="card">

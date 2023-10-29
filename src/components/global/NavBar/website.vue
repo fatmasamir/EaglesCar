@@ -4,13 +4,14 @@ import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.
 import { useAuthStore } from "@/stores/auth";
 import signoutGoogle from "./signoutGoogle.vue";
 import LogoutFacebook from "../ContinueSocial/logoutFacebook.vue";
-import { defineProps, defineEmits, ref, watch, onMounted } from "vue";
+import { defineProps, defineEmits, ref, onMounted } from "vue";
+import { useLight } from "@/stores/light";
 // props
 let props = defineProps(["Links", "lang"]);
-let emit = defineEmits(["changeLang", "Logout"]);
+let emit = defineEmits(["changeLang", "Logout", "LightFun"]);
 
-// auth store
-const authStore = useAuthStore();
+// useLight
+const Light = useLight();
 
 // i18n
 const { t } = useI18n();
@@ -28,6 +29,10 @@ const LogoutFun = () => {
 //changeLangEmit
 const changeLangEmit = (lang_targe: String) => {
   emit("changeLang", lang_targe);
+};
+//LightFunEmit
+const LightFunEmit = (value: String) => {
+  emit("LightFun", value);
 };
 //onMounted page
 onMounted(() => {
@@ -68,27 +73,37 @@ onMounted(() => {
       <!-- lang -->
       <div class="lang">
         <button v-if="props.lang == 'ar'" @click="changeLangEmit('en')">
-          <img src="@/assets//images/global/icons/global/flag-eng.svg" />
+          <img src="@/assets/images/global/icons/global/flag-eng.svg" />
         </button>
         <button v-else @click="changeLangEmit('ar')">
-          <img src="@/assets//images/global/icons/global/flag-eng.svg" />
+          <img src="@/assets/images/global/icons/global/flag_eg.svg" />
         </button>
       </div>
       <!-- light button -->
       <div class="light">
-        <div class="open">
+        <div
+          class="open"
+          @click="LightFunEmit('off')"
+          v-if="Light.Light == 'open'"
+        >
+          <img src="../../../assets/images/global/icons/global/moon.svg" />
+        </div>
+        <div
+          class="off"
+          @click="LightFunEmit('open')"
+          v-if="Light.Light == 'off'"
+        >
           <img src="../../../assets/images/global/icons/global/light.svg" />
         </div>
       </div>
 
       <!--if Login-->
-
       <div v-if="Login">
         <!--if signin or login by google-->
         <signoutGoogle v-if="type == 'Google'" />
 
         <!--if signin or login by facebook-->
-        <LogoutFacebook v-if="type == 'facebook'" />
+        <LogoutFacebook v-if="type == 'Facebook'" />
 
         <!--if signin or login by account-->
         <SimpleButton type="send" v-if="type == 'account'">

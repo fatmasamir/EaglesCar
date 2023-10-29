@@ -26,10 +26,9 @@ onMounted(() => {
               src="../../../../assets/images/global/icons/global/Homepage/car-door.svg"
             />
           </div>
-          <h5>Select Car</h5>
+          <h5>{{ t("Select_Car") }}</h5>
           <p>
-            To contribute to positive change and achieve our sustainability
-            goals with many extraordinary
+            {{ t("par1") }}
           </p>
         </div>
         <div class="col-md-1">
@@ -48,10 +47,9 @@ onMounted(() => {
               src="../../../../assets/images/global/icons/global/Homepage/customer-service.svg"
             />
           </div>
-          <h5>Contact Operator</h5>
+          <h5>{{ t("Contact_Operator") }}</h5>
           <p>
-            To contribute to positive change and achieve our sustainability
-            goals with many extraordinary
+            {{ t("par2") }}
           </p>
         </div>
         <div class="col-md-1">
@@ -70,10 +68,9 @@ onMounted(() => {
               src="../../../../assets/images/global/icons/global/Homepage/car-key.svg"
             />
           </div>
-          <h5>Let's Drive</h5>
+          <h5>{{ t("Let_Drive") }}</h5>
           <p>
-            To contribute to positive change and achieve our sustainability
-            goals with many extraordinary
+            {{ t("par3") }}
           </p>
         </div>
       </div>

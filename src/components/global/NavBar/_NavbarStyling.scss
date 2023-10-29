@@ -160,16 +160,25 @@
   -o-border-radius: 0px;
   width: 100px;
   height: 30px;
-  .open {
+  .open,
+  .off {
     background-color: white;
     width: 50px;
     text-align: center;
     height: 29px;
     border-radius: 3px;
+    transition: linear ease-in 0.3s;
+    -webkit-transition: linear ease-in 0.3s;
+    -moz-transition: linear ease-in 0.3s;
+    -ms-transition: linear ease-in 0.3s;
+    -o-transition: linear ease-in 0.3s;
     img {
       width: 20px;
       height: 20px;
     }
+  }
+  .off {
+    margin-left: auto;
   }
 }
 .simple-button.send .logout {
@@ -250,5 +259,9 @@
   .navbar .light {
     margin-left: 0px;
     margin-right: 1.5rem !important;
+  }
+  .off {
+    margin-right: auto;
+    margin-left: 0px;
   }
 }

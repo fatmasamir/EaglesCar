@@ -96,7 +96,8 @@ export const useAuthStore = defineStore("auth", () => {
       throw errors;
     } else {
       toast.success("Successfully Register ... ");
-      this.router.push("/login");
+      is_auth.value = true;
+      is_loading.value = false;
     }
   }
 
@@ -106,7 +107,7 @@ export const useAuthStore = defineStore("auth", () => {
     is_loading.value = true;
     is_waiting.value = true;
     const response = await callServer({
-      url: "api/auth/register",
+      url: "api/auth/verify",
       method: "POST",
       data,
     });
@@ -204,10 +205,10 @@ export const useAuthStore = defineStore("auth", () => {
     if (response.ok) {
       is_auth.value = true;
       response.json().then(async (res) => {
-        localStorage.setItem("access_token", data.data.token);
-        localStorage.setItem("user", data.data.user);
-        user.value = data.data.user;
-        localStorage.setItem("type", "Google");
+        localStorage.setItem("access_token", res.data.token);
+        localStorage.setItem("user", res.data.user);
+        user.value = res.data.user;
+        localStorage.setItem("type", "Facebook");
         is_auth.value = true;
         is_loading.value = false;
         await window.location.reload();

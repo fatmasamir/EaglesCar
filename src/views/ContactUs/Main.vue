@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import NavBar from "@/components/global/NavBar/NavBar.vue";
 import Header from "@/components/global/Header/index.vue";
-// import FormContact from "@/components//pages/ContactUs/FormContact/index.vue";
+import FormContact from "@/components//pages/ContactUs/FormContact/index.vue";
 import Footer from "@/components/global/Footer/index.vue";
 </script>
 <template>
   <section class="Pages">
     <NavBar></NavBar>
     <Header TiltePage="Contact_us"></Header>
-    <!-- <FormContact></FormContact> -->
+    <FormContact></FormContact>
     <Footer></Footer>
   </section>
 </template>

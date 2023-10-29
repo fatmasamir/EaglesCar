@@ -89,9 +89,9 @@ let onSubmit = handleSubmit((values) => {
 
 onMounted(() => {
   AOS.init();
-  // if (localStorage.getItem("access_token")) {
-  //   router.push("/");
-  // }
+  if (localStorage.getItem("access_token")) {
+    router.push("/");
+  }
 });
 </script>
 
@@ -147,7 +147,7 @@ onMounted(() => {
             type="email"
             id="email"
             name="email"
-            :placeholder="t('email')"
+            :placeholder="t('Email')"
             required
             v-bind="email"
             :class="{ 'is-invalid': errors.email }"
@@ -171,6 +171,7 @@ onMounted(() => {
             :dropdownStyle="{ backgroundColor: '#f9f9f9' }"
             :class="{ 'is-invalid': errors.phone }"
             v-bind="phone"
+            :placeholder="t('phone_number')"
           />
           <div class="invalid-feedback">{{ errors.phone }}</div>
         </SimpleInput>
@@ -235,7 +236,7 @@ onMounted(() => {
           <input type="checkbox" required v-model="terms_and_conditions" />
           <div class="invalid-feedback">{{ errors.terms_and_conditions }}</div>
           <label for="rememberMe" class="mx-2">
-            {{ t("Iaccept_conditions1") }}
+            {{ t("I_accept") }}
             <router-link to="/privacy-policy" class="color-main">{{
               t("Iaccept_conditions2")
             }}</router-link></label
@@ -274,6 +275,12 @@ a {
     &:first-child {
       padding-right: 10px;
     }
+  }
+}
+.is-ar {
+  .nameInput > div:first-child {
+    padding-right: 0px;
+    padding-left: 10px;
   }
 }
 </style>

@@ -85,9 +85,9 @@ onMounted(() => {
     </div>
     <div class="Send_request">
       <SimpleButton type="send">
-        <button class="btn">
+        <a href="https://wa.me/201010888069" target="_blank" class="btn">
           {{ t("Send_request") }}
-        </button></SimpleButton
+        </a></SimpleButton
       >
     </div>
   </div>
@@ -139,7 +139,7 @@ onMounted(() => {
   }
   .Send_request {
     width: 100%;
-    button {
+    a {
       width: 100%;
       margin-top: 20px;
     }

@@ -123,5 +123,20 @@ onMounted(() => {
 
 /*ar version */
 .is-ar {
+  .Vision .info {
+    padding-left: auto;
+    padding-right: 30px;
+    margin-right: 0px;
+    margin-left: auto;
+    text-align: right;
+  }
+  .car2 {
+    left: 0px;
+    right: auto;
+  }
+  .backgorund_img img,
+  .car2 img {
+    transform: scaleX(-1);
+  }
 }
 </style>

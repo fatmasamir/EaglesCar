@@ -21,7 +21,7 @@ let callServer: CallFunction = async (options) => {
   };
 
   // base url
-  const base_url: string = `http://api.eagles-car.com`;
+  const base_url: string = `https://api.eagles-car.com`;
 
   const end_point: string = `${base_url}/${options.url}`;
   // header

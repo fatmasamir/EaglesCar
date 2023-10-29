@@ -28,10 +28,10 @@ onMounted(() => {
         >
         <div class="choose_Car_condition">
           <div :class="Driver ? 'active' : ''" @click="Driver = true">
-            With driver
+            {{ t("with_driver") }}
           </div>
           <div :class="!Driver ? 'active' : ''" @click="Driver = false">
-            Without driver
+            {{ t("Without_driver") }}
           </div>
         </div>
       </div>
@@ -260,5 +260,9 @@ onMounted(() => {
 
 /*ar version */
 .is-ar {
+  .Fillter .row .choose_Car_condition > div:first-child {
+    margin-left: 10px;
+    margin-right: 0px;
+  }
 }
 </style>

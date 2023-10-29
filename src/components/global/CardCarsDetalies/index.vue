@@ -17,52 +17,58 @@ onMounted(() => {
       <img :src="data.image_car" />
     </div>
     <div class="card">
-      <div class="title">
-        <h3>C200</h3>
-        <div class="buttons">
-          <div class="rating_number">
-            <img
-              src="../../../assets/images/global/icons/global/carRental/star.svg"
-            />
-            {{ data.numbrtFavorit }}
-          </div>
-          <SimpleButton type="send">
-            <button to="/" type="submit" class="btn">
-              {{ t("Available") }}
-            </button></SimpleButton
-          >
-        </div>
-      </div>
-      <p class="my-3">
-        Lorem ipsum dolor sit amet, conse ctetur adipiscing elit ut elit tellus.
-      </p>
-      <div class="row list">
-        <div class="col-lg-4">
-          <div class="content">
-            <span>Power:</span>
-            {{ data.turbo }}
+      <router-link to="/car-detalies">
+        <div class="title">
+          <h3>C200</h3>
+          <div class="buttons">
+            <div class="rating_number">
+              <img
+                src="../../../assets/images/global/icons/global/carRental/star.svg"
+              />
+              {{ data.numbrtFavorit }}
+            </div>
+            <SimpleButton type="send">
+              <button to="/" type="submit" class="btn">
+                {{ t("Available") }}
+              </button></SimpleButton
+            >
           </div>
         </div>
-        <div class="col-lg-4">
-          <div class="content">
-            <span>Bag:</span>
-            {{ data.turbo2 }}
+        <p class="my-3">
+          Lorem ipsum dolor sit amet, conse ctetur adipiscing elit ut elit
+          tellus.
+        </p>
+        <div class="row list">
+          <div class="col-lg-4">
+            <div class="content">
+              <span>Power:</span>
+              {{ data.turbo }}
+            </div>
           </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="content">
-            <span>Seat:</span>
-            {{ data.babyCarSeat }}
+          <div class="col-lg-4">
+            <div class="content">
+              <span>Bag:</span>
+              {{ data.turbo2 }}
+            </div>
           </div>
-        </div>
-      </div>
+          <div class="col-lg-4">
+            <div class="content">
+              <span>Seat:</span>
+              {{ data.babyCarSeat }}
+            </div>
+          </div>
+        </div></router-link
+      >
       <hr />
       <div class="BookNow">
-        <h5>120000 LE <span>(per week)</span></h5>
+        <div>
+          <h5>120000 LE</h5>
+          <span>(per week)</span>
+        </div>
         <SimpleButton type="send">
-          <button to="/" type="submit" class="btn">
+          <a href="https://wa.me/201010888069" target="_blank" class="btn p-2">
             {{ t("BookNow") }}
-          </button></SimpleButton
+          </a></SimpleButton
         >
       </div>
     </div>
@@ -74,12 +80,16 @@ onMounted(() => {
   .image_car img {
     width: 100%;
     margin: auto auto 20px;
+    height: 200px;
   }
   .card {
     border: 1px solid #e7e7e7 !important;
     border-top: 0px !important;
     margin-bottom: 100px;
     padding: 20px;
+    a {
+      color: initial;
+    }
     .title {
       justify-content: space-between;
       align-items: center;
@@ -130,14 +140,20 @@ onMounted(() => {
       margin: 20px 0px;
       display: flex;
       h5 {
+        display: inline-block;
         font-size: 18px;
-        span {
-          font-size: 15px;
-          vertical-align: sub;
-        }
+      }
+      span {
+        font-size: 15px;
       }
       button {
         height: 50px;
+      }
+      a {
+        color: white;
+      }
+      a:focus {
+        box-shadow: none;
       }
     }
     hr {
@@ -156,5 +172,9 @@ onMounted(() => {
 
 /*ar version */
 .is-ar {
+  .the_block .card .title .buttons .rating_number {
+    margin-right: 0px;
+    margin-left: 10px;
+  }
 }
 </style>

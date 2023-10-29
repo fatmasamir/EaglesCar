@@ -9,15 +9,30 @@ import AOS from "aos";
 const { t } = useI18n();
 
 //Return_point
-const Return_point = ref(false);
+const Return_pointLong_term = ref(false);
 
+//Return_point
+const openLoc = ref(false);
+
+//openLocation{z
+const openLocation = (e) => {
+  console.log("e.target.value", e.target.value);
+  if (e.target.value) {
+    openLoc.value = true;
+  } else {
+    openLoc.value = false;
+  }
+};
 //onMounted
 onMounted(() => {
   AOS.init();
 });
 </script>
 <template>
-  <div class="card p-3" :class="Return_point ? '' : 'withReturn_point'">
+  <div
+    class="card p-3"
+    :class="Return_pointLong_term ? '' : 'withReturn_point'"
+  >
     <h4>{{ t("Book_car") }}</h4>
     <div class="row flex">
       <div class="Location">
@@ -32,9 +47,10 @@ onMounted(() => {
             :placeholder="t('Location')"
             class="form-control"
             name="Location"
+            @input="openLocation($event)"
         /></SimpleInput>
       </div>
-      <div v-if="Return_point">
+      <div v-if="Return_pointLong_term" class="Return_point">
         <label
           ><img
             src="@//assets/images/global/icons/global/Homepage/location.svg"
@@ -79,10 +95,33 @@ onMounted(() => {
         ></SimpleButton>
       </div>
     </div>
-
-    <h6 class="Return-point" @click="Return_point = true" v-if="!Return_point">
-      + Return point
+    <h6
+      class="Return-point"
+      @click="Return_pointLong_term = true"
+      v-if="!Return_pointLong_term"
+    >
+      + {{ t("return_point") }}
     </h6>
+    <div class="The_location" v-if="openLoc">
+      <hr />
+      <p>
+        <img src="@//assets/images/global/icons/global/Homepage/location.svg" />
+        Your location
+      </p>
+      <h5>Popular location</h5>
+      <p>
+        <img src="@//assets/images/global/icons/global/Homepage/location.svg" />
+        Eltera street
+      </p>
+      <p>
+        <img src="@//assets/images/global/icons/global/Homepage/location.svg" />
+        Elsanawyea street
+      </p>
+      <p>
+        <img src="@//assets/images/global/icons/global/Homepage/location.svg" />
+        Elgomhoria street
+      </p>
+    </div>
   </div>
 </template>
 <style lang="scss" scoped>

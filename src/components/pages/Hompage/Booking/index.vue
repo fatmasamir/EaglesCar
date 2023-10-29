@@ -50,12 +50,12 @@ onMounted(() => {
       >
         <div class="row">
           <div class="col-lg-4">
-            <h2>{{ t("carName") }}</h2>
+            <h2>Hyundai</h2>
             <p>{{ t("bookingparagrah") }}</p>
             <div class="flex my-4">
               <router-link to="/" class="Nissan"
                 ><img
-                  src="../../../../assets/images/global/icons/global/Homepage/Nissan.svg"
+                  src="../../../../assets/images/global/icons/global/Homepage/hyundai.svg"
               /></router-link>
               <router-link to="/" type="submit" class="Available_now">
                 {{ t("Available_now") }}

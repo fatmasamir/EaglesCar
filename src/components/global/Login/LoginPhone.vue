@@ -27,8 +27,8 @@ const { meta } = useForm();
 // formLogin
 const { errors, handleSubmit, defineInputBinds } = useForm({
   validationSchema: Yup.object({
-    login: Yup.string().required(),
-    password: Yup.string().min(6).required(),
+    login: Yup.string().required(t("requiredFiled")),
+    password: Yup.string().min(6).required(t("requiredFiled")),
   }),
 });
 
@@ -72,6 +72,7 @@ onMounted(() => {
             :dropdownStyle="{ backgroundColor: '#f9f9f9' }"
             :class="{ 'is-invalid': errors.login }"
             v-bind="login"
+            placeholder=""
           />
           <div class="invalid-feedback">{{ errors.login }}</div>
         </SimpleInput>

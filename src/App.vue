@@ -1,10 +1,26 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from "@vue/runtime-core";
 import { useLang } from "@/stores/lang";
+import { useLight } from "@/stores/light";
+
+//Language
 const Language = useLang();
+
+//Language
+const Light = useLight();
+
+//loading
 const loading = ref(true);
+
+//onMounted
 onMounted(() => {
+  //onMounted
   Language.changeLayout();
+
+  //Light
+  Light.changeLight();
+
+  //setTimeout
   setTimeout(function () {
     loading.value = false;
   }, 1000);

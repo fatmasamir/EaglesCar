@@ -18,22 +18,24 @@ onMounted(() => {
 });
 </script>
 <template>
-  <ul class="tab">
-    <li
-      @click="Tab_choose = 'Long'"
-      :class="Tab_choose == 'Long' ? 'active' : ''"
-    >
-      Long term
-    </li>
-    <li
-      @click="Tab_choose = 'Short'"
-      :class="Tab_choose == 'Short' ? 'active' : ''"
-    >
-      Short term
-    </li>
-  </ul>
-  <Long_term v-if="Tab_choose == 'Long'" />
-  <Short_term v-if="Tab_choose == 'Short'" />
+  <div class="FillterHeader">
+    <ul class="tab">
+      <li
+        @click="Tab_choose = 'Long'"
+        :class="Tab_choose == 'Long' ? 'active' : ''"
+      >
+        {{ t("long_term") }}
+      </li>
+      <li
+        @click="Tab_choose = 'Short'"
+        :class="Tab_choose == 'Short' ? 'active' : ''"
+      >
+        {{ t("short_term") }}
+      </li>
+    </ul>
+    <Long_term v-if="Tab_choose == 'Long'" />
+    <Short_term v-if="Tab_choose == 'Short'" />
+  </div>
 </template>
 <style lang="scss" scoped>
 @import "./styleing.scss";
@@ -54,8 +56,22 @@ onMounted(() => {
     }
   }
   .active {
-    background-color: #f4a71d;
-    color: white;
+    background-color: #f4a71d !important;
+    color: white !important;
+  }
+}
+.is-ar {
+  .tab {
+    li {
+      &:first-child {
+        border-top-right-radius: 8px;
+        border-top-left-radius: 0px;
+      }
+      &:last-child {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 0px;
+      }
+    }
   }
 }
 </style>

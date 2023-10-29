@@ -80,9 +80,8 @@ onMounted(() => {
 <template>
   <div class="row">
     <div class="col-md-6" v-for="info in data" :key="info.id">
-      <router-link to="/car-detalies">
-        <CardCarsDetalies :data="info"></CardCarsDetalies
-      ></router-link>
+      <!-- <router-link to="/car-detalies"> -->
+      <CardCarsDetalies :data="info"></CardCarsDetalies>
     </div>
   </div>
 </template>

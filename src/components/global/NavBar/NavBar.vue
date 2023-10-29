@@ -7,6 +7,7 @@ import { useLang } from "@/stores/lang";
 import Mobile from "./Mobile.vue";
 import Website from "./Website.vue";
 import { useAuthStore } from "@/stores/auth";
+import { useLight } from "@/stores/light";
 import { useRouter } from "vue-router";
 
 // i18n
@@ -14,8 +15,12 @@ const { t } = useI18n();
 
 // auth store
 const authStore = useAuthStore();
+
 // router
 const router = useRouter();
+
+// useLight
+const Light = useLight();
 
 // Language
 const Language = useLang();
@@ -67,10 +72,19 @@ let changeLang = (lang_targe: string) => {
   console.log("  lang.value", lang.value);
   Language.changeLayout();
 };
+
+// handel light
+let LightFun = (value: string) => {
+  Light.Light = value;
+  Light.changeLight();
+};
+
+// handel changeshowMobile
 let changeshowMobile = () => {
   console.log("changeshowMobile");
   showMobileList.value = false;
 };
+
 //Logout
 const Logout = () => {
   authStore.logOut();
@@ -91,6 +105,7 @@ const Logout = () => {
         :lang="lang"
         @changeLang="changeLang"
         @Logout="Logout"
+        @LightFun="LightFun"
       />
       <button
         class="navbar-toggler"

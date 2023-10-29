@@ -22,7 +22,7 @@ export const accountService = defineStore("account_Service", () => {
       //localStorage
       // send loginSocialMedia.access_token to fun registerFacebook
       authStore.registerFacebook(authStore.loginSocialMedia).then(() => {
-        this.router.push("/");
+        // this.router.push("/");
       });
     }
 
@@ -46,7 +46,7 @@ export const accountService = defineStore("account_Service", () => {
     // accountSubject
     accountSubject.next(null);
     // removeItem removeItem
-    localStorage.removeItem("removeItem");
+    localStorage.removeItem("access_token");
     // removeItem type
     localStorage.removeItem("type");
     // go to page login

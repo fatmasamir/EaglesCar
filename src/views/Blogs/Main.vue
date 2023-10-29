@@ -20,7 +20,10 @@ onMounted(() => {
     <NavBar></NavBar>
     <Header TiltePage="Blogs"></Header>
     <Blogs :Bloges="Bloges.Bloges" v-if="Bloges.Bloges.length != 0"></Blogs>
-    <Loading v-if="Bloges.Bloges.length == 0"></Loading>
+    <div v-if="Bloges.Bloges.length == 0">
+      <Loading v-if="!Bloges.unfouned"></Loading>
+      <p class="Not_Found" v-else>Not Found !</p>
+    </div>
     <Footer></Footer>
   </section>
 </template>
@@ -35,5 +38,10 @@ onMounted(() => {
       display: none;
     }
   }
+}
+.Not_Found {
+  margin: 100px auto;
+  text-align: center;
+  color: #aaa;
 }
 </style>
