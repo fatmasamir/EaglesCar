@@ -3,8 +3,14 @@ import { useI18n } from "vue-i18n";
 import { onMounted } from "vue";
 import Description from "./Description/index.vue";
 import specificationsCar from "./specificationsCar/index.vue";
+import { defineProps } from "vue";
 import AOS from "aos";
+
+// useI18n
 const { t } = useI18n();
+
+// defineProps
+let props = defineProps(["Car"]);
 onMounted(() => {
   AOS.init();
 });
@@ -13,8 +19,8 @@ onMounted(() => {
   <div class="DetaliesCar">
     <div class="container">
       <div class="row">
-        <div class="col-lg-8"><Description /></div>
-        <div class="col-lg-4"><specificationsCar /></div>
+        <div class="col-lg-8"><Description :Car="props.Car" /></div>
+        <div class="col-lg-4"><specificationsCar :Car="props.Car" /></div>
       </div>
     </div>
   </div>

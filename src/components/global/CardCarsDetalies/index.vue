@@ -14,55 +14,56 @@ onMounted(() => {
 <template>
   <div class="the_block">
     <div class="image_car">
-      <img :src="data.image_car" />
+      <img :src="props.data.image_car" />
     </div>
     <div class="card">
-      <router-link to="/car-detalies">
-        <div class="title">
-          <h3>C200</h3>
-          <div class="buttons">
-            <div class="rating_number">
-              <img
-                src="../../../assets/images/global/icons/global/carRental/star.svg"
-              />
-              {{ data.numbrtFavorit }}
-            </div>
-            <SimpleButton type="send">
-              <button to="/" type="submit" class="btn">
-                {{ t("Available") }}
-              </button></SimpleButton
+      <div class="title">
+        <h3>{{ props.data.title }}</h3>
+        <div class="buttons">
+          <div class="rating_number">
+            <img
+              src="../../../assets/images/global/icons/global/carRental/star.svg"
+            />
+            {{ props.data.per }}
+          </div>
+          <SimpleButton type="send" v-if="data.available">
+            <router-link
+              :to="'/car-detalies/' + data.slug"
+              type="submit"
+              class="btn"
             >
+              {{ t("Available") }}
+            </router-link></SimpleButton
+          >
+        </div>
+      </div>
+      <p class="my-3">
+        {{ data.short_description }}
+      </p>
+      <div class="row list">
+        <div class="col-lg-4">
+          <div class="content">
+            <span>Power:</span>
+            {{ data.power }}
           </div>
         </div>
-        <p class="my-3">
-          Lorem ipsum dolor sit amet, conse ctetur adipiscing elit ut elit
-          tellus.
-        </p>
-        <div class="row list">
-          <div class="col-lg-4">
-            <div class="content">
-              <span>Power:</span>
-              {{ data.turbo }}
-            </div>
+        <div class="col-lg-4">
+          <div class="content">
+            <span>Bag:</span>
+            {{ data.bags }}
           </div>
-          <div class="col-lg-4">
-            <div class="content">
-              <span>Bag:</span>
-              {{ data.turbo2 }}
-            </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="content">
+            <span>Seat:</span>
+            {{ data.seats }}
           </div>
-          <div class="col-lg-4">
-            <div class="content">
-              <span>Seat:</span>
-              {{ data.babyCarSeat }}
-            </div>
-          </div>
-        </div></router-link
-      >
+        </div>
+      </div>
       <hr />
       <div class="BookNow">
         <div>
-          <h5>120000 LE</h5>
+          <h5>{{ data.per }} LE</h5>
           <span>(per week)</span>
         </div>
         <SimpleButton type="send">
@@ -109,11 +110,14 @@ onMounted(() => {
           width: 70px;
           text-align: center;
         }
-        button {
+        a {
           height: 44px;
-          padding: 5px 10px;
+          padding: 10px 10px;
           background: #44c308;
           border-radius: 8px;
+          color: white;
+          display: block;
+          cursor: pointer !important;
         }
       }
     }

@@ -2,15 +2,17 @@
 import { useI18n } from "vue-i18n";
 import { onMounted } from "vue";
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
-import AOS from "aos";
+import { defineProps } from "vue";
+
+// useI18n
 const { t } = useI18n();
-onMounted(() => {
-  AOS.init();
-});
+
+// defineProps
+let props = defineProps(["Car"]);
 </script>
 <template>
   <div class="specificationsCar">
-    <h4 class="mb-4">Chevrolet Camaro 2-door convertible blue</h4>
+    <h4 class="mb-4">{{ props.Car.title }}</h4>
     <hr />
     <div class="row">
       <div class="col-lg-6">
@@ -29,7 +31,7 @@ onMounted(() => {
             />
             3
           </div>
-          <SimpleButton type="send">
+          <SimpleButton type="send" v-if="props.Car.available">
             <button to="/" type="submit" class="btn">
               {{ t("Available") }}
             </button></SimpleButton

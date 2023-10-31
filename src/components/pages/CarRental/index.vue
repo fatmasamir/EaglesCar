@@ -4,8 +4,14 @@ import { onMounted } from "vue";
 import FillterHeader from "../../global/FillterHeader/index.vue";
 import Fillter from "./Fillter/index.vue";
 import CardsDetailes from "./CardsDetailes/index.vue";
+import { defineProps } from "vue";
 import AOS from "aos";
+
+// useI18n
 const { t } = useI18n();
+
+// defineProps
+let props = defineProps(["Cars"]);
 onMounted(() => {
   AOS.init();
 });
@@ -15,8 +21,9 @@ onMounted(() => {
     <div class="container">
       <div class="LookingFor"><FillterHeader /></div>
       <div class="row">
+        <pre>{{ props.Cars }}</pre>
         <div class="col-lg-4"><Fillter /></div>
-        <div class="col-lg-8"><CardsDetailes /></div>
+        <div class="col-lg-8"><CardsDetailes :Cars="props.Cars" /></div>
       </div>
     </div>
   </section>

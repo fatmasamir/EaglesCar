@@ -3,7 +3,13 @@ import { useI18n } from "vue-i18n";
 import { onMounted, reactive, ref } from "vue";
 import AOS from "aos";
 import { data } from "../../CardsDetailes/data";
+import { defineProps } from "vue";
+
+// useI18n
 const { t } = useI18n();
+
+// defineProps
+let props = defineProps(["Car"]);
 
 //showNumberCar
 let showNumberCar = ref(1);
@@ -87,15 +93,7 @@ onMounted(() => {
     </ul>
     <h5>Description</h5>
     <p>
-      How the adventure ended will be seen anon. Aouda was anxious, though she
-      said nothing. As for Passepartout, he thought Mr. Fogg’s manoeuvre simply
-      glorious. The captain had said “between eleven and twelve knots,” and the
-      Henrietta confirmed his prediction.
-    </p>
-    <p>
-      If, then—for there were “ifs” still—the sea did not become too boisterous,
-      if the wind did not veer round to the east, if no accident happened to the
-      boat or its machinery, the Henrietta might cross the three…
+      {{ props.Car.description }}
     </p>
     <router-link to="/" class="color-main">{{ t("Show_more") }}</router-link>
     <h5>Features</h5>
@@ -107,8 +105,8 @@ onMounted(() => {
       <li><span></span>Navigation System</li>
       <li><span></span>Side airbags</li>
     </ul>
-    <h5>Attachments</h5>
-    <div class="Attachments">
+    <h5 v-if="props.Car.documents.length != 0">Attachments</h5>
+    <div class="Attachments" v-if="props.Car.documents.length != 0">
       <div>
         <router-link to="/" class="color-main">
           <img

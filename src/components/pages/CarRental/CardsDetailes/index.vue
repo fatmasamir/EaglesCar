@@ -3,8 +3,15 @@ import { useI18n } from "vue-i18n";
 import { onMounted, ref } from "vue";
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
 import CardCarsDetalies from "../../../global/CardCarsDetalies/index.vue";
+import { defineProps } from "vue";
 import AOS from "aos";
+
+// useI18n
 const { t } = useI18n();
+
+// defineProps
+let props = defineProps(["Cars"]);
+
 const data = ref([
   {
     id: 0,
@@ -78,8 +85,8 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div class="row">
-    <div class="col-md-6" v-for="info in data" :key="info.id">
+  <div class="row" v-if="props.Cars.length != 0">
+    <div class="col-md-6" v-for="info in props.Cars" :key="info.id">
       <!-- <router-link to="/car-detalies"> -->
       <CardCarsDetalies :data="info"></CardCarsDetalies>
     </div>
