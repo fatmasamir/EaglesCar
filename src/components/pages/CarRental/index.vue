@@ -21,7 +21,6 @@ onMounted(() => {
     <div class="container">
       <div class="LookingFor"><FillterHeader /></div>
       <div class="row">
-        <pre>{{ props.Cars }}</pre>
         <div class="col-lg-4"><Fillter /></div>
         <div class="col-lg-8"><CardsDetailes :Cars="props.Cars" /></div>
       </div>

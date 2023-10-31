@@ -67,7 +67,7 @@ onMounted(() => {
           <span>(per week)</span>
         </div>
         <SimpleButton type="send">
-          <a href="https://wa.me/201010888069" target="_blank" class="btn p-2">
+          <a href="https://wa.me/01032337327" target="_blank" class="btn p-2">
             {{ t("BookNow") }}
           </a></SimpleButton
         >

@@ -105,23 +105,25 @@ onMounted(() => {
       <li><span></span>Navigation System</li>
       <li><span></span>Side airbags</li>
     </ul>
-    <h5 v-if="props.Car.documents.length != 0">Attachments</h5>
-    <div class="Attachments" v-if="props.Car.documents.length != 0">
-      <div>
-        <router-link to="/" class="color-main">
-          <img
-            src="../../../../../assets/images/global/icons/global/cardDetailes/pdf.svg"
-          />
-          Sample PDF File
-        </router-link>
-      </div>
-      <div>
-        <router-link to="/" class="color-main">
-          <img
-            src="../../../../../assets/images/global/icons/global/cardDetailes/zip.svg"
-          />
-          Notes and some related files
-        </router-link>
+    <div v-if="props.Car && props.Car.documents.length != 0">
+      <h5>Attachments</h5>
+      <div class="Attachments">
+        <div>
+          <router-link to="/" class="color-main">
+            <img
+              src="../../../../../assets/images/global/icons/global/cardDetailes/pdf.svg"
+            />
+            Sample PDF File
+          </router-link>
+        </div>
+        <div>
+          <router-link to="/" class="color-main">
+            <img
+              src="../../../../../assets/images/global/icons/global/cardDetailes/zip.svg"
+            />
+            Notes and some related files
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
