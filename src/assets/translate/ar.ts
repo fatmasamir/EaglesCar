@@ -199,7 +199,8 @@ const ar = {
   paraFooter: "متخصصون بخبرة أكثر من عشر سنوات في  توريد سيارات للتأجير.",
   with_driver: "بسائق",
   Without_driver: "بدون سائق",
-  //conatct Us
+  //Profile
+  profile: "حسابك الشخصى",
 };
 
 export default ar;

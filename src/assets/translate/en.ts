@@ -213,6 +213,8 @@ expectations.`,
     "Specialists with More Than Ten Years Of Experience in Supplying Cars for Renting.",
   with_driver: "With driver",
   Without_driver: "Without driver",
+  //profile
+  profile: "Profile",
 };
 
 export default en;

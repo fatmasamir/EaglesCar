@@ -21,6 +21,6 @@ const logout = () => {
   account_service.logout();
 };
 </script>
-<style lang="scss" scoped>
-@import "../Navbar/NavbarStyling";
+<style lang="scss">
+@import "../NavBar/NavbarStyling";
 </style>

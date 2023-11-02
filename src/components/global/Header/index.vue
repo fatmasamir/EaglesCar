@@ -13,7 +13,7 @@ onMounted(() => {
 });
 </script>
 <template>
-  <header>
+  <header :class="props.TiltePage == 'profile' ? 'Imageprofile' : ''">
     <div class="container">
       <h1
         data-aos="fade-right"
@@ -49,6 +49,11 @@ header {
   }
 }
 
+.Imageprofile {
+  background: url(../../../assets/images/global/icons/global/profile/backgroundProfile.svg)
+    no-repeat center center;
+  height: 389px;
+}
 /****media****/
 
 @media screen and (max-width: 1240px) {

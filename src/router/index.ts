@@ -44,6 +44,9 @@ import CarRental from "../views/CarRental/Main.vue";
 
 //CarDetailes page
 import CarDetailes from "../views/CarDetailes/Main.vue";
+
+//profile page
+import Profile from "../views/Profile/Main.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -336,6 +339,18 @@ const routes: Array<RouteRecordRaw> = [
       // if (!localStorage.getItem("access_token")) {
       //   return `/login`;
       // }
+    },
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: Profile,
+    beforeEnter(to, from) {
+      if (localStorage.getItem("lang") == "ar") {
+        document.title = `  حسابك السخصى - sEagles car`;
+      } else {
+        document.title = "Profile Page - Eagles car";
+      }
     },
   },
   {

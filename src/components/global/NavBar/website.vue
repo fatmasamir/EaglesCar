@@ -70,6 +70,22 @@ onMounted(() => {
       <router-link to="/login" class="btn mx-4" v-if="!Login">{{
         t("Login")
       }}</router-link>
+      <!-- profile  -->
+      <div class="info-login" v-if="Login">
+        <router-link to="/profile" class="profile_link">
+          <img
+            src="../../../assets/images/global/icons/global/man.jpg" /></router-link
+        ><button class="btn notification">
+          <img
+            src="../../../assets/images/global/icons/global/profile/notification-bing.svg"
+          />
+        </button>
+        <button class="messages">
+          <img
+            src="../../../assets/images/global/icons/global/profile/messages.svg"
+          />
+        </button>
+      </div>
       <!-- lang -->
       <div class="lang">
         <button v-if="props.lang == 'ar'" @click="changeLangEmit('en')">
@@ -117,4 +133,21 @@ onMounted(() => {
 </template>
 <style scoped lang="scss">
 @import "./NavbarStyling.scss";
+.navbar .navbar-btns-icons .info-login {
+  margin-right: 25px;
+  .profile_link img,
+  .notification,
+  .messages {
+    border: 2px solid #f4a71d;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background: transparent;
+  }
+  .notification,
+  .messages {
+    border: 2px solid #313131;
+    margin-left: 15px;
+  }
+}
 </style>
