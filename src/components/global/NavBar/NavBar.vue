@@ -5,7 +5,7 @@ import { useI18n } from "vue-i18n";
 import { useLang } from "@/stores/lang";
 // import router from "@/router";
 import Mobile from "./Mobile.vue";
-import Website from "./Website.vue";
+import Website from "./website.vue";
 import { useAuthStore } from "@/stores/auth";
 import { useLight } from "@/stores/light";
 import { useRouter } from "vue-router";

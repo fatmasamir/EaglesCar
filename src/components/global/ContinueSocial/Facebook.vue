@@ -25,6 +25,3 @@ const login = () => {
   account_service.login(props.typeLogin);
 };
 </script>
-<style lang="scss" scoped>
-@import "../Navbar/NavbarStyling";
-</style>
