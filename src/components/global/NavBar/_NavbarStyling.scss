@@ -195,7 +195,10 @@
 }
 /****media****/
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 1199px) {
+  .navbar-expand-lg .navbar-toggler {
+    display: block;
+  }
   .website,
   .mobile {
     display: none !important;
@@ -263,5 +266,9 @@
   .off {
     margin-right: auto;
     margin-left: 0px;
+  }
+  .navbar .navbar-btns-icons .info-login .notification {
+    margin-left: 15px;
+    margin-right: 15px;
   }
 }

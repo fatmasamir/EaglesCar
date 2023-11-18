@@ -24,7 +24,7 @@ onMounted(() => {
   <section class="Pages">
     <NavBar></NavBar>
     <Header TiltePage="Car_details"></Header>
-    <DetaliesCar :Car="Cars.Car"></DetaliesCar>
+    <DetaliesCar :Car="Cars.Car" v-if="Cars.Car"></DetaliesCar>
     <CarRental></CarRental>
     <ClientsTestimonials></ClientsTestimonials>
     <CardsDetailes></CardsDetailes>

@@ -74,7 +74,7 @@ onMounted(() => {
       <div class="info-login" v-if="Login">
         <router-link to="/profile" class="profile_link">
           <img
-            src="../../../assets/images/global/icons/global/man.jpg" /></router-link
+            src="../../../assets/images/global/icons/global/man.svg" /></router-link
         ><button class="btn notification">
           <img
             src="../../../assets/images/global/icons/global/profile/notification-bing.svg"

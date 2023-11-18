@@ -86,7 +86,7 @@ onMounted(() => {
       />
       {{ showNumberCar }}/{{ items.length }}
     </p>
-    <ul class="ListCars">
+    <ul class="ListCars" v-if="items.length != 0">
       <li class="" v-for="item in items" :key="item.id">
         <img :src="item.image_car" @click="showImage(item.id)" />
       </li>

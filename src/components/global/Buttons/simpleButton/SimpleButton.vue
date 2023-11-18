@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
-  type: "send" | "end" | "sub_button" | "send_blue";
+  type: "send" | "end" | "sub_button" | "send_gray";
 }>();
 </script>
 <template>
@@ -30,10 +30,10 @@ const props = defineProps<{
       min-width: max-content;
     }
   }
-  &.send_blue {
+  &.send_gray {
     button,
     .btn {
-      background: #094e81;
+      background: #f3f3f3;
     }
   }
   &.end {
@@ -47,9 +47,7 @@ const props = defineProps<{
   &.sub_button {
     button,
     .btn {
-      background-color: transparent;
-      color: var(--orange-text-color);
-      border: 1px solid;
+      background: #f3f3f3;
       min-width: max-content;
     }
   }
