@@ -87,7 +87,7 @@ let props = defineProps(["Car"]);
     </div>
     <div class="Send_request">
       <SimpleButton type="send">
-        <a href="https://wa.me/201010888069" target="_blank" class="btn">
+        <a href="https://wa.me/01032337327" target="_blank" class="btn">
           {{ t("Send_request") }}
         </a></SimpleButton
       >

@@ -6,8 +6,8 @@ import Tabs from "@/components/pages/Profile/Tabs/index.vue";
 import MyAccount from "@/components/pages/Profile/MyAccount/index.vue";
 import MyCars from "@/components/pages/Profile/MyCars/index.vue";
 import MyRequests from "@/components/pages/Profile/MyRequests/index.vue";
-// import MyBorrowings from "@/components/pages/Profile/MyBorrowings/index.vue";
-// import MyPayement from "@/components/pages/Profile/MyPayement/index.vue";
+import MyBorrowings from "@/components/pages/Profile/MyBorrowings/index.vue";
+import MyPayement from "@/components/pages/Profile/MyPayement/index.vue";
 import { ref } from "vue";
 const itemChoose = ref<String>("My account");
 const ChooseTab = (nameTab: String) => {
@@ -28,9 +28,9 @@ const ChooseTab = (nameTab: String) => {
       <!--MyRequests-->
       <MyRequests v-if="itemChoose == 'My requests'" />
       <!--MyBorrowings-->
-      <!-- <MyBorrowings v-if="itemChoose == 'My borrowings'" /> -->
+      <MyBorrowings v-if="itemChoose == 'My borrowings'" />
       <!--MyBorrowings-->
-      <!-- <MyPayement v-if="itemChoose == 'Payement'" /> -->
+      <MyPayement v-if="itemChoose == 'Payement'" />
     </div>
     <Footer></Footer>
   </section>

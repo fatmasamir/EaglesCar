@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
-import { onMounted, reactive, ref } from "vue";
+import { onMounted, ref } from "vue";
 import AOS from "aos";
-import { data } from "../../CardsDetailes/data";
 import { defineProps } from "vue";
 
 // useI18n
@@ -22,8 +21,8 @@ let showImageSrc = ref(
   ).href
 );
 
-//items
-const items = reactive([
+//ListsCar
+const ListsCar = ref([
   {
     id: 0,
     image_car: new URL(
@@ -63,10 +62,10 @@ const items = reactive([
 
 //showImage
 const showImage = (id) => {
-  for (let key in items) {
+  for (let key in ListsCar.value) {
     if (key == id) {
-      console.log(items[key]);
-      showImageSrc.value = items[key].image_car;
+      console.log(ListsCar.value[key]);
+      showImageSrc.value = ListsCar.value[key].image_car;
       showNumberCar.value = id + 1;
     }
   }
@@ -76,23 +75,23 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div class="Description">
-    <div class="ImageShow">
+  <div class="Description" v-if="props.Car">
+    <div class="ImageShow" v-if="showImageSrc">
       <img :src="showImageSrc" />
     </div>
     <p class="showNumberCar text-end">
       <img
         src="../../../../../assets/images/global/icons/global/cardDetailes/images-icon.svg"
       />
-      {{ showNumberCar }}/{{ items.length }}
+      {{ showNumberCar }}/{{ ListsCar.length }}
     </p>
-    <ul class="ListCars" v-if="items.length != 0">
-      <li class="" v-for="item in items" :key="item.id">
+    <ul class="ListCars" v-if="ListsCar">
+      <li class="" v-for="item in ListsCar" :key="item.id">
         <img :src="item.image_car" @click="showImage(item.id)" />
       </li>
     </ul>
     <h5>Description</h5>
-    <p>
+    <p v-if="props.Car && props.Car.description">
       {{ props.Car.description }}
     </p>
     <router-link to="/" class="color-main">{{ t("Show_more") }}</router-link>
@@ -105,9 +104,14 @@ onMounted(() => {
       <li><span></span>Navigation System</li>
       <li><span></span>Side airbags</li>
     </ul>
-    <div v-if="props.Car && props.Car.documents.length != 0">
+    <div>
       <h5>Attachments</h5>
-      <div class="Attachments">
+      <div
+        class="Attachments"
+        v-if="
+          props.Car && props.Car.documents && props.Car.documents.length != 0
+        "
+      >
         <div>
           <router-link to="/" class="color-main">
             <img

@@ -16,7 +16,7 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div class="DetaliesCar">
+  <div class="DetaliesCar" v-if="props.Car">
     <div class="container">
       <div class="row">
         <div class="col-lg-8"><Description :Car="props.Car" /></div>
