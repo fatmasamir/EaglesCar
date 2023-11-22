@@ -13,7 +13,7 @@ const ListOfCar = ref([]);
   <div class="AllRequests">
     <div class="text-center mb-5" v-if="ListOfCar.length == 0">
       <img
-        src="@/assets/images/global/icons/global/profile/drunk driving-cuate.svg"
+        src="@/assets/images/global/icons/global/profile/drunk_driving-cuate.svg"
       />
       <h6>{{ t("Add_car") }}</h6>
       <p>{{ t("messageAdd_car") }}</p>
