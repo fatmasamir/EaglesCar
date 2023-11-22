@@ -3,6 +3,7 @@ import { useI18n } from "vue-i18n";
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
 import { defineProps, defineEmits } from "vue";
 import signoutGoogle from "./signoutGoogle.vue";
+import { useLight } from "@/stores/light";
 
 // props
 let props = defineProps(["Links", "lang"]);
@@ -14,12 +15,23 @@ const Login = localStorage.getItem("access_token");
 const type = localStorage.getItem("type");
 
 // emit
-let emit = defineEmits(["changeLang", "changeshowMobile", "Logout"]);
+let emit = defineEmits([
+  "changeLang",
+  "changeshowMobile",
+  "Logout",
+  "LightFun",
+]);
+// useLight
+const Light = useLight();
 // i18n
 const { t } = useI18n();
 
 const changeLangEmit = (lang_targe: String) => {
   emit("changeLang", lang_targe);
+};
+//LightFunEmit
+const LightFunEmit = (value: String) => {
+  emit("LightFun", value);
 };
 const showMobile = () => {
   emit("changeshowMobile");
@@ -69,9 +81,21 @@ const LogoutFun = () => {
           <button v-else @click="changeLangEmit('ar')">
             <img src="@/assets//images/global/icons/global/flag-eng.svg" />
           </button>
+
           <!-- light button -->
           <div class="light">
-            <div class="open">
+            <div
+              class="open"
+              @click="LightFunEmit('off')"
+              v-if="Light.Light == 'open'"
+            >
+              <img src="../../../assets/images/global/icons/global/moon.svg" />
+            </div>
+            <div
+              class="off"
+              @click="LightFunEmit('open')"
+              v-if="Light.Light == 'off'"
+            >
               <img src="../../../assets/images/global/icons/global/light.svg" />
             </div>
           </div>

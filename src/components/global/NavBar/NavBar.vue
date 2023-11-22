@@ -119,6 +119,7 @@ const Logout = () => {
         :lang="lang"
         @changeLang="changeLang"
         :class="showMobileList ? 'show' : ''"
+        @LightFun="LightFun"
         @changeshowMobile="changeshowMobile()"
       />
     </div>

@@ -102,7 +102,7 @@ watch(page, (newpage) => {
       >
         <router-link :to="'/blog-detailes/' + item.slug">
           <!-- <img :src="item.image" /> -->
-          <img src="./images/blog1.png" />
+          <img :src="item.media.cover" />
           <div
             class="info"
             data-aos="zoom-in-up"
@@ -155,14 +155,21 @@ watch(page, (newpage) => {
   li {
     position: relative;
     padding: 5px;
+    height: 300px;
+    margin: 4px 0px;
     img {
       width: 100%;
-      object-fit: contain;
+      object-fit: cover;
+      height: 100%;
     }
     .info {
       position: absolute;
-      bottom: 0px;
       padding: 15px;
+      width: 97%;
+      top: 2px;
+      background: rgba(0, 0, 0, 0.312);
+      height: 97%;
+      padding-top: 10%;
       span {
         color: #d8d8d8;
         font-size: 14px;
