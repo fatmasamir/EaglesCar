@@ -213,6 +213,7 @@ expectations.`,
     "Specialists with More Than Ten Years Of Experience in Supplying Cars for Renting.",
   with_driver: "With driver",
   Without_driver: "Without driver",
+  Notification: "Notification",
   //profile
   profile: "Profile",
   Basic_information: "Basic information",
@@ -300,6 +301,11 @@ expectations.`,
   Click_followed_button_copy_link:
     "Click the followed button or copy the link:",
   link_fawry: "This is the link of fawry",
+  See_more_notifications: "See more notifications",
+  See_more_Chats: "See more chats",
+  Chats: "Chats",
+  Send_message: "Send message",
+  List_your_car: "List your car",
 };
 
 export default en;

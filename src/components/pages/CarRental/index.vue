@@ -29,13 +29,14 @@ onMounted(() => {
 </template>
 <style scoped lang="scss">
 .CarRental {
-  padding-top: 200px;
+  padding-top: 250px;
   position: relative;
   .LookingFor {
     position: absolute;
-    top: -120px;
+    top: -90px;
     width: 100%;
     left: 0px;
+    z-index: 10000;
   }
 }
 /*media" */

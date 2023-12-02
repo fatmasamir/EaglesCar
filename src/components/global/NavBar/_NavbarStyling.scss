@@ -3,12 +3,18 @@
 .navbar {
   gap: 150px;
   position: absolute;
-  height: 60px;
+  height: auto;
   width: 100%;
   top: 20px;
   z-index: 999;
   .navbar-brand h4 {
     color: var(--orange-text-color);
+  }
+  .container {
+    position: relative;
+    height: 360px;
+    align-items: baseline;
+    overflow-y: hidden;
   }
   .navbar-toggler .navbar-toggler-icon {
     filter: invert(1);
@@ -206,6 +212,28 @@
   .navbar .navbar-btns-icons {
     display: none !important;
   }
+  .navbar {
+    z-index: 1000000;
+    .notification,
+    .messages {
+      img {
+        filter: brightness(0);
+        -webkit-filter: brightness(0);
+      }
+    }
+    button {
+      background: transparent;
+      border: 0px;
+    }
+    .profile_link {
+      img {
+        width: 50px;
+      }
+    }
+    .container {
+      height: auto;
+    }
+  }
   .mobile {
     border-radius: 8px;
     background: white;
@@ -270,5 +298,18 @@
   .navbar .navbar-btns-icons .info-login .notification {
     margin-left: 15px;
     margin-right: 15px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+  /*   small devices */
+  .navbar .container {
+    width: 98%;
+    .website {
+      width: 95%;
+    }
+  }
+  .navbar .navbar-nav .nav-link {
+    padding: 15px 8px 5px;
   }
 }

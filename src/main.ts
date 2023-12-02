@@ -62,7 +62,7 @@ import { fakeBackend } from "@/_helpers";
 fakeBackend();
 
 import { initFacebookSdk, jwtInterceptor, errorInterceptor } from "@/_helpers";
-
+// import VueGoogleMaps from "@fawmi/vue-google-maps";
 // enable interceptors for http requests
 jwtInterceptor();
 errorInterceptor();
@@ -92,6 +92,11 @@ function startApp() {
       plugin_name: "put anything here",
       fetch_basic_profile: false,
     })
+    // .use(VueGoogleMaps, {
+    //   load: {
+    //     key: "AIzaSyDOFlx7_zAF2nBL2D8rdhJTREPgnGgvtKk",
+    //   },
+    // })
     .use(Toast, {
       // Setting the global default position
       position: POSITION.TOP_LEFT,

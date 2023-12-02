@@ -6,6 +6,8 @@ import signoutGoogle from "./signoutGoogle.vue";
 import LogoutFacebook from "../ContinueSocial/logoutFacebook.vue";
 import { defineProps, defineEmits, ref, onMounted } from "vue";
 import { useLight } from "@/stores/light";
+import NotificationPopup from "../NotificationPopup/index.vue";
+import ChatPopup from "../ChatPopup/index.vue";
 // props
 let props = defineProps(["Links", "lang"]);
 let emit = defineEmits(["changeLang", "Logout", "LightFun"]);
@@ -21,6 +23,12 @@ const Login = ref();
 
 //type
 const type = localStorage.getItem("type");
+
+// showNotification
+const showNotification = ref(false);
+
+// showNotification
+const showChat = ref(false);
 
 //Logout
 const LogoutFun = () => {
@@ -75,16 +83,26 @@ onMounted(() => {
         <router-link to="/profile" class="profile_link">
           <img
             src="../../../assets/images/global/icons/global/man.svg" /></router-link
-        ><button class="btn notification">
+        ><button
+          class="btn notification"
+          @click="(showNotification = !showNotification) && (showChat = false)"
+        >
           <img
             src="../../../assets/images/global/icons/global/profile/notification-bing.svg"
           />
         </button>
-        <button class="messages">
+        <button
+          class="messages"
+          @click="(showChat = !showChat) && (showNotification = false)"
+        >
           <img
             src="../../../assets/images/global/icons/global/profile/messages.svg"
           />
         </button>
+        <NotificationPopup v-if="showNotification" /><ChatPopup
+          v-if="showChat"
+        />
+        <router-link to="/ListYourCar" class="plusListYourCar">+</router-link>
       </div>
       <!-- lang -->
       <div class="lang">
@@ -148,6 +166,14 @@ onMounted(() => {
   .messages {
     border: 2px solid #313131;
     margin-left: 15px;
+  }
+  .plusListYourCar {
+    background: #f4a71d;
+    border-radius: 100%;
+    margin-left: 15px;
+    padding: 10px 17px;
+    color: white;
+    font-size: 20px;
   }
 }
 </style>

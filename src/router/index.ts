@@ -47,6 +47,15 @@ import CarDetailes from "../views/CarDetailes/Main.vue";
 
 //profile page
 import Profile from "../views/Profile/Main.vue";
+
+//Notification page
+import Notification from "../views/Notification/Main.vue";
+
+//Chats page
+import Chats from "../views/Chats/Main.vue";
+
+//ListYourCar page
+import ListYourCar from "../views/ListYourCar/Main.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -347,9 +356,45 @@ const routes: Array<RouteRecordRaw> = [
     component: Profile,
     beforeEnter(to, from) {
       if (localStorage.getItem("lang") == "ar") {
-        document.title = `  حسابك السخصى - sEagles car`;
+        document.title = `  حسابك السخصى - Eagles car`;
       } else {
         document.title = "Profile Page - Eagles car";
+      }
+    },
+  },
+  {
+    path: "/notification",
+    name: "Notification",
+    component: Notification,
+    beforeEnter(to, from) {
+      if (localStorage.getItem("lang") == "ar") {
+        document.title = ` الإشعارات - Eagles car`;
+      } else {
+        document.title = "Notification Page - Eagles car";
+      }
+    },
+  },
+  {
+    path: "/Chats",
+    name: "Chats",
+    component: Chats,
+    beforeEnter(to, from) {
+      if (localStorage.getItem("lang") == "ar") {
+        document.title = ` الرسائل - Eagles car`;
+      } else {
+        document.title = "Chats Page - Eagles car";
+      }
+    },
+  },
+  {
+    path: "/ListYourCar",
+    name: "ListYourCar",
+    component: ListYourCar,
+    beforeEnter(to, from) {
+      if (localStorage.getItem("lang") == "ar") {
+        document.title = ` قائمة سيارتك - Eagles car`;
+      } else {
+        document.title = "List Your Car Page - Eagles car";
       }
     },
   },

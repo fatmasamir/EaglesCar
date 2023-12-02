@@ -286,5 +286,11 @@ const ar = {
     "تأكد من أن لديك حسابًا لاستخدام طرق الدفع هذه",
   Click_followed_button_copy_link: "انقر فوق الزر المتبع أو انسخ الرابط",
   link_fawry: "وهذا رابط فوري",
+  Notification: "الإشعارات",
+  See_more_notifications: "رؤية المزيد من الإشعارات",
+  See_more_Chats: "رؤية المزيد من الرسائل",
+  Chats: "الرسائل",
+  Send_message: "أرسل رسالة",
+  List_your_car: "قائمة سيارتك",
 };
 export default ar;

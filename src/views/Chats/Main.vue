@@ -1,27 +1,30 @@
 <script setup lang="ts">
 import NavBar from "@/components/global/NavBar/NavBar.vue";
 import Header from "@/components/global/Header/index.vue";
-import CarRental from "@/components/pages/CarRental/index.vue";
+import Chats from "@/components/pages/Chats/index.vue";
 import Footer from "@/components/global/Footer/index.vue";
 import NotFound from "@/components/pages/NotFound/index.vue";
-import { UseCars } from "@/stores/Cars/index";
+import { UseChats } from "@/stores/Chat/index";
 import { onMounted } from "vue";
 
 //Bloges
-const Cars = UseCars();
+const Chat = UseChats();
 
 //onMounted
-onMounted(() => {
-  Cars.get_Cars();
-});
+// onMounted(() => {
+//   Chat.chatInformation;
+// });
 </script>
 <template>
   <section class="Pages">
     <NavBar></NavBar>
-    <Header TiltePage="Car_rental"> </Header>
-    <CarRental :Cars="Cars.Cars" v-if="Cars.Cars.length != 0"></CarRental>
-    <div v-if="Cars.Cars.length == 0">
-      <Loading v-if="!Cars.unfounedCars"></Loading>
+    <Header TiltePage="Chats"> </Header>
+    <Chats
+      v-if="Chat.chatInformation.length != 0"
+      :chatInformation="Chat.chatInformation"
+    />
+    <div v-else>
+      <Loading v-if="!Chat.unfounedChat"></Loading>
       <NotFound v-else />
     </div>
     <Footer></Footer>
