@@ -62,6 +62,9 @@ import { fakeBackend } from "@/_helpers";
 fakeBackend();
 
 import { initFacebookSdk, jwtInterceptor, errorInterceptor } from "@/_helpers";
+import VueTelInput from "vue3-tel-input";
+import "vue3-tel-input/dist/vue3-tel-input.css";
+
 // import VueGoogleMaps from "@fawmi/vue-google-maps";
 // enable interceptors for http requests
 jwtInterceptor();
@@ -85,6 +88,7 @@ function startApp() {
     .use(BootstrapVue3)
     .use(Vue3ReactiveTelInput)
     .use(VueSocialSharing)
+    .use(VueTelInput)
     .use(gAuthPlugin, {
       clientId: gauthClientId,
       scope: "email",

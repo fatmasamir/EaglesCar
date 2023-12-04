@@ -124,6 +124,11 @@ export const useAuthStore = defineStore("auth", () => {
       is_auth.value = true;
       is_loading.value = false;
     } else {
+      response.json().then((data) => {
+        for (let key in data.errors) {
+          toast.error(data.errors[key][0]);
+        }
+      });
       is_error.value = true;
       is_loading.value = false;
       is_waiting.value = false;
@@ -153,10 +158,14 @@ export const useAuthStore = defineStore("auth", () => {
       is_auth.value = true;
       is_loading.value = false;
     } else {
+      response.json().then((data) => {
+        for (let key in data.errors) {
+          toast.error(data.errors[key][0]);
+        }
+      });
       is_error.value = true;
       is_loading.value = false;
       is_waiting.value = false;
-      toast.error("data is Not Correct. .... ");
       throw response.status;
     }
   }

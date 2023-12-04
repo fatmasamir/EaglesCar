@@ -57,6 +57,10 @@
         margin-bottom: 0px !important;
       }
     }
+    .simple-input input,
+    .simple-input select {
+      direction: ltr !important;
+    }
     /* simple-button.send button */
     .simple-button.send button {
       width: 100%;
@@ -349,11 +353,7 @@
   .auth-form .main-box .simple-input select[data-v-2ad4f39d] {
     text-align: right !important;
   }
-  .vue3-reactive-tel-input {
-    input {
-      direction: rtl;
-    }
-  }
+
   .auth-form .main-box .ContinueWith {
     margin-right: auto;
     margin-left: 50px;
@@ -361,6 +361,10 @@
   .tab li {
     padding-right: 0px;
     padding-left: 10px;
+  }
+  .auth-form .main-box .simple-input input,
+  .auth-form .main-box .simple-input select {
+    direction: rtl !important;
   }
 }
 
