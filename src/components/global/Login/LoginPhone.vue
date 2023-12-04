@@ -5,8 +5,6 @@ import SimpleInput from "@/components/global/CusomInputs/SimpleInput/SimpleInput
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
 import { useForm } from "vee-validate";
 import { useAuthStore } from "@/stores/auth";
-import Vue3QTelInput from "vue3-q-tel-input";
-import "vue3-q-tel-input/dist/vue3-q-tel-input.esm.css";
 import * as Yup from "yup";
 import { defineEmits } from "vue";
 import AOS from "aos";

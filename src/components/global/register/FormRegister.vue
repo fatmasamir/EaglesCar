@@ -162,19 +162,12 @@ onMounted(() => {
         data-aos-duration="700"
       >
         <SimpleInput>
-          <!-- <label>Email <span class="text-red">*</span> </label> -->
-
-          <vue3-reactive-tel-input
-            :rootStyle="{ backgroundColor: '#f9f9f9' }"
-            :inputStyle="{ backgroundColor: '#f9f9f9' }"
-            :listStyle="{ backgroundColor: '#f9f9f9' }"
-            :dropdownStyle="{ backgroundColor: '#f9f9f9' }"
-            :class="{ 'is-invalid': errors.phone }"
-            v-bind="phone"
-            :placeholder="t('phone_number')"
-          />
-          <div class="invalid-feedback">{{ errors.phone }}</div>
-        </SimpleInput>
+          <vue-tel-input v-bind="phone" mode="international"></vue-tel-input>
+          <div class="invalid-feedback">
+            {{ errors.phone }}
+          </div>
+          <div class="invalid-feedback">{{ errors.phone }}</div></SimpleInput
+        >
       </div>
       <div
         class="col-md-12 mt-3 passwordField"

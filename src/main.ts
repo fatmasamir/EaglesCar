@@ -77,6 +77,10 @@ const pinia = createPinia();
 pinia.use(({ store }) => {
   store.router = markRaw(router);
 });
+const VueTelInputOptions = {
+  mode: "international",
+  onlyCountries: ["eg", "ae"],
+};
 //768834812579-ivi0oopbkqe05cg6t41p83t7gteekut6.apps.googleusercontent.com
 //302001231533-2n3la83qa8po429m21hkhhl1udq15tbj.apps.googleusercontent.com
 function startApp() {
@@ -88,7 +92,7 @@ function startApp() {
     .use(BootstrapVue3)
     .use(Vue3ReactiveTelInput)
     .use(VueSocialSharing)
-    .use(VueTelInput)
+    .use(VueTelInput, VueTelInputOptions)
     .use(gAuthPlugin, {
       clientId: gauthClientId,
       scope: "email",
