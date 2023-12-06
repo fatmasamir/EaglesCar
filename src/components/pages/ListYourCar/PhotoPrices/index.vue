@@ -73,7 +73,7 @@ let onSubmit = () => {
         <div class="col-md-6 px-0">
           <div class="ranking">
             <img
-              src="../../../../../../assets/images/global/icons/global/profile/ranking.svg"
+              src="@/assets/images/global/icons/global/profile/ranking.svg"
             />
             <p>
               {{ t("Our_Recommended_daily_price") }}
