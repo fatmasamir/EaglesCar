@@ -93,7 +93,7 @@ watch(page, (newpage) => {
 <template>
   <!--blogs_list-->
 
-  <div class="container">
+  <div class="Bloges_sec">
     <ul class="blogs_list row" v-if="props.Bloges.length != 0">
       <li
         v-for="item in paginatedData"
@@ -111,7 +111,7 @@ watch(page, (newpage) => {
           >
             <!-- <span>{{ item.date }}</span> -->
             <h5>{{ item.title }}</h5>
-            <p>{{ item.short_description }}</p>
+            <p>{{ item.short_description.substr(0, 70) }}</p>
           </div></router-link
         >
       </li>
@@ -144,83 +144,89 @@ watch(page, (newpage) => {
 </template>
 <style scoped lang="scss">
 //blogs_list styling
-
-.blogs_list {
-  margin: auto;
-  margin-top: 150px;
-  margin-bottom: 150px;
-  padding: 0px;
-  list-style-type: none;
-  overflow: hidden;
-  li {
-    position: relative;
-    padding: 5px;
-    height: 300px;
-    margin: 4px 0px;
-    img {
-      width: 100%;
-      object-fit: cover;
-      height: 100%;
-    }
-    .info {
-      position: absolute;
-      padding: 15px;
-      width: 97%;
-      top: 2px;
-      background: rgba(0, 0, 0, 0.312);
-      height: 97%;
-      padding-top: 10%;
-      span {
-        color: #d8d8d8;
-        font-size: 14px;
-      }
-      p {
-        color: #d8d8d8;
-        font-size: 14px;
-      }
-      h5 {
-        color: white;
-        margin: 10px 0px;
-      }
-    }
-  }
-}
-.pagination {
-  margin-bottom: 150px;
-  button {
-    background: #ededed;
-    color: black;
-    border-radius: 8px;
-    padding: 10px 16px;
-    margin-right: 8px;
-    border: 0px;
-  }
-  .active {
-    background: #f4a71d;
-    color: white;
-  }
-  .button_number_pages {
-  }
-  .button_backPage,
-  .button_nextPage {
-    background: white;
+.Bloges_sec {
+  padding: 0px 50px;
+  .blogs_list {
+    margin: auto;
+    margin-top: 150px;
+    margin-bottom: 150px;
     padding: 0px;
-    img {
-      width: 20px;
+    list-style-type: none;
+    overflow: hidden;
+    li {
+      position: relative;
+      padding: 5px;
+      height: 400px;
+      margin: 4px 0px;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .info {
+        position: absolute;
+        padding: 15px;
+        width: 97%;
+        bottom: 5px;
+        background: rgba(0, 0, 0, 0.312);
+        height: 97%;
+        /* padding-top: 10%; */
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        align-items: start;
+        span {
+          color: #d8d8d8;
+          font-size: 14px;
+        }
+        p {
+          color: #d8d8d8;
+          font-size: 14px;
+        }
+        h5 {
+          color: white;
+          margin: 10px 0px;
+        }
+      }
     }
   }
-}
-.hidden {
-  display: none;
-}
-.show {
-  display: inline-block;
-}
-/****is-ar****/
-.is-ar {
-  .pagination .button_backPage img,
-  .pagination .button_nextPage img {
-    transform: scaleX(-1);
+  .pagination {
+    margin-bottom: 150px;
+    button {
+      background: #ededed;
+      color: black;
+      border-radius: 8px;
+      padding: 10px 16px;
+      margin-right: 8px;
+      border: 0px;
+    }
+    .active {
+      background: #f4a71d;
+      color: white;
+    }
+    .button_number_pages {
+    }
+    .button_backPage,
+    .button_nextPage {
+      background: white;
+      padding: 0px;
+      img {
+        width: 20px;
+      }
+    }
+  }
+  .hidden {
+    display: none;
+  }
+  .show {
+    display: inline-block;
+  }
+  /****is-ar****/
+  .is-ar {
+    .pagination .button_backPage img,
+    .pagination .button_nextPage img {
+      transform: scaleX(-1);
+    }
   }
 }
 </style>

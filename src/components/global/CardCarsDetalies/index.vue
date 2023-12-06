@@ -14,52 +14,52 @@ onMounted(() => {
 <template>
   <div class="the_block">
     <div class="image_car">
-      <img :src="props.data.image_car" />
+      <router-link :to="'/car-detalies/' + data.slug" type="submit" class="btn">
+        <img :src="props.data.cover"
+      /></router-link>
     </div>
     <div class="card">
-      <div class="title">
-        <h3>{{ props.data.title }}</h3>
-        <div class="buttons">
-          <div class="rating_number">
-            <img
-              src="../../../assets/images/global/icons/global/carRental/star.svg"
-            />
-            {{ props.data.per }}
+      <router-link :to="'/car-detalies/' + data.slug" type="submit" class="btn">
+        <div class="m-0 p-0">
+          <div class="title">
+            <h3>{{ props.data.title }}</h3>
+            <div class="buttons">
+              <div class="rating_number">
+                <img
+                  src="@/assets/images/global/icons/global/carRental/star.svg"
+                />
+                {{ props.data.per }}
+              </div>
+              <SimpleButton type="send" v-if="data.available">
+                {{ t("Available") }}
+              </SimpleButton>
+            </div>
           </div>
-          <SimpleButton type="send" v-if="data.available">
-            <router-link
-              :to="'/car-detalies/' + data.slug"
-              type="submit"
-              class="btn"
-            >
-              {{ t("Available") }}
-            </router-link></SimpleButton
-          >
-        </div>
-      </div>
-      <p class="my-3">
-        {{ data.short_description }}
-      </p>
-      <div class="row list">
-        <div class="col-lg-4">
-          <div class="content">
-            <span>Power:</span>
-            {{ data.power }}
+          <p class="my-3">
+            {{ data.short_description }}
+          </p>
+          <div class="row list">
+            <div class="col-lg-4">
+              <div class="content">
+                <span>Power:</span>
+                {{ data.power }}
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="content">
+                <span>Bag:</span>
+                {{ data.bags }}
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="content">
+                <span>Seat:</span>
+                {{ data.seats }}
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="content">
-            <span>Bag:</span>
-            {{ data.bags }}
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="content">
-            <span>Seat:</span>
-            {{ data.seats }}
-          </div>
-        </div>
-      </div>
+        </div></router-link
+      >
       <hr />
       <div class="BookNow">
         <div>
@@ -78,18 +78,25 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .the_block {
-  .image_car img {
-    width: 100%;
-    margin: auto auto 20px;
+  .image_car a {
+    margin: 0px;
+    padding: 0px;
+    display: block;
     height: 200px;
+    img {
+      width: 100%;
+      margin: auto auto 20px;
+      height: 100%;
+    }
   }
   .card {
     border: 1px solid #e7e7e7 !important;
     border-top: 0px !important;
     margin-bottom: 100px;
-    padding: 20px;
     a {
-      color: initial;
+      margin: 0px;
+      padding: 20px;
+      display: block;
     }
     .title {
       justify-content: space-between;
@@ -161,7 +168,6 @@ onMounted(() => {
       }
     }
     hr {
-      margin-top: 30px;
       border: 1px solid;
       height: 0px;
     }

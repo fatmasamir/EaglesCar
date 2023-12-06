@@ -82,7 +82,7 @@ let onSubmit = handleSubmit((values) => {
                 required
                 :class="{ 'is-invalid': errors.Make }"
               >
-                <option disabled>{{ t("Make") }}</option>
+                <option value="" disabled selected>{{ t("Make") }}</option>
                 <option value="1">anythink</option>
               </select>
               <div class="invalid-feedback">{{ errors.LastName }}</div>
@@ -99,7 +99,7 @@ let onSubmit = handleSubmit((values) => {
                 required
                 :class="{ 'is-invalid': errors.Model }"
               >
-                <option disabled>{{ t("Model") }}</option>
+                <option value="" disabled selected>{{ t("Model") }}</option>
                 <option value="1">anythink</option>
               </select>
               <div class="invalid-feedback">{{ errors.Model }}</div>
@@ -116,7 +116,7 @@ let onSubmit = handleSubmit((values) => {
                 required
                 :class="{ 'is-invalid': errors.Year }"
               >
-                <option disabled>{{ t("Year") }}</option>
+                <option value="" disabled selected>{{ t("Year") }}</option>
                 <option value="1">anythink</option>
               </select>
               <div class="invalid-feedback">{{ errors.Year }}</div>
@@ -133,7 +133,9 @@ let onSubmit = handleSubmit((values) => {
                 required
                 :class="{ 'is-invalid': errors.Number_Seats }"
               >
-                <option disabled>{{ t("Number_Seats") }}</option>
+                <option value="" disabled selected>
+                  {{ t("Number_Seats") }}
+                </option>
                 <option value="1">anythink</option>
               </select>
               <div class="invalid-feedback">{{ errors.Number_Seats }}</div>
@@ -150,7 +152,9 @@ let onSubmit = handleSubmit((values) => {
                 required
                 :class="{ 'is-invalid': errors.Number_Doors }"
               >
-                <option disabled>{{ t("Number_Doors") }}</option>
+                <option value="" disabled selected>
+                  {{ t("Number_Doors") }}
+                </option>
                 <option value="1">anythink</option>
               </select>
               <div class="invalid-feedback">{{ errors.Number_Doors }}</div>
@@ -167,7 +171,7 @@ let onSubmit = handleSubmit((values) => {
                 required
                 :class="{ 'is-invalid': errors.Fuel_Type }"
               >
-                <option disabled>{{ t("Fuel_Type") }}</option>
+                <option value="" disabled selected>{{ t("Fuel_Type") }}</option>
                 <option value="1">anythink</option>
               </select>
               <div class="invalid-feedback">{{ errors.Fuel_Type }}</div>
@@ -183,7 +187,9 @@ let onSubmit = handleSubmit((values) => {
                 required
                 :class="{ 'is-invalid': errors.Transmission }"
               >
-                <option disabled>{{ t("Transmission") }}</option>
+                <option value="" disabled selected>
+                  {{ t("Transmission") }}
+                </option>
                 <option value="1">anythink</option>
               </select>
               <div class="invalid-feedback">{{ errors.Transmission }}</div>
@@ -199,7 +205,7 @@ let onSubmit = handleSubmit((values) => {
                 required
                 :class="{ 'is-invalid': errors.Mileage }"
               >
-                <option disabled>{{ t("Mileage") }}</option>
+                <option value="" disabled selected>{{ t("Mileage") }}</option>
                 <option value="1">anythink</option>
               </select>
               <div class="invalid-feedback">{{ errors.Transmission }}</div>
@@ -215,7 +221,7 @@ let onSubmit = handleSubmit((values) => {
                 required
                 :class="{ 'is-invalid': errors.Color }"
               >
-                <option disabled>{{ t("Color") }}</option>
+                <option value="" disabled selected>{{ t("Color") }}</option>
                 <option value="1">anythink</option>
               </select>
               <div class="invalid-feedback">{{ errors.Transmission }}</div>
@@ -249,7 +255,7 @@ let onSubmit = handleSubmit((values) => {
       </div>
     </div>
     <div class="row my-5">
-      <div class="col-12 text-center">
+      <div class="col-12 text-center direction_ar">
         <SimpleButton type="sub_button">
           <button>
             {{ t("Finish_later") }}
@@ -259,7 +265,7 @@ let onSubmit = handleSubmit((values) => {
           <button type="submit">
             {{ t("Next_step") }}
           </button>
-          <!-- <button type="submit" disabled v-else>
+          <!-- <button type="submit" value="" disabled selected v-else>
                   {{ t("wait") }}
                 </button> -->
         </SimpleButton>

@@ -20,7 +20,7 @@ onMounted(() => {
         <h2>{{ t("rentaltitle") }}</h2>
         <p>{{ t("rentalMessage") }}</p>
         <SimpleButton type="send">
-          <router-link to="/" type="submit" class="btn">
+          <router-link to="/car-rental" type="submit" class="btn">
             {{ t("book_ride") }}
             <img
               src="../../../../assets/images/global/icons/global/Homepage/check.svg" /></router-link

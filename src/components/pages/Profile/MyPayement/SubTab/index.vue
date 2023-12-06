@@ -1,5 +1,8 @@
 <script setup>
 import { ref, defineEmits, defineProps, onMounted } from "vue";
+import { useI18n } from "vue-i18n";
+//i18n
+const { t } = useI18n();
 // emit
 let props = defineProps(["itemChooseAddCar"]);
 
@@ -47,7 +50,7 @@ const ChooseTabAccountFun = (value) => {
       <div class="content">
         <img :src="item.image_icon" class="normal" />
         <img :src="item.image_icon_active" class="activeImage" />
-        <h5>{{ item.title }}</h5>
+        <h5>{{ t(item.title) }}</h5>
       </div>
     </li>
   </ul>

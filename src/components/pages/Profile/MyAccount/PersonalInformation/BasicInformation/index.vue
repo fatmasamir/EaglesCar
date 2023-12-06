@@ -21,7 +21,7 @@ const { errors, handleSubmit, defineInputBinds } = useForm({
     login: Yup.string()
       .email(t("requiredFiledemail"))
       .required(t("requiredFiled")),
-    ID: Yup.string().required(t("requiredFiled")),
+    ID: Yup.string().min(12).max(12).required(t("requiredFiled")),
     Date_of_birth: Yup.string().required(t("requiredFiled")),
     Primary_phone_number: Yup.string().required(t("requiredFiled")),
     Secondary_phone_number: Yup.string().required(t("requiredFiled")),
@@ -95,7 +95,6 @@ let imageLoaded = (event) => {
                   name="FirstName"
                   v-bind="FirstName"
                   :placeholder="t('FirstName')"
-                  required
                   :class="{ 'is-invalid': errors.FirstName }"
                 />
 
@@ -111,7 +110,6 @@ let imageLoaded = (event) => {
                   name="LastName"
                   v-bind="LastName"
                   :placeholder="t('LastName')"
-                  required
                   :class="{ 'is-invalid': errors.LastName }"
                 />
 
@@ -120,18 +118,21 @@ let imageLoaded = (event) => {
             </div>
             <div class="col-md-4">
               <SimpleInput>
-                <!-- <label>Email <span class="text-red">*</span> </label> -->
-                <input
-                  type="text"
-                  id="Nationality"
-                  name="Nationality"
-                  v-bind="Nationality"
-                  :placeholder="t('Nationality')"
-                  required
-                  :class="{ 'is-invalid': errors.Nationality }"
-                />
-
-                <div class="invalid-feedback">{{ errors.Nationality }}</div>
+                <SimpleInput>
+                  <!-- <label>Email <span class="text-red">*</span> </label> -->
+                  <select
+                    id="Expiration_Date"
+                    name="Expiration_Date"
+                    v-bind="Nationality"
+                    :class="{ 'is-invalid': errors.Nationality }"
+                  >
+                    <option value="" disabled selected>
+                      {{ t("Nationality") }}
+                    </option>
+                    <option value="1">anythink</option>
+                  </select>
+                  <div class="invalid-feedback">{{ errors.Nationality }}</div>
+                </SimpleInput>
               </SimpleInput>
             </div>
             <div class="col-md-4">
@@ -143,7 +144,6 @@ let imageLoaded = (event) => {
                   name="login"
                   v-bind="login"
                   :placeholder="t('Email')"
-                  required
                   :class="{ 'is-invalid': errors.login }"
                 />
 
@@ -159,7 +159,6 @@ let imageLoaded = (event) => {
                   name="ID"
                   v-bind="ID"
                   :placeholder="t('ID')"
-                  required
                   :class="{ 'is-invalid': errors.ID }"
                 />
 
@@ -175,7 +174,6 @@ let imageLoaded = (event) => {
                   name="Date_of_birth"
                   v-bind="Date_of_birth"
                   :placeholder="t('Date_of_birth')"
-                  required
                   :class="{ 'is-invalid': errors.Date_of_birth }"
                 />
 
@@ -191,7 +189,6 @@ let imageLoaded = (event) => {
                   name="Primary_phone_number"
                   v-bind="Primary_phone_number"
                   :placeholder="t('Primary_phone_number')"
-                  required
                   :class="{ 'is-invalid': errors.Primary_phone_number }"
                 />
 
@@ -209,7 +206,6 @@ let imageLoaded = (event) => {
                   name="Secondary_phone_number"
                   v-bind="Secondary_phone_number"
                   :placeholder="t('Secondary_phone_number')"
-                  required
                   :class="{ 'is-invalid': errors.Secondary_phone_number }"
                 />
 
@@ -227,7 +223,6 @@ let imageLoaded = (event) => {
                   name="Location"
                   v-bind="Location"
                   :placeholder="t('Location')"
-                  required
                   :class="{ 'is-invalid': errors.Location }"
                 />
 

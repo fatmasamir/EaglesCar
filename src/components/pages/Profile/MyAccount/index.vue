@@ -5,7 +5,7 @@ import Tabs from "./SubTab/index.vue";
 import PersonalInformation from "./PersonalInformation/index.vue";
 import BorrowingVerification from "./BorrowingVerification/index.vue";
 import { ref } from "vue";
-const itemChooseAccount = ref<String>("Personal information");
+const itemChooseAccount = ref<String>("Personal_information");
 const ChooseTabAccount = (nameTab: String) => {
   console.log("ChooseTab", nameTab);
   itemChooseAccount.value = nameTab;
@@ -25,7 +25,7 @@ onMounted(() => {
       data-aos-duration="500"
     >
       <Tabs @ChooseTabAccount="ChooseTabAccount"></Tabs>
-      <p v-if="itemChooseAccount == 'Personal information'">
+      <p v-if="itemChooseAccount == 'Personal_information'">
         <PersonalInformation />
       </p>
       <p v-else>

@@ -55,13 +55,49 @@
       background: #716d6e !important;
     }
   }
-  body .card {
-    background: black;
+  body .card,
+  .TabProfile li .content {
+    background: #171717;
     h4,
     label,
     h6 {
       color: white !important;
     }
+  }
+  .TabProfile li .content img,
+  .SubTab li .content img {
+    filter: brightness(1) invert(1);
+    -webkit-filter: brightness(1) invert(1);
+  }
+  .TabProfile .active .content .activeImage,
+  .TabProfile li:hover .content .activeImage,
+  .SubTab .subActive .content .activeImage,
+  .SubTab li:hover .content img {
+    filter: none;
+    -webkit-filter: none;
+  }
+  .TabProfile .active .content,
+  .SubTab li .content,
+  .Promotions,
+  .TabProfile li:hover .content,
+  .simple-input textarea,
+  .simple-input input,
+  .simple-input select,
+  .Payement,
+  .Account_verified,
+  .Identity_document,
+  .simple-input .upload_file {
+    background: #4d4d4dbf !important;
+    color: white;
+    h6 {
+      color: #b3b3ee;
+    }
+    p {
+      color: white;
+    }
+  }
+  h6 {
+    color: white;
   }
   body .form-control:focus {
     border-color: #f5b235;
@@ -69,7 +105,8 @@
   .MostFaster .social_media img,
   .auth-form .main-box .ContinueWith .card,
   .auth-form .main-box .ContinueWith .card:hover p,
-  .Contact_Info .Social_media_contacts li {
+  .Contact_Info .Social_media_contacts li,
+  .SubTab li .content {
     background: #141414 !important;
     color: white !important;
     border-color: #141414;

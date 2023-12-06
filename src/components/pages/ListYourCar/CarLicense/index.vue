@@ -208,7 +208,7 @@ let onSubmit = handleSubmit((values) => {
         </SimpleInput>
       </div>
     </div>
-    <div class="col-12 text-center mb-5 mt-5">
+    <div class="col-12 text-center mb-5 mt-5 direction_ar">
       <SimpleButton type="sub_button">
         <button>
           {{ t("Finish_later") }}

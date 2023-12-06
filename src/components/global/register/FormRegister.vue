@@ -31,7 +31,7 @@ const { errors, handleSubmit, defineInputBinds } = useForm({
     phone: Yup.string().required(t("requiredFiled")),
     password: Yup.string().min(8).required(t("requiredFiled")),
     password_confirmation: Yup.string()
-      .required()
+      .required(t("requiredFiledemail"))
       .oneOf([Yup.ref("password")], "Passwords do not match"),
   }),
 });

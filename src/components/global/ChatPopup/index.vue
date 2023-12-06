@@ -12,7 +12,7 @@ onMounted(() => {
 </script>
 <template>
   <div
-    class="NotificationPopup"
+    class="ChatPopup"
     data-aos="zoom-up"
     data-aos-offset="200"
     data-aos-easing="ease-in-out"
@@ -72,14 +72,14 @@ onMounted(() => {
   </div>
 </template>
 <style scoped lang="scss">
-.NotificationPopup {
+.ChatPopup {
   position: absolute;
   z-index: 1000000;
   background: white;
   border-radius: 4px;
   width: 450px;
   height: 300px;
-  right: 25%;
+  right: 30%;
   overflow-y: auto;
   top: 55px;
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.348);
@@ -125,13 +125,13 @@ onMounted(() => {
   }
 }
 @media screen and (max-width: 993px) {
-  .NotificationPopup {
+  .ChatPopup {
     display: none;
   }
 }
 //.is-ar
 .is-ar {
-  .NotificationPopup {
+  .ChatPopup {
     left: 25%;
     right: auto;
     .content .message-notification .icon {

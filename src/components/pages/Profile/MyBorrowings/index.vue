@@ -5,7 +5,7 @@ import AllRequests from "./AllRequests/index.vue";
 import ConfirmedRequest from "./ConfirmedRequest/index.vue";
 
 //itemChooseAddCar
-const itemChooseAddCar = ref("All Requests");
+const itemChooseAddCar = ref("All_Requests");
 
 //ChooseTabAccount
 const ChooseTabAccount = (nameTab) => {
@@ -20,12 +20,12 @@ const ChooseTabAccount = (nameTab) => {
   ></Tabs>
   <!--AllRequests-->
   <AllRequests
-    v-if="itemChooseAddCar == 'All Requests'"
+    v-if="itemChooseAddCar == 'All_Requests'"
     @ChooseTabAccount="ChooseTabAccount"
   />
   <!--ConfirmedRequest-->
   <ConfirmedRequest
-    v-if="itemChooseAddCar == 'Confirmed request'"
+    v-if="itemChooseAddCar == 'Confirmed_request'"
     @ChooseTabAccount="ChooseTabAccount"
   />
 </template>

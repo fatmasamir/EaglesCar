@@ -17,7 +17,9 @@ const { meta } = useForm();
 const { errors, handleSubmit, defineInputBinds } = useForm({
   validationSchema: Yup.object({
     Old_Password: Yup.string().required(t("requiredFiled")),
-    New_Password: Yup.string().required(t("requiredFiled")),
+    New_Password: Yup.string()
+      .required()
+      .oneOf([Yup.ref("Old_Password")], "Passwords do not match"),
     Rewrite_new_Password: Yup.string().required(t("requiredFiled")),
   }),
 });
@@ -75,7 +77,6 @@ onMounted(() => {
                   id="Old_Password"
                   name="Old_Password"
                   :placeholder="t('Old_Password')"
-                  required
                   v-bind="Old_Password"
                   :class="{ 'is-invalid': errors.Old_Password }"
                 /><img
@@ -100,7 +101,6 @@ onMounted(() => {
                   id="New_Password"
                   name="New_Password"
                   :placeholder="t('New_Password')"
-                  required
                   v-bind="New_Password"
                   :class="{ 'is-invalid': errors.New_Password }"
                 /><img
@@ -127,7 +127,6 @@ onMounted(() => {
                   id="Rewrite_new_Password"
                   name="Rewrite_new_Password"
                   :placeholder="t('Rewrite_new_Password')"
-                  required
                   v-bind="Rewrite_new_Password"
                   :class="{ 'is-invalid': errors.Rewrite_new_Password }"
                 /><img

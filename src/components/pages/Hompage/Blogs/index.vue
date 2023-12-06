@@ -1,39 +1,16 @@
-<script setup lang="ts">
+<script lang="ts" setup>
+import { ref, onMounted, watch } from "vue";
 import { useI18n } from "vue-i18n";
-import { onMounted, ref } from "vue";
-import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from "swiper/vue";
+// Import Swiper styles
+import "swiper/css";
 import AOS from "aos";
+import { defineProps } from "vue";
 const { t } = useI18n();
-const Lists = [
-  {
-    id: 1,
-    date: "18 May 2022",
-    name: "Article name",
-    image: new URL(`./images/blog1.png`, import.meta.url).href,
-    paragraph: "Here it will include the data about this article",
-  },
-  {
-    id: 2,
-    date: "18 May 2022",
-    name: "Article name",
-    image: new URL(`./images/blog2.png`, import.meta.url).href,
-    paragraph: "Here it will include the data about this article",
-  },
-  {
-    id: 3,
-    date: "18 May 2022",
-    name: "Article name",
-    image: new URL(`./images/blog3.png`, import.meta.url).href,
-    paragraph: "Here it will include the data about this article",
-  },
-  {
-    id: 4,
-    date: "18 May 2022",
-    name: "Article name",
-    image: new URL(`./images/blog4.png`, import.meta.url).href,
-    paragraph: "Here it will include the data about this article",
-  },
-];
+// props
+let props = defineProps(["Bloges"]);
+
 onMounted(() => {
   AOS.init();
 });
@@ -44,21 +21,44 @@ onMounted(() => {
       <div class="row">
         <h6 class="color-main p-0">{{ t("New_information") }}</h6>
         <h3>{{ t("Our_blogs") }}</h3>
-        <ul class="blogs_list row">
-          <li class="col-lg-3 col-md-6" v-for="list in Lists" :key="list.id">
-            <img :src="list.image" />
-            <div
-              class="info"
-              data-aos="zoom-in-up"
-              data-aos-offset="300"
-              data-aos-easing="ease-in-out"
+        <swiper :slides-per-view="4" :space-between="0" class="blogs_list row">
+          <swiper-slide v-for="list in props.Bloges" :key="list.id">
+            <router-link :to="'/blog-detailes/' + list.slug">
+              <img :src="list.media.cover" />
+              <div
+                class="info"
+                data-aos="zoom-in-up"
+                data-aos-offset="300"
+                data-aos-easing="ease-in-out"
+              >
+                <!-- <span>{{ list.date }}</span> -->
+                <h5>{{ list.title }}</h5>
+                <p>{{ list.short_description.substr(0, 70) }}</p>
+              </div></router-link
+            ></swiper-slide
+          >
+          ...
+        </swiper>
+        <!-- <ul class="blogs_list row">
+          <li
+            class="col-lg-3 col-md-6"
+            v-for="list in props.Bloges"
+            :key="list.id"
+          >
+            <router-link :to="'/blog-detailes/' + list.slug">
+              <img :src="list.media.cover" />
+              <div
+                class="info"
+                data-aos="zoom-in-up"
+                data-aos-offset="300"
+                data-aos-easing="ease-in-out"
+              >
+                <h5>{{ list.title }}</h5>
+                <p>{{ list.short_description.substr(0, 70) }}</p>
+              </div></router-link
             >
-              <span>{{ list.date }}</span>
-              <h5>{{ list.name }}</h5>
-              <p>{{ list.paragraph }}</p>
-            </div>
           </li>
-        </ul>
+        </ul> -->
       </div>
     </div>
   </section>
@@ -77,17 +77,25 @@ onMounted(() => {
         padding: 0px;
         margin-bottom: 50px;
       }
-      .blogs_list {
+
+      .blogs_list,
+      .swiper {
         padding: 0px;
+        margin: 0px;
         list-style-type: none;
         overflow: hidden;
-        li {
-          margin: auto;
+
+        li,
+        .swiper-slide {
           position: relative;
-          padding-left: 0px;
+          padding: 5px;
+          height: 400px;
+          margin: 4px 0px;
+          // margin-right: 42px !important;
           img {
             width: 100%;
-            object-fit: contain;
+            height: 100%;
+            object-fit: cover;
           }
           .info {
             position: absolute;
@@ -153,5 +161,14 @@ onMounted(() => {
     padding-right: 5px;
     padding-left: 0px;
   }
+  .Blogs .container .row .blogs_list {
+    margin-right: -10px !important;
+  }
+}
+</style>
+<style>
+.Blogs .swiper .swiper-wrapper {
+  padding: 0px !important;
+  margin: 0px !important;
 }
 </style>

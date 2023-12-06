@@ -19,7 +19,7 @@ onMounted(() => {
   >
     <div class="row m-0 p-0">
       <div class="col-lg-12">
-        <router-link to="/">
+        <router-link to="/notification">
           <div class="content">
             <div class="message-notification">
               <span class="icon"
@@ -33,7 +33,7 @@ onMounted(() => {
         >
       </div>
       <div class="col-lg-12">
-        <router-link to="/">
+        <router-link to="/notification">
           <div class="content">
             <div class="message-notification">
               <span class="icon"
@@ -47,7 +47,7 @@ onMounted(() => {
         >
       </div>
       <div class="col-lg-12">
-        <router-link to="/">
+        <router-link to="/notification">
           <div class="content">
             <div class="message-notification">
               <span class="icon"
@@ -61,7 +61,7 @@ onMounted(() => {
         >
       </div>
       <div class="col-lg-12 text-center pt-3 pb-3">
-        <router-link to="/"
+        <router-link to="/notification"
           ><span class="color-main">{{
             t("See_more_notifications")
           }}</span></router-link
@@ -79,7 +79,7 @@ onMounted(() => {
   border-radius: 4px;
   width: 450px;
   height: 300px;
-  right: 30%;
+  right: 35%;
   overflow-y: auto;
   top: 55px;
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.348);

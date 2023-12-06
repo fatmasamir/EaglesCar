@@ -75,7 +75,7 @@ const ListOfCar = ref([
                     </button></SimpleButton
                   > -->
                   <SimpleButton type="send">
-                    <button class="btn" @click="AddCar = true">
+                    <button class="btn">
                       {{ t("view") }}
                     </button></SimpleButton
                   >

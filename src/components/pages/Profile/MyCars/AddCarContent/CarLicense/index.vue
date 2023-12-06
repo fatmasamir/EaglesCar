@@ -70,7 +70,7 @@ let onSubmit = handleSubmit((values) => {
                 required
                 :class="{ 'is-invalid': errors.City }"
               >
-                <option disabled>{{ t("City") }}</option>
+                <option value="" disabled selected>{{ t("City") }}</option>
                 <option value="1">anythink</option>
               </select>
               <div class="invalid-feedback">{{ errors.City }}</div>
@@ -87,7 +87,9 @@ let onSubmit = handleSubmit((values) => {
                 required
                 :class="{ 'is-invalid': errors.Plate_number }"
               >
-                <option disabled>{{ t("Plate_number") }}</option>
+                <option value="" disabled selected>
+                  {{ t("Plate_number") }}
+                </option>
                 <option value="1">anythink</option>
               </select>
               <div class="invalid-feedback">{{ errors.Plate_number }}</div>
@@ -104,7 +106,9 @@ let onSubmit = handleSubmit((values) => {
                 required
                 :class="{ 'is-invalid': errors.License_expiration_date }"
               >
-                <option disabled>{{ t("License_expiration_date") }}</option>
+                <option value="" disabled selected>
+                  {{ t("License_expiration_date") }}
+                </option>
                 <option value="1">anythink</option>
               </select>
               <div class="invalid-feedback">
@@ -208,7 +212,7 @@ let onSubmit = handleSubmit((values) => {
         </SimpleInput>
       </div>
     </div>
-    <div class="col-12 text-center mb-5 mt-5">
+    <div class="col-12 text-center mb-5 mt-5 direction_ar">
       <SimpleButton type="sub_button">
         <button>
           {{ t("Finish_later") }}
@@ -218,7 +222,7 @@ let onSubmit = handleSubmit((values) => {
         <button type="submit">
           {{ t("Next_step") }}
         </button>
-        <!-- <button type="submit" disabled v-else>
+        <!-- <button type="submit" value="" disabled selected v-else>
                   {{ t("wait") }}
                 </button> -->
       </SimpleButton>

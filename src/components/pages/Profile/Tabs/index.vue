@@ -1,9 +1,11 @@
 <script setup>
 import { ref, defineEmits } from "vue";
-
+import { useI18n } from "vue-i18n";
+//i18n
+const { t } = useI18n();
 // emit
 let emits = defineEmits(["ChooseTab"]);
-let activeItem = ref("My account");
+let activeItem = ref("My_account");
 let ListIcons = ref([
   {
     id: 0,
@@ -15,7 +17,7 @@ let ListIcons = ref([
       `../../../../assets/images/global/icons/global/profile/profile-active.svg`,
       import.meta.url
     ).href,
-    title: "My account",
+    title: "My_account",
   },
   {
     id: 1,
@@ -27,7 +29,7 @@ let ListIcons = ref([
       `../../../../assets/images/global/icons/global/profile/car-active.svg`,
       import.meta.url
     ).href,
-    title: "My cars",
+    title: "My_cars",
   },
   {
     id: 2,
@@ -39,7 +41,7 @@ let ListIcons = ref([
       `../../../../assets/images/global/icons/global/profile/voice-square-active.svg`,
       import.meta.url
     ).href,
-    title: "My requests",
+    title: "My_requests",
   },
   {
     id: 3,
@@ -51,7 +53,7 @@ let ListIcons = ref([
       `../../../../assets/images/global/icons/global/profile/key-active.svg`,
       import.meta.url
     ).href,
-    title: "My borrowings",
+    title: "My_borrowings",
   },
   {
     id: 3,
@@ -83,7 +85,7 @@ const ChooseTabFun = (value) => {
       <div class="content">
         <img :src="item.image_icon" class="normal" />
         <img :src="item.image_icon_active" class="activeImage" />
-        <h5>{{ item.title }}</h5>
+        <h5>{{ t(item.title) }}</h5>
       </div>
     </li>
   </ul>

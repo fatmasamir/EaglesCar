@@ -101,4 +101,12 @@ h6 {
   color: #0a0a68;
   font-size: 18px;
 }
+.is-ar {
+  .Promotions {
+    img {
+      margin-left: 10px;
+      margin-right: 0px;
+    }
+  }
+}
 </style>

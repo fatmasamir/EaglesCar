@@ -9,7 +9,7 @@ import MyRequests from "@/components/pages/Profile/MyRequests/index.vue";
 import MyBorrowings from "@/components/pages/Profile/MyBorrowings/index.vue";
 import MyPayement from "@/components/pages/Profile/MyPayement/index.vue";
 import { ref } from "vue";
-const itemChoose = ref<String>("My account");
+const itemChoose = ref<String>("My_account");
 const ChooseTab = (nameTab: String) => {
   console.log("ChooseTab", nameTab);
   itemChoose.value = nameTab;
@@ -22,13 +22,13 @@ const ChooseTab = (nameTab: String) => {
     <div class="container px-0">
       <Tabs @ChooseTab="ChooseTab"></Tabs>
       <!--MyAccount-->
-      <MyAccount v-if="itemChoose == 'My account'" />
+      <MyAccount v-if="itemChoose == 'My_account'" />
       <!--MyCars-->
-      <MyCars v-if="itemChoose == 'My cars'" />
+      <MyCars v-if="itemChoose == 'My_cars'" />
       <!--MyRequests-->
-      <MyRequests v-if="itemChoose == 'My requests'" />
+      <MyRequests v-if="itemChoose == 'My_requests'" />
       <!--MyBorrowings-->
-      <MyBorrowings v-if="itemChoose == 'My borrowings'" />
+      <MyBorrowings v-if="itemChoose == 'My_borrowings'" />
       <!--MyBorrowings-->
       <MyPayement v-if="itemChoose == 'Payement'" />
     </div>

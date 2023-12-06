@@ -43,7 +43,11 @@ onMounted(() => {
       </div>
       <div class="">
         <SimpleInput>
-          <textarea id="exampleFormControlTextarea1" rows="3"></textarea
+          <textarea
+            id="exampleFormControlTextarea1"
+            rows="3"
+            :placeholder="t('message')"
+          ></textarea
           ><img
             src="../../../../../assets/images/global/icons/global/contactUs/message-2.svg"
         /></SimpleInput>
@@ -78,6 +82,7 @@ form {
       width: 100%;
       margin-bottom: 0px !important;
       padding-left: 39px !important;
+      padding-top: 13px;
     }
     img {
       position: absolute;

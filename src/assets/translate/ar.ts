@@ -51,7 +51,7 @@ const ar = {
   save: "احفظ",
   time: "وقت",
   withOur: "معنا",
-  Eagles: "ايجلز",
+  Eagles: "Eagles",
   car_rental: "لتأجير السيارات",
   Book_car: "حجز سيارة",
   Location: "موقع",
@@ -71,9 +71,10 @@ const ar = {
   carName: "اسم السيارة",
   par1: " يمكنك العثور على مجموعة كبيرة ومتنوعة من السيارات يمكنك الاختيار من بينها ",
   par2: "سيقوم فريق مركز الاتصال على مدار 24 ساعة بالاتصال بك للحصول على سيارتك السحرية.",
-  par3: "",
+  par3: "هذا هو الوقت المناسب لك للحصول على سيارة ذات جودة عالية",
   Select_Car: "اختر السياره",
   Contact_Operator: "اتصل بنا",
+  Available_now: "متاح الان",
   Let_Drive: "لنقم بالقيادة",
   //BookNow
   BookNow: "احجز الآن",
@@ -81,12 +82,12 @@ const ar = {
   bookingparagrah: `أسست مجموعة هيونداي موتور رؤية جديدة، "معًا من أجل مستقبل أفضل". من أجل الوفاء بدورها ومسؤوليتها كشركة عالمية موثوقة. حددت شركة هيونداي موتور رؤيتها`,
 
   //rental
-  rentaltitle: "وفّر الوقت مع شركة ايجلز  لتأجير السيارات",
+  rentaltitle: "وفّر الوقت مع شركة Eagles  لتأجير السيارات",
   rentalMessage: "أعلى السيارات. الموردين المحليين. دعم 24/7.",
   book_ride: "احجز الان ",
   New_information: "معلومات جديدة",
   //Our_blogs
-  Our_blogs: "مدوناتنا",
+  Our_blogs: "المقاله",
   Reviewed_People: "تقييم العملاء",
   Clients_testimonials: "اراء العملاء",
   Clients_reviews: `إنها دائمًا تجربة إيجابية عند الاستئجار لديكم. فريق العمل محترف للغاية وفعال ويبتسم دائمًا. وأشعر دائمًا بالترحيب والتقدير.
@@ -104,7 +105,7 @@ const ar = {
   //DownloadTitle
   DownloadTitle: "قم بتنزيل تطبيقنا للحصول   علي كامل الخدمات المتاحة",
   Downloadparagrah:
-    "تقديم خدمات تأجير السيارات لجميع الفئات الاجتماعية مثل شركات الأمن والبنوك والأدوية الشركات، وجميع الجنسيات مع مجموعة كبيرة ومتنوعة من الميزات",
+    "تقديم خدمات تأجير السيارات لجميع الفئات الاجتماعية مثل  شركات الأمن والبنوك والأدوية  الشركات، وجميع الجنسيات مع مجموعة كبيرة ومتنوعة من الميزات",
   //Footer
   Terms_conditions: "الأحكام والشروط",
   Privacy_policy: "سياسة الخصوصية",
@@ -117,7 +118,6 @@ const ar = {
   Audi: "أودي",
   Range_Rover: "رينج روفر",
   Join_community: "انضم إلى مجتمعنا",
-  Available_now: "Available now",
 
   //MostFast
   most_fast: "أسرع سيارة في عام 2023",
@@ -131,7 +131,7 @@ const ar = {
   //about us
   More_info: "مزيد من المعلومات",
   about_us_page: "عن شركتنا",
-  Eagles_Car: "سيارة النسور",
+  Eagles_Car: "تأسست شركة Eagles car",
   messabout1:
     "تأسست شركة إيغلز لتأجير السيارات في ديسمبر 2015 على يد مجموعة من موردي السيارات. لدينا متخصصون ذوو خبرة تزيد عن عشر سنوات في توريد السيارات للإيجار.",
   paragabout1:
@@ -194,7 +194,7 @@ const ar = {
   requiredFiledemail: "",
   phone: "الهاتف",
   Logout: "تسجيل خروج",
-  Return_point: "Return_point",
+  Return_point: "نقطة العوده",
   Car_condition: "حالة السيارة",
   paraFooter: "متخصصون بخبرة أكثر من عشر سنوات في  توريد سيارات للتأجير.",
   with_driver: "بسائق",
@@ -251,7 +251,6 @@ const ar = {
   Car_Description_message: "يمكنك أن تكتب هنا أي شيء عن سيارتك",
   Finish_later: "لاحقا",
   Next_step: "الخطوة التالية",
-  Car_license: "رخصة السيارة",
   Country_registeration: "بلد التسجيل",
   City: "المدينة",
   Plate_number: "رقم اللوحة",
@@ -274,13 +273,12 @@ const ar = {
   Long_term: "المدى القصير",
   Long_term_mess: "قم بإدراج سيارتك لفترة قصيرة من 3 أشهر إلى 3 سنوات",
   With_driver: "مع السائق",
-  Parking_address: "عنوان وقوف السيارات",
   Publish: "نشرها",
   Finish_now: "انهاء الأن",
   Send_request_again: "أرسل الطلب مرة أخرى",
   Add_promotion: "أضف رمز الترويج الخاص بك",
   with_getting_new_users: "مع سوف يساعد في الحصول على مستخدمين جدد.",
-  PromotionCode: "شفرة الترقية",
+  PromotionCode: "كود الترويجي",
   Use_fawery_payement: "استخدم طرق الفوري لاستخدام الدفع",
   Ensure_account_payment_methods_ways:
     "تأكد من أن لديك حسابًا لاستخدام طرق الدفع هذه",
@@ -292,5 +290,26 @@ const ar = {
   Chats: "الرسائل",
   Send_message: "أرسل رسالة",
   List_your_car: "قائمة سيارتك",
+  location: "المكان",
+  Upload_Papers: "تحميل الأوراق",
+  My_account: "حسابي",
+  My_cars: "سياراتي",
+  My_borrowings: "قروضي",
+  My_requests: "طلباتي",
+  Personal_information: "معلومات شخصية",
+  Borrowing: "الاقتراض",
+  All_Requests: "جميع الطلبات",
+  Confirmed_request: "طلب مؤكد ",
+  Car_information: "معلومات السيارة",
+  Parking_address: "مكان السيارات",
+  Car_license: "رخصة السيارة",
+  Photo_and_prices: "الصور والأسعار",
+  Promotions: "الترقيات",
+  Payement: "الدفع",
+  Choose_Your_Type: "اختر النوع الخاص بك",
+  Choose_Car_model: "اختر توع السيارة",
+  Choose_Number_seat: "ختر رقم المقعد",
+  Maximum: "أقصى ",
+  Minimum: "الحد الأدنى",
 };
 export default ar;

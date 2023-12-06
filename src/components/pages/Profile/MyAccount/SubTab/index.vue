@@ -1,9 +1,11 @@
 <script setup>
 import { ref, defineEmits } from "vue";
-
+import { useI18n } from "vue-i18n";
+//i18n
+const { t } = useI18n();
 // emit
 let emits = defineEmits(["ChooseTabAccount"]);
-let activeItemAccount = ref("Personal information");
+let activeItemAccount = ref("Personal_information");
 let AccountListIcons = ref([
   {
     id: 0,
@@ -15,7 +17,7 @@ let AccountListIcons = ref([
       `../../../../../assets/images/global/icons/global/profile/verify-active.svg`,
       import.meta.url
     ).href,
-    title: "Personal information",
+    title: "Personal_information",
   },
   {
     id: 1,
@@ -27,7 +29,7 @@ let AccountListIcons = ref([
       `../../../../../assets/images/global/icons/global/profile/Personalinformation-active.svg`,
       import.meta.url
     ).href,
-    title: "Borrowing verification",
+    title: "Borrowing_verification",
   },
 ]);
 const ChooseTabAccountFun = (value) => {
@@ -47,7 +49,7 @@ const ChooseTabAccountFun = (value) => {
       <div class="content">
         <img :src="item.image_icon" class="normal" />
         <img :src="item.image_icon_active" class="activeImage" />
-        <h5>{{ item.title }}</h5>
+        <h5>{{ t(item.title) }}</h5>
       </div>
     </li>
   </ul>

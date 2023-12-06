@@ -1,5 +1,8 @@
 <script setup>
 import { ref, defineEmits, defineProps, onMounted } from "vue";
+import { useI18n } from "vue-i18n";
+//i18n
+const { t } = useI18n();
 // emit
 let props = defineProps(["itemChooseAddCar"]);
 
@@ -16,7 +19,7 @@ let AccountListIcons = ref([
       `@/assets/images/global/icons/global/profile/data-active.svg`,
       import.meta.url
     ).href,
-    title: "Car information",
+    title: "Car_information",
   },
   {
     id: 1,
@@ -28,7 +31,7 @@ let AccountListIcons = ref([
       `@/assets/images/global/icons/global/profile/money-forbidden-active.svg`,
       import.meta.url
     ).href,
-    title: "Car license",
+    title: "Car_license",
   },
   {
     id: 2,
@@ -40,7 +43,7 @@ let AccountListIcons = ref([
       `@/assets/images/global/icons/global/profile/wallet-2-active.svg`,
       import.meta.url
     ).href,
-    title: "Photo and prices",
+    title: "Photo_and_prices",
   },
   {
     id: 3,
@@ -52,7 +55,7 @@ let AccountListIcons = ref([
       `@/assets/images/global/icons/global/profile/radar-active.svg`,
       import.meta.url
     ).href,
-    title: "Parking address",
+    title: "Parking_address",
   },
 ]);
 const ChooseTabAccountFun = (value) => {
@@ -71,7 +74,7 @@ const ChooseTabAccountFun = (value) => {
       <div class="content">
         <img :src="item.image_icon" class="normal" />
         <img :src="item.image_icon_active" class="activeImage" />
-        <h5>{{ item.title }}</h5>
+        <h5>{{ t(item.title) }}</h5>
       </div>
     </li>
   </ul>

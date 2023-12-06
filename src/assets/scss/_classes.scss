@@ -126,6 +126,11 @@ p {
 ul {
   list-style-type: none;
 }
+.is-ar {
+  .direction_ar {
+    direction: ltr;
+  }
+}
 @media screen and (max-width: 1136px) {
   .container {
     min-width: 95% !important;

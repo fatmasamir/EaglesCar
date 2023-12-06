@@ -43,8 +43,10 @@ onMounted(() => {
         >
         <SimpleInput>
           <select class="form-control">
-            <option></option>
-            sdsaasd
+            <option disabled selected value="">
+              {{ t("Choose_Your_Type") }}
+            </option>
+            <option>anythink</option>
           </select></SimpleInput
         >
       </div>
@@ -56,7 +58,10 @@ onMounted(() => {
         >
         <SimpleInput>
           <select class="form-control">
-            <option>asdasd</option>
+            <option disabled selected value="">
+              {{ t("Choose_Car_model") }}
+            </option>
+            <option>anythink</option>
           </select></SimpleInput
         >
       </div>
@@ -79,7 +84,10 @@ onMounted(() => {
         >
         <SimpleInput>
           <select class="form-control">
-            <option>asdasd</option>
+            <option disabled selected value="">
+              {{ t("Choose_Number_seat") }}
+            </option>
+            <option>anythink</option>
           </select></SimpleInput
         >
       </div>
@@ -91,16 +99,22 @@ onMounted(() => {
         >
         <div class="row p-0 m-0">
           <div class="col-lg-6 p-0 m-0">
-            <NiceInput
-              ><select class="form-control">
+            <SimpleInput>
+              <select class="form-control">
+                <option disabled selected value="">
+                  {{ t("Minimum") }}
+                </option>
                 <option></option></select
-            ></NiceInput>
+            ></SimpleInput>
           </div>
           <div class="col-lg-6 px-1 m-0">
-            <NiceInput
+            <SimpleInput
               ><select class="form-control">
+                <option disabled selected value="">
+                  {{ t("Maximum") }}
+                </option>
                 <option></option></select
-            ></NiceInput>
+            ></SimpleInput>
           </div>
         </div>
       </div>

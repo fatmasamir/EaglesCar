@@ -10,6 +10,17 @@ import ClientsTestimonials from "@/components/pages/Hompage/ClientsTestimonials/
 import FAQ from "@/components/pages/Hompage/FAQ/index.vue";
 import DownloadApp from "@/components/pages/Hompage/DownloadApp/index.vue";
 import Footer from "@/components/global/Footer/index.vue";
+import { UseBloges } from "@/stores/Bloges/index";
+import Loading from "@/components/global/Loading/index.vue";
+import { onMounted } from "vue";
+
+//Bloges
+const Bloges = UseBloges();
+
+//onMounted
+onMounted(() => {
+  Bloges.get_Bloges();
+});
 </script>
 <template>
   <section class="Pages">
@@ -19,7 +30,11 @@ import Footer from "@/components/global/Footer/index.vue";
     <AboutCompany></AboutCompany>
     <Booking></Booking>
     <Rental></Rental>
-    <Blogs></Blogs>
+    <Blogs :Bloges="Bloges.Bloges" v-if="Bloges.Bloges.length != 0"></Blogs>
+    <div v-if="Bloges.Bloges.length == 0">
+      <Loading v-if="!Bloges.unfouned"></Loading>
+      <NotFound v-else />
+    </div>
     <ClientsTestimonials></ClientsTestimonials>
     <FAQ></FAQ>
     <DownloadApp></DownloadApp>

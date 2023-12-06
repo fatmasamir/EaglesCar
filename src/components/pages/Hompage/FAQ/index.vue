@@ -167,6 +167,10 @@ onMounted(() => {
     .img_faq img {
       transform: scalex(-1);
     }
+    .accordion-body {
+      text-align: right;
+      padding: 10px 0px;
+    }
   }
   .accordion-button::after {
     position: absolute;

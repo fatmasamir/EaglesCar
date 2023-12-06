@@ -21,7 +21,7 @@ onMounted(() => {
         <h2>{{ t("aboutTitle") }}</h2>
         <p class="mt-4">{{ t("aboutparagrah") }}</p>
         <SimpleButton type="send">
-          <router-link to="/" type="submit" class="btn">
+          <router-link to="/about-us" type="submit" class="btn">
             {{ t("learn_more") }}
             <img
               src="../../../../assets/images/global/icons/global/Homepage/arrow.svg" /></router-link
