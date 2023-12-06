@@ -21,7 +21,12 @@ onMounted(() => {
       <div class="row">
         <h6 class="color-main p-0">{{ t("New_information") }}</h6>
         <h3>{{ t("Our_blogs") }}</h3>
-        <swiper :slides-per-view="4" :space-between="0" class="blogs_list row">
+        <swiper
+          :slides-per-view="4"
+          :space-between="0"
+          class="blogs_list row"
+          v-if="props.Bloges.length != 0"
+        >
           <swiper-slide v-for="list in props.Bloges" :key="list.id">
             <router-link :to="'/blog-detailes/' + list.slug">
               <img :src="list.media.cover" />

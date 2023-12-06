@@ -25,7 +25,6 @@ const ar = {
   number: "رقم",
   OR: "أو",
   send: "إرسال",
-
   //forgetPass page
   forgetPass: "هل نسيت كلمة السر",
   Forgetpassword: "نسيان كلمه السر",
