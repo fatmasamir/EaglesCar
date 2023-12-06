@@ -59,7 +59,7 @@ let onSubmit = () => {
         <SimpleInput class="upload">
           <SimpleButton type="send" class="">
             <img
-              src="../../../../../../assets/images/global/icons/global/profile/document-upload-white.svg"
+              src="@/assets/images/global/icons/global/profile/document-upload-white.svg"
             />
             {{ t("upload") }}</SimpleButton
           >
