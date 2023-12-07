@@ -11,9 +11,9 @@ import FAQ from "@/components/pages/Hompage/FAQ/index.vue";
 import DownloadApp from "@/components/pages/Hompage/DownloadApp/index.vue";
 import Footer from "@/components/global/Footer/index.vue";
 import { UseBloges } from "@/stores/Bloges/index";
-import Loading from "@/components/global/Loading/index.vue";
-import { onMounted } from "vue";
-
+// import Loading from "@/components/global/Loading/index.vue";
+import { onMounted, ref } from "vue";
+const checkIn = ref<Date>();
 //Bloges
 const Bloges = UseBloges();
 
@@ -31,7 +31,6 @@ onMounted(() => {
     <Booking></Booking>
     <Rental></Rental>
     <Blogs :Bloges="Bloges.Bloges"></Blogs>
-
     <ClientsTestimonials></ClientsTestimonials>
     <FAQ></FAQ>
     <DownloadApp></DownloadApp>

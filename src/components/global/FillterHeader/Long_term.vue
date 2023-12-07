@@ -10,7 +10,8 @@ const { t } = useI18n();
 
 //Return_point
 const Return_pointLong_term = ref(false);
-
+const Pick_up = ref();
+const Drop_of = ref();
 //Return_point
 const openLoc = ref(false);
 
@@ -73,9 +74,7 @@ onMounted(() => {
             t("Pick_up")
           }}</label
         >
-        <SimpleInput
-          ><input type="date" class="form-control" name="Pick_up"
-        /></SimpleInput>
+        <VueDatePicker v-model="Pick_up" />
       </div>
       <div>
         <label
@@ -83,9 +82,10 @@ onMounted(() => {
             t("Drop_of")
           }}</label
         >
-        <SimpleInput><input type="date" class="form-control" /></SimpleInput>
+        <VueDatePicker v-model="Drop_of" />
       </div>
       <div class="mt-3 buttons">
+        <label></label>
         <SimpleButton type="send" class="register_lab">
           <button type="submit">
             {{ t("Search") }}

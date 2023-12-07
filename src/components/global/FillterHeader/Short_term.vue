@@ -3,6 +3,8 @@ import { useI18n } from "vue-i18n";
 import { onMounted, ref } from "vue";
 import SimpleInput from "@/components/global/CusomInputs/SimpleInput/SimpleInput.vue";
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
+import Date from "./date.vue";
+import Date2 from "./date2.vue";
 import AOS from "aos";
 
 //useI18n
@@ -14,6 +16,12 @@ const Return_pointLong_term = ref(false);
 //Return_point
 const openLoc = ref(false);
 
+//checkIn
+const checkIn = ref<Date>();
+const AddDateFirst = (value: Date) => {
+  console.log("value", value);
+  checkIn.value = value;
+};
 //openLocation{z
 const openLocation = (e) => {
   console.log("e.target.value", e.target.value);
@@ -73,9 +81,7 @@ onMounted(() => {
             t("Pick_up")
           }}</label
         >
-        <SimpleInput
-          ><input type="date" class="form-control" name="Pick_up"
-        /></SimpleInput>
+        <Date @AddDateFirst="AddDateFirst" />
       </div>
       <div>
         <label
@@ -83,9 +89,10 @@ onMounted(() => {
             t("Drop_of")
           }}</label
         >
-        <SimpleInput><input type="date" class="form-control" /></SimpleInput>
+        <Date2 :checkIn="checkIn" />
       </div>
       <div class="mt-3 buttons">
+        <label></label>
         <SimpleButton type="send" class="register_lab">
           <button type="submit">
             {{ t("Search") }}
@@ -126,4 +133,33 @@ onMounted(() => {
 </template>
 <style lang="scss" scoped>
 @import "./styleing.scss";
+</style>
+<style>
+.dp--menu-wrapper {
+  position: relative !important;
+  top: auto !important;
+  bottom: 0px !important;
+}
+.dp__arrow_top {
+  display: none;
+}
+.dp__main {
+  width: 100% !important;
+}
+.dp__menu {
+  border: 0px !important;
+}
+.dp__input_icon {
+  top: 20px;
+}
+.dp__clear_icon {
+  top: 20px;
+  right: auto;
+  left: 19px;
+}
+.dp__input {
+  margin: 0px !important;
+  height: 47px;
+  border-radius: 0px;
+}
 </style>

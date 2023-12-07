@@ -64,7 +64,9 @@ fakeBackend();
 import { initFacebookSdk, jwtInterceptor, errorInterceptor } from "@/_helpers";
 import VueTelInput from "vue3-tel-input";
 import "vue3-tel-input/dist/vue3-tel-input.css";
-
+import { Calendar } from "vue-calendar-3";
+import VueDatePicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
 // import VueGoogleMaps from "@fawmi/vue-google-maps";
 // enable interceptors for http requests
 jwtInterceptor();
@@ -93,6 +95,7 @@ function startApp() {
     .use(Vue3ReactiveTelInput)
     .use(VueSocialSharing)
     .use(VueTelInput, VueTelInputOptions)
+    .use(Calendar)
     .use(gAuthPlugin, {
       clientId: gauthClientId,
       scope: "email",
@@ -112,5 +115,6 @@ function startApp() {
     .component("InlineSvg", InlineSvg)
     .component("DataTable", Vue3EasyDataTable)
     .component("v-select", vSelect)
+    .component("VueDatePicker", VueDatePicker)
     .mount("#app");
 }
