@@ -4,6 +4,8 @@ import { onMounted, ref } from "vue";
 import SimpleInput from "@/components/global/CusomInputs/SimpleInput/SimpleInput.vue";
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
 import AOS from "aos";
+import { useLight } from "@/stores/light";
+const Light = useLight();
 
 //useI18n
 const { t } = useI18n();
@@ -74,7 +76,10 @@ onMounted(() => {
             t("Pick_up")
           }}</label
         >
-        <VueDatePicker v-model="Pick_up" />
+        <VueDatePicker
+          v-model="Pick_up"
+          :dark="Light.Light == 'off' ? true : false"
+        />
       </div>
       <div>
         <label
@@ -82,7 +87,10 @@ onMounted(() => {
             t("Drop_of")
           }}</label
         >
-        <VueDatePicker v-model="Drop_of" />
+        <VueDatePicker
+          v-model="Drop_of"
+          :dark="Light.Light == 'off' ? true : false"
+        />
       </div>
       <div class="mt-3 buttons">
         <label></label>
