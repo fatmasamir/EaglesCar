@@ -18,7 +18,7 @@ onMounted(() => {
 </script>
 <template>
   <section class="Fillter">
-    <h4>{{ t("Search_filter") }}</h4>
+    <h4>{{ t("Search_filter") }} <span></span></h4>
     <div class="row">
       <div class="col-lg-12">
         <label
@@ -71,9 +71,17 @@ onMounted(() => {
             src="../../../../assets/images/global/icons/global/Homepage/location.svg"
           />{{ t("Year_model") }}</label
         >
-        <SimpleInput>
-          <input type="range" class="form-range" id="disabledRange"
-        /></SimpleInput>
+        <div id="slider">
+          <input
+            class="bar"
+            type="range"
+            id="rangeinput"
+            value="50"
+            onchange="rangevalue.value=value"
+          />
+          <span class="highlight"></span>
+          <output id="rangevalue">50</output>
+        </div>
         <div class="info"><span>2018</span><span>2023</span></div>
       </div>
       <div class="col-lg-12">
@@ -165,6 +173,14 @@ onMounted(() => {
     font-weight: 700;
     font-size: 20px;
     margin: 0px 0px 20px;
+    span {
+      width: 100px;
+      display: block;
+      height: 3px;
+      background: rgba(244, 167, 29, 1);
+      margin: auto;
+      margin-top: 10px;
+    }
   }
   .row {
     margin: auto;
@@ -245,8 +261,9 @@ onMounted(() => {
       .info {
         justify-content: space-between;
         display: flex;
-        margin-top: -15px;
+        margin-top: -20px;
         margin-bottom: 15px;
+        font-weight: 600;
       }
     }
     .simple-button button {
@@ -264,6 +281,107 @@ onMounted(() => {
       margin: 10px auto;
     }
   }
+  .form-control {
+    appearance: auto !important;
+    border-radius: 0px;
+    padding: 10px 5px !important;
+    color: rgba(117, 117, 117, 1);
+  }
+
+  #slider {
+    width: 100%;
+    height: 13px;
+    position: relative;
+    margin: 0px 0px 22px;
+  }
+  #slider .bar {
+    width: 100%;
+    height: 5px;
+    background-color: rgba(244, 167, 29, 1);
+    position: relative;
+    top: -4px;
+    left: 4px;
+    background: white;
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    border-radius: 40px;
+  }
+  #slider .highlight {
+    height: 2px;
+    position: absolute;
+    width: 90%;
+    top: 6px;
+    left: 17px;
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    border-radius: 40px;
+    background: rgb(231, 231, 231);
+    margin: auto;
+  }
+  input[type="range"] {
+    -webkit-appearance: none;
+    background-color: red;
+    height: 2px;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    position: relative;
+    top: 0px;
+    z-index: 1;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    border-radius: 40px;
+
+    background-color: white;
+    border: 2px solid rgba(244, 167, 29, 1);
+  }
+  input[type="range"]:hover ~ #rangevalue,
+  input[type="range"]:active ~ #rangevalue {
+    background-color: rgba(244, 167, 29, 1);
+    opacity: 1;
+    top: -75px;
+  }
+  /* Tool Tip */
+
+  #rangevalue {
+    color: white;
+    font-size: 10px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    display: block;
+    color: #fff;
+    margin: 20px 0;
+    position: relative;
+    left: 44.5%;
+    padding: 10px;
+    background: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      color-stop(0%, #222931),
+      color-stop(100%, #181d21)
+    );
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+
+    background-color: rgba(244, 167, 29, 1);
+    opacity: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    top: -95px;
+    width: 30px;
+    height: 30px;
+  }
+  input[type="range"]:focus {
+    outline: none;
+  }
 }
 /*media" */
 
@@ -277,6 +395,10 @@ onMounted(() => {
   .Fillter .row .choose_Car_condition > div:first-child {
     margin-left: 10px;
     margin-right: 0px;
+  }
+  .Fillter #rangevalue {
+    left: auto;
+    right: 44.5%;
   }
 }
 </style>

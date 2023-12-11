@@ -15,7 +15,7 @@ onMounted(() => {
   <div class="the_block">
     <div class="image_car">
       <router-link :to="'/car-detalies/' + data.slug" type="submit" class="btn">
-        <img :src="props.data.cover"
+        <img :src="props.data.media.cover"
       /></router-link>
     </div>
     <div class="card">
@@ -30,9 +30,9 @@ onMounted(() => {
                 />
                 {{ props.data.per }}
               </div>
-              <SimpleButton type="send" v-if="data.available">
+              <span class="available" v-if="data.available">
                 {{ t("Available") }}
-              </SimpleButton>
+              </span>
             </div>
           </div>
           <p class="my-3">
@@ -98,6 +98,12 @@ onMounted(() => {
       padding: 20px;
       display: block;
     }
+    a:active {
+      border: 0px;
+    }
+    a:focus {
+      box-shadow: 0px 0px 0px;
+    }
     .title {
       justify-content: space-between;
       align-items: center;
@@ -116,6 +122,15 @@ onMounted(() => {
           margin-right: 10px;
           width: 70px;
           text-align: center;
+          align-items: center;
+          display: flex;
+          justify-content: center;
+        }
+        .available {
+          background: rgba(68, 195, 8, 1);
+          color: white;
+          border-radius: 8px;
+          padding: 9px;
         }
         a {
           height: 44px;
@@ -130,12 +145,15 @@ onMounted(() => {
     }
     p {
       color: #818181;
+      text-align: left;
     }
     .list {
+      margin: auto;
       border-radius: 4px;
       > div {
         text-align: center;
-        padding: 0px 5px;
+        padding: 0px;
+        padding-right: 10px;
         .content {
           background: #fbfbfb;
           img {
@@ -144,11 +162,15 @@ onMounted(() => {
           }
         }
       }
+      > div:last-child {
+        padding-right: 0px;
+      }
     }
     .BookNow {
       align-items: center;
       justify-content: space-between;
       margin: 20px 0px;
+      padding: 0px 20px;
       display: flex;
       h5 {
         display: inline-block;
@@ -170,6 +192,7 @@ onMounted(() => {
     hr {
       border: 1px solid;
       height: 0px;
+      margin: 0px;
     }
   }
 }
@@ -185,6 +208,17 @@ onMounted(() => {
   .the_block .card .title .buttons .rating_number {
     margin-right: 0px;
     margin-left: 10px;
+  }
+  .the_block .card .list > div {
+    padding-right: 0px;
+    padding-left: 10px;
+  }
+  .the_block .card .list > div:last-child {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+  .the_block .card p {
+    text-align: right;
   }
 }
 </style>
