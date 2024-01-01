@@ -12,7 +12,7 @@ const { t } = useI18n();
 
 //Return_point
 const Return_pointLong_term = ref(false);
-const Pick_up = ref();
+const Pick_up = ref(new Date());
 const Drop_of = ref();
 //Return_point
 const openLoc = ref(false);
@@ -78,6 +78,7 @@ onMounted(() => {
         >
         <VueDatePicker
           v-model="Pick_up"
+          :min-date="new Date()"
           :dark="Light.Light == 'off' ? true : false"
         />
       </div>

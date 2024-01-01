@@ -1,6 +1,7 @@
 <template>
   <VueDatePicker
     v-model="date"
+    :min-date="new Date()"
     :dark="Light.Light == 'off' ? true : false"
   ></VueDatePicker>
 </template>
@@ -12,7 +13,7 @@ import { ref, defineEmits, watch } from "vue";
 import { useLight } from "@/stores/light";
 const Light = useLight();
 let emit = defineEmits(["AddDateFirst"]);
-let date = ref<Date>();
+const date = ref(new Date());
 // const disabledDates = computed(() => {
 //   const today = new Date();
 

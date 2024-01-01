@@ -19,7 +19,7 @@ onMounted(() => {
   >
     <div class="row m-0 p-0">
       <div class="col-lg-12">
-        <router-link to="/">
+        <router-link to="/chats">
           <div class="content">
             <div class="message-notification">
               <span class="icon"
@@ -33,7 +33,7 @@ onMounted(() => {
         >
       </div>
       <div class="col-lg-12">
-        <router-link to="/">
+        <router-link to="/chats">
           <div class="content">
             <div class="message-notification">
               <span class="icon"
@@ -47,7 +47,7 @@ onMounted(() => {
         >
       </div>
       <div class="col-lg-12">
-        <router-link to="/">
+        <router-link to="/chats">
           <div class="content">
             <div class="message-notification">
               <span class="icon"
@@ -61,7 +61,7 @@ onMounted(() => {
         >
       </div>
       <div class="col-lg-12 text-center pt-3 pb-3">
-        <router-link to="/"
+        <router-link to="/chats"
           ><span class="color-main">{{
             t("See_more_Chats")
           }}</span></router-link

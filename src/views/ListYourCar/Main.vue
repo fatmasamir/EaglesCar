@@ -9,11 +9,10 @@ import Footer from "@/components/global/Footer/index.vue";
 import { ref } from "vue";
 
 //itemChooseAddCar
-const itemChooseAddCar = ref("Parking address");
+const itemChooseAddCar = ref("Car information");
 
 //ChooseTabAccount
 const ChooseTabAccount = (nameTab) => {
-  console.log("ChooseTab==", nameTab);
   itemChooseAddCar.value = nameTab;
 };
 </script>
@@ -21,7 +20,7 @@ const ChooseTabAccount = (nameTab) => {
   <section class="Pages">
     <NavBar></NavBar>
     <Header TiltePage="List_your_car"></Header>
-    <div class="container">
+    <div class="container mt-5">
       <CarInformation
         v-if="itemChooseAddCar == 'Car information'"
         @ChooseTabAccount="ChooseTabAccount"
