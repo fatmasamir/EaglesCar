@@ -1,13 +1,19 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, defineProps } from "vue";
 import { useI18n } from "vue-i18n";
 import SimpleInput from "@/components/global/CusomInputs/SimpleInput/SimpleInput.vue";
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
 import { useForm } from "vee-validate";
 import * as Yup from "yup";
+import { UseProfile } from "@/stores/Profile/index";
 
+//Bloges
+const Profile = UseProfile();
 //i18n
 const { t } = useI18n();
+
+// props
+const props = defineProps(["Years", "Counteries"]);
 
 // meta
 const { meta } = useForm();
@@ -15,33 +21,58 @@ const { meta } = useForm();
 // formLogin
 const { errors, handleSubmit, defineInputBinds } = useForm({
   validationSchema: Yup.object({
-    License_Number: Yup.string().required(t("requiredFiled")),
-    Issuance_Date: Yup.string().required(t("requiredFiled")),
-    Expiration_Date: Yup.string().required(t("requiredFiled")),
-    Country_Issue: Yup.string().required(t("requiredFiled")),
-    Driver_Phone_Number: Yup.string().required(t("requiredFiled")),
-    effect: Yup.string().required(t("requiredFiled")),
-    yearsDriving: Yup.string().required(t("requiredFiled")),
+    license_number: Yup.string().required(t("requiredFiled")),
+    issuance_date: Yup.string().required(t("requiredFiled")),
+    expiration_date: Yup.string().required(t("requiredFiled")),
+    country_id: Yup.string().required(t("requiredFiled")),
+    phone: Yup.string().required(t("requiredFiled")),
+    years: Yup.string().required(t("requiredFiled")),
+    drugs: Yup.string().required(t("requiredFiled")),
   }),
 });
 
 //login ,password
-const License_Number = defineInputBinds("License_Number");
-const Issuance_Date = defineInputBinds("Issuance_Date");
-const Expiration_Date = defineInputBinds("Expiration_Date");
-const Country_Issue = defineInputBinds("Country_Issue");
-const Driver_Phone_Number = defineInputBinds("Driver_Phone_Number");
-const effect = defineInputBinds("effect");
-const yearsDriving = defineInputBinds("yearsDriving");
+const license_number = defineInputBinds("license_number");
+const issuance_date = defineInputBinds("issuance_date");
+const expiration_date = defineInputBinds("expiration_date");
+const country_id = defineInputBinds("country_id");
+const phone = defineInputBinds("phone");
+const drugs = defineInputBinds("drugs");
+const years = defineInputBinds("years");
 
 // Driver_license
 const Driver_license = ref();
 const image = ref();
 const imageUrl = ref();
+const identity_face = ref();
+const identity_back = ref();
+const identity_face_error = ref();
+const identity_back_error = ref();
 const F = ref();
 // handel submit
-let onSubmit = handleSubmit((values) => {
-  console.log("values", values);
+let onSubmit = handleSubmit(async (values) => {
+  identity_face_error.value = "";
+  identity_back_error.value = "";
+  if (identity_face.value) {
+    if (identity_back.value) {
+      let formdata = new FormData();
+      let data = {
+        license_number: values.license_number,
+        issuance_date: values.issuance_date,
+        expiration_date: values.expiration_date,
+        country_id: values.country_id,
+        phone: values.phone,
+        drugs: values.drugs,
+        years: values.years,
+      };
+      for (let key in data) {
+        formdata.append(key, data[key]);
+      }
+      formdata.append("identity_face", identity_face.value);
+      formdata.append("identity_back", identity_back.value);
+      await Profile.profile_verify(formdata);
+    } else identity_back_error.value = "this field required";
+  } else identity_face_error.value = "this field required";
 });
 // fileSelected
 let fileSelected = (event) => {
@@ -55,6 +86,20 @@ let fileSelected = (event) => {
 let imageLoaded = (event) => {
   imageUrl.value = event.target.result;
 };
+// fileSelected
+let fileSelectedface = (event) => {
+  const target = event.target as HTMLInputElement;
+  if (target && target.files) {
+    identity_face.value = target.files[0];
+  }
+};
+let fileSelectedback = (event) => {
+  const target = event.target as HTMLInputElement;
+  if (target && target.files) {
+    identity_back.value = target.files[0];
+  }
+};
+
 // emptyFileDriver_license
 let emptyFileDriver_license = () => {
   imageUrl.value = "";
@@ -72,15 +117,15 @@ let emptyFileDriver_license = () => {
             <!-- <label>Email <span class="text-red">*</span> </label> -->
             <input
               type="text"
-              id="License_Number"
-              name="License_Number"
-              v-bind="License_Number"
-              :placeholder="t('License_Number')"
+              id="license_number"
+              name="license_number"
+              v-bind="license_number"
+              :placeholder="t('license_number')"
               required
-              :class="{ 'is-invalid': errors.License_Number }"
+              :class="{ 'is-invalid': errors.license_number }"
             />
 
-            <div class="invalid-feedback">{{ errors.License_Number }}</div>
+            <div class="invalid-feedback">{{ errors.license_number }}</div>
           </SimpleInput>
         </div>
         <div class="col-md-4">
@@ -88,15 +133,15 @@ let emptyFileDriver_license = () => {
             <!-- <label>Email <span class="text-red">*</span> </label> -->
             <input
               type="date"
-              id="Issuance_Date"
-              name="Issuance_Date"
-              v-bind="Issuance_Date"
-              :placeholder="t('Issuance_Date')"
+              id="issuance_date"
+              name="issuance_date"
+              v-bind="issuance_date"
+              :placeholder="t('issuance_date')"
               required
-              :class="{ 'is-invalid': errors.Issuance_Date }"
+              :class="{ 'is-invalid': errors.issuance_date }"
             />
 
-            <div class="invalid-feedback">{{ errors.Issuance_Date }}</div>
+            <div class="invalid-feedback">{{ errors.issuance_date }}</div>
           </SimpleInput>
         </div>
         <div class="col-md-4">
@@ -104,12 +149,12 @@ let emptyFileDriver_license = () => {
             <!-- <label>Email <span class="text-red">*</span> </label> -->
             <input
               type="date"
-              id="Expiration_Date"
-              name="Expiration_Date"
-              v-bind="Expiration_Date"
-              :placeholder="t('Expiration_Date')"
+              id="expiration_date"
+              name="expiration_date"
+              v-bind="expiration_date"
+              :placeholder="t('expiration_date')"
               required
-              :class="{ 'is-invalid': errors.Expiration_Date }"
+              :class="{ 'is-invalid': errors.expiration_date }"
             />
 
             <div class="invalid-feedback">{{ errors.Nationality }}</div>
@@ -117,18 +162,25 @@ let emptyFileDriver_license = () => {
         </div>
         <div class="col-md-4 mx-0 px-0">
           <SimpleInput>
-            <!-- <label>Email <span class="text-red">*</span> </label> -->
-            <input
-              type="text"
-              id="Country_Issue"
-              name="Country_Issue"
-              v-bind="Country_Issue"
-              :placeholder="t('Country_Issue')"
-              required
-              :class="{ 'is-invalid': errors.Country_Issue }"
-            />
+            <select
+              id="Expiration_Date"
+              name="Expiration_Date"
+              v-bind="country_id"
+              :class="{ 'is-invalid': errors.country_id }"
+            >
+              <option value="" disabled selected>
+                {{ t("Country_Issue") }}
+              </option>
+              <option
+                :value="country.id"
+                v-for="country in props.Counteries"
+                :key="country.id"
+              >
+                {{ country.title }}
+              </option>
+            </select>
 
-            <div class="invalid-feedback">{{ errors.Country_Issue }}</div>
+            <div class="invalid-feedback">{{ errors.country_id }}</div>
           </SimpleInput>
         </div>
         <div class="col-md-4">
@@ -136,15 +188,15 @@ let emptyFileDriver_license = () => {
             <!-- <label>Email <span class="text-red">*</span> </label> -->
             <input
               type="text"
-              id="Driver_Phone_Number"
-              name="Driver_Phone_Number"
-              v-bind="Driver_Phone_Number"
+              id="phone"
+              name="phone"
+              v-bind="phone"
               :placeholder="t('Driver_Phone_Number')"
               required
-              :class="{ 'is-invalid': errors.Driver_Phone_Number }"
+              :class="{ 'is-invalid': errors.phone }"
             />
 
-            <div class="invalid-feedback">{{ errors.ID }}</div>
+            <div class="invalid-feedback">{{ errors.phone }}</div>
           </SimpleInput>
         </div>
         <div class="col-md-4">
@@ -191,46 +243,68 @@ let emptyFileDriver_license = () => {
                 />
                 {{ t("upload") }}</SimpleButton
               >
-              <input type="file" />
+              <input type="file" @change="fileSelectedface($event)" />
             </SimpleInput>
           </div>
         </div>
+        <div class="invalid" v-if="identity_face_error && !identity_face">
+          {{ identity_face_error }}
+        </div>
+        <div class="col-md-12 Identity_document">
+          <div class="content">
+            <div class="">
+              <h5>{{ t("Identity_document") }}</h5>
+              <p>{{ t("messageIdentity_document") }}</p>
+            </div>
+            <SimpleInput class="upload">
+              <SimpleButton type="send" class="">
+                <img
+                  src="../../../../../../assets/images/global/icons/global/profile/document-upload-white.svg"
+                />
+                {{ t("upload") }}</SimpleButton
+              >
+              <input type="file" @change="fileSelectedback($event)" />
+            </SimpleInput>
+          </div>
+        </div>
+        <div class="invalid" v-if="identity_back_error && !identity_back">
+          {{ identity_back_error }}
+        </div>
       </div>
     </div>
-    <div class="row mt-3">
+    <div class="row mt-4">
       <h5>{{ t("Identity_document") }}</h5>
       <div class="col-md-6">
         <SimpleInput>
           <label class="py-3">{{ t("drivingEffect") }} </label>
           <select
-            id="effect"
-            name="effect"
-            v-bind="effect"
+            id="drugs"
+            name="drugs"
+            v-bind="drugs"
             required
-            :class="{ 'is-invalid': errors.effect }"
+            :class="{ 'is-invalid': errors.drugs }"
           >
-            <option value="1">Anything</option>
-            <option value="2">Anything</option>
-            <option value="3">Anything</option>
+            <option :value="1">yes</option>
+            <option :value="0">no</option>
           </select>
-          <div class="invalid-feedback">{{ errors.effect }}</div>
+          <div class="invalid-feedback">{{ errors.drugs }}</div>
         </SimpleInput>
       </div>
       <div class="col-md-6">
         <SimpleInput>
           <label class="py-3">{{ t("yearsDriving") }} </label>
           <select
-            id="yearsDriving"
-            name="yearsDriving"
-            v-bind="yearsDriving"
+            id="years"
+            name="years"
+            v-bind="years"
             required
-            :class="{ 'is-invalid': errors.yearsDriving }"
+            :class="{ 'is-invalid': errors.years }"
           >
-            <option value="1">Anything</option>
-            <option value="2">Anything</option>
-            <option value="3">Anything</option>
+            <option :value="year.id" v-for="year in Years" :key="year.id">
+              {{ year.title }}
+            </option>
           </select>
-          <div class="invalid-feedback">{{ errors.yearsDriving }}</div>
+          <div class="invalid-feedback">{{ errors.years }}</div>
         </SimpleInput>
       </div>
       <div class="col-md-12">
@@ -263,8 +337,14 @@ let emptyFileDriver_license = () => {
     }
   }
 }
+.invalid {
+  font-size: 14px;
+  color: red;
+  margin: 0px;
+}
 .Identity_document {
   background: #f9f9f9;
+  margin: 10px 0px 0px;
 }
 .submit_button.send {
   width: 200px;

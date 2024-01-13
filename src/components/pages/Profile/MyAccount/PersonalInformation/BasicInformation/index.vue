@@ -1,59 +1,52 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, defineProps, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import SimpleInput from "@/components/global/CusomInputs/SimpleInput/SimpleInput.vue";
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
 import { useForm } from "vee-validate";
 import * as Yup from "yup";
+import { UseProfile } from "@/stores/Profile/index";
+
+//Bloges
+const Profile = UseProfile();
 
 //i18n
 const { t } = useI18n();
-
+// props
+const props = defineProps(["Profile", "Counteries"]);
 // meta
 const { meta } = useForm();
 
 // formLogin
-const { errors, handleSubmit, defineInputBinds } = useForm({
+const { errors, handleSubmit, resetForm, defineInputBinds } = useForm({
   validationSchema: Yup.object({
-    FirstName: Yup.string().required(t("requiredFiled")),
-    LastName: Yup.string().required(t("requiredFiled")),
-    Nationality: Yup.string().required(t("requiredFiled")),
-    login: Yup.string()
+    first_name: Yup.string().required(t("requiredFiled")),
+    last_name: Yup.string().required(t("requiredFiled")),
+    nationality_id: Yup.number().required(t("requiredFiled")),
+    residence_id: Yup.number().required(t("requiredFiled")),
+    email: Yup.string()
       .email(t("requiredFiledemail"))
       .required(t("requiredFiled")),
-    ID: Yup.string().min(12).max(12).required(t("requiredFiled")),
-    Date_of_birth: Yup.string().required(t("requiredFiled")),
-    Primary_phone_number: Yup.string().required(t("requiredFiled")),
-    Secondary_phone_number: Yup.string().required(t("requiredFiled")),
-    Location: Yup.string().required(t("requiredFiled")),
+    identity: Yup.string().min(12).max(12).required(t("requiredFiled")),
+    birthday: Yup.string().required(t("requiredFiled")),
+    phone: Yup.string().required(t("requiredFiled")),
+    secondary_phone: Yup.string().required(t("requiredFiled")),
   }),
 });
 
-//login ,password
-const FirstName = defineInputBinds("FirstName");
-const LastName = defineInputBinds("LastName");
-const Nationality = defineInputBinds("Nationality");
-const login = defineInputBinds("login");
-const ID = defineInputBinds("ID");
-const Date_of_birth = defineInputBinds("Date_of_birth");
-const Primary_phone_number = defineInputBinds("Primary_phone_number");
-const Secondary_phone_number = defineInputBinds("Secondary_phone_number");
-const Location = defineInputBinds("Location");
+//data useForm
+const first_name = defineInputBinds("first_name");
+const last_name = defineInputBinds("last_name");
+const nationality_id = defineInputBinds("nationality_id");
+const residence_id = defineInputBinds("residence_id");
+const email = defineInputBinds("email");
+const identity = defineInputBinds("identity");
+const birthday = defineInputBinds("birthday");
+const phone = defineInputBinds("phone");
+const secondary_phone = defineInputBinds("secondary_phone");
 
-// input password type
-const passwordFieldType = ref("password");
-
-// show/hide new password
-const switchVisibility = () => {
-  passwordFieldType.value =
-    passwordFieldType.value === "password" ? "text" : "password";
-};
 const image = ref();
 const imageUrl = ref();
-// handel submit
-let onSubmit = handleSubmit((values) => {
-  console.log("values", values);
-});
 // fileSelected
 let fileSelected = (event) => {
   const file = event.target.files.item(0);
@@ -65,6 +58,40 @@ let fileSelected = (event) => {
 let imageLoaded = (event) => {
   imageUrl.value = event.target.result;
 };
+// handel submit
+let onSubmit = handleSubmit((values) => {
+  console.log("values", values);
+  try {
+    Profile.set_updateProfile(JSON.stringify(values));
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+// watch props update
+watch(props, (newValue) => {
+  resetForm({
+    values: {
+      first_name: newValue.Profile.first_name
+        ? newValue.Profile.first_name
+        : "",
+      last_name: newValue.Profile.last_name ? newValue.Profile.last_name : "",
+      nationality_id: newValue.Profile.nationality
+        ? newValue.Profile.nationality.id
+        : 1,
+      residence_id: newValue.Profile.residence
+        ? newValue.Profile.residence.id
+        : 1,
+      email: newValue.Profile.email ? newValue.Profile.email : "",
+      identity: newValue.Profile.identity ? newValue.Profile.identity : "",
+      birthday: newValue.Profile.birthday ? newValue.Profile.birthday : "",
+      phone: newValue.Profile.phone ? newValue.Profile.phone : "",
+      secondary_phone: newValue.Profile.secondary_phone
+        ? newValue.Profile.secondary_phone
+        : "",
+    },
+  });
+});
 </script>
 <template>
   <div class="box">
@@ -91,14 +118,14 @@ let imageLoaded = (event) => {
                 <!-- <label>Email <span class="text-red">*</span> </label> -->
                 <input
                   type="text"
-                  id="FirstName"
-                  name="FirstName"
-                  v-bind="FirstName"
+                  id="first_name"
+                  name="first_name"
+                  v-bind="first_name"
                   :placeholder="t('FirstName')"
-                  :class="{ 'is-invalid': errors.FirstName }"
+                  :class="{ 'is-invalid': errors.first_name }"
                 />
 
-                <div class="invalid-feedback">{{ errors.FirstName }}</div>
+                <div class="invalid-feedback">{{ errors.first_name }}</div>
               </SimpleInput>
             </div>
             <div class="col-md-4">
@@ -106,33 +133,37 @@ let imageLoaded = (event) => {
                 <!-- <label>Email <span class="text-red">*</span> </label> -->
                 <input
                   type="text"
-                  id="LastName"
-                  name="LastName"
-                  v-bind="LastName"
+                  id="last_name"
+                  name="last_name"
+                  v-bind="last_name"
                   :placeholder="t('LastName')"
-                  :class="{ 'is-invalid': errors.LastName }"
+                  :class="{ 'is-invalid': errors.last_name }"
                 />
 
-                <div class="invalid-feedback">{{ errors.LastName }}</div>
+                <div class="invalid-feedback">{{ errors.last_name }}</div>
               </SimpleInput>
             </div>
             <div class="col-md-4">
               <SimpleInput>
-                <SimpleInput>
-                  <!-- <label>Email <span class="text-red">*</span> </label> -->
-                  <select
-                    id="Expiration_Date"
-                    name="Expiration_Date"
-                    v-bind="Nationality"
-                    :class="{ 'is-invalid': errors.Nationality }"
+                <!-- <label>Email <span class="text-red">*</span> </label> -->
+                <select
+                  id="Expiration_Date"
+                  name="Expiration_Date"
+                  v-bind="nationality_id"
+                  :class="{ 'is-invalid': errors.nationality_id }"
+                >
+                  <option value="" disabled selected>
+                    {{ t("Nationality") }}
+                  </option>
+                  <option
+                    :value="country.id"
+                    v-for="country in props.Counteries"
+                    :key="country.id"
                   >
-                    <option value="" disabled selected>
-                      {{ t("Nationality") }}
-                    </option>
-                    <option value="1">anythink</option>
-                  </select>
-                  <div class="invalid-feedback">{{ errors.Nationality }}</div>
-                </SimpleInput>
+                    {{ country.title }}
+                  </option>
+                </select>
+                <div class="invalid-feedback">{{ errors.nationality_id }}</div>
               </SimpleInput>
             </div>
             <div class="col-md-4">
@@ -140,14 +171,16 @@ let imageLoaded = (event) => {
                 <!-- <label>Email <span class="text-red">*</span> </label> -->
                 <input
                   type="email"
-                  id="login"
-                  name="login"
-                  v-bind="login"
+                  id="email"
+                  name="email"
+                  v-bind="email"
                   :placeholder="t('Email')"
-                  :class="{ 'is-invalid': errors.login }"
+                  :class="{ 'is-invalid': errors.email }"
+                  class="disabled"
+                  disabled
                 />
 
-                <div class="invalid-feedback">{{ errors.login }}</div>
+                <div class="invalid-feedback">{{ errors.email }}</div>
               </SimpleInput>
             </div>
             <div class="col-md-4">
@@ -155,14 +188,14 @@ let imageLoaded = (event) => {
                 <!-- <label>Email <span class="text-red">*</span> </label> -->
                 <input
                   type="text"
-                  id="ID"
-                  name="ID"
-                  v-bind="ID"
+                  id="identity"
+                  name="identity"
+                  v-bind="identity"
                   :placeholder="t('ID')"
-                  :class="{ 'is-invalid': errors.ID }"
+                  :class="{ 'is-invalid': errors.identity }"
                 />
 
-                <div class="invalid-feedback">{{ errors.ID }}</div>
+                <div class="invalid-feedback">{{ errors.identity }}</div>
               </SimpleInput>
             </div>
             <div class="col-md-4">
@@ -170,14 +203,14 @@ let imageLoaded = (event) => {
                 <!-- <label>Email <span class="text-red">*</span> </label> -->
                 <input
                   type="date"
-                  id="Date_of_birth"
-                  name="Date_of_birth"
-                  v-bind="Date_of_birth"
+                  id="birthday"
+                  name="birthday"
+                  v-bind="birthday"
                   :placeholder="t('Date_of_birth')"
-                  :class="{ 'is-invalid': errors.Date_of_birth }"
+                  :class="{ 'is-invalid': errors.birthday }"
                 />
 
-                <div class="invalid-feedback">{{ errors.Date_of_birth }}</div>
+                <div class="invalid-feedback">{{ errors.birthday }}</div>
               </SimpleInput>
             </div>
             <div class="col-md-4">
@@ -185,15 +218,15 @@ let imageLoaded = (event) => {
                 <!-- <label>Email <span class="text-red">*</span> </label> -->
                 <input
                   type="text"
-                  id="Primary_phone_number"
-                  name="Primary_phone_number"
-                  v-bind="Primary_phone_number"
+                  id="phone"
+                  name="phone"
+                  v-bind="phone"
                   :placeholder="t('Primary_phone_number')"
-                  :class="{ 'is-invalid': errors.Primary_phone_number }"
+                  :class="{ 'is-invalid': errors.phone }"
                 />
 
                 <div class="invalid-feedback">
-                  {{ errors.Primary_phone_number }}
+                  {{ errors.phone }}
                 </div>
               </SimpleInput>
             </div>
@@ -202,43 +235,49 @@ let imageLoaded = (event) => {
                 <!-- <label>Email <span class="text-red">*</span> </label> -->
                 <input
                   type="text"
-                  id="Secondary_phone_number"
-                  name="Secondary_phone_number"
-                  v-bind="Secondary_phone_number"
+                  id="secondary_phone"
+                  name="secondary_phone"
+                  v-bind="secondary_phone"
                   :placeholder="t('Secondary_phone_number')"
-                  :class="{ 'is-invalid': errors.Secondary_phone_number }"
+                  :class="{ 'is-invalid': errors.secondary_phone }"
                 />
 
                 <div class="invalid-feedback">
-                  {{ errors.Secondary_phone_number }}
+                  {{ errors.secondary_phone }}
                 </div>
               </SimpleInput>
             </div>
             <div class="col-md-4">
               <SimpleInput>
                 <!-- <label>Email <span class="text-red">*</span> </label> -->
-                <input
-                  type="text"
-                  id="Location"
-                  name="Location"
-                  v-bind="Location"
-                  :placeholder="t('Location')"
-                  :class="{ 'is-invalid': errors.Location }"
-                />
-
-                <div class="invalid-feedback">
-                  {{ errors.Location }}
-                </div>
+                <select
+                  id="residence_id"
+                  name="residence_id"
+                  v-bind="residence_id"
+                  :class="{ 'is-invalid': errors.residence_id }"
+                >
+                  <option value="" disabled selected>
+                    {{ t("Location") }}
+                  </option>
+                  <option
+                    :value="country.id"
+                    v-for="country in props.Counteries"
+                    :key="country.id"
+                  >
+                    {{ country.title }}
+                  </option>
+                </select>
+                <div class="invalid-feedback">{{ errors.residence_id }}</div>
               </SimpleInput>
             </div>
             <div class="col-md-4">
               <SimpleButton type="send">
-                <button type="submit">
+                <button type="submit" v-if="!Profile.is_waiting">
                   {{ t("Save_changes") }}
                 </button>
-                <!-- <button type="submit" disabled v-else>
+                <button type="submit" disabled v-else>
                   {{ t("wait") }}
-                </button> -->
+                </button>
               </SimpleButton>
             </div>
           </div>
@@ -282,5 +321,8 @@ let imageLoaded = (event) => {
     cursor: pointer;
     z-index: 999;
   }
+}
+.disabled {
+  background: #ddd !important;
 }
 </style>

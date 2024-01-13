@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import { ref, defineEmits } from "vue";
+import { ref, defineEmits, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import SimpleInput from "@/components/global/CusomInputs/SimpleInput/SimpleInput.vue";
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
 import { useForm } from "vee-validate";
 import * as Yup from "yup";
+import { UseProfile } from "@/stores/Profile/index";
+//Bloges
+const Profile = UseProfile();
 
 // emit
 let emits = defineEmits(["ChooseTabAccount"]);
@@ -20,13 +23,14 @@ const { errors, handleSubmit, defineInputBinds } = useForm({
     Car_title: Yup.string().required(t("requiredFiled")),
     Make: Yup.string().required(t("requiredFiled")),
     Model: Yup.string().required(t("requiredFiled")),
-    Year: Yup.string().required(t("requiredFiled")),
+    years: Yup.string().required(t("requiredFiled")),
     Number_Seats: Yup.string().required(t("requiredFiled")),
     Number_Doors: Yup.string().required(t("requiredFiled")),
     Fuel_Type: Yup.string().required(t("requiredFiled")),
     Transmission: Yup.string().required(t("requiredFiled")),
     Mileage: Yup.string().required(t("requiredFiled")),
     Color: Yup.string().required(t("requiredFiled")),
+    Car_type: Yup.string().required(t("requiredFiled")),
     Car_Description_message: Yup.string().required(t("requiredFiled")),
   }),
 });
@@ -35,18 +39,28 @@ const { errors, handleSubmit, defineInputBinds } = useForm({
 const Car_title = defineInputBinds("Car_title");
 const Make = defineInputBinds("Make");
 const Model = defineInputBinds("Model");
-const Year = defineInputBinds("Year");
+const years = defineInputBinds("years");
 const Number_Seats = defineInputBinds("Number_Seats");
 const Number_Doors = defineInputBinds("Number_Doors");
 const Fuel_Type = defineInputBinds("Fuel_Type");
 const Transmission = defineInputBinds("Transmission");
 const Mileage = defineInputBinds("Mileage");
 const Color = defineInputBinds("Color");
+const Car_type = defineInputBinds("Car_type");
 const Car_Description_message = defineInputBinds("Car_Description_message");
 // handel submit
 let onSubmit = handleSubmit((values) => {
   console.log("values", values);
   emits("ChooseTabAccount", "Car license");
+});
+//onMounted
+onMounted(() => {
+  Profile.get_years();
+  Profile.get_models();
+  Profile.get_colors();
+  Profile.get_fuel_types();
+  Profile.get_doors();
+  Profile.get_transmissions();
 });
 </script>
 <template>
@@ -100,7 +114,13 @@ let onSubmit = handleSubmit((values) => {
                 :class="{ 'is-invalid': errors.Model }"
               >
                 <option value="" disabled selected>{{ t("Model") }}</option>
-                <option value="1">anythink</option>
+                <option
+                  :value="Model.id"
+                  v-for="Model in Profile.Models"
+                  :key="Model.id"
+                >
+                  {{ Model.title }}
+                </option>
               </select>
               <div class="invalid-feedback">{{ errors.Model }}</div>
             </SimpleInput>
@@ -109,17 +129,22 @@ let onSubmit = handleSubmit((values) => {
             <SimpleInput>
               <!-- <label>Email <span class="text-red">*</span> </label> -->
               <select
-                type="text"
-                id="Year"
-                name="Year"
-                v-bind="Year"
+                id="years"
+                name="years"
+                v-bind="years"
                 required
-                :class="{ 'is-invalid': errors.Year }"
+                :class="{ 'is-invalid': errors.years }"
               >
                 <option value="" disabled selected>{{ t("Year") }}</option>
-                <option value="1">anythink</option>
+                <option
+                  :value="year.id"
+                  v-for="year in Profile.Years"
+                  :key="year.id"
+                >
+                  {{ year.title }}
+                </option>
               </select>
-              <div class="invalid-feedback">{{ errors.Year }}</div>
+              <div class="invalid-feedback">{{ errors.years }}</div>
             </SimpleInput>
           </div>
           <div class="col-md-4">
@@ -155,7 +180,13 @@ let onSubmit = handleSubmit((values) => {
                 <option value="" disabled selected>
                   {{ t("Number_Doors") }}
                 </option>
-                <option value="1">anythink</option>
+                <option
+                  :value="Door.id"
+                  v-for="Door in Profile.Doors"
+                  :key="Door.id"
+                >
+                  {{ Door.title }}
+                </option>
               </select>
               <div class="invalid-feedback">{{ errors.Number_Doors }}</div>
             </SimpleInput>
@@ -172,7 +203,13 @@ let onSubmit = handleSubmit((values) => {
                 :class="{ 'is-invalid': errors.Fuel_Type }"
               >
                 <option value="" disabled selected>{{ t("Fuel_Type") }}</option>
-                <option value="1">anythink</option>
+                <option
+                  :value="FuelType.id"
+                  v-for="FuelType in Profile.FuelTypes"
+                  :key="FuelType.id"
+                >
+                  {{ FuelType.title }}
+                </option>
               </select>
               <div class="invalid-feedback">{{ errors.Fuel_Type }}</div>
             </SimpleInput>
@@ -190,7 +227,13 @@ let onSubmit = handleSubmit((values) => {
                 <option value="" disabled selected>
                   {{ t("Transmission") }}
                 </option>
-                <option value="1">anythink</option>
+                <option
+                  :value="Transmission.id"
+                  v-for="Transmission in Profile.Transmissions"
+                  :key="Transmission.id"
+                >
+                  {{ Transmission.title }}
+                </option>
               </select>
               <div class="invalid-feedback">{{ errors.Transmission }}</div>
             </SimpleInput>
@@ -222,9 +265,31 @@ let onSubmit = handleSubmit((values) => {
                 :class="{ 'is-invalid': errors.Color }"
               >
                 <option value="" disabled selected>{{ t("Color") }}</option>
-                <option value="1">anythink</option>
+                <option
+                  :value="Color.id"
+                  v-for="Color in Profile.Colors"
+                  :key="Color.id"
+                >
+                  {{ Color.title }}
+                </option>
               </select>
               <div class="invalid-feedback">{{ errors.Transmission }}</div>
+            </SimpleInput>
+          </div>
+          <div class="col-md-4">
+            <SimpleInput>
+              <select
+                type="text"
+                id="Car_type"
+                name="Car_type"
+                v-bind="Car_type"
+                required
+                :class="{ 'is-invalid': errors.Car_type }"
+              >
+                <option value="" disabled selected>{{ t("Car_type") }}</option>
+                <option value="1">anythink</option>
+              </select>
+              <div class="invalid-feedback">{{ errors.Car_type }}</div>
             </SimpleInput>
           </div>
         </div>

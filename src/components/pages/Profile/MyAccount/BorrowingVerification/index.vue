@@ -1,19 +1,25 @@
 <script setup lang="ts">
 import AOS from "aos";
+import { ref, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
 import VerifyFormOpen from "./VerifyFormOpen/index.vue";
+import { UseProfile } from "@/stores/Profile/index";
 //i18n
 const { t } = useI18n();
 
 //is_verify
-const is_verify = ref(false);
+const is_verify = ref(true);
 //is_verify
-const Verify_form_open = ref(false);
-import { onMounted, ref } from "vue";
+const Verify_form_open = ref(true);
 
+//Bloges
+const Profile = UseProfile();
+
+//onMounted
 onMounted(() => {
   AOS.init();
+  Profile.get_years();
 });
 </script>
 <template>
@@ -62,7 +68,13 @@ onMounted(() => {
         </div>
       </div>
     </div>
-    <div class="Verify_form" v-if="Verify_form_open"><VerifyFormOpen /></div>
+    <div class="Verify_form" v-if="Verify_form_open">
+      <VerifyFormOpen
+        :Years="Profile.Years"
+        v-if="Profile.Years"
+        :Counteries="Profile.Counteries"
+      />
+    </div>
   </div>
 </template>
 <style scoped lang="scss">
