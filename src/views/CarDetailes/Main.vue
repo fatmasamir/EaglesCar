@@ -18,6 +18,7 @@ const Cars = UseCars();
 //onMounted
 onMounted(() => {
   Cars.get_Car(route.params.slug);
+  Cars.get_Cars();
 });
 </script>
 <template>
@@ -27,7 +28,10 @@ onMounted(() => {
     <DetaliesCar :Car="Cars.Car" v-if="Cars.Car"></DetaliesCar>
     <CarRental></CarRental>
     <ClientsTestimonials></ClientsTestimonials>
-    <CardsDetailes></CardsDetailes>
+    <CardsDetailes
+      :Cars="Cars.Cars"
+      v-if="Cars.Cars.length != 0"
+    ></CardsDetailes>
     <Footer></Footer>
   </section>
 </template>

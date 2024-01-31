@@ -42,8 +42,7 @@ const years = defineInputBinds("years");
 
 // Driver_license
 const Driver_license = ref();
-const image = ref();
-const imageUrl = ref();
+const Driver_licenseName = ref();
 const identity_face = ref();
 const identity_back = ref();
 const identity_face_error = ref();
@@ -70,6 +69,7 @@ let onSubmit = handleSubmit(async (values) => {
       }
       formdata.append("identity_face", identity_face.value);
       formdata.append("identity_back", identity_back.value);
+      formdata.append("license", Driver_license.value);
       await Profile.profile_verify(formdata);
     } else identity_back_error.value = "this field required";
   } else identity_face_error.value = "this field required";
@@ -77,14 +77,8 @@ let onSubmit = handleSubmit(async (values) => {
 // fileSelected
 let fileSelected = (event) => {
   const file = event.target.files.item(0);
-  Driver_license.value = event.target.files.item(0).name;
-  const reader = new FileReader();
-  reader.addEventListener("load", imageLoaded);
-  reader.readAsDataURL(file);
-};
-// imageLoaded
-let imageLoaded = (event) => {
-  imageUrl.value = event.target.result;
+  Driver_license.value = event.target.files.item(0);
+  Driver_licenseName.value = event.target.files.item(0).name;
 };
 // fileSelected
 let fileSelectedface = (event) => {
@@ -102,8 +96,7 @@ let fileSelectedback = (event) => {
 
 // emptyFileDriver_license
 let emptyFileDriver_license = () => {
-  imageUrl.value = "";
-  image.value = "";
+  Driver_licenseName.value = "";
   Driver_license.value = "";
 };
 </script>
@@ -208,7 +201,11 @@ let emptyFileDriver_license = () => {
             >
               <div class="content">
                 <span>
-                  {{ Driver_license ? Driver_license : t("Driver_license") }}
+                  {{
+                    Driver_licenseName
+                      ? Driver_licenseName
+                      : t("Driver_license")
+                  }}
                 </span>
                 <img
                   src="../../../../../../assets/images/global/icons/global/profile/document-upload.svg"
@@ -309,12 +306,12 @@ let emptyFileDriver_license = () => {
       </div>
       <div class="col-md-12">
         <SimpleButton type="send" class="submit_button">
-          <button type="submit">
+          <button type="submit" v-if="!Profile.is_waiting_verify">
             {{ t("Save_changes") }}
           </button>
-          <!-- <button type="submit" disabled v-else>
-                  {{ t("wait") }}
-                </button> -->
+          <button type="submit" disabled v-else>
+            {{ t("wait") }}
+          </button>
         </SimpleButton>
       </div>
     </div>

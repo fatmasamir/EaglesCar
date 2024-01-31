@@ -6,6 +6,10 @@ import SimpleInput from "@/components/global/CusomInputs/SimpleInput/SimpleInput
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
 import { useForm } from "vee-validate";
 import * as Yup from "yup";
+import { UseProfile } from "@/stores/Profile/index";
+
+//Bloges
+const Profile = UseProfile();
 
 //i18n
 const { t } = useI18n();
@@ -16,18 +20,19 @@ const { meta } = useForm();
 // formLogin
 const { errors, handleSubmit, defineInputBinds } = useForm({
   validationSchema: Yup.object({
-    Old_Password: Yup.string().required(t("requiredFiled")),
-    New_Password: Yup.string()
+    old_password: Yup.string().required(t("requiredFiled")),
+    password_confirmation: Yup.string()
       .required()
-      .oneOf([Yup.ref("Old_Password")], "Passwords do not match"),
-    Rewrite_new_Password: Yup.string().required(t("requiredFiled")),
+      .oneOf([Yup.ref("password")], "Passwords do not match")
+      .required(t("requiredFiled")),
+    password: Yup.string().required(t("requiredFiled")),
   }),
 });
 
 //login ,password
-const Old_Password = defineInputBinds("Old_Password");
-const New_Password = defineInputBinds("New_Password");
-const Rewrite_new_Password = defineInputBinds("Rewrite_new_Password");
+const old_password = defineInputBinds("old_password");
+const password = defineInputBinds("password");
+const password_confirmation = defineInputBinds("password_confirmation");
 // input password type
 const passwordFieldoldPass = ref("password");
 // input password type
@@ -50,11 +55,13 @@ const switchVisibilityNewRewrite = () => {
   passwordFieldNewRewrite.value =
     passwordFieldNewRewrite.value === "password" ? "text" : "password";
 };
-const image = ref();
-const imageUrl = ref();
 // handel submit
 let onSubmit = handleSubmit((values) => {
-  console.log("values", values);
+  try {
+    Profile.set_ChangePassword(JSON.stringify(values));
+  } catch (err) {
+    console.log(err);
+  }
 });
 // onMounted
 onMounted(() => {
@@ -74,11 +81,11 @@ onMounted(() => {
                 <!-- <label>Email <span class="text-red">*</span> </label> -->
                 <input
                   :type="passwordFieldoldPass"
-                  id="Old_Password"
-                  name="Old_Password"
+                  id="old_password"
+                  name="old_password"
                   :placeholder="t('Old_Password')"
-                  v-bind="Old_Password"
-                  :class="{ 'is-invalid': errors.Old_Password }"
+                  v-bind="old_password"
+                  :class="{ 'is-invalid': errors.old_password }"
                 /><img
                   src="@/assets/images/global/icons/global/eye-svgrepo.svg"
                   @click="switchVisibility"
@@ -90,7 +97,7 @@ onMounted(() => {
                   class="pass_icon"
                   v-else
                 />
-                <div class="invalid-feedback">{{ errors.Old_Password }}</div>
+                <div class="invalid-feedback">{{ errors.old_password }}</div>
               </SimpleInput>
             </div>
             <div class="col-md-4 passwordField">
@@ -98,11 +105,11 @@ onMounted(() => {
                 <!-- <label>Email <span class="text-red">*</span> </label> -->
                 <input
                   :type="passwordFieldoldPassNew"
-                  id="New_Password"
-                  name="New_Password"
+                  id="password"
+                  name="password"
                   :placeholder="t('New_Password')"
-                  v-bind="New_Password"
-                  :class="{ 'is-invalid': errors.New_Password }"
+                  v-bind="password"
+                  :class="{ 'is-invalid': errors.password }"
                 /><img
                   src="@/assets/images/global/icons/global/eye-svgrepo.svg"
                   @click="switchVisibilityNewPass"
@@ -115,7 +122,7 @@ onMounted(() => {
                   v-else
                 />
                 <div class="invalid-feedback">
-                  {{ errors.New_Password }}
+                  {{ errors.password }}
                 </div>
               </SimpleInput>
             </div>
@@ -124,11 +131,11 @@ onMounted(() => {
                 <!-- <label>Email <span class="text-red">*</span> </label> -->
                 <input
                   :type="passwordFieldNewRewrite"
-                  id="Rewrite_new_Password"
-                  name="Rewrite_new_Password"
+                  id="password_confirmation"
+                  name="password_confirmation"
                   :placeholder="t('Rewrite_new_Password')"
-                  v-bind="Rewrite_new_Password"
-                  :class="{ 'is-invalid': errors.Rewrite_new_Password }"
+                  v-bind="password_confirmation"
+                  :class="{ 'is-invalid': errors.password_confirmation }"
                 /><img
                   src="@/assets/images/global/icons/global/eye-svgrepo.svg"
                   @click="switchVisibilityNewRewrite"
@@ -141,18 +148,18 @@ onMounted(() => {
                   v-else
                 />
                 <div class="invalid-feedback">
-                  {{ errors.Rewrite_new_Password }}
+                  {{ errors.password_confirmation }}
                 </div>
               </SimpleInput>
             </div>
             <div class="col-md-4">
               <SimpleButton type="send" class="register_lab">
-                <button type="submit">
+                <button type="submit" v-if="!Profile.is_waitingChangePassword">
                   {{ t("Save_changes") }}
                 </button>
-                <!-- <button type="submit" disabled v-else>
+                <button type="submit" disabled v-else>
                   {{ t("wait") }}
-                </button> -->
+                </button>
               </SimpleButton>
             </div>
           </div>

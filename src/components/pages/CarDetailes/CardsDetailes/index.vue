@@ -3,8 +3,8 @@ import { useI18n } from "vue-i18n";
 import { onMounted } from "vue";
 import CardCarsDetalies from "../../../global/CardCarsDetalies/index.vue";
 import AOS from "aos";
-import { data } from "./data";
 const { t } = useI18n();
+const props = defineProps(["Cars"]);
 onMounted(() => {
   AOS.init();
 });
@@ -15,7 +15,7 @@ onMounted(() => {
       <h6 class="color-main p-0">{{ t("New_data") }}</h6>
       <h3>{{ t("Recommended_cars") }}</h3>
       <div class="row">
-        <div class="col-lg-4" v-for="info in data" :key="info.id">
+        <div class="col-lg-4" v-for="info in props.Cars" :key="info.id">
           <CardCarsDetalies :data="info"></CardCarsDetalies>
         </div>
       </div>

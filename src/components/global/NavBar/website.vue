@@ -8,8 +8,12 @@ import { defineProps, defineEmits, ref, onMounted } from "vue";
 import { useLight } from "@/stores/light";
 import NotificationPopup from "../NotificationPopup/index.vue";
 import ChatPopup from "../ChatPopup/index.vue";
+import { UseProfile } from "@/stores/Profile/index";
+
+//Profile
+const Profile = UseProfile();
 // props
-let props = defineProps(["Links", "lang"]);
+let props = defineProps(["Links", "lang", "ImageProfile"]);
 let emit = defineEmits(["changeLang", "Logout", "LightFun"]);
 
 // useLight
@@ -81,8 +85,10 @@ onMounted(() => {
       <!-- profile  -->
       <div class="info-login" v-if="Login">
         <router-link to="/profile" class="profile_link">
+          <img v-if="props.ImageProfile" :src="props.ImageProfile" />
           <img
-            src="../../../assets/images/global/icons/global/man.svg" /></router-link
+            src="../../../assets/images/global/icons/global/man.svg"
+            v-else /></router-link
         ><button
           class="btn notification"
           @click="(showNotification = !showNotification) && (showChat = false)"

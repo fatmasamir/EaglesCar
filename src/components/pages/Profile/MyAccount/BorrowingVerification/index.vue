@@ -9,9 +9,9 @@ import { UseProfile } from "@/stores/Profile/index";
 const { t } = useI18n();
 
 //is_verify
-const is_verify = ref(true);
+const is_verify = ref("");
 //is_verify
-const Verify_form_open = ref(true);
+const Verify_form_open = ref(false);
 
 //Bloges
 const Profile = UseProfile();
@@ -20,13 +20,16 @@ const Profile = UseProfile();
 onMounted(() => {
   AOS.init();
   Profile.get_years();
+  if (!Profile.Profile) {
+    Profile.get_profile();
+  }
 });
 </script>
 <template>
   <div class="box">
     <h4>{{ t("Borrowing_verification") }}</h4>
-    <div class="row">
-      <div class="col-lg-12" v-if="!is_verify">
+    <div class="row" v-if="Profile.Profile">
+      <div class="col-lg-12" v-if="Profile.Profile.user.verification !== 2">
         <div class="Account_verified Account_not_verified">
           <img
             src="@/assets/images/global/icons/global/profile/verify_error.svg"
@@ -62,7 +65,9 @@ onMounted(() => {
               </p>
             </div>
             <SimpleButton type="send">
-              <button class="btn">Edit</button></SimpleButton
+              <button class="btn" @click="Verify_form_open = true">
+                Edit
+              </button></SimpleButton
             >
           </div>
         </div>

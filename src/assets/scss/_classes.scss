@@ -131,6 +131,17 @@ ul {
     direction: ltr;
   }
 }
+.is-en {
+  .simple-input input,
+  .simple-input select,
+  .simple-input .upload_file,
+  .simple-input textarea,
+  .vs--searchable .vs__dropdown-toggle,
+  input {
+    direction: ltr !important;
+  }
+}
+
 @media screen and (max-width: 1136px) {
   .container {
     min-width: 95% !important;

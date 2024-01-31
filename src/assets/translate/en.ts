@@ -324,6 +324,7 @@ expectations.`,
   Choose_Number_seat: "Choose Number seat",
   Maximum: "Maximum ",
   Minimum: "Minimum",
+  license_number: "License Number",
 };
 
 export default en;

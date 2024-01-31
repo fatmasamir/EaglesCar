@@ -3,7 +3,7 @@ import { ref } from "vue";
 
 export const useLight = defineStore("Light", () => {
   let Light = ref(
-    localStorage.getItem("light") ? localStorage.getItem("light") : "open"
+    localStorage.getItem("light") ? localStorage.getItem("light") : "off"
   );
 
   // Followers

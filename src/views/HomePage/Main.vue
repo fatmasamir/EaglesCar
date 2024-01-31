@@ -11,15 +11,21 @@ import FAQ from "@/components/pages/Hompage/FAQ/index.vue";
 import DownloadApp from "@/components/pages/Hompage/DownloadApp/index.vue";
 import Footer from "@/components/global/Footer/index.vue";
 import { UseBloges } from "@/stores/Bloges/index";
+import { UseHomepage } from "@/stores/homepage/index";
 // import Loading from "@/components/global/Loading/index.vue";
 import { onMounted, ref } from "vue";
 const checkIn = ref<Date>();
 //Bloges
 const Bloges = UseBloges();
+//Bloges
+const Homepage = UseHomepage();
 
 //onMounted
 onMounted(() => {
   Bloges.get_Bloges();
+  Homepage.get_faqs();
+  Homepage.get_testimonials();
+  Homepage.get_services();
 });
 </script>
 <template>
@@ -32,7 +38,8 @@ onMounted(() => {
     <Rental></Rental>
     <Blogs :Bloges="Bloges.Bloges"></Blogs>
     <ClientsTestimonials></ClientsTestimonials>
-    <FAQ></FAQ>
+    <pre>{{ Homepage.testimonials }}</pre>
+    <FAQ :faqs="Homepage.faqs"></FAQ>
     <DownloadApp></DownloadApp>
     <Footer></Footer>
   </section>

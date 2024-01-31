@@ -12,10 +12,47 @@ export const UseProfile = defineStore("Profile", () => {
   let FuelTypes = ref();
   let Doors = ref();
   let Transmissions = ref();
+  let Brands = ref();
+  let ImageProfile = ref();
 
   // is_waiting
   let is_waiting = ref(false);
-
+  // is_waiting_verify
+  let is_waiting_verify = ref(false);
+  // is_waitingChangePassword
+  let is_waitingChangePassword = ref(false);
+  let AccountVerified = ref({
+    title: "",
+    transmission: "",
+    brand: "",
+    model: "",
+    year: "",
+    mileage: "",
+    door: "",
+    color: "",
+    fuelType: "",
+    seats: "",
+    plate_number: "",
+    expiration_date: "",
+    short_description: "",
+    license: "",
+    insurance_yearly_cost: "",
+    insurance_excess_value: "",
+    identity_back: "",
+    identity_face: "",
+    Short_term: 0,
+    long_term: 0,
+    with_driver: 0,
+    without_driver: 0,
+  });
+  // "title[en]": "",
+  // "properties[transmission]": "",
+  // "properties[brand]": "",
+  // "properties[model]": "",
+  // "properties[year]": "",
+  // "properties[door]": "",
+  // "properties[color]": "",
+  // "properties[fuelType]": "",
   //Get profile
   async function get_profile() {
     const response = await callServer({
@@ -25,6 +62,13 @@ export const UseProfile = defineStore("Profile", () => {
     if (response.ok) {
       response.json().then((data) => {
         Profile.value = data.data;
+        if (Profile.value) {
+          console.log(
+            "Profile.value.user.image.original_url",
+            Profile.value.user.image.original_url
+          );
+          ImageProfile.value = Profile.value.user.image.original_url;
+        }
       });
     } else {
       toast.error("Has Error");
@@ -128,13 +172,29 @@ export const UseProfile = defineStore("Profile", () => {
       toast.error("Has Error");
     }
   }
+  //Get transmissions
+  async function get_brands() {
+    const response = await callServer({
+      url: "api/brands",
+      auth: true,
+    });
+    if (response.ok) {
+      response.json().then((data) => {
+        Brands.value = data.data;
+      });
+    } else {
+      toast.error("Has Error");
+    }
+  }
   // set_updateProfile
-  async function set_updateProfile(data) {
+  async function set_updateProfile(data, ImageProfile) {
     is_waiting.value = true;
+    console.log("ImageProfile", ImageProfile);
     const response = await callServer({
       url: "api/auth/profile",
       method: "POST",
       data,
+      type: "",
       auth: true,
     });
     if (!response.ok) {
@@ -145,13 +205,36 @@ export const UseProfile = defineStore("Profile", () => {
       is_waiting.value = false;
       throw errors;
     } else {
+      ImageProfile.value = ImageProfile;
       toast.success("Successfully  ... ");
       is_waiting.value = false;
     }
   }
+  // set_ChangePassword
+  async function set_ChangePassword(data) {
+    is_waitingChangePassword.value = true;
+    const response = await callServer({
+      url: "api/auth/profile/change-password",
+      method: "POST",
+      data,
+      auth: true,
+    });
+    if (!response.ok) {
+      let errors = null;
+      await response.json().then((data) => {
+        toast.error(data.message);
+      });
+      is_waitingChangePassword.value = false;
+      throw errors;
+    } else {
+      toast.success("Successfully  ... ");
+      is_waitingChangePassword.value = false;
+      get_profile();
+    }
+  }
   // profile_verify
   async function profile_verify(data) {
-    is_waiting.value = true;
+    is_waiting_verify.value = true;
     const response = await callServer({
       url: "api/auth/profile/verify",
       method: "POST",
@@ -164,11 +247,11 @@ export const UseProfile = defineStore("Profile", () => {
       await response.json().then((data) => {
         toast.error(data.message);
       });
-      is_waiting.value = false;
+      is_waiting_verify.value = false;
       throw errors;
     } else {
       toast.success("Successfully  ... ");
-      is_waiting.value = false;
+      is_waiting_verify.value = false;
     }
   }
   return {
@@ -178,6 +261,7 @@ export const UseProfile = defineStore("Profile", () => {
     get_countries,
     get_years,
     is_waiting,
+    is_waiting_verify,
     Counteries,
     Years,
     profile_verify,
@@ -191,5 +275,11 @@ export const UseProfile = defineStore("Profile", () => {
     get_doors,
     Transmissions,
     get_transmissions,
+    Brands,
+    get_brands,
+    set_ChangePassword,
+    is_waitingChangePassword,
+    AccountVerified,
+    ImageProfile,
   };
 });

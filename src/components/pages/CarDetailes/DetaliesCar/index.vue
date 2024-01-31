@@ -4,6 +4,7 @@ import { onMounted } from "vue";
 import Description from "./Description/index.vue";
 import specificationsCar from "./specificationsCar/index.vue";
 import { defineProps } from "vue";
+import loading from "../../../global/Loading/index.vue";
 import AOS from "aos";
 
 // useI18n
@@ -24,6 +25,7 @@ onMounted(() => {
       </div>
     </div>
   </div>
+  <loading v-else></loading>
 </template>
 <style scoped lang="scss">
 .DetaliesCar {

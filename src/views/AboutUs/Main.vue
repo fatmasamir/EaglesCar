@@ -7,6 +7,14 @@ import Vision from "@/components/pages/AboutUs/Vision/index.vue";
 import OurTeam from "@/components/pages/AboutUs/OurTeam/index.vue";
 import OurService from "@/components/pages/AboutUs/OurService/index.vue";
 import Footer from "@/components/global/Footer/index.vue";
+import { UseHomepage } from "@/stores/homepage/index";
+import { onMounted, ref } from "vue";
+const Homepage = UseHomepage();
+//onMounted
+onMounted(() => {
+  Homepage.get_team();
+  Homepage.get_services();
+});
 </script>
 <template>
   <section class="Pages">
@@ -15,7 +23,9 @@ import Footer from "@/components/global/Footer/index.vue";
     <Moreinfo></Moreinfo>
     <Mission></Mission>
     <Vision></Vision>
+    <pre>{{ Homepage.team }}</pre>
     <OurTeam></OurTeam>
+    <pre>{{ Homepage.services }}</pre>
     <OurService></OurService>
     <Footer></Footer>
   </section>

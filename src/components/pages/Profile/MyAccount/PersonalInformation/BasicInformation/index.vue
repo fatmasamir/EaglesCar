@@ -59,10 +59,25 @@ let imageLoaded = (event) => {
   imageUrl.value = event.target.result;
 };
 // handel submit
-let onSubmit = handleSubmit((values) => {
-  console.log("values", values);
+let onSubmit = handleSubmit(async (values) => {
   try {
-    Profile.set_updateProfile(JSON.stringify(values));
+    let formdata = new FormData();
+    let data = {
+      first_name: values.first_name,
+      last_name: values.last_name,
+      nationality_id: values.nationality_id,
+      residence_id: values.residence_id,
+      email: values.email,
+      identity: values.identity,
+      birthday: values.birthday,
+      phone: values.phone,
+      secondary_phone: values.secondary_phone,
+    };
+    for (let key in data) {
+      formdata.append(key, data[key]);
+    }
+    formdata.append("image", image.value);
+    await Profile.set_updateProfile(formdata, imageUrl.value);
   } catch (err) {
     console.log(err);
   }
@@ -91,6 +106,9 @@ watch(props, (newValue) => {
         : "",
     },
   });
+  imageUrl.value = newValue.Profile.image
+    ? newValue.Profile.image.original_url
+    : "";
 });
 </script>
 <template>

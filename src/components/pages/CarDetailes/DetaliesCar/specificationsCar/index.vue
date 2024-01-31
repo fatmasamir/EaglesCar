@@ -31,7 +31,7 @@ let props = defineProps(["Car"]);
             />
             3
           </div>
-          <SimpleButton type="send" v-if="props.Car.available">
+          <SimpleButton type="send" v-if="props.Car.available == 1">
             <button to="/" type="submit" class="btn">
               {{ t("Available") }}
             </button></SimpleButton
@@ -39,50 +39,10 @@ let props = defineProps(["Car"]);
         </div>
       </div>
     </div>
-    <div class="information">
-      <div class="row">
-        <div class="col-lg-6">Make:</div>
-        <div class="col-lg-6">Chevrolet</div>
-      </div>
-      <div class="row">
-        <div class="col-lg-6">Model:</div>
-        <div class="col-lg-6">Camaro</div>
-      </div>
-      <div class="row">
-        <div class="col-lg-6">Color:</div>
-        <div class="col-lg-6">Blue</div>
-      </div>
-      <div class="row">
-        <div class="col-lg-6">Drive Type:</div>
-        <div class="col-lg-6">Front Wheel Drive</div>
-      </div>
-      <div class="row">
-        <div class="col-lg-6">Transmission:</div>
-        <div class="col-lg-6">Automatic</div>
-      </div>
-      <div class="row">
-        <div class="col-lg-6">Condition::</div>
-        <div class="col-lg-6">New</div>
-      </div>
-      <div class="row">
-        <div class="col-lg-6">New:</div>
-        <div class="col-lg-6">2021</div>
-      </div>
-      <div class="row">
-        <div class="col-lg-6">Fuel Type:</div>
-        <div class="col-lg-6">Diesel</div>
-      </div>
-      <div class="row">
-        <div class="col-lg-6">Engine Size:</div>
-        <div class="col-lg-6">4.8L</div>
-      </div>
-      <div class="row">
-        <div class="col-lg-6">Doors:</div>
-        <div class="col-lg-6">2-door</div>
-      </div>
-      <div class="row">
-        <div class="col-lg-6">Cylinders:</div>
-        <div class="col-lg-6">6</div>
+    <div class="information" v-if="props.Car.properties">
+      <div class="row" v-for="proper in props.Car.properties">
+        <div class="col-lg-6">{{ proper.title }}</div>
+        <div class="col-lg-6">{{ proper.value }}</div>
       </div>
     </div>
     <div class="Send_request">

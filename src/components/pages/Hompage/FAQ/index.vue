@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
 import AOS from "aos";
 const { t } = useI18n();
+const props = defineProps(["faqs"]);
+const i18n = useI18n();
 onMounted(() => {
   AOS.init();
 });
@@ -28,75 +30,36 @@ onMounted(() => {
             data-aos-offset="300"
             data-aos-easing="ease-in-out"
           >
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingOne">
+            <div
+              class="accordion-item"
+              v-for="(faq, index) in props.faqs"
+              :key="faq"
+            >
+              <h2 class="accordion-header" :id="'heading' + index">
                 <button
                   class="accordion-button"
                   type="button"
                   data-bs-toggle="collapse"
-                  data-bs-target="#collapseOne"
-                  aria-expanded="true"
-                  aria-controls="collapseOne"
+                  :data-bs-target="'#collapse' + index"
+                  :class="index != 0 ? 'collapsed' : ''"
+                  :aria-controls="'collapse' + index"
                 >
-                  {{ t("qus1") }}
+                  <span v-if="i18n.locale.value == 'ar'">{{
+                    faq.question.ar
+                  }}</span>
+                  <span v-else>{{ faq.question.en }}</span>
                 </button>
               </h2>
               <div
-                id="collapseOne"
-                class="accordion-collapse collapse show"
-                aria-labelledby="headingOne"
-                data-bs-parent="#accordionExample"
-              >
-                <div class="accordion-body">
-                  {{ t("answerQue") }}
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingTwo">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseTwo"
-                  aria-expanded="false"
-                  aria-controls="collapseTwo"
-                >
-                  {{ t("qus2") }}
-                </button>
-              </h2>
-              <div
-                id="collapseTwo"
+                :id="'collapse' + index"
                 class="accordion-collapse collapse"
-                aria-labelledby="headingTwo"
+                :class="index == 0 ? 'show' : ''"
+                :aria-labelledby="'heading' + index"
                 data-bs-parent="#accordionExample"
               >
                 <div class="accordion-body">
-                  {{ t("answerQue") }}
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingThree">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseThree"
-                  aria-expanded="false"
-                  aria-controls="collapseThree"
-                >
-                  {{ t("qus3") }}
-                </button>
-              </h2>
-              <div
-                id="collapseThree"
-                class="accordion-collapse collapse"
-                aria-labelledby="headingThree"
-                data-bs-parent="#accordionExample"
-              >
-                <div class="accordion-body">
-                  {{ t("answerQue") }}
+                  <span v-if="props.lang == 'ar'" v-html="faq.answer.ar"></span>
+                  <span v-else v-html="faq.answer.en"></span>
                 </div>
               </div>
             </div>

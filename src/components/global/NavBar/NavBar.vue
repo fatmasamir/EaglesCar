@@ -9,6 +9,10 @@ import Website from "./website.vue";
 import { useAuthStore } from "@/stores/auth";
 import { useLight } from "@/stores/light";
 import { useRouter } from "vue-router";
+import { UseProfile } from "@/stores/Profile/index";
+
+//Profile
+const Profile = UseProfile();
 
 // i18n
 const { t } = useI18n();
@@ -99,13 +103,13 @@ const Logout = () => {
       <router-link to="/" class="navbar-brand">
         <img src="../../../assets//images//global/icons/global/logo.svg" />
       </router-link>
-
       <Website
         :Links="Links"
         :lang="lang"
         @changeLang="changeLang"
         @Logout="Logout"
         @LightFun="LightFun"
+        :ImageProfile="Profile.ImageProfile"
       />
       <button
         class="navbar-toggler"

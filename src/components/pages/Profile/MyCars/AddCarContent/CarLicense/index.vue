@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import { ref, defineEmits } from "vue";
+import { ref, defineEmits, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import SimpleInput from "@/components/global/CusomInputs/SimpleInput/SimpleInput.vue";
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
 import { useForm } from "vee-validate";
 import * as Yup from "yup";
+import { UseProfile } from "@/stores/Profile/index";
+//Bloges
+const Profile = UseProfile();
 
 // emit
 let emits = defineEmits(["ChooseTabAccount"]);
@@ -15,12 +18,14 @@ const { t } = useI18n();
 const { meta } = useForm();
 
 // formLogin
-const { errors, handleSubmit, defineInputBinds } = useForm({
+const { errors, handleSubmit, defineInputBinds, resetForm } = useForm({
   validationSchema: Yup.object({
     Country_registeration: Yup.string().required(t("requiredFiled")),
     City: Yup.string().required(t("requiredFiled")),
     Plate_number: Yup.string().required(t("requiredFiled")),
     License_expiration_date: Yup.string().required(t("requiredFiled")),
+    insurance_yearly_cost: Yup.string().required(t("requiredFiled")),
+    insurance_excess_value: Yup.string().required(t("requiredFiled")),
   }),
 });
 
@@ -29,10 +34,49 @@ const Country_registeration = defineInputBinds("Country_registeration");
 const City = defineInputBinds("City");
 const Plate_number = defineInputBinds("Plate_number");
 const License_expiration_date = defineInputBinds("License_expiration_date");
+const insurance_yearly_cost = defineInputBinds("insurance_yearly_cost");
+const insurance_excess_value = defineInputBinds("insurance_excess_value");
+const license = ref();
+const identity_face = ref();
+const identity_back = ref();
+// fileSelected
+let fileSelected = (event) => {
+  license.value = event.target.files.item(0);
+}; // fileSelected
+let fileSelectedIdentity_back = (event) => {
+  identity_back.value = event.target.files.item(0);
+}; // fileSelected
+let fileSelectedIdentity_face = (event) => {
+  identity_face.value = event.target.files.item(0);
+};
 // handel submit
 let onSubmit = handleSubmit((values) => {
-  console.log("values", values);
-  emits("ChooseTabAccount", "Photo and prices");
+  Profile.AccountVerified.plate_number = values.Plate_number;
+  Profile.AccountVerified.expiration_date = values.License_expiration_date;
+  Profile.AccountVerified.license = license.value;
+  Profile.AccountVerified.insurance_yearly_cost = values.insurance_yearly_cost;
+  Profile.AccountVerified.insurance_excess_value =
+    values.insurance_excess_value;
+  Profile.AccountVerified.identity_back = identity_back.value;
+  Profile.AccountVerified.identity_face = identity_face.value;
+  emits("ChooseTabAccount", "Photo_and_prices");
+});
+//onMounted
+onMounted(() => {
+  Profile.get_countries();
+  if (Profile.AccountVerified) {
+    resetForm({
+      values: {
+        Plate_number: Profile.AccountVerified.plate_number,
+        License_expiration_date: Profile.AccountVerified.expiration_date,
+        insurance_yearly_cost: Profile.AccountVerified.insurance_yearly_cost,
+        insurance_excess_value: Profile.AccountVerified.insurance_excess_value,
+      },
+    });
+    license.value = Profile.AccountVerified.license;
+    identity_back.value = Profile.AccountVerified.identity_back;
+    identity_face.value = Profile.AccountVerified.identity_face;
+  }
 });
 </script>
 <template>
@@ -41,9 +85,33 @@ let onSubmit = handleSubmit((values) => {
       <h4>{{ t("Car_license") }}</h4>
       <div>
         <div class="row mx-0 px-0">
-          <div class="col-md-4 mx-0 px-0">
+          <div class="col-md-4">
             <SimpleInput>
               <!-- <label>Email <span class="text-red">*</span> </label> -->
+              <select
+                id="Expiration_Date"
+                name="Expiration_Date"
+                v-bind="Country_registeration"
+                :class="{ 'is-invalid': errors.Country_registeration }"
+              >
+                <option value="" disabled selected>
+                  {{ t("Country_registeration") }}
+                </option>
+                <option
+                  :value="country.id"
+                  v-for="country in Profile.Counteries"
+                  :key="country.id"
+                >
+                  {{ country.title }}
+                </option>
+              </select>
+              <div class="invalid-feedback">
+                {{ errors.Country_registeration }}
+              </div>
+            </SimpleInput>
+          </div>
+          <!-- <div class="col-md-4 mx-0 px-0">
+            <SimpleInput>
               <input
                 type="text"
                 id="Country_registeration"
@@ -58,7 +126,7 @@ let onSubmit = handleSubmit((values) => {
                 {{ errors.Country_registeration }}
               </div>
             </SimpleInput>
-          </div>
+          </div> -->
           <div class="col-md-4">
             <SimpleInput>
               <!-- <label>Email <span class="text-red">*</span> </label> -->
@@ -79,38 +147,30 @@ let onSubmit = handleSubmit((values) => {
           <div class="col-md-4">
             <SimpleInput>
               <!-- <label>Email <span class="text-red">*</span> </label> -->
-              <select
+              <input
                 type="text"
                 id="Plate_number"
                 name="Plate_number"
+                :placeholder="t('Plate_number')"
                 v-bind="Plate_number"
                 required
                 :class="{ 'is-invalid': errors.Plate_number }"
-              >
-                <option value="" disabled selected>
-                  {{ t("Plate_number") }}
-                </option>
-                <option value="1">anythink</option>
-              </select>
+              />
               <div class="invalid-feedback">{{ errors.Plate_number }}</div>
             </SimpleInput>
           </div>
-          <div class="col-md-4 mx-0 px-0">
+          <div class="col-md-4 mx-0 px-2">
             <SimpleInput>
-              <!-- <label>Email <span class="text-red">*</span> </label> -->
-              <select
-                type="text"
-                id="License_expiration_date"
+              <input
                 name="License_expiration_date"
                 v-bind="License_expiration_date"
+                placeholder="Date"
+                class="textbox-n"
+                onfocus="(this.type='date')"
+                onblur="(this.type='text')"
                 required
                 :class="{ 'is-invalid': errors.License_expiration_date }"
-              >
-                <option value="" disabled selected>
-                  {{ t("License_expiration_date") }}
-                </option>
-                <option value="1">anythink</option>
-              </select>
+              />
               <div class="invalid-feedback">
                 {{ errors.License_expiration_date }}
               </div>
@@ -132,7 +192,7 @@ let onSubmit = handleSubmit((values) => {
             />
             {{ t("upload") }}</SimpleButton
           >
-          <input type="file" />
+          <input type="file" @change="fileSelected" />
         </SimpleInput>
       </div>
     </div>
@@ -146,14 +206,14 @@ let onSubmit = handleSubmit((values) => {
               type="text"
               id="Insurance_yearly_cost"
               name="Insurance_yearly_cost"
-              v-bind="Insurance_yearly_cost"
+              v-bind="insurance_yearly_cost"
               placeholder="0000000"
               required
-              :class="{ 'is-invalid': errors.Insurance_yearly_cost }"
+              :class="{ 'is-invalid': errors.insurance_yearly_cost }"
             />
 
             <div class="invalid-feedback">
-              {{ errors.Insurance_yearly_cost }}
+              {{ errors.insurance_yearly_cost }}
             </div>
             <span class="currency">EGP</span>
           </SimpleInput>
@@ -163,15 +223,16 @@ let onSubmit = handleSubmit((values) => {
             <label>{{ t("Insurance_excess_value") }}</label>
             <input
               type="text"
-              id="Insurance_yearly_cost"
-              name="Insurance_yearly_cost"
+              v-bind="insurance_excess_value"
+              id="insurance_excess_value"
+              name="insurance_excess_value"
               placeholder="0000000"
               required
-              :class="{ 'is-invalid': errors.Insurance_yearly_cost }"
+              :class="{ 'is-invalid': errors.insurance_excess_value }"
             />
 
             <div class="invalid-feedback">
-              {{ errors.Insurance_yearly_cost }}
+              {{ errors.insurance_excess_value }}
             </div>
             <span class="currency">EGP</span>
           </SimpleInput>
@@ -181,7 +242,7 @@ let onSubmit = handleSubmit((values) => {
     <div class="Upload_Papers">
       <div class="content">
         <div class="">
-          <h5>{{ t("Upload_Papers_car_license") }}</h5>
+          <h5>{{ t("Identity_document") }}</h5>
           <p>{{ t("messageIdentity_document") }}</p>
         </div>
         <SimpleInput class="upload">
@@ -191,14 +252,14 @@ let onSubmit = handleSubmit((values) => {
             />
             {{ t("upload") }}</SimpleButton
           >
-          <input type="file" />
+          <input type="file" @change="fileSelectedIdentity_face" />
         </SimpleInput>
       </div>
     </div>
     <div class="Upload_Papers">
       <div class="content">
         <div class="">
-          <h5>{{ t("Upload_Papers") }}</h5>
+          <h5>{{ t("Identity_document") }}</h5>
           <p>{{ t("messageIdentity_document") }}</p>
         </div>
         <SimpleInput class="upload">
@@ -208,7 +269,7 @@ let onSubmit = handleSubmit((values) => {
             />
             {{ t("upload") }}</SimpleButton
           >
-          <input type="file" />
+          <input type="file" @change="fileSelectedIdentity_back" />
         </SimpleInput>
       </div>
     </div>

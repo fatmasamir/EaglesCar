@@ -3,14 +3,21 @@ import { ref, defineEmits } from "vue";
 import { useI18n } from "vue-i18n";
 import SimpleInput from "@/components/global/CusomInputs/SimpleInput/SimpleInput.vue";
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
-
+import { UseProfile } from "@/stores/Profile/index";
+//Bloges
+const Profile = UseProfile();
 // emit
 let emits = defineEmits(["ChooseTabAccount"]);
 //i18n
 const { t } = useI18n();
 
 // ListCar
-let ListCar = ref([]);
+let ListCar = ref({
+  Short_term: 0,
+  long_term: 0,
+  with_driver: 0,
+  without_driver: 0,
+});
 let ListShort_term = ref([]);
 let ListShortTerms = ref(false);
 let error = ref(false);
@@ -19,25 +26,30 @@ let error = ref(false);
 let Changecheckbox = (e) => {
   const valueChecked = e.target.checked;
   if (valueChecked) {
-    for (let key in ListCar.value) {
-      if (ListCar.value[key] == "Short_term") {
-        ListShortTerms.value = true;
-        error.value = false;
-      } else if (ListCar.value[key] == "Long_term") {
-        error.value = false;
-      }
+    if (ListCar.value.Short_term) {
+      ListShortTerms.value = true;
     }
   } else {
     ListShortTerms.value = false;
-    ListShort_term.value = [];
-    error.value = true;
+    ListCar.value.with_driver = false;
+    ListCar.value.without_driver = false;
   }
 };
 // handel submit
 let onSubmit = () => {
   if (ListCar.value.length !== 0) {
-    emits("ChooseTabAccount", "Parking address");
-    console.log("ChooseTabAccount ====");
+    Profile.AccountVerified.Short_term = ListCar.value.Short_term;
+    Profile.AccountVerified.long_term = ListCar.value.long_term;
+    Profile.AccountVerified.with_driver = ListCar.value.with_driver;
+    Profile.AccountVerified.without_driver = ListCar.value.without_driver;
+    console.log("Profile.AccountVerified=", Profile.AccountVerified);
+    // for (let key in ListCar.value) {
+    //   console.log(ListCar.value[key]);
+    //   if (ListCar.value[key] == "Short_term") {
+    //     Profile.AccountVerified.plate_number = values.Plate_number;
+    //   }
+    // }
+    // emits("ChooseTabAccount", "Parking address");
   } else {
     error.value = true;
   }
@@ -100,13 +112,14 @@ let onSubmit = () => {
     <div class="box mt-3 mb-3 SELECT_HOW_WANT">
       <h6>{{ t("SELECT_HOW_WANT") }}</h6>
       <p class="mt-3 mb-4">{{ t("messageIdentity_document") }}</p>
+      <pre>{{ ListCar }}</pre>
       <ul class="List">
         <li>
           <div class="content">
             <input
               type="checkbox"
-              value="Short_term"
-              v-model="ListCar"
+              value="0"
+              v-model="ListCar.Short_term"
               @change="Changecheckbox($event)"
             />
             <p>
@@ -117,11 +130,7 @@ let onSubmit = () => {
           </div>
           <ul v-if="ListShortTerms" class="SubList">
             <li>
-              <input
-                type="checkbox"
-                value="With_driver"
-                v-model="ListShort_term"
-              />
+              <input type="checkbox" v-model="ListCar.with_driver" />
               <p>
                 {{ t("With_driver") }}
               </p>
@@ -130,7 +139,7 @@ let onSubmit = () => {
               <input
                 type="checkbox"
                 value="Without_driver"
-                v-model="ListShort_term"
+                v-model="ListCar.without_driver"
               />
               <p>
                 {{ t("Without_driver") }}
@@ -140,12 +149,7 @@ let onSubmit = () => {
         </li>
         <li>
           <div class="content">
-            <input
-              type="checkbox"
-              value="Long_term"
-              v-model="ListCar"
-              @change="Changecheckbox($event)"
-            />
+            <input type="checkbox" value="0" v-model="ListCar.long_term" />
             <p>
               <span class="color-gray">{{ t("Long_term") }}</span> (
               {{ t("Long_term_mess") }}
@@ -154,7 +158,7 @@ let onSubmit = () => {
           </div>
         </li>
       </ul>
-      <span v-if="error" class="color-denger">{{ t("requiredFiled") }}</span>
+      <!-- <span v-if="error" class="color-denger">{{ t("requiredFiled") }}</span> -->
     </div>
     <div class="col-12 text-center mb-5 mt-5 direction_ar">
       <SimpleButton type="sub_button">

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import AOS from "aos";
 import { defineProps } from "vue";
 
@@ -9,93 +9,88 @@ const { t } = useI18n();
 
 // defineProps
 let props = defineProps(["Car"]);
-
+let lengthMediaCar = ref(0);
 //showNumberCar
 let showNumberCar = ref(1);
 
 //showImageSrc
-let showImageSrc = ref(
-  new URL(
-    `../../../../../assets/images/global/icons/global/cardDetailes/carSlider1.svg`,
-    import.meta.url
-  ).href
-);
+let showImageSrc = ref();
 
 //ListsCar
-const ListsCar = ref([
-  {
-    id: 0,
-    image_car: new URL(
-      `../../../../../assets/images/global/icons/global/cardDetailes/carSlider1.svg`,
-      import.meta.url
-    ).href,
-  },
-  {
-    id: 1,
-    image_car: new URL(
-      `../../../../../assets/images/global/icons/global/cardDetailes/carSlider2.svg`,
-      import.meta.url
-    ).href,
-  },
-  {
-    id: 2,
-    image_car: new URL(
-      `../../../../../assets/images/global/icons/global/cardDetailes/carSlider3.svg`,
-      import.meta.url
-    ).href,
-  },
-  {
-    id: 3,
-    image_car: new URL(
-      `../../../../../assets/images/global/icons/global/cardDetailes/carSlider4.svg`,
-      import.meta.url
-    ).href,
-  },
-  {
-    id: 4,
-    image_car: new URL(
-      `../../../../../assets/images/global/icons/global/cardDetailes/carSlider5.svg`,
-      import.meta.url
-    ).href,
-  },
-]);
+// const ListsCar = ref([
+//   {
+//     id: 0,
+//     image_car: new URL(
+//       `../../../../../assets/images/global/icons/global/cardDetailes/carSlider1.svg`,
+//       import.meta.url
+//     ).href,
+//   },
+//   {
+//     id: 1,
+//     image_car: new URL(
+//       `../../../../../assets/images/global/icons/global/cardDetailes/carSlider2.svg`,
+//       import.meta.url
+//     ).href,
+//   },
+//   {
+//     id: 2,
+//     image_car: new URL(
+//       `../../../../../assets/images/global/icons/global/cardDetailes/carSlider3.svg`,
+//       import.meta.url
+//     ).href,
+//   },
+//   {
+//     id: 3,
+//     image_car: new URL(
+//       `../../../../../assets/images/global/icons/global/cardDetailes/carSlider4.svg`,
+//       import.meta.url
+//     ).href,
+//   },
+//   {
+//     id: 4,
+//     image_car: new URL(
+//       `../../../../../assets/images/global/icons/global/cardDetailes/carSlider5.svg`,
+//       import.meta.url
+//     ).href,
+//   },
+// ]);
 
 //showImage
-const showImage = (id) => {
-  for (let key in ListsCar.value) {
-    if (key == id) {
-      console.log(ListsCar.value[key]);
-      showImageSrc.value = ListsCar.value[key].image_car;
-      showNumberCar.value = id + 1;
-    }
-  }
+const showImage = (index) => {
+  console.log(index);
+  showImageSrc.value = props.Car.media[index];
+  showNumberCar.value = index + 1;
 };
 onMounted(() => {
   AOS.init();
+});
+watch(props, (newQuestion) => {
+  showImageSrc.value = newQuestion.Car.media[0];
+  lengthMediaCar = newQuestion.Car.media.length;
 });
 </script>
 <template>
   <div class="Description" v-if="props.Car">
     <div class="ImageShow" v-if="showImageSrc">
-      <img :src="showImageSrc" />
+      <img :src="showImageSrc.cover" />
     </div>
     <p class="showNumberCar text-end">
       <img
         src="../../../../../assets/images/global/icons/global/cardDetailes/images-icon.svg"
       />
-      {{ showNumberCar }}/{{ ListsCar.length }}
+      {{ showNumberCar }}/{{ lengthMediaCar }}
     </p>
-    <ul class="ListCars" v-if="ListsCar">
-      <li class="" v-for="item in ListsCar" :key="item.id">
-        <img :src="item.image_car" @click="showImage(item.id)" />
+    <ul class="ListCars" v-if="props.Car.media">
+      <li class="" v-for="(item, index) in props.Car.media" :key="item.id">
+        <img :src="item.cover" @click="showImage(index)" />
       </li>
     </ul>
     <h5>Description</h5>
     <p v-if="props.Car && props.Car.description">
-      {{ props.Car.description }}
+      {{ props.Car.short_description }}
     </p>
     <router-link to="/" class="color-main">{{ t("Show_more") }}</router-link>
-    <h5>Features</h5>
+    <!-- <h5>Features</h5>
     <ul class="Features">
       <li><span></span>Blind spot alert</li>
       <li><span></span>Bluetooth</li>
@@ -103,15 +98,15 @@ onMounted(() => {
       <li><span></span>Leather seats</li>
       <li><span></span>Navigation System</li>
       <li><span></span>Side airbags</li>
-    </ul>
+    </ul> -->
     <div>
-      <h5>Attachments</h5>
       <div
         class="Attachments"
         v-if="
           props.Car && props.Car.documents && props.Car.documents.length != 0
         "
       >
+        <h5>Attachments</h5>
         <div>
           <router-link to="/" class="color-main">
             <img
@@ -142,16 +137,20 @@ onMounted(() => {
     img {
       width: 100%;
       height: 100%;
+      border-radius: 8px;
     }
   }
   .ListCars {
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
+    padding: 0px;
     list-style-type: none;
     li {
       cursor: pointer;
       padding: 10px;
+      height: 200px;
+      width: 100%;
       img {
         width: 100%;
         height: 100%;

@@ -2,9 +2,11 @@
 import { ref, onMounted, watch } from "vue";
 import AOS from "aos";
 import { useI18n } from "vue-i18n";
-
+import loading from "@/components/global/Loading/index.vue";
+let props = defineProps(["support"]);
 //i18n
 const { t } = useI18n();
+const i18n = useI18n();
 //onMounted
 onMounted(() => {
   //AOS
@@ -13,53 +15,77 @@ onMounted(() => {
 </script>
 <template>
   <!--MostFaster-->
-  <div class="Support">
+  <div class="support">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
+      <div class="row" v-if="props.support">
+        <div class="col-lg-12" v-if="i18n.locale.value == 'en'">
+          <h5>
+            {{
+              props.support && props.support.title && props.support.title.en
+                ? props.support.title.en
+                : ""
+            }}
+          </h5>
           <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
+            {{
+              props.support &&
+              props.support.description &&
+              props.support.description.en
+                ? props.support.description.en
+                : ""
+            }}
           </p>
-          <p class="mt-5">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
+        </div>
+        <div class="col-lg-12 text-start" v-else>
+          <h5>
+            {{
+              props.support && props.support.title && props.support.title.ar
+                ? props.support.title.ar
+                : ""
+            }}
+          </h5>
+          <p class="text-start">
+            {{
+              props.support &&
+              props.support.description &&
+              props.support.description.ar
+                ? props.support.description.ar
+                : ""
+            }}
           </p>
         </div>
       </div>
+      <loading v-else></loading>
     </div>
   </div>
 </template>
 <style scoped lang="scss">
 @import "../../../assets/scss/variables";
-.Support {
+.support {
   overflow-y: hidden;
   margin: 150px 0px;
   .row {
     overflow-y: hidden;
     p {
       width: 80%;
-      margin: auto;
+      margin: 5px;
       line-height: 2.3;
+      text-align: left;
+    }
+    h6 {
+      color: var(--orange-text-color);
+      margin-top: 20px;
+    }
+    ul {
+      margin-bottom: 30px;
+      li {
+        margin-bottom: 15px;
+      }
     }
   }
 }
 @media screen and (max-width: 992px) {
-  .Support .row p {
+  .Terms_conditions .row p {
     width: 90%;
   }
 }
