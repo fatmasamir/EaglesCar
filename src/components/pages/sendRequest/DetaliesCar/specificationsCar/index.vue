@@ -45,13 +45,6 @@ let props = defineProps(["Car"]);
         <div class="col-lg-6">{{ proper.value }}</div>
       </div>
     </div>
-    <div class="Send_request">
-      <SimpleButton type="send">
-        <router-link :to="'/send-request/' + Car.slug" class="btn">
-          {{ t("Send_request") }}
-        </router-link></SimpleButton
-      >
-    </div>
   </div>
 </template>
 <style scoped lang="scss">

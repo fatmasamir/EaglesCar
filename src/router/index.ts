@@ -45,6 +45,9 @@ import CarRental from "../views/CarRental/Main.vue";
 //CarDetailes page
 import CarDetailes from "../views/CarDetailes/Main.vue";
 
+//sendRequest page
+import sendRequest from "../views/sendRequest/Main.vue";
+
 //profile page
 import Profile from "../views/Profile/Main.vue";
 
@@ -344,6 +347,22 @@ const routes: Array<RouteRecordRaw> = [
         document.title = `تفاصيل السيارة  - Eagles car`;
       } else {
         document.title = "Car Detailes Page - Eagles car";
+      }
+      // if (!localStorage.getItem("access_token")) {
+      //   return `/login`;
+      // }
+    },
+  },
+  {
+    //CardsDetailes
+    path: "/send-request/:slug",
+    name: "sendRequest",
+    component: sendRequest,
+    beforeEnter(to, from) {
+      if (localStorage.getItem("lang") == "ar") {
+        document.title = `تفاصيل السيارة  - Eagles car`;
+      } else {
+        document.title = "Send Request Page - Eagles car";
       }
       // if (!localStorage.getItem("access_token")) {
       //   return `/login`;

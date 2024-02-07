@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
 import { onMounted } from "vue";
+import { UseContactus } from "@/stores/Contactus/index";
 import AOS from "aos";
 const { t } = useI18n();
+const Contactusg = UseContactus();
 onMounted(() => {
   AOS.init();
+  Contactusg.get_ContactInformation();
 });
 </script>
 <template>
+  <pre>{{ Contactusg.ContactInformation }}</pre>
   <div class="Contact_Info">
     <h3>{{ t("Contact_Info") }}</h3>
     <ul class="list_contact">

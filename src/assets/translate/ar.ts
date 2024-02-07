@@ -310,5 +310,7 @@ const ar = {
   Choose_Number_seat: "ختر رقم المقعد",
   Maximum: "أقصى ",
   Minimum: "الحد الأدنى",
+  sendRequest: "ارسل طلب",
+  StartDate: "تاريخ البدء",
 };
 export default ar;

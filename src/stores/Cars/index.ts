@@ -7,6 +7,7 @@ export const UseCars = defineStore("Cars", () => {
   let Cars = ref([]);
   let Car = ref({});
   let unfounedCars = ref(false);
+  let is_waitingSend = ref(false);
 
   //Get Bloges
   async function get_Cars() {
@@ -43,11 +44,38 @@ export const UseCars = defineStore("Cars", () => {
     }
   }
 
+  // sendRequest
+  async function sendRequest(data) {
+    is_waitingSend.value = true;
+    console.log("data =", data);
+    const response = await callServer({
+      url: "api/user/cars/rent-car",
+      method: "POST",
+      data,
+      auth: true,
+    });
+
+    if (response.ok) {
+      response.json().then(async (res) => {
+        is_waitingSend.value = false;
+        toast.success("Successfully Send Reuest... ");
+      });
+    } else {
+      is_waitingSend.value = false;
+      response.json().then((data) => {
+        for (let key in data.errors) {
+          toast.error(data.errors[key][0]);
+        }
+      });
+    }
+  }
   return {
     get_Cars,
     Cars,
     get_Car,
     Car,
     unfounedCars,
+    is_waitingSend,
+    sendRequest,
   };
 });

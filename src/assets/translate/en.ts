@@ -325,6 +325,8 @@ expectations.`,
   Maximum: "Maximum ",
   Minimum: "Minimum",
   license_number: "License Number",
+  sendRequest: "send Request",
+  StartDate: "Start Date",
 };
 
 export default en;

@@ -61,6 +61,10 @@ const showImage = (index) => {
   showImageSrc.value = props.Car.media[index];
   showNumberCar.value = index + 1;
 };
+const isShowDesc = ref(false);
+const showDescription = () => {
+  isShowDesc.value = !isShowDesc.value;
+};
 onMounted(() => {
   AOS.init();
 });
@@ -87,9 +91,10 @@ watch(props, (newQuestion) => {
     </ul>
     <h5>Description</h5>
     <p v-if="props.Car && props.Car.description">
-      {{ props.Car.short_description }}
+      <span v-if="!isShowDesc">{{ props.Car.short_description }}</span>
+      <span v-else v-html="props.Car.description"></span>
     </p>
-    <router-link to="/" class="color-main">{{ t("Show_more") }}</router-link>
+    <a @click="showDescription()" class="color-main">{{ t("Show_more") }}</a>
     <!-- <h5>Features</h5>
     <ul class="Features">
       <li><span></span>Blind spot alert</li>

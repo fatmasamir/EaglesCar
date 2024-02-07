@@ -1,12 +1,12 @@
 <script setup>
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import AddCarContent from "./AddCarContent/index.vue";
-
+import { UseCars } from "@/stores/Cars/index";
 //i18n
 const { t } = useI18n();
-
+const Cars = UseCars();
 //i18n
 const AddCar = ref(false);
 const ListOfCar = ref([
@@ -35,10 +35,13 @@ const ListOfCar = ref([
     status: "Refused",
   },
 ]);
+onMounted(() => {
+  Cars.get_Cars();
+});
 </script>
 <template>
   <div v-if="!AddCar">
-    <div class="text-center mb-5" v-if="ListOfCar.length == 0">
+    <div class="text-center mb-5" v-if="!Cars.Cars">
       <img
         src="../../../../assets/images/global/icons/global/profile/drunk_driving-cuate.svg"
       />
@@ -52,20 +55,20 @@ const ListOfCar = ref([
     </div>
     <div v-else>
       <ul>
-        <li v-for="item in ListOfCar" :key="item.id">
+        <li v-for="item in Cars.Cars" :key="item.id">
           <div class="box">
-            <div class="img_div"><img :src="item.img" /></div>
+            <div class="img_div"><img :src="item.media.cover" /></div>
             <div class="content">
               <div class="title">
                 <h3>
                   {{ item.title }}
                 </h3>
               </div>
-              <p>{{ item.description }}</p>
+              <p>{{ item.short_description }}</p>
               <hr />
               <div class="end">
                 <span
-                  ><strong>{{ item.pre }} LE</strong>
+                  ><strong>{{ item.price }} LE</strong>
                   <span class="per_week">(per week)</span></span
                 >
                 <div class="buttons">
