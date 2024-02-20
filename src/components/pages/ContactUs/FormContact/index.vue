@@ -4,9 +4,14 @@ import { onMounted } from "vue";
 import AOS from "aos";
 import Form_Detailes from "./Form_Detailes/index.vue";
 import Contact_Info from "./Contact_Info/index.vue";
+import { UseContactus } from "@/stores/Contactus/index";
+import loading from "@/components/global/Loading/index.vue";
+const Contactusg = UseContactus();
 const { t } = useI18n();
 onMounted(() => {
   AOS.init();
+  Contactusg.get_ContactInformation();
+  Contactusg.get_socialMedia();
 });
 </script>
 <template>
@@ -18,7 +23,15 @@ onMounted(() => {
           <Form_Detailes />
         </div>
         <div class="col-lg-5">
-          <Contact_Info />
+          <Contact_Info
+            :ContactInformation="Contactusg.ContactInformation"
+            :socialMedia="Contactusg.socialMedia"
+            v-if="
+              Contactusg.ContactInformation.length > 0 &&
+              Contactusg.socialMedia.length > 0
+            "
+          />
+          <loading v-else />
         </div>
       </div>
     </div>

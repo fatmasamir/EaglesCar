@@ -1,7 +1,10 @@
 <script lang="ts" setup>
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, defineProps } from "vue";
 import AOS from "aos";
 import { useI18n } from "vue-i18n";
+
+const i18n = useI18n();
+const props = defineProps(["services"]);
 
 //i18n
 const { t } = useI18n();
@@ -24,40 +27,16 @@ onMounted(() => {
         <h6 class="color-main">{{ t("More_info") }}</h6>
         <h2 class="header_title">{{ t("Our_Service") }}</h2>
         <ul>
-          <li>
+          <li v-for="service in props.services" :key="service.id">
             <img
               src="../../../../assets/images/global/icons/global/aboutus/right.svg"
               class="right_mark"
             />
-            <p class="color-main">{{ t("Service1") }}</p>
-          </li>
-          <li>
-            <img
-              src="../../../../assets/images/global/icons/global/aboutus/right.svg"
-              class="right_mark"
-            />
-            <p>{{ t("Service2") }}</p>
-          </li>
-          <li>
-            <img
-              src="../../../../assets/images/global/icons/global/aboutus/right.svg"
-              class="right_mark"
-            />
-            <p class="color-main">{{ t("Service3") }}</p>
-          </li>
-          <li>
-            <img
-              src="../../../../assets/images/global/icons/global/aboutus/right.svg"
-              class="right_mark"
-            />
-            <p>{{ t("Service4") }}</p>
-          </li>
-          <li>
-            <img
-              src="../../../../assets/images/global/icons/global/aboutus/right.svg"
-              class="right_mark"
-            />
-            <p class="color-main">{{ t("Service5") }}</p>
+            <p class="color-main">
+              {{
+                i18n.locale.value == "en" ? service.title.en : service.title.ar
+              }}
+            </p>
           </li>
         </ul>
       </div>

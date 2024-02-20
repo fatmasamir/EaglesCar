@@ -41,8 +41,8 @@ let props = defineProps(["Car"]);
     </div>
     <div class="information" v-if="props.Car.properties">
       <div class="row" v-for="proper in props.Car.properties">
-        <div class="col-lg-6">{{ proper.title }}</div>
-        <div class="col-lg-6">{{ proper.value }}</div>
+        <div class="col-sm-6">{{ proper.title }}</div>
+        <div class="col-sm-6">{{ proper.value }}</div>
       </div>
     </div>
   </div>

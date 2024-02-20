@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, defineProps } from "vue";
 import AOS from "aos";
 const { t } = useI18n();
+const i18n = useI18n();
+const props = defineProps(["team"]);
 onMounted(() => {
   AOS.init();
 });
@@ -14,46 +16,20 @@ onMounted(() => {
         <h6 class="color-main">{{ t("More_info") }}</h6>
         <h2>{{ t("Our_Team") }}</h2>
         <ul class="list">
-          <li>
-            <img
-              src="../../../../assets/images/global/icons/global/aboutus/man1.svg"
-            />
+          <li v-for="person in props.team" :key="person.id">
+            <img :src="person.image.cover" />
             <div
               class="info_par"
               data-aos="zoom-in-up"
               data-aos-offset="300"
               data-aos-easing="ease-in-out"
             >
-              <h5>Mohamed Ahmed</h5>
-              <p>Agency owner</p>
-            </div>
-          </li>
-          <li>
-            <img
-              src="../../../../assets/images/global/icons/global/aboutus/man2.svg"
-            />
-            <div
-              class="info_par"
-              data-aos="zoom-in-up"
-              data-aos-offset="300"
-              data-aos-easing="ease-in-out"
-            >
-              <h5>Mohamed Ahmed</h5>
-              <p>Agency owner</p>
-            </div>
-          </li>
-          <li>
-            <img
-              src="../../../../assets/images/global/icons/global/aboutus/man3.svg"
-            />
-            <div
-              class="info_par"
-              data-aos="zoom-in-up"
-              data-aos-offset="300"
-              data-aos-easing="ease-in-out"
-            >
-              <h5>Mohamed Ahmed</h5>
-              <p>Agency owner</p>
+              <h5>
+                {{
+                  i18n.locale.value == "en" ? person.name.en : person.name.ar
+                }}
+              </h5>
+              <p>{{ person.title.en }}</p>
             </div>
           </li>
         </ul>
@@ -77,6 +53,7 @@ onMounted(() => {
     display: flex;
     align-items: flex-start;
     li {
+      width: 33%;
       text-align: center;
       position: relative;
       img {
@@ -113,5 +90,10 @@ onMounted(() => {
 
 /*ar version */
 .is-ar {
+  .OurTeam .list li .info_par {
+    text-align: right;
+    right: 50px;
+    left: auto;
+  }
 }
 </style>

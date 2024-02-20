@@ -6,8 +6,8 @@ const toast = useToast();
 export const UseHomepage = defineStore("Homepage", () => {
   let faqs = ref({});
   let testimonials = ref({});
-  let services = ref({});
-  let team = ref({});
+  let services = ref([]);
+  let team = ref([]);
   let termsConditions = ref({});
   let privacyPolicy = ref({});
   let support = ref({});
@@ -38,7 +38,7 @@ export const UseHomepage = defineStore("Homepage", () => {
     });
     if (response.ok) {
       response.json().then((data) => {
-        testimonials.value = data;
+        testimonials.value = data.data;
       });
     } else {
       toast.error("Has Error");
@@ -52,7 +52,7 @@ export const UseHomepage = defineStore("Homepage", () => {
     });
     if (response.ok) {
       response.json().then((data) => {
-        services.value = data;
+        services.value = data.data.services;
       });
     } else {
       toast.error("Has Error");
@@ -66,7 +66,7 @@ export const UseHomepage = defineStore("Homepage", () => {
     });
     if (response.ok) {
       response.json().then((data) => {
-        team.value = data;
+        team.value = data.data.data;
       });
     } else {
       toast.error("Has Error");

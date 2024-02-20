@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
 import { onMounted, ref } from "vue";
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
+import { useI18n } from "vue-i18n";
+
 import AOS from "aos";
 const { t } = useI18n();
+const i18n = useI18n();
+const props = defineProps(["testimonials"]);
 const slides = [
   {
     author: "Ahmed ali",
@@ -35,7 +38,7 @@ onMounted(() => {
           class="rateing"
         />
         <carousel :items-to-show="1">
-          <slide v-for="slide in slides" :key="slide" class="mx-1">
+          <slide v-for="slide in props.testimonials" :key="slide" class="mx-1">
             <div class="review">
               <!-- <div class="rate">
                 <input type="radio" id="star5" name="rate" value="5" />
@@ -50,8 +53,8 @@ onMounted(() => {
                 <label for="star1" title="1">1 star</label>
               </div> -->
 
-              <p>{{ t(slide.content) }}</p>
-              <h5>- {{ slide.author }}</h5>
+              <p v-html="slide.description.en"></p>
+              <h5>- {{ slide.name.en }}</h5>
             </div>
           </slide>
 

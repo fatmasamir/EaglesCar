@@ -37,8 +37,10 @@ onMounted(() => {
     <Booking></Booking>
     <Rental></Rental>
     <Blogs :Bloges="Bloges.Bloges"></Blogs>
-    <ClientsTestimonials></ClientsTestimonials>
-    <pre>{{ Homepage.testimonials }}</pre>
+    <ClientsTestimonials
+      v-if="Homepage.testimonials.length > 0"
+      :testimonials="Homepage.testimonials"
+    ></ClientsTestimonials>
     <FAQ :faqs="Homepage.faqs"></FAQ>
     <DownloadApp></DownloadApp>
     <Footer></Footer>

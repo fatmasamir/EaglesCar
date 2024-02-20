@@ -10,7 +10,23 @@ import { defineProps } from "vue";
 const { t } = useI18n();
 // props
 let props = defineProps(["Bloges"]);
+const swiperOptions = {
+  breakpoints: {
+    320: {
+      slidesPerView: 1,
+      spaceBetween: 10,
+    },
+    770: {
+      slidesPerView: 2,
+      spaceBetween: 50,
+    },
 
+    1200: {
+      slidesPerView: 4,
+      spaceBetween: 30,
+    },
+  },
+};
 onMounted(() => {
   AOS.init();
 });
@@ -24,6 +40,7 @@ onMounted(() => {
         <swiper
           :slides-per-view="4"
           :space-between="0"
+          :breakpoints="swiperOptions.breakpoints"
           class="blogs_list row"
           v-if="props.Bloges.length != 0"
         >

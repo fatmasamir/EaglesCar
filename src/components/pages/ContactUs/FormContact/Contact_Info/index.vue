@@ -1,65 +1,83 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
-import { onMounted } from "vue";
-import { UseContactus } from "@/stores/Contactus/index";
+import { onMounted, defineProps } from "vue";
 import AOS from "aos";
 const { t } = useI18n();
-const Contactusg = UseContactus();
+const i18n = useI18n();
+// props
+let props = defineProps(["ContactInformation", "socialMedia"]);
 onMounted(() => {
   AOS.init();
-  Contactusg.get_ContactInformation();
 });
 </script>
 <template>
-  <pre>{{ Contactusg.ContactInformation }}</pre>
   <div class="Contact_Info">
     <h3>{{ t("Contact_Info") }}</h3>
-    <ul class="list_contact">
+    <ul class="list_contact" v-if="props.ContactInformation">
       <li>
-        <router-link to="/"
-          ><img
-            src="@//assets/images/global/icons/global/contactUs/map.svg"
-          />{{ t("location") }}</router-link
+        <a :href="'mailto:' + props.ContactInformation[2].link">
+          <img src="@//assets/images/global/icons/global/contactUs/map.svg" />
+          {{
+            i18n.locale.value == "en"
+              ? props.ContactInformation[2].title.en
+              : props.ContactInformation[2].title.ar
+          }}</a
         >
       </li>
       <li>
-        <router-link to="/"
-          ><img
+        <a
+          :href="'https://wa.me/' + props.ContactInformation[1].link"
+          target="_blank"
+        >
+          <img
             src="@//assets/images/global/icons/global/contactUs/mobile.svg"
-          />{{ t("Phone_number") }}</router-link
-        >
+          />
+          {{
+            i18n.locale.value == "en"
+              ? props.ContactInformation[1].title.en
+              : props.ContactInformation[1].title.ar
+          }}
+        </a>
       </li>
       <li>
-        <router-link to="/"
-          ><img
-            src="@//assets/images/global/icons/global/contactUs/sms.svg"
-          />{{ t("Email") }}</router-link
+        <a
+          target="_blank"
+          :href="'https://' + props.ContactInformation[0].link"
         >
+          <!-- <img src="@//assets/images/global/icons/global/contactUs/map.svg" /> -->
+
+          <img src="@//assets/images/global/icons/global/contactUs/sms.svg" />
+          {{
+            i18n.locale.value == "en"
+              ? props.ContactInformation[0].title.en
+              : props.ContactInformation[0].title.ar
+          }}
+        </a>
       </li>
     </ul>
     <h6>{{ t("Social_media_contacts") }}</h6>
-    <ul class="Social_media_contacts">
+    <ul class="Social_media_contacts" v-if="props.socialMedia">
       <li>
-        <router-link to="/">
+        <a :href="'https://' + props.socialMedia[0].link" target="_blank">
           <img
             src="@//assets/images/global/icons/global/contactUs/facebook.svg"
-        /></router-link>
+        /></a>
       </li>
       <li>
-        <router-link to="/">
+        <a :href="'https://' + props.socialMedia[1].link" target="_blank">
           <img src="@//assets/images/global/icons/global/contactUs/twitter.svg"
-        /></router-link>
+        /></a>
       </li>
       <li>
-        <router-link to="/">
+        <a :href="'https://' + props.socialMedia[2].link" target="_blank">
           <img
             src="@//assets/images/global/icons/global/contactUs/instagram.svg"
-        /></router-link>
+        /></a>
       </li>
       <li>
-        <router-link to="/">
+        <a :href="'https://' + props.socialMedia[3].link" target="_blank">
           <img src="@//assets/images/global/icons/global/contactUs/youtube.svg"
-        /></router-link>
+        /></a>
       </li>
     </ul>
   </div>

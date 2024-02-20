@@ -6,6 +6,7 @@ const toast = useToast();
 
 export const UseContactus = defineStore("Contactus", () => {
   let ContactInformation = ref([]);
+  let socialMedia = ref([]);
   let is_waitingSend = ref(false);
 
   async function get_ContactInformation() {
@@ -15,6 +16,22 @@ export const UseContactus = defineStore("Contactus", () => {
     if (response.ok) {
       response.json().then((data) => {
         ContactInformation.value = data.data;
+      });
+    } else {
+      response.json().then((data) => {
+        for (let key in data.errors) {
+          toast.error(data.errors[key][0]);
+        }
+      });
+    }
+  }
+  async function get_socialMedia() {
+    const response = await callServer({
+      url: "api/social-media",
+    });
+    if (response.ok) {
+      response.json().then((data) => {
+        socialMedia.value = data.data;
       });
     } else {
       response.json().then((data) => {
@@ -47,7 +64,9 @@ export const UseContactus = defineStore("Contactus", () => {
   return {
     get_ContactInformation,
     ContactInformation,
+    get_socialMedia,
     sendContactMessage,
     is_waitingSend,
+    socialMedia,
   };
 });

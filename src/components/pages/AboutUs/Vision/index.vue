@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, defineProps } from "vue";
 import AOS from "aos";
 const { t } = useI18n();
+const i18n = useI18n();
+const props = defineProps(["ourvision"]);
 onMounted(() => {
   AOS.init();
 });
 </script>
 <template>
   <section class="Vision">
+    <pre>{{ props.ourvision }}</pre>
     <div class="backgorund_img">
       <img
         src="../../../../assets/images/global/icons/global/aboutus/vision.svg"
@@ -32,9 +35,19 @@ onMounted(() => {
         data-aos-easing="ease-in-out"
       >
         <h6 class="color-main">{{ t("More_info") }}</h6>
-        <h2 class="color-main">{{ t("Our_vision") }}</h2>
+        <h2 class="color-main">
+          {{
+            i18n.locale.value == "en"
+              ? props.ourvision.title.en
+              : props.ourvision.title.ar
+          }}
+        </h2>
         <p class="">
-          {{ t("paravision") }}
+          {{
+            i18n.locale.value == "en"
+              ? props.ourvision.description.en
+              : props.ourvision.description.ar
+          }}
         </p>
       </div>
     </div>

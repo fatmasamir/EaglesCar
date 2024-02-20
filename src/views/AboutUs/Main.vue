@@ -14,6 +14,7 @@ const Homepage = UseHomepage();
 onMounted(() => {
   Homepage.get_team();
   Homepage.get_services();
+  Homepage.get_pages("our-vision");
 });
 </script>
 <template>
@@ -22,11 +23,12 @@ onMounted(() => {
     <Header TiltePage="About_us"></Header>
     <Moreinfo></Moreinfo>
     <Mission></Mission>
-    <Vision></Vision>
-    <pre>{{ Homepage.team }}</pre>
-    <OurTeam></OurTeam>
-    <pre>{{ Homepage.services }}</pre>
-    <OurService></OurService>
+    <Vision v-if="Homepage.ourvision" :ourvision="Homepage.ourvision"></Vision>
+    <OurTeam :team="Homepage.team" v-if="Homepage.team.length > 0"></OurTeam>
+    <OurService
+      :services="Homepage.services"
+      v-if="Homepage.services.length > 0"
+    ></OurService>
     <Footer></Footer>
   </section>
 </template>
