@@ -23,7 +23,10 @@ onMounted(() => {
     <Header TiltePage="About_us"></Header>
     <Moreinfo></Moreinfo>
     <Mission></Mission>
-    <Vision v-if="Homepage.ourvision" :ourvision="Homepage.ourvision"></Vision>
+    <Vision
+      v-if="Homepage.ourvision.title"
+      :ourvision="Homepage.ourvision"
+    ></Vision>
     <OurTeam :team="Homepage.team" v-if="Homepage.team.length > 0"></OurTeam>
     <OurService
       :services="Homepage.services"

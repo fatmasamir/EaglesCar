@@ -11,7 +11,6 @@ onMounted(() => {
 </script>
 <template>
   <section class="Vision">
-    <pre>{{ props.ourvision }}</pre>
     <div class="backgorund_img">
       <img
         src="../../../../assets/images/global/icons/global/aboutus/vision.svg"

@@ -119,7 +119,7 @@ export const useAuthStore = defineStore("auth", () => {
         localStorage.setItem("user", data.data.user);
         user.value = data.data.user;
         localStorage.setItem("type", "account");
-        toast.success("Successfully Login ... ");
+        toast.success("Successfully  ... ");
       });
       is_auth.value = true;
       is_loading.value = false;
@@ -153,7 +153,7 @@ export const useAuthStore = defineStore("auth", () => {
         localStorage.setItem("user", data.data.user);
         user.value = data.data.user;
         localStorage.setItem("type", "account");
-        toast.success("Successfully Login ... ");
+        toast.success("Successfully  ... ");
       });
       is_auth.value = true;
       is_loading.value = false;
@@ -190,7 +190,7 @@ export const useAuthStore = defineStore("auth", () => {
         is_auth.value = true;
         is_loading.value = false;
         await window.location.reload();
-        toast.success("Successfully Login ... ");
+        toast.success("Successfully  ... ");
       });
     } else {
       is_error.value = true;
@@ -221,7 +221,7 @@ export const useAuthStore = defineStore("auth", () => {
         is_auth.value = true;
         is_loading.value = false;
         await window.location.reload();
-        toast.success("Successfully Login ... ");
+        toast.success("Successfully  ... ");
       });
     } else {
       is_error.value = true;
