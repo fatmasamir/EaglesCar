@@ -45,11 +45,10 @@ export const UseCars = defineStore("Cars", () => {
   }
 
   // sendRequest
-  async function sendRequest(data) {
+  async function sendRequest(data, id) {
     is_waitingSend.value = true;
-    console.log("data =", data);
     const response = await callServer({
-      url: "api/user/cars/rent-car",
+      url: "api/user/cars/" + id + "/send-request/",
       method: "POST",
       data,
       auth: true,

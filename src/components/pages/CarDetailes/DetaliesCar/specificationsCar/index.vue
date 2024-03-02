@@ -47,7 +47,10 @@ let props = defineProps(["Car"]);
     </div>
     <div class="Send_request">
       <SimpleButton type="send">
-        <router-link :to="'/send-request/' + Car.slug" class="btn">
+        <router-link
+          :to="'/send-request/' + Car.slug + '/' + Car.id"
+          class="btn"
+        >
           {{ t("Send_request") }}
         </router-link></SimpleButton
       >

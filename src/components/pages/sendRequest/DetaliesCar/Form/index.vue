@@ -8,9 +8,11 @@ import { useForm } from "vee-validate";
 import * as Yup from "yup";
 import { UseProfile } from "@/stores/Profile/index";
 import { UseCars } from "@/stores/Cars/index";
-
+import { useRoute } from "vue-router";
 //Bloges
 const Profile = UseProfile();
+//Bloges
+const route = useRoute();
 
 //Bloges
 const Cars = UseCars();
@@ -46,8 +48,8 @@ const location = defineInputBinds("location");
 // handel submit
 let onSubmit = handleSubmit(async (values) => {
   try {
-    console.log("value = ", values);
-    Cars.sendRequest(JSON.stringify(values));
+    console.log("value = ", values, route.params.id);
+    Cars.sendRequest(JSON.stringify(values), route.params.id);
   } catch (err) {
     console.log(err);
   }

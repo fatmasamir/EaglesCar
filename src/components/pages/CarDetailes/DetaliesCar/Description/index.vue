@@ -6,7 +6,7 @@ import { defineProps } from "vue";
 
 // useI18n
 const { t } = useI18n();
-
+const i18n = useI18n();
 // defineProps
 let props = defineProps(["Car"]);
 let lengthMediaCar = ref(0);
@@ -95,15 +95,15 @@ watch(props, (newQuestion) => {
       <span v-else v-html="props.Car.description"></span>
     </p>
     <a @click="showDescription()" class="color-main">{{ t("Show_more") }}</a>
-    <!-- <h5>Features</h5>
-    <ul class="Features">
-      <li><span></span>Blind spot alert</li>
-      <li><span></span>Bluetooth</li>
-      <li><span></span>Heated seats</li>
-      <li><span></span>Leather seats</li>
-      <li><span></span>Navigation System</li>
-      <li><span></span>Side airbags</li>
-    </ul> -->
+    <h5>Features</h5>
+    <ul
+      class="Features"
+      v-if="props.Car && props.Car.features && props.Car.features.length != 0"
+    >
+      <li v-for="feature in props.Car.features" :key="feature">
+        <span></span>{{ i18n.locale.value == "en" ? feature.en : feature.ar }}
+      </li>
+    </ul>
     <div>
       <div
         class="Attachments"
@@ -112,21 +112,12 @@ watch(props, (newQuestion) => {
         "
       >
         <h5>Attachments</h5>
-        <div>
-          <router-link to="/" class="color-main">
-            <img
-              src="../../../../../assets/images/global/icons/global/cardDetailes/pdf.svg"
-            />
-            Sample PDF File
-          </router-link>
-        </div>
-        <div>
-          <router-link to="/" class="color-main">
-            <img
-              src="../../../../../assets/images/global/icons/global/cardDetailes/zip.svg"
-            />
-            Notes and some related files
-          </router-link>
+        <div v-for="document in props.Car.documents" :key="document">
+          <a :href="document.original_url" class="color-main">
+            <img :src="document.cover" /><span class="mx-2">{{
+              document.file_name
+            }}</span>
+          </a>
         </div>
       </div>
     </div>

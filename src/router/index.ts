@@ -355,7 +355,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     //CardsDetailes
-    path: "/send-request/:slug",
+    path: "/send-request/:slug/:id",
     name: "sendRequest",
     component: sendRequest,
     beforeEnter(to, from) {

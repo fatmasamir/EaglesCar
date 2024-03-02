@@ -31,18 +31,18 @@ let ListIcons = ref([
     ).href,
     title: "My_cars",
   },
-  {
-    id: 2,
-    image_icon: new URL(
-      `../../../../assets/images/global/icons/global/profile/voice-square.svg`,
-      import.meta.url
-    ).href,
-    image_icon_active: new URL(
-      `../../../../assets/images/global/icons/global/profile/voice-square-active.svg`,
-      import.meta.url
-    ).href,
-    title: "My_requests",
-  },
+  // {
+  //   id: 2,
+  //   image_icon: new URL(
+  //     `../../../../assets/images/global/icons/global/profile/voice-square.svg`,
+  //     import.meta.url
+  //   ).href,
+  //   image_icon_active: new URL(
+  //     `../../../../assets/images/global/icons/global/profile/voice-square-active.svg`,
+  //     import.meta.url
+  //   ).href,
+  //   title: "My_requests",
+  // },
   {
     id: 3,
     image_icon: new URL(

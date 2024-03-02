@@ -4,11 +4,20 @@ import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import AddCarContent from "./AddCarContent/index.vue";
 import { UseCars } from "@/stores/Cars/index";
+import Tabs from "./SubTab/index.vue";
 //i18n
 const { t } = useI18n();
 const Cars = UseCars();
 //i18n
 const AddCar = ref(false);
+//itemChooseAddCar
+const itemChooseAddCar = ref("All_Requests");
+
+//ChooseTabAccount
+const ChooseTabAccount = (nameTab) => {
+  console.log("ChooseTab==", nameTab);
+  itemChooseAddCar.value = nameTab;
+};
 const ListOfCar = ref([
   {
     id: 0,
@@ -40,7 +49,12 @@ onMounted(() => {
 });
 </script>
 <template>
+  <Tabs
+    @ChooseTabAccount="ChooseTabAccount"
+    :itemChooseAddCar="itemChooseAddCar"
+  ></Tabs>
   <div v-if="!AddCar">
+    <pre>{{ Cars.Cars }}</pre>
     <div class="text-center mb-5" v-if="!Cars.Cars">
       <img
         src="../../../../assets/images/global/icons/global/profile/drunk_driving-cuate.svg"
@@ -78,8 +92,11 @@ onMounted(() => {
                     </button></SimpleButton
                   > -->
                   <SimpleButton type="send">
-                    <button class="btn">
-                      {{ t("view") }}
+                    <!-- <button class="btn">
+                      {{ t("Finish now") }}
+                    </button> -->
+                    <button class="btn btn-Edit">
+                      {{ t("Edit") }}
                     </button></SimpleButton
                   >
                 </div>
@@ -158,6 +175,10 @@ onMounted(() => {
   text-align: center;
   padding: 15px;
   margin-bottom: 40px;
+}
+.simple-button.send .btn.btn-Edit {
+  background: rgba(244, 167, 29, 0.1);
+  color: rgba(244, 167, 29, 1);
 }
 @media screen and (max-width: 992px) {
   .box {
