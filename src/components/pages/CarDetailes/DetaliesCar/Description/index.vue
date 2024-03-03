@@ -114,9 +114,9 @@ watch(props, (newQuestion) => {
         <h5>Attachments</h5>
         <div v-for="document in props.Car.documents" :key="document">
           <a :href="document.original_url" class="color-main">
-            <img :src="document.cover" /><span class="mx-2">{{
-              document.file_name
-            }}</span>
+            <img
+              src="@/assets/images/global/icons/global/cardDetailes/pdf.svg"
+            /><span class="mx-2">{{ document.file_name }}</span>
           </a>
         </div>
       </div>
