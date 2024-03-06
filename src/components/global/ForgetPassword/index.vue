@@ -71,12 +71,7 @@ onMounted(() => {
   <section class="auth-form">
     <div class="row">
       <div class="col-lg-7 col-12 m-0 p-0 logo_box">
-        <div
-          class="logo"
-          data-aos="flip-right"
-          data-aos-offset="300"
-          data-aos-easing="ease-in-out"
-        >
+        <div class="logo">
           <router-link to="/">
             <img src="../../../assets/images/global/icons/global/logo.svg"
           /></router-link>
@@ -85,12 +80,7 @@ onMounted(() => {
           <img src="@/assets/images/global/icons/global/Carbackground.svg" />
         </div>
       </div>
-      <div
-        class="col-lg-5 col-12 main-box"
-        data-aos="zoom-in-up"
-        data-aos-offset="200"
-        data-aos-easing="ease-in-out"
-      >
+      <div class="col-lg-5 col-12 main-box">
         <div class="middle">
           <div class="auth_header text-start">
             <h3>{{ t("Forgetpassword") }}</h3>
@@ -98,12 +88,7 @@ onMounted(() => {
           </div>
           <form @submit.prevent="onSubmit">
             <div class="form mt-4">
-              <div
-                class="col-md-12 mt-3"
-                data-aos="zoom-in-up"
-                data-aos-easing="linear"
-                data-aos-duration="500"
-              >
+              <div class="col-md-12 mt-3">
                 <SimpleInput>
                   <!-- <label>Email <span class="text-red">*</span> </label> -->
 
@@ -117,12 +102,7 @@ onMounted(() => {
                   />
                 </SimpleInput>
               </div>
-              <div
-                class="col-12 mt-3"
-                data-aos="zoom-in-up"
-                data-aos-easing="linear"
-                data-aos-duration="1100"
-              >
+              <div class="col-12 mt-3">
                 <SimpleButton type="send" class="register_lab">
                   <button
                     type="submit"

@@ -60,12 +60,7 @@ onMounted(() => {
 <template>
   <form @submit.prevent="onSubmit">
     <div class="form mt-4">
-      <div
-        class="col-md-12 mt-3"
-        data-aos="zoom-in-up"
-        data-aos-easing="linear"
-        data-aos-duration="500"
-      >
+      <div class="col-md-12 mt-3">
         <SimpleInput>
           <!-- <label>Email <span class="text-red">*</span> </label> -->
           <input
@@ -81,12 +76,7 @@ onMounted(() => {
           <div class="invalid-feedback">{{ errors.login }}</div>
         </SimpleInput>
       </div>
-      <div
-        class="col-md-12 mt-2 passwordField"
-        data-aos="zoom-in-up"
-        data-aos-easing="linear"
-        data-aos-duration="700"
-      >
+      <div class="col-md-12 mt-2 passwordField">
         <SimpleInput>
           <!-- <label>Email <span class="text-red">*</span> </label> -->
           <input
@@ -113,24 +103,14 @@ onMounted(() => {
           <div class="invalid-feedback">{{ errors.password }}</div>
         </SimpleInput>
       </div>
-      <div
-        class="col-md-12 mt-1 mb-4 forget_remember"
-        data-aos="zoom-in-up"
-        data-aos-easing="linear"
-        data-aos-duration="900"
-      >
+      <div class="col-md-12 mt-1 mb-4 forget_remember">
         <div class="d-flex align-items-center">
           <input type="checkbox" value="lsRememberMe" id="rememberMe" />
           <label for="rememberMe" class="mx-2"> {{ t("remember_me") }}</label>
         </div>
         <router-link to="/forget-password">{{ t("forgetPass") }}</router-link>
       </div>
-      <div
-        class="col-12 mt-3"
-        data-aos="zoom-in-up"
-        data-aos-easing="linear"
-        data-aos-duration="1100"
-      >
+      <div class="col-12 mt-3">
         <SimpleButton type="send" class="register_lab">
           <button type="submit" v-if="!authStore.is_loading">
             {{ t("Login") }}

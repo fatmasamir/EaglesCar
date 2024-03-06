@@ -54,7 +54,7 @@ onMounted(() => {
     :itemChooseAddCar="itemChooseAddCar"
   ></Tabs>
   <div v-if="!AddCar">
-    <pre>{{ Cars.Cars }}</pre>
+    <!-- <pre>{{ Cars.Cars }}</pre> -->
     <div class="text-center mb-5" v-if="!Cars.Cars">
       <img
         src="../../../../assets/images/global/icons/global/profile/drunk_driving-cuate.svg"

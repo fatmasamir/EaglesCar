@@ -276,4 +276,9 @@ a {
     padding-left: 10px;
   }
 }
+@media screen and (max-width: 991px) {
+  .nameInput > div[data-v-0bfec106]:first-child {
+    padding: 0px;
+  }
+}
 </style>

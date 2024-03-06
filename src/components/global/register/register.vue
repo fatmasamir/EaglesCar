@@ -37,12 +37,7 @@ onMounted(() => {
           <img src="@/assets/images/global/icons/global/Carbackground.svg" />
         </div>
       </div>
-      <div
-        class="col-lg-5 col-12 main-box"
-        data-aos="zoom-in-up"
-        data-aos-offset="200"
-        data-aos-easing="ease-in-out"
-      >
+      <div class="col-lg-5 col-12 main-box">
         <div class="middle">
           <div class="auth_header text-start">
             <h3>{{ t("Register") }}</h3>

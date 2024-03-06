@@ -106,6 +106,29 @@ header {
   }
 }
 
+/*ar version */
+.is-ar {
+  header .row input {
+    text-align: right;
+  }
+  header .card .row.flex label img {
+    margin-left: 5px;
+    margin-right: 0px;
+    vertical-align: middle;
+  }
+  header .simple-button {
+    text-align: center;
+  }
+  header .carImage {
+    left: 10px;
+    right: auto;
+    img {
+      transform: scaleX(-1);
+      -webkit-transform: scaleX(-1);
+    }
+  }
+}
+
 /****media****/
 
 @media screen and (max-width: 1240px) {
@@ -144,29 +167,6 @@ header {
         padding-top: 25%;
         font-size: 30px;
       }
-    }
-  }
-}
-
-/*ar version */
-.is-ar {
-  header .row input {
-    text-align: right;
-  }
-  header .card .row.flex label img {
-    margin-left: 5px;
-    margin-right: 0px;
-    vertical-align: middle;
-  }
-  header .simple-button {
-    text-align: center;
-  }
-  header .carImage {
-    left: 10px;
-    right: auto;
-    img {
-      transform: scaleX(-1);
-      -webkit-transform: scaleX(-1);
     }
   }
 }

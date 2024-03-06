@@ -126,6 +126,14 @@ dp__input {
     width: 95%;
     margin: initial;
   }
+  .FillterHeader {
+    .withReturn_point {
+      max-width: 98% !important;
+    }
+    .tab li {
+      padding: 15px !important;
+    }
+  }
 }
 
 /*ar version */

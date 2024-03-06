@@ -76,10 +76,10 @@ const LogoutFun = () => {
         <!-- lang -->
         <div class="lang">
           <button v-if="props.lang == 'ar'" @click="changeLangEmit('en')">
-            <img src="@/assets//images/global/icons/global/flag-eng.svg" />
+            <img src="@/assets/images/global/icons/global/flag-eng.svg" />
           </button>
           <button v-else @click="changeLangEmit('ar')">
-            <img src="@/assets//images/global/icons/global/flag-eng.svg" />
+            <img src="@/assets/images/global/icons/global/flag_eg.svg" />
           </button>
         </div>
         <div class="info-login" v-if="Login">
