@@ -16,7 +16,16 @@ let props = defineProps(["Car"]);
     <hr />
     <div class="row">
       <div class="col-lg-6">
-        <h6><span class="color-main">$40,000</span> (per week)</h6>
+        <p class="priceCar">
+          {{ props.Car.price }} LE
+          <span>
+            (per <span v-if="props.Car.per == 1">hour</span>
+            <span v-else-if="props.Car.per == 2">day</span>
+            <span v-else-if="props.Car.per == 3">week </span>
+            <span v-else-if="props.Car.per == 4">month</span>
+            <span v-else-if="props.Car.per == 5">year</span>)
+          </span>
+        </p>
         <!-- <p>
           <img
             src="../../../../../assets/images/global/icons/global/cardDetailes/star.svg"
@@ -59,6 +68,11 @@ let props = defineProps(["Car"]);
 </template>
 <style scoped lang="scss">
 .specificationsCar {
+  .priceCar {
+    font-size: 20px;
+    color: black;
+    font-weight: 500;
+  }
   h6 {
     font-size: 14px;
     span {

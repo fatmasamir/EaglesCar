@@ -125,12 +125,13 @@ let emptyFileDriver_license = () => {
           <SimpleInput>
             <!-- <label>Email <span class="text-red">*</span> </label> -->
             <input
-              type="date"
               id="issuance_date"
               name="issuance_date"
               v-bind="issuance_date"
               :placeholder="t('issuance_date')"
               required
+              onfocus="(this.type='date')"
+              onblur="(this.type='text')"
               :class="{ 'is-invalid': errors.issuance_date }"
             />
 
@@ -141,7 +142,8 @@ let emptyFileDriver_license = () => {
           <SimpleInput>
             <!-- <label>Email <span class="text-red">*</span> </label> -->
             <input
-              type="date"
+              onfocus="(this.type='date')"
+              onblur="(this.type='text')"
               id="expiration_date"
               name="expiration_date"
               v-bind="expiration_date"
@@ -270,7 +272,6 @@ let emptyFileDriver_license = () => {
       </div>
     </div>
     <div class="row mt-4">
-      <h5>{{ t("Identity_document") }}</h5>
       <div class="col-md-6">
         <SimpleInput>
           <label class="py-3">{{ t("drivingEffect") }} </label>
@@ -290,7 +291,7 @@ let emptyFileDriver_license = () => {
       <div class="col-md-6">
         <SimpleInput>
           <label class="py-3">{{ t("yearsDriving") }} </label>
-          <select
+          <!-- <select
             id="years"
             name="years"
             v-bind="years"
@@ -300,7 +301,13 @@ let emptyFileDriver_license = () => {
             <option :value="year.id" v-for="year in Years" :key="year.id">
               {{ year.title }}
             </option>
-          </select>
+          </select> --><input
+            type="text"
+            v-bind="years"
+            name="years"
+            required
+            :class="{ 'is-invalid': errors.years }"
+          />
           <div class="invalid-feedback">{{ errors.years }}</div>
         </SimpleInput>
       </div>

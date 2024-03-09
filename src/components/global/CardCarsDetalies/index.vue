@@ -63,8 +63,14 @@ onMounted(() => {
       <hr />
       <div class="BookNow">
         <div>
-          <h5>{{ data.per }} LE</h5>
-          <span>(per week)</span>
+          <h5>{{ data.price }} LE</h5>
+          <span>
+            (per <span v-if="data.per == 1">hour</span>
+            <span v-else-if="data.per == 2">day</span>
+            <span v-else-if="data.per == 3">week </span>
+            <span v-else-if="data.per == 4">month</span>
+            <span v-else-if="data.per == 5">year</span>)</span
+          >
         </div>
         <SimpleButton type="send">
           <a href="https://wa.me/01032337327" target="_blank" class="btn p-2">
@@ -92,10 +98,10 @@ onMounted(() => {
   .card {
     border: 1px solid #e7e7e7 !important;
     border-top: 0px !important;
-    margin-bottom: 100px;
+    margin-bottom: 30px;
     a {
       margin: 0px;
-      padding: 20px;
+      padding: 20px 10px;
       display: block;
     }
     a:active {
@@ -110,6 +116,7 @@ onMounted(() => {
       display: flex;
       h3 {
         font-weight: 700;
+        font-size: 20px;
       }
       .buttons {
         display: flex;

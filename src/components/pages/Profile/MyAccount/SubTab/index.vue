@@ -10,11 +10,11 @@ let AccountListIcons = ref([
   {
     id: 0,
     image_icon: new URL(
-      `../../../../../assets/images/global/icons/global/profile/verify.svg`,
+      `../../../../../assets/images/global/icons/global/profile/profile.svg`,
       import.meta.url
     ).href,
     image_icon_active: new URL(
-      `../../../../../assets/images/global/icons/global/profile/verify-active.svg`,
+      `../../../../../assets/images/global/icons/global/profile/profile-active.svg`,
       import.meta.url
     ).href,
     title: "Personal_information",
@@ -22,14 +22,14 @@ let AccountListIcons = ref([
   {
     id: 1,
     image_icon: new URL(
-      `../../../../../assets/images/global/icons/global/profile/Personalinformation.svg`,
+      `../../../../../assets/images/global/icons/global/profile/verify.svg`,
       import.meta.url
     ).href,
     image_icon_active: new URL(
-      `../../../../../assets/images/global/icons/global/profile/Personalinformation-active.svg`,
+      `../../../../../assets/images/global/icons/global/profile/verify-active.svg`,
       import.meta.url
     ).href,
-    title: "Borrowing_verification",
+    title: "User verification",
   },
 ]);
 const ChooseTabAccountFun = (value) => {

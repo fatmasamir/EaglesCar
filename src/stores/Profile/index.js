@@ -187,9 +187,8 @@ export const UseProfile = defineStore("Profile", () => {
     }
   }
   // set_updateProfile
-  async function set_updateProfile(data, ImageProfile) {
+  async function set_updateProfile(data, ImageProfile1) {
     is_waiting.value = true;
-    console.log("ImageProfile", ImageProfile);
     const response = await callServer({
       url: "api/auth/profile",
       method: "POST",
@@ -197,17 +196,17 @@ export const UseProfile = defineStore("Profile", () => {
       type: "",
       auth: true,
     });
-    if (!response.ok) {
+    if (response.ok) {
+      ImageProfile.value = ImageProfile1;
+      is_waiting.value = false;
+      toast.success("Successfully  ... ");
+    } else {
       let errors = null;
       await response.json().then((data) => {
         toast.error(data.message);
       });
       is_waiting.value = false;
       throw errors;
-    } else {
-      ImageProfile.value = ImageProfile;
-      toast.success("Successfully  ... ");
-      is_waiting.value = false;
     }
   }
   // set_ChangePassword

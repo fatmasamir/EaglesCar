@@ -161,7 +161,7 @@ watch(props, (newValue) => {
                 <div class="invalid-feedback">{{ errors.last_name }}</div>
               </SimpleInput>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 selectForm">
               <SimpleInput>
                 <!-- <label>Email <span class="text-red">*</span> </label> -->
                 <select
@@ -179,8 +179,10 @@ watch(props, (newValue) => {
                     :key="country.id"
                   >
                     {{ country.title }}
-                  </option>
-                </select>
+                  </option></select
+                ><img
+                  src="@/assets/images/global/icons/global/arrow-down.svg"
+                />
                 <div class="invalid-feedback">{{ errors.nationality_id }}</div>
               </SimpleInput>
             </div>
@@ -265,7 +267,7 @@ watch(props, (newValue) => {
                 </div>
               </SimpleInput>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 selectForm">
               <SimpleInput>
                 <!-- <label>Email <span class="text-red">*</span> </label> -->
                 <select
@@ -283,8 +285,10 @@ watch(props, (newValue) => {
                     :key="country.id"
                   >
                     {{ country.title }}
-                  </option>
-                </select>
+                  </option></select
+                ><img
+                  src="@/assets/images/global/icons/global/arrow-down.svg"
+                />
                 <div class="invalid-feedback">{{ errors.residence_id }}</div>
               </SimpleInput>
             </div>
@@ -331,7 +335,7 @@ watch(props, (newValue) => {
     position: absolute;
     opacity: 0;
     right: 0px;
-    bottom: 0px;
+    bottom: -12px;
     width: 35px;
     height: 35px;
     padding: 5px;
