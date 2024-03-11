@@ -269,26 +269,17 @@ watch(props, (newValue) => {
             </div>
             <div class="col-md-4 selectForm">
               <SimpleInput>
-                <!-- <label>Email <span class="text-red">*</span> </label> -->
-                <select
+                <!-- <label>Email <span class="text-red">*</span> </label> 
+                  v-bind="residence_id"-->
+                <input
+                  type="text"
                   id="residence_id"
                   name="residence_id"
                   v-bind="residence_id"
+                  :placeholder="t('Location')"
                   :class="{ 'is-invalid': errors.residence_id }"
-                >
-                  <option value="" disabled selected>
-                    {{ t("Location") }}
-                  </option>
-                  <option
-                    :value="country.id"
-                    v-for="country in props.Counteries"
-                    :key="country.id"
-                  >
-                    {{ country.title }}
-                  </option></select
-                ><img
-                  src="@/assets/images/global/icons/global/arrow-down.svg"
                 />
+                <img src="@/assets/images/global/icons/global/arrow-down.svg" />
                 <div class="invalid-feedback">{{ errors.residence_id }}</div>
               </SimpleInput>
             </div>
@@ -346,5 +337,8 @@ watch(props, (newValue) => {
 }
 .disabled {
   background: #ddd !important;
+}
+.LightOff .disabled {
+  background: rgba(77, 77, 77, 0.7490196078) !important;
 }
 </style>
