@@ -75,3 +75,28 @@ onMounted(() => {
   }
 }
 </style>
+
+<style lang="scss">
+.dp__clear_icon {
+  top: 20px;
+  left: auto;
+  right: 19px;
+}
+.dp__input_icon {
+  top: 20px;
+  right: 0px;
+  left: auto;
+}
+.is-ar {
+  .dp__clear_icon {
+    top: 20px;
+    left: auto;
+    right: 19px;
+  }
+  .dp__input_icon {
+    top: 20px;
+    right: 0px;
+    left: auto;
+  }
+}
+</style>
