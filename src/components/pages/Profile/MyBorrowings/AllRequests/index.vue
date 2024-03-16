@@ -1,11 +1,11 @@
 <script setup>
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
-import { ref } from "vue";
+import { ref, defineProps } from "vue";
 import { useI18n } from "vue-i18n";
 
 //i18n
 const { t } = useI18n();
-
+const props = defineProps(["Borrowings"]);
 //i18n
 const ListOfCar = ref([
   {
@@ -36,7 +36,7 @@ const ListOfCar = ref([
 </script>
 <template>
   <div class="AllRequests">
-    <div class="text-center mb-5" v-if="ListOfCar.length == 0">
+    <div class="text-center mb-5" v-if="props.Borrowings.length == 0">
       <img
         src="@/assets/images/global/icons/global/profile/drunk_driving-cuate.svg"
       />
@@ -50,28 +50,44 @@ const ListOfCar = ref([
     </div>
     <div v-else>
       <ul>
-        <li v-for="item in ListOfCar" :key="item.id">
+        <li v-for="item in props.Borrowings" :key="item.id">
           <div class="box">
-            <div class="img_div"><img :src="item.img" /></div>
+            <div class="img_div"><img :src="item.car.media[0].cover" /></div>
             <div class="content">
               <div class="title">
                 <h3>
-                  {{ item.title }}
+                  {{ item.car.title }}
                 </h3>
-                <span :class="item.status"> {{ item.status }}</span>
+                <span v-if="item.car.status == 0" class="Pending">
+                  Pending</span
+                >
+                <span v-else-if="item.car.status == 1" class="accepted">
+                  Accepted</span
+                >
+                <span v-else class="Refused"> Refused</span>
               </div>
-              <p>{{ item.description }}</p>
+              <p v-html="item.car.description"></p>
               <hr />
               <div class="end">
                 <span
-                  ><strong>{{ item.pre }} LE</strong>
-                  <span class="per_week">(per week)</span></span
+                  ><strong>{{ item.car.price }} LE</strong>
+                  <span>
+                    (per <span v-if="item.car.per == 1">hour</span>
+                    <span v-else-if="item.car.per == 2">day</span>
+                    <span v-else-if="item.car.per == 3">week </span>
+                    <span v-else-if="item.car.per == 4">month</span>
+                    <span v-else-if="item.car.per == 5">year</span>)
+                  </span></span
                 >
                 <div class="buttons">
                   <SimpleButton type="send">
-                    <button class="btn" @click="AddCar = true">
-                      {{ t("Send_request_again") }}
-                    </button></SimpleButton
+                    <router-link
+                      class="btn"
+                      @click="AddCar = true"
+                      :to="'/car-detalies/' + item.car.slug"
+                    >
+                      {{ t("View") }}
+                    </router-link></SimpleButton
                   >
                   <!-- <SimpleButton type="send">
                     <button class="btn" @click="AddCar = true">

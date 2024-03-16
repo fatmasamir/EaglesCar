@@ -23,7 +23,7 @@ const { errors, handleSubmit, resetForm, defineInputBinds } = useForm({
     first_name: Yup.string().required(t("requiredFiled")),
     last_name: Yup.string().required(t("requiredFiled")),
     nationality_id: Yup.number().required(t("requiredFiled")),
-    residence_id: Yup.number().required(t("requiredFiled")),
+    location: Yup.string().required(t("requiredFiled")),
     email: Yup.string()
       .email(t("requiredFiledemail"))
       .required(t("requiredFiled")),
@@ -38,7 +38,7 @@ const { errors, handleSubmit, resetForm, defineInputBinds } = useForm({
 const first_name = defineInputBinds("first_name");
 const last_name = defineInputBinds("last_name");
 const nationality_id = defineInputBinds("nationality_id");
-const residence_id = defineInputBinds("residence_id");
+const location = defineInputBinds("location");
 const email = defineInputBinds("email");
 const identity = defineInputBinds("identity");
 const birthday = defineInputBinds("birthday");
@@ -66,7 +66,7 @@ let onSubmit = handleSubmit(async (values) => {
       first_name: values.first_name,
       last_name: values.last_name,
       nationality_id: values.nationality_id,
-      residence_id: values.residence_id,
+      location: values.location,
       email: values.email,
       identity: values.identity,
       birthday: values.birthday,
@@ -94,9 +94,7 @@ watch(props, (newValue) => {
       nationality_id: newValue.Profile.nationality
         ? newValue.Profile.nationality.id
         : 1,
-      residence_id: newValue.Profile.residence
-        ? newValue.Profile.residence.id
-        : 1,
+      location: newValue.Profile.location ? newValue.Profile.location : "",
       email: newValue.Profile.email ? newValue.Profile.email : "",
       identity: newValue.Profile.identity ? newValue.Profile.identity : "",
       birthday: newValue.Profile.birthday ? newValue.Profile.birthday : "",
@@ -267,20 +265,19 @@ watch(props, (newValue) => {
                 </div>
               </SimpleInput>
             </div>
-            <div class="col-md-4 selectForm">
+            <div class="col-md-4">
               <SimpleInput>
                 <!-- <label>Email <span class="text-red">*</span> </label> 
-                  v-bind="residence_id"-->
+                  v-bind="location"-->
                 <input
                   type="text"
-                  id="residence_id"
-                  name="residence_id"
-                  v-bind="residence_id"
+                  id="location"
+                  name="location"
+                  v-bind="location"
                   :placeholder="t('Location')"
-                  :class="{ 'is-invalid': errors.residence_id }"
+                  :class="{ 'is-invalid': errors.location }"
                 />
-                <img src="@/assets/images/global/icons/global/arrow-down.svg" />
-                <div class="invalid-feedback">{{ errors.residence_id }}</div>
+                <div class="invalid-feedback">{{ errors.location }}</div>
               </SimpleInput>
             </div>
             <div class="col-md-4">

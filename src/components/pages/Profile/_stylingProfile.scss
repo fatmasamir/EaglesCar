@@ -148,7 +148,8 @@ label {
     margin: 0px 10px;
   }
   .Refused,
-  .Pending {
+  .Pending,
+  .accepted {
     font-size: 10px;
     color: white;
     padding: 10px 20px;
@@ -160,6 +161,9 @@ label {
   }
   .Refused {
     background: #ff0000;
+  }
+  .accepted {
+    background: rgba(68, 195, 8, 1);
   }
 }
 //.is-ar

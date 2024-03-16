@@ -14,6 +14,8 @@ export const UseProfile = defineStore("Profile", () => {
   let Transmissions = ref();
   let Brands = ref();
   let ImageProfile = ref();
+  let Borrowings = ref([]);
+  let BorrowingsConfirmed = ref([]);
 
   // is_waiting
   let is_waiting = ref(false);
@@ -158,6 +160,34 @@ export const UseProfile = defineStore("Profile", () => {
       toast.error("Has Error");
     }
   }
+  //Get borrowings
+  async function borrowings() {
+    const response = await callServer({
+      url: "api/user/borrowings",
+      auth: true,
+    });
+    if (response.ok) {
+      response.json().then((data) => {
+        Borrowings.value = data.data;
+      });
+    } else {
+      toast.error("Has Error");
+    }
+  }
+  //Get borrowingsconfirmed
+  async function getborrowingsconfirmed() {
+    const response = await callServer({
+      url: "api/user/borrowings/confirmed",
+      auth: true,
+    });
+    if (response.ok) {
+      response.json().then((data) => {
+        BorrowingsConfirmed.value = data.data;
+      });
+    } else {
+      toast.error("Has Error");
+    }
+  }
   //Get transmissions
   async function get_transmissions() {
     const response = await callServer({
@@ -280,5 +310,9 @@ export const UseProfile = defineStore("Profile", () => {
     is_waitingChangePassword,
     AccountVerified,
     ImageProfile,
+    borrowings,
+    Borrowings,
+    getborrowingsconfirmed,
+    BorrowingsConfirmed,
   };
 });

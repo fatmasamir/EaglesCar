@@ -90,13 +90,13 @@ onMounted(() => {
 .is-ar {
   .dp__clear_icon {
     top: 20px;
-    left: auto;
-    right: 19px;
+    right: auto;
+    left: 19px;
   }
   .dp__input_icon {
     top: 20px;
-    right: 0px;
-    left: auto;
+    left: 0px;
+    right: auto;
   }
 }
 </style>
