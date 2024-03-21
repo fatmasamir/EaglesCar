@@ -3,6 +3,8 @@ import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.
 import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import AddCarContent from "./AddCarContent/index.vue";
+import AllRequests from "./AllRequests/index.vue";
+import ConfirmedRequest from "./ConfirmedRequest/index.vue";
 import { UseCars } from "@/stores/Cars/index";
 import Tabs from "./SubTab/index.vue";
 //i18n
@@ -11,103 +13,64 @@ const Cars = UseCars();
 //i18n
 const AddCar = ref(false);
 //itemChooseAddCar
-const itemChooseAddCar = ref("All_Requests");
+const itemChooseAddCar = ref("All_Car");
 
 //ChooseTabAccount
 const ChooseTabAccount = (nameTab) => {
   console.log("ChooseTab==", nameTab);
   itemChooseAddCar.value = nameTab;
 };
-const ListOfCar = ref([
-  {
-    id: 0,
-    title: "C200",
-    description:
-      "Lorem ipsum dolor sit amet, conse ctetur adipiscing elit ut elit tellus.",
-    pre: "120000",
-    img: new URL(
-      `../../../../assets/images/global/icons/global/carRental/car1.svg`,
-      import.meta.url
-    ).href,
-    status: "Pending",
-  },
-  {
-    id: 1,
-    title: "C200",
-    description:
-      "Lorem ipsum dolor sit amet, conse ctetur adipiscing elit ut elit tellus.",
-    pre: "120000",
-    img: new URL(
-      `../../../../assets/images/global/icons/global/carRental/car2.svg`,
-      import.meta.url
-    ).href,
-    status: "Refused",
-  },
-]);
 onMounted(() => {
   Cars.get_Cars();
 });
 </script>
 <template>
   <Tabs
+    v-if="!AddCar"
     @ChooseTabAccount="ChooseTabAccount"
     :itemChooseAddCar="itemChooseAddCar"
   ></Tabs>
-  <div v-if="!AddCar">
-    <!-- <pre>{{ Cars.Cars }}</pre> -->
-    <div class="text-center mb-5" v-if="!Cars.Cars">
-      <img
-        src="../../../../assets/images/global/icons/global/profile/drunk_driving-cuate.svg"
+  <span v-if="!AddCar">
+    <!--AllRequests-->
+    <div v-if="itemChooseAddCar == 'All_Car'">
+      <AllRequests
+        v-if="Cars.Cars.length != 0"
+        @ChooseTabAccount="ChooseTabAccount"
+        :Cars="Cars.Cars"
       />
-      <h6>{{ t("Add_car") }}</h6>
-      <p>{{ t("messageAdd_car") }}</p>
-      <SimpleButton type="send">
-        <button class="btn" @click="AddCar = true">
-          {{ t("add") }}
-        </button></SimpleButton
-      >
+      <div class="text-center mb-5" v-else>
+        <img
+          src="@/assets/images/global/icons/global/profile/drunk_driving-cuate.svg"
+        />
+        <h6>{{ t("Add_car") }}</h6>
+        <p>{{ t("messageAdd_car") }}</p>
+        <SimpleButton type="send">
+          <button class="btn" @click="AddCar = true">
+            {{ t("add") }}
+          </button></SimpleButton
+        >
+      </div>
     </div>
-    <div v-else>
-      <ul>
-        <li v-for="item in Cars.Cars" :key="item.id">
-          <div class="box">
-            <div class="img_div"><img :src="item.media.cover" /></div>
-            <div class="content">
-              <div class="title">
-                <h3>
-                  {{ item.title }}
-                </h3>
-              </div>
-              <p>{{ item.short_description }}</p>
-              <hr />
-              <div class="end">
-                <span
-                  ><strong>{{ item.price }} LE</strong>
-                  <span class="per_week">(per week)</span></span
-                >
-                <div class="buttons">
-                  <!-- <SimpleButton type="send">
-                    <button class="btn" @click="AddCar = true">
-                      {{ t("Finish_now") }}
-                    </button></SimpleButton
-                  > -->
-                  <SimpleButton type="send">
-                    <!-- <button class="btn">
-                      {{ t("Finish now") }}
-                    </button> -->
-                    <button class="btn btn-Edit">
-                      {{ t("Edit") }}
-                    </button></SimpleButton
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <div class="plus" @click="AddCar = true">+</div>
+    <div v-if="itemChooseAddCar == 'Confirmed_Car'">
+      <ConfirmedRequest
+        v-if="Cars.Cars.length > 0"
+        @ChooseTabAccount="ChooseTabAccount"
+        :Cars="Cars.Cars"
+      />
+      <div class="text-center mb-5" v-else>
+        <img
+          src="@/assets/images/global/icons/global/profile/drunk_driving-cuate.svg"
+        />
+        <h6>{{ t("Add_car") }}</h6>
+        <p>{{ t("messageAdd_car") }}</p>
+        <SimpleButton type="send">
+          <button class="btn" @click="AddCar = true">
+            {{ t("add") }}
+          </button></SimpleButton
+        >
+      </div>
     </div>
-  </div>
+  </span>
   <AddCarContent v-else />
 </template>
 <style lang="scss" scoped>

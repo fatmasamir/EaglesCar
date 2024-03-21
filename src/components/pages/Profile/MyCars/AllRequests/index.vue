@@ -5,22 +5,20 @@ import { useI18n } from "vue-i18n";
 
 //i18n
 const { t } = useI18n();
-const props = defineProps(["BorrowingsConfirmed"]);
-
+const props = defineProps(["Cars"]);
 //i18n
-const ListOfCar = ref([]);
 </script>
 <template>
   <div class="AllRequests">
-    <div v-if="props.BorrowingsConfirmed.length != 0">
-      <ul class="ListOfCar">
-        <li v-for="item in props.BorrowingsConfirmed" :key="item.id">
+    <div>
+      <ul>
+        <li v-for="item in props.Cars" :key="item.id">
           <div class="box">
-            <div class="img_div"><img :src="item.car.media[0].cover" /></div>
+            <div class="img_div"><img :src="item.media.cover" /></div>
             <div class="content">
               <div class="title">
                 <h3>
-                  {{ item.car.title }}
+                  {{ item.title }}
                 </h3>
                 <span v-if="item.status == 0" class="Pending"> Pending</span>
                 <span v-else-if="item.status == 1" class="accepted">
@@ -28,17 +26,17 @@ const ListOfCar = ref([]);
                 >
                 <span v-else class="Refused"> Refused</span>
               </div>
-              <p v-html="item.car.description"></p>
+              <p v-html="item.description"></p>
               <hr />
               <div class="end">
                 <span
-                  ><strong>{{ item.car.price }} LE</strong>
+                  ><strong>{{ item.price }} LE</strong>
                   <span>
-                    (per <span v-if="item.car.per == 1">hour</span>
-                    <span v-else-if="item.car.per == 2">day</span>
-                    <span v-else-if="item.car.per == 3">week </span>
-                    <span v-else-if="item.car.per == 4">month</span>
-                    <span v-else-if="item.car.per == 5">year</span>)
+                    (per <span v-if="item.per == 1">hour</span>
+                    <span v-else-if="item.per == 2">day</span>
+                    <span v-else-if="item.per == 3">week </span>
+                    <span v-else-if="item.per == 4">month</span>
+                    <span v-else-if="item.per == 5">year</span>)
                   </span></span
                 >
                 <div class="buttons">
@@ -46,7 +44,7 @@ const ListOfCar = ref([]);
                     <router-link
                       class="btn"
                       @click="AddCar = true"
-                      :to="'/car-detalies/' + item.car.slug"
+                      :to="'/car-detalies/' + item.slug"
                     >
                       {{ t("View") }}
                     </router-link></SimpleButton
@@ -63,23 +61,18 @@ const ListOfCar = ref([]);
         </li>
       </ul>
     </div>
-    <div class="text-center">
-      <h5 style="color: #ddd">Empty.....</h5>
-    </div>
   </div>
 </template>
 <style lang="scss" scoped>
 @import "../../stylingProfile.scss";
 .AllRequests {
+  padding-bottom: 100px;
   .simple-button.send button,
   .simple-button.send .btn {
     padding: 15px 30px;
     width: max-content !important;
     height: max-content !important;
     border-radius: 8px;
-  }
-  .ListOfCar {
-    padding-bottom: 100px;
   }
   .box {
     display: flex;

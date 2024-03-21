@@ -47,7 +47,7 @@ const en = {
   Home: "Home",
   About_us: "About us",
   About: "About",
-  Blogs: "Our Blogs",
+  Blogs: "Blog",
   Contact_us: "Contact us",
   save: "Save",
   time: "Time",
@@ -327,6 +327,8 @@ expectations.`,
   license_number: "License Number",
   sendRequest: "send Request",
   StartDate: "Start Date",
+  All_Car: "All Car",
+  Confirmed_Car: "Confirmed Car",
 };
 
 export default en;

@@ -14,11 +14,14 @@ import { UseBloges } from "@/stores/Bloges/index";
 import { UseHomepage } from "@/stores/homepage/index";
 // import Loading from "@/components/global/Loading/index.vue";
 import { onMounted, ref } from "vue";
+import { UseProfile } from "@/stores/Profile";
 const checkIn = ref<Date>();
 //Bloges
 const Bloges = UseBloges();
 //Bloges
 const Homepage = UseHomepage();
+//Bloges
+const Profile = UseProfile();
 
 //onMounted
 onMounted(() => {
@@ -26,6 +29,7 @@ onMounted(() => {
   Homepage.get_faqs();
   Homepage.get_testimonials();
   Homepage.get_services();
+  Profile.get_profile();
 });
 </script>
 <template>

@@ -37,7 +37,7 @@ const ListOfCar = ref([
 <template>
   <div class="AllRequests">
     <div class="text-center mb-5" v-if="props.Borrowings.length == 0">
-      <img
+      <!-- <img
         src="@/assets/images/global/icons/global/profile/drunk_driving-cuate.svg"
       />
       <h6>{{ t("Add_car") }}</h6>
@@ -46,7 +46,10 @@ const ListOfCar = ref([
         <button class="btn" @click="AddCar = true">
           {{ t("add") }}
         </button></SimpleButton
-      >
+      > -->
+      <div class="text-center">
+        <h5 style="color: #ddd">Empty.....</h5>
+      </div>
     </div>
     <div v-else>
       <ul>

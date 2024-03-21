@@ -84,9 +84,9 @@ const LogoutFun = () => {
         </div>
         <div class="info-login" v-if="Login">
           <router-link to="/profile" class="profile_link">
-            <img
-              src="../../../assets/images/global/icons/global/man.svg" /></router-link
-          ><router-link class="btn notification" to="/notification">
+            <img src="../../../assets/images/global/icons/global/man.svg"
+          /></router-link>
+          <!-- <router-link class="btn notification" to="/notification">
             <img
               src="../../../assets/images/global/icons/global/profile/notification-bing.svg"
             />
@@ -95,7 +95,7 @@ const LogoutFun = () => {
             <img
               src="../../../assets/images/global/icons/global/profile/messages.svg"
             />
-          </router-link>
+          </router-link> -->
         </div>
 
         <!-- light button -->

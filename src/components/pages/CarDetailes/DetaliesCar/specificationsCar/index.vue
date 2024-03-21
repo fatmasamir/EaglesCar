@@ -14,7 +14,7 @@ let props = defineProps(["Car"]);
   <div class="specificationsCar">
     <h4 class="mb-4">{{ props.Car.title }}</h4>
     <hr />
-    <div class="row">
+    <div class="row d-flex">
       <div class="col-lg-6">
         <p class="priceCar">
           {{ props.Car.price }} LE
@@ -34,12 +34,12 @@ let props = defineProps(["Car"]);
       </div>
       <div class="col-lg-6">
         <div class="buttons">
-          <div class="rating_number">
+          <!-- <div class="rating_number">
             <img
               src="../../../../../assets/images/global/icons/global/carRental/star.svg"
             />
             3
-          </div>
+          </div> -->
           <SimpleButton type="send" v-if="props.Car.available == 1">
             <button to="/" type="submit" class="btn">
               {{ t("Available") }}
@@ -84,8 +84,14 @@ let props = defineProps(["Car"]);
   p img {
     vertical-align: sub;
   }
+  .d-flex.row {
+    align-items: baseline;
+    width: 100% !important;
+    margin: auto;
+  }
   .buttons {
     display: flex;
+    justify-content: end;
     align-items: center;
     .rating_number {
       background: black;

@@ -88,8 +88,10 @@ onMounted(() => {
           <img v-if="props.ImageProfile" :src="props.ImageProfile" />
           <img
             src="../../../assets/images/global/icons/global/man.svg"
-            v-else /></router-link
-        ><button
+            v-else
+          />
+        </router-link>
+        <!-- <button
           class="btn notification"
           @click="(showNotification = !showNotification) && (showChat = false)"
         >
@@ -104,10 +106,10 @@ onMounted(() => {
           <img
             src="../../../assets/images/global/icons/global/profile/messages.svg"
           />
-        </button>
-        <NotificationPopup v-if="showNotification" /><ChatPopup
+        </button> -->
+        <!-- <NotificationPopup v-if="showNotification" /><ChatPopup
           v-if="showChat"
-        />
+        /> -->
         <router-link to="/ListYourCar" class="plusListYourCar">+</router-link>
       </div>
       <!-- lang -->
@@ -136,7 +138,6 @@ onMounted(() => {
           <img src="../../../assets/images/global/icons/global/light.svg" />
         </div>
       </div>
-
       <!--if Login-->
       <div v-if="Login">
         <!--if signin or login by google-->

@@ -15,6 +15,7 @@ const Verify_form_open = ref(false);
 
 //Bloges
 const Profile = UseProfile();
+const Profile2 = ref();
 
 //onMounted
 onMounted(() => {
@@ -27,9 +28,8 @@ onMounted(() => {
 </script>
 <template>
   <div class="box">
-    <h4>{{ t("Borrowing_verification") }}</h4>
     <div class="row" v-if="Profile.Profile">
-      <div class="col-lg-12" v-if="Profile.Profile.user.verification !== 2">
+      <div class="col-lg-12" v-if="Profile.Profile.user.verification !== 1">
         <div class="Account_verified Account_not_verified">
           <img
             src="@/assets/images/global/icons/global/profile/verify_error.svg"

@@ -19,7 +19,7 @@ let AccountListIcons = ref([
       `@/assets/images/global/icons/global/profile/like-dislike-active.svg`,
       import.meta.url
     ).href,
-    title: "All_Requests",
+    title: "All_Car",
   },
   {
     id: 1,
@@ -31,7 +31,7 @@ let AccountListIcons = ref([
       `@/assets/images/global/icons/global/profile/like-shapes-active.svg`,
       import.meta.url
     ).href,
-    title: "Confirmed_request",
+    title: "Confirmed_Car",
   },
 ]);
 const ChooseTabAccountFun = (value) => {

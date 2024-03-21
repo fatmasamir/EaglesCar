@@ -139,4 +139,17 @@
   .specificationsCar .information {
     border-color: #141414 !important;
   }
+  .simple-button.send .logout {
+    background-color: white !important;
+  }
+  .specificationsCar .priceCar {
+    color: white;
+  }
+  .simple-input input:not([class="vs__search"]):focus,
+  .simple-input textarea:focus {
+    background-color: transparent !important;
+  }
+  .Promotions img {
+    filter: brightness(0) invert(1);
+  }
 }

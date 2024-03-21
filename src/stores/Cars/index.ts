@@ -12,7 +12,7 @@ export const UseCars = defineStore("Cars", () => {
   //Get Bloges
   async function get_Cars() {
     const response = await callServer({
-      url: "api/cars",
+      url: "api/user/cars",
       auth: true,
     });
     if (response.ok) {

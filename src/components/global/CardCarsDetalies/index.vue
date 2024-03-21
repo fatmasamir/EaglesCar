@@ -24,12 +24,12 @@ onMounted(() => {
           <div class="title">
             <h3>{{ props.data.title }}</h3>
             <div class="buttons">
-              <div class="rating_number">
+              <!-- <div class="rating_number">
                 <img
                   src="@/assets/images/global/icons/global/carRental/star.svg"
                 />
                 {{ props.data.per }}
-              </div>
+              </div> -->
               <span class="available" v-if="data.available">
                 {{ t("Available") }}
               </span>
