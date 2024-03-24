@@ -61,10 +61,8 @@ const ListOfCar = ref([
                 <h3>
                   {{ item.car.title }}
                 </h3>
-                <span v-if="item.car.status == 0" class="Pending">
-                  Pending</span
-                >
-                <span v-else-if="item.car.status == 1" class="accepted">
+                <span v-if="item.status == 0" class="Pending"> Pending</span>
+                <span v-else-if="item.status == 1" class="accepted">
                   Accepted</span
                 >
                 <span v-else class="Refused"> Refused</span>

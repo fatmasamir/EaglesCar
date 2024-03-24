@@ -59,10 +59,6 @@ onMounted(() => {
           <div class="content">
             <div>
               <h6>Account is verified</h6>
-              <p>
-                Please verify yourself as a borrower to continue rent cars in
-                Egypt.
-              </p>
             </div>
             <SimpleButton type="send">
               <button class="btn" @click="Verify_form_open = true">
@@ -96,6 +92,7 @@ onMounted(() => {
     display: flex;
     width: 100%;
     padding: 0px 10px;
+    align-items: center;
     justify-content: space-between;
     .simple-button.send button {
       width: 120px;

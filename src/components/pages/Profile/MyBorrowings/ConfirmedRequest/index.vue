@@ -63,7 +63,7 @@ const ListOfCar = ref([]);
         </li>
       </ul>
     </div>
-    <div class="text-center">
+    <div class="text-center" v-else>
       <h5 style="color: #ddd">Empty.....</h5>
     </div>
   </div>

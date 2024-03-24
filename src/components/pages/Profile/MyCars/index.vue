@@ -34,11 +34,12 @@ onMounted(() => {
     <!--AllRequests-->
     <div v-if="itemChooseAddCar == 'All_Car'">
       <AllRequests
-        v-if="Cars.Cars.length != 0"
+        v-if="Cars.Cars"
         @ChooseTabAccount="ChooseTabAccount"
         :Cars="Cars.Cars"
       />
       <div class="text-center mb-5" v-else>
+        cdccd
         <img
           src="@/assets/images/global/icons/global/profile/drunk_driving-cuate.svg"
         />
@@ -58,6 +59,7 @@ onMounted(() => {
         :Cars="Cars.Cars"
       />
       <div class="text-center mb-5" v-else>
+        jhjhjhj
         <img
           src="@/assets/images/global/icons/global/profile/drunk_driving-cuate.svg"
         />
