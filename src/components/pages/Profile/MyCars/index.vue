@@ -22,6 +22,7 @@ const ChooseTabAccount = (nameTab) => {
 };
 onMounted(() => {
   Cars.get_Cars();
+  Cars.get_Cars_confirmed();
 });
 </script>
 <template>
@@ -34,12 +35,11 @@ onMounted(() => {
     <!--AllRequests-->
     <div v-if="itemChooseAddCar == 'All_Car'">
       <AllRequests
-        v-if="Cars.Cars"
+        v-if="Cars.CarsConfirmed.length > 0"
         @ChooseTabAccount="ChooseTabAccount"
         :Cars="Cars.Cars"
       />
       <div class="text-center mb-5" v-else>
-        cdccd
         <img
           src="@/assets/images/global/icons/global/profile/drunk_driving-cuate.svg"
         />
@@ -54,12 +54,11 @@ onMounted(() => {
     </div>
     <div v-if="itemChooseAddCar == 'Confirmed_Car'">
       <ConfirmedRequest
-        v-if="Cars.Cars.length > 0"
+        v-if="Cars.CarsConfirmed.length > 0"
         @ChooseTabAccount="ChooseTabAccount"
-        :Cars="Cars.Cars"
+        :Cars="Cars.CarsConfirmed"
       />
       <div class="text-center mb-5" v-else>
-        jhjhjhj
         <img
           src="@/assets/images/global/icons/global/profile/drunk_driving-cuate.svg"
         />

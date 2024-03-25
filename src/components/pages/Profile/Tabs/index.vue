@@ -55,18 +55,18 @@ let ListIcons = ref([
     ).href,
     title: "My_borrowings",
   },
-  {
-    id: 3,
-    image_icon: new URL(
-      `../../../../assets/images/global/icons/global/profile/money-3.svg`,
-      import.meta.url
-    ).href,
-    image_icon_active: new URL(
-      `../../../../assets/images/global/icons/global/profile/money-3-active.svg`,
-      import.meta.url
-    ).href,
-    title: "Payement",
-  },
+  // {
+  //   id: 3,
+  //   image_icon: new URL(
+  //     `../../../../assets/images/global/icons/global/profile/money-3.svg`,
+  //     import.meta.url
+  //   ).href,
+  //   image_icon_active: new URL(
+  //     `../../../../assets/images/global/icons/global/profile/money-3-active.svg`,
+  //     import.meta.url
+  //   ).href,
+  //   title: "Payement",
+  // },
 ]);
 const ChooseTabFun = (value) => {
   activeItem.value = value;

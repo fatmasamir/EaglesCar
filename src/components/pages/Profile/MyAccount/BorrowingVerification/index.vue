@@ -60,11 +60,11 @@ onMounted(() => {
             <div>
               <h6>Account is verified</h6>
             </div>
-            <SimpleButton type="send">
+            <!-- <SimpleButton type="send">
               <button class="btn" @click="Verify_form_open = true">
                 Edit
               </button></SimpleButton
-            >
+            > -->
           </div>
         </div>
       </div>
@@ -72,7 +72,8 @@ onMounted(() => {
     <div class="Verify_form" v-if="Verify_form_open">
       <VerifyFormOpen
         :Years="Profile.Years"
-        v-if="Profile.Years"
+        :Profile="Profile.Profile"
+        v-if="Profile.Profile"
         :Counteries="Profile.Counteries"
       />
     </div>
@@ -101,7 +102,7 @@ onMounted(() => {
     h6 {
       color: #44c308;
       font-weight: 500;
-      margin-bottom: 10px;
+      margin-bottom: -3px;
     }
     p {
       margin: 0px;

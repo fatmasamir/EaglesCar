@@ -5,6 +5,7 @@ import { useToast } from "vue-toastification";
 const toast = useToast();
 export const UseCars = defineStore("Cars", () => {
   let Cars = ref([]);
+  let CarsConfirmed = ref([]);
   let Car = ref({});
   let unfounedCars = ref(false);
   let is_waitingSend = ref(false);
@@ -27,7 +28,20 @@ export const UseCars = defineStore("Cars", () => {
       toast.error("Has Error");
     }
   }
-
+  //Get Bloges
+  async function get_Cars_confirmed() {
+    const response = await callServer({
+      url: "api/user/cars/confirmed",
+      auth: true,
+    });
+    if (response.ok) {
+      response.json().then((data) => {
+        CarsConfirmed.value = data.data;
+      });
+    } else {
+      toast.error("Has Error");
+    }
+  }
   //Get Bloge
   async function get_Car(slug) {
     const response = await callServer({
@@ -76,5 +90,7 @@ export const UseCars = defineStore("Cars", () => {
     unfounedCars,
     is_waitingSend,
     sendRequest,
+    CarsConfirmed,
+    get_Cars_confirmed,
   };
 });

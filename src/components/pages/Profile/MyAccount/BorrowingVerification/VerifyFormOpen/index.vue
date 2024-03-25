@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, defineProps } from "vue";
+import { ref, defineProps, watch, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import SimpleInput from "@/components/global/CusomInputs/SimpleInput/SimpleInput.vue";
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
@@ -13,13 +13,13 @@ const Profile = UseProfile();
 const { t } = useI18n();
 
 // props
-const props = defineProps(["Years", "Counteries"]);
+const props = defineProps(["Years", "Counteries", "Profile"]);
 
 // meta
 const { meta } = useForm();
 
 // formLogin
-const { errors, handleSubmit, defineInputBinds } = useForm({
+const { errors, handleSubmit, resetForm, defineInputBinds } = useForm({
   validationSchema: Yup.object({
     license_number: Yup.string().required(t("requiredFiled")),
     issuance_date: Yup.string().required(t("requiredFiled")),
@@ -99,6 +99,19 @@ let emptyFileDriver_license = () => {
   Driver_licenseName.value = "";
   Driver_license.value = "";
 };
+onMounted(() => {
+  resetForm({
+    values: {
+      license_number: props.Profile.user.license_number,
+      issuance_date: props.Profile.user.issuance_date,
+      expiration_date: props.Profile.user.expiration_date,
+      country_id: props.Profile.user.country_id,
+      phone: props.Profile.user.phone,
+      years: props.Profile.user.years,
+      drugs: props.Profile.user.drugs,
+    },
+  });
+});
 </script>
 <template>
   <h5>{{ t("Driver_License") }}</h5>

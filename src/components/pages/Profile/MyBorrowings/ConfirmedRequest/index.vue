@@ -16,7 +16,9 @@ const ListOfCar = ref([]);
       <ul class="ListOfCar">
         <li v-for="item in props.BorrowingsConfirmed" :key="item.id">
           <div class="box">
-            <div class="img_div"><img :src="item.car.media[0].cover" /></div>
+            <div class="img_div" v-if="item.car.media.length > 0">
+              <img :src="item.car.media[0].cover" />
+            </div>
             <div class="content">
               <div class="title">
                 <h3>
