@@ -13,7 +13,6 @@ const Profile = UseProfile();
 let emits = defineEmits(["ChooseTabAccount", "ChooseTabGoToMyCar"]);
 //i18n
 const { t } = useI18n();
-
 // meta
 const { meta } = useForm();
 

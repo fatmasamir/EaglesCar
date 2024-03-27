@@ -330,6 +330,7 @@ expectations.`,
   StartDate: "Start Date",
   All_Car: "All Cars",
   Confirmed_Car: "Confirmed Cars",
+  add_car: "Add Car",
 };
 
 export default en;

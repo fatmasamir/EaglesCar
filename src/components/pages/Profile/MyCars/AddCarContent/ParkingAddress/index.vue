@@ -28,11 +28,12 @@ const Featurer1 = defineInputBinds("Featurer1");
 const Featurer2 = defineInputBinds("Featurer2");
 const Featurer3 = defineInputBinds("Featurer3");
 // handel submit
-let onSubmit = handleSubmit((values) => {
+let onSubmit = handleSubmit(async (values) => {
   Profile.AccountVerified.Featurer1 = values.Featurer1;
   Profile.AccountVerified.Featurer2 = values.Featurer2;
   Profile.AccountVerified.Featurer3 = values.Featurer3;
-  Profile.add_cars();
+  await Profile.add_cars();
+  ChooseTabGoToMyCar();
 });
 const ChooseTabGoToMyCar = () => {
   emits("ChooseTabGoToMyCar");

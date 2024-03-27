@@ -312,5 +312,6 @@ const ar = {
   Minimum: "الحد الأدنى",
   sendRequest: "ارسل طلب",
   StartDate: "تاريخ البدء",
+  add_car: "إضافه  عربيه",
 };
 export default ar;

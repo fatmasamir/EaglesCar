@@ -1,9 +1,11 @@
 import callServer from "@/assets/scripts/callServer/callServer";
 import { defineStore } from "pinia";
+// import { UseCars } from "../Cars/index.ts";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useToast } from "vue-toastification";
 const toast = useToast();
+// const Cars = UseCars();
 export const UseProfile = defineStore("Profile", () => {
   const i18n = useI18n();
   let Profile = ref({});
@@ -341,6 +343,20 @@ export const UseProfile = defineStore("Profile", () => {
     data.append("with_driver", AccountVerified.value.with_driver);
     data.append("long_term", AccountVerified.value.long_term);
     data.append("country_id", AccountVerified.value.country_id);
+    // for (let x = 0; x < AccountVerified.value.media.length; x++) {
+    //   data.append(`media[${x}]`, AccountVerified.value.media[x]);
+    // }
+    for (let x in AccountVerified.value.media) {
+      console.log(`media[${x}]`, AccountVerified.value.media[x]);
+      data.append(`media[${x}]`, AccountVerified.value.media[x]);
+    }
+    for (let key in AccountVerified.media) {
+      console.log(
+        "AccountVerified.value.media",
+        AccountVerified.value.media[key]
+      );
+      data.append("media[0]", AccountVerified.value.media[key]);
+    }
 
     const response = await callServer({
       url: "api/user/cars",
@@ -359,9 +375,37 @@ export const UseProfile = defineStore("Profile", () => {
       throw errors;
     } else {
       toast.success("Successfully  ... ");
+      AccountVerified.value = {
+        title: "",
+        transmission: "",
+        brand: "",
+        model: "",
+        year: "",
+        mileage: "",
+        door: "",
+        color: "",
+        fuelType: "",
+        seats: "",
+        plate_number: "",
+        expiration_date: "",
+        description: "",
+        license: "",
+        insurance: "",
+        identity_back: "",
+        identity_face: "",
+        Short_term: 0,
+        long_term: 0,
+        with_driver: 0,
+        Featurer1: "",
+        Featurer2: "",
+        Featurer3: "",
+        media: [],
+        country_id: null,
+        price: 0,
+      };
       is_waiting.value = false;
       get_profile();
-      this.router.push("/profile");
+      // Cars.get_Cars();
     }
   }
   return {

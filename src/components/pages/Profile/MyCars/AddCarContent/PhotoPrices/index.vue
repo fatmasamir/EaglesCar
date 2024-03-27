@@ -37,8 +37,11 @@ let ListShortTerms = ref(false);
 let error = ref(false);
 // fileSelectedInsurance
 let fileSelectedMedia = (event) => {
-  console.log(event.target.files);
-  media.value = event.target.files;
+  let files = event.target.files;
+  for (let i = 0; i < files.length; i++) {
+    media.value.push(files[i]);
+  }
+  console.log(media.value);
 };
 // Changecheckbox submit
 let Changecheckbox = (e) => {

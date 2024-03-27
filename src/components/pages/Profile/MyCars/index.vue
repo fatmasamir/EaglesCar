@@ -24,6 +24,8 @@ const ChooseTabAccount = (nameTab) => {
 const GoToMyCar = () => {
   AddCar.value = false;
   itemChooseAddCar.value = "All_Car";
+  Cars.get_user_Cars();
+  Cars.get_Cars_confirmed();
 };
 onMounted(() => {
   Cars.get_user_Cars();
@@ -106,7 +108,7 @@ onMounted(() => {
   height: 60px;
   position: absolute;
   right: 40px;
-  bottom: 20px;
+  top: 20px;
   border: 0px;
 }
 .box {
