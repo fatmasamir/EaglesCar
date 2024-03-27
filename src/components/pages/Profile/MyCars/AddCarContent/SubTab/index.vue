@@ -48,14 +48,14 @@ let AccountListIcons = ref([
   {
     id: 3,
     image_icon: new URL(
-      `@/assets/images/global/icons/global/profile/radar.svg`,
+      `@/assets/images/global/icons/global/profile/star-svgrepo-com.active.svg`,
       import.meta.url
     ).href,
     image_icon_active: new URL(
-      `@/assets/images/global/icons/global/profile/radar-active.svg`,
+      `@/assets/images/global/icons/global/profile/star-svgrepo-com.svg`,
       import.meta.url
     ).href,
-    title: "Parking_address",
+    title: "Features",
   },
 ]);
 const ChooseTabAccountFun = (value) => {
@@ -69,7 +69,6 @@ const ChooseTabAccountFun = (value) => {
       v-for="item in AccountListIcons"
       :key="item.id"
       :class="props.itemChooseAddCar == item.title ? 'subActive' : ''"
-      @click="ChooseTabAccountFun(item.title)"
     >
       <div class="content">
         <img :src="item.image_icon" class="normal" />

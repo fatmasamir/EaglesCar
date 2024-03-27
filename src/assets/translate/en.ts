@@ -239,7 +239,8 @@ expectations.`,
   Account_not_verified: "Account not verified",
   messageAccount_not_verified:
     "Please verify yourself as a borrower to continue rent cars in Egypt.",
-  Identity_document: "Identity document :",
+  Identity_document_face: "Identity document (face):",
+  Identity_document_back: "Identity document (back):",
   messageIdentity_document:
     "Make sure to the identity in a PDF or JPG format with maximum file size 5 MB.",
   upload: "upload",

@@ -10,7 +10,7 @@ import { UseProfile } from "@/stores/Profile/index";
 const Profile = UseProfile();
 
 // emit
-let emits = defineEmits(["ChooseTabAccount"]);
+let emits = defineEmits(["ChooseTabAccount", "ChooseTabGoToMyCar"]);
 //i18n
 const { t } = useI18n();
 
@@ -58,9 +58,12 @@ let onSubmit = handleSubmit((values) => {
   Profile.AccountVerified.color = values.color;
   Profile.AccountVerified.fuelType = values.Fuel_Type;
   Profile.AccountVerified.seats = values.Number_Seats;
-  Profile.AccountVerified.short_description = values.Car_Description_message;
+  Profile.AccountVerified.description = values.Car_Description_message;
   emits("ChooseTabAccount", "Car_license");
 });
+const ChooseTabGoToMyCar = () => {
+  emits("ChooseTabGoToMyCar");
+};
 //onMounted
 onMounted(() => {
   Profile.get_years();
@@ -74,7 +77,7 @@ onMounted(() => {
     resetForm({
       values: {
         Car_title: Profile.AccountVerified.title,
-        Car_Description_message: Profile.AccountVerified.short_description,
+        Car_Description_message: Profile.AccountVerified.description,
         Transmission: Profile.AccountVerified.transmission,
         Make: Profile.AccountVerified.brand,
         Model: Profile.AccountVerified.model,
@@ -334,7 +337,7 @@ onMounted(() => {
     <div class="row my-5">
       <div class="col-12 text-center direction_ar">
         <SimpleButton type="sub_button">
-          <button>
+          <button @click="ChooseTabGoToMyCar()">
             {{ t("Finish_later") }}
           </button>
         </SimpleButton>

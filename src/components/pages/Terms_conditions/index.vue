@@ -18,27 +18,27 @@ onMounted(() => {
   <div class="Terms_conditions">
     <div class="container">
       <div class="row" v-if="props.termsConditions">
-        <div class="col-lg-12" v-if="i18n.locale.value == 'en'">
-          <h5>
-            {{
-              props.termsConditions &&
-              props.termsConditions.title &&
-              props.termsConditions.title.en
-                ? props.termsConditions.title.en
-                : ""
-            }}
-          </h5>
-          <p>
-            {{
-              props.termsConditions &&
-              props.termsConditions.description &&
-              props.termsConditions.description.en
-                ? props.termsConditions.description.en
-                : ""
-            }}
-          </p>
+        <div class="col-lg-12">
+          <h5
+            v-if="i18n.locale.value == 'en'"
+            v-html="props.termsConditions.title.en"
+          ></h5>
+          <h5
+            v-else
+            class="text-start"
+            v-html="props.termsConditions.title.ar"
+          ></h5>
+          <p
+            v-if="i18n.locale.value == 'en'"
+            v-html="props.termsConditions.description.en"
+          ></p>
+          <p
+            v-else
+            class="text-start"
+            v-html="props.termsConditions.description.ar"
+          ></p>
         </div>
-        <div class="col-lg-12 text-start" v-else>
+        <!-- <div class="col-lg-12 text-start" v-else>
           <h5>
             {{
               props.termsConditions &&
@@ -48,16 +48,9 @@ onMounted(() => {
                 : ""
             }}
           </h5>
-          <p class="text-start">
-            {{
-              props.termsConditions &&
-              props.termsConditions.description &&
-              props.termsConditions.description.ar
-                ? props.termsConditions.description.ar
-                : ""
-            }}
-          </p>
-        </div>
+
+          <p v-html="props.termsConditions.description.en"></p>
+        </div> -->
       </div>
       <loading v-else></loading>
     </div>

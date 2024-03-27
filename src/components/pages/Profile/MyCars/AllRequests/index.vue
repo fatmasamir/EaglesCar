@@ -15,7 +15,7 @@ const props = defineProps(["Cars"]);
         <li v-for="item in props.Cars" :key="item.id">
           <div class="box">
             <div class="img_div" v-if="item.media.length > 0">
-              <img :src="item.media.cover" />
+              <img :src="item.media[0].cover" />
             </div>
             <div class="content">
               <div class="title">

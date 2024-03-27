@@ -13,9 +13,9 @@ onMounted(() => {
 </script>
 <template>
   <div class="the_block">
-    <div class="image_car">
+    <div class="image_car" v-if="props.data.media.length > 0">
       <router-link :to="'/car-detalies/' + data.slug" type="submit" class="btn">
-        <img :src="props.data.media.cover"
+        <img :src="props.data.media[0].cover"
       /></router-link>
     </div>
     <div class="card">

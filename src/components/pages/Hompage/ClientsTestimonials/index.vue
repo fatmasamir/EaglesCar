@@ -6,8 +6,8 @@ import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 import { useI18n } from "vue-i18n";
 
 import AOS from "aos";
-const { t } = useI18n();
 const i18n = useI18n();
+const { t } = useI18n();
 const props = defineProps(["testimonials"]);
 const slides = [
   {
@@ -52,9 +52,16 @@ onMounted(() => {
                 <input type="radio" id="star1" name="rate" value="1" />
                 <label for="star1" title="1">1 star</label>
               </div> -->
-
-              <p v-html="slide.description.en"></p>
-              <h5>- {{ slide.name.en }}</h5>
+              <p
+                v-if="i18n.locale.value == 'ar'"
+                v-html="slide.description.ar"
+              ></p>
+              <p
+                v-if="i18n.locale.value == 'en'"
+                v-html="slide.description.en"
+              ></p>
+              <h5 v-if="i18n.locale.value == 'ar'">- {{ slide.name.ar }}</h5>
+              <h5 v-if="i18n.locale.value == 'en'">- {{ slide.name.en }}</h5>
             </div>
           </slide>
 

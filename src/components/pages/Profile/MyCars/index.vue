@@ -20,59 +20,68 @@ const ChooseTabAccount = (nameTab) => {
   console.log("ChooseTab==", nameTab);
   itemChooseAddCar.value = nameTab;
 };
+//ChooseTabAccount
+const GoToMyCar = () => {
+  AddCar.value = false;
+  itemChooseAddCar.value = "All_Car";
+};
 onMounted(() => {
-  Cars.get_Cars();
+  Cars.get_user_Cars();
   Cars.get_Cars_confirmed();
 });
 </script>
 <template>
-  <Tabs
-    v-if="!AddCar"
-    @ChooseTabAccount="ChooseTabAccount"
-    :itemChooseAddCar="itemChooseAddCar"
-  ></Tabs>
-  <span v-if="!AddCar">
-    <!--AllRequests-->
-    <div v-if="itemChooseAddCar == 'All_Car'">
-      <AllRequests
-        v-if="Cars.CarsConfirmed.length > 0"
-        @ChooseTabAccount="ChooseTabAccount"
-        :Cars="Cars.Cars"
-      />
-      <div class="text-center mb-5" v-else>
-        <img
-          src="@/assets/images/global/icons/global/profile/drunk_driving-cuate.svg"
-        />
-        <h6>{{ t("Add_car") }}</h6>
-        <p>{{ t("messageAdd_car") }}</p>
-        <SimpleButton type="send">
-          <button class="btn" @click="AddCar = true">
-            {{ t("add") }}
-          </button></SimpleButton
-        >
+  <div class="myCar">
+    <Tabs
+      v-if="!AddCar"
+      @ChooseTabAccount="ChooseTabAccount"
+      :itemChooseAddCar="itemChooseAddCar"
+    ></Tabs>
+    <span v-if="!AddCar">
+      <!--AllRequests-->
+      <div v-if="itemChooseAddCar == 'All_Car'">
+        <div v-if="Cars.CarsUser.length > 0">
+          <AllRequests
+            @ChooseTabAccount="ChooseTabAccount"
+            :Cars="Cars.CarsUser"
+          />
+          <button @click="AddCar = true" class="plusListYourCar">+</button>
+        </div>
+        <div class="text-center mb-5" v-else>
+          <img
+            src="@/assets/images/global/icons/global/profile/drunk_driving-cuate.svg"
+          />
+          <h6>{{ t("Add_car") }}</h6>
+          <p>{{ t("messageAdd_car") }}</p>
+          <SimpleButton type="send">
+            <button class="btn" @click="AddCar = true">
+              {{ t("add") }}
+            </button></SimpleButton
+          >
+        </div>
       </div>
-    </div>
-    <div v-if="itemChooseAddCar == 'Confirmed_Car'">
-      <ConfirmedRequest
-        v-if="Cars.CarsConfirmed.length > 0"
-        @ChooseTabAccount="ChooseTabAccount"
-        :Cars="Cars.CarsConfirmed"
-      />
-      <div class="text-center mb-5" v-else>
-        <img
-          src="@/assets/images/global/icons/global/profile/drunk_driving-cuate.svg"
+      <div v-if="itemChooseAddCar == 'Confirmed_Car'">
+        <ConfirmedRequest
+          v-if="Cars.CarsConfirmed.length > 0"
+          @ChooseTabAccount="ChooseTabAccount"
+          :Cars="Cars.CarsConfirmed"
         />
-        <h6>{{ t("Add_car") }}</h6>
-        <p>{{ t("messageAdd_car") }}</p>
-        <SimpleButton type="send">
-          <button class="btn" @click="AddCar = true">
-            {{ t("add") }}
-          </button></SimpleButton
-        >
+        <div class="text-center mb-5" v-else>
+          <img
+            src="@/assets/images/global/icons/global/profile/drunk_driving-cuate.svg"
+          />
+          <h6>{{ t("Add_car") }}</h6>
+          <p>{{ t("messageAdd_car") }}</p>
+          <SimpleButton type="send">
+            <button class="btn" @click="AddCar = true">
+              {{ t("add") }}
+            </button></SimpleButton
+          >
+        </div>
       </div>
-    </div>
-  </span>
-  <AddCarContent v-else />
+    </span>
+    <AddCarContent v-else @GoToMyCar="GoToMyCar" />
+  </div>
 </template>
 <style lang="scss" scoped>
 @import "../stylingProfile.scss";
@@ -82,6 +91,23 @@ onMounted(() => {
   width: max-content !important;
   height: max-content !important;
   border-radius: 8px;
+}
+.myCar {
+  position: relative;
+}
+.plusListYourCar {
+  background: #f4a71d;
+  border-radius: 100%;
+  margin-left: 15px;
+  padding: 10px 17px;
+  color: white;
+  font-size: 20px;
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  right: 40px;
+  bottom: 20px;
+  border: 0px;
 }
 .box {
   display: flex;

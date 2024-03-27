@@ -14,17 +14,13 @@ onMounted(() => {
   <div class="Contact_Info">
     <h3>{{ t("Contact_Info") }}</h3>
     <ul class="list_contact" v-if="props.ContactInformation">
-      <li>
-        <a :href="'mailto:' + props.ContactInformation[2].link">
-          <img src="@//assets/images/global/icons/global/contactUs/map.svg" />
-          {{
-            i18n.locale.value == "en"
-              ? props.ContactInformation[2].title.en
-              : props.ContactInformation[2].title.ar
-          }}</a
+      <li v-for="info in props.ContactInformation" :key="info.id">
+        <a :href="'mailto:' + info.link">
+          <img :src="info.image.cover" />
+          {{ i18n.locale.value == "en" ? info.title.en : info.title.ar }}</a
         >
       </li>
-      <li>
+      <!-- <li>
         <a
           :href="'https://wa.me/' + props.ContactInformation[1].link"
           target="_blank"
@@ -44,8 +40,6 @@ onMounted(() => {
           target="_blank"
           :href="'https://' + props.ContactInformation[0].link"
         >
-          <!-- <img src="@//assets/images/global/icons/global/contactUs/map.svg" /> -->
-
           <img src="@//assets/images/global/icons/global/contactUs/sms.svg" />
           {{
             i18n.locale.value == "en"
@@ -53,17 +47,16 @@ onMounted(() => {
               : props.ContactInformation[0].title.ar
           }}
         </a>
-      </li>
+      </li> -->
     </ul>
     <h6>{{ t("Social_media_contacts") }}</h6>
     <ul class="Social_media_contacts" v-if="props.socialMedia">
-      <li>
-        <a :href="'https://' + props.socialMedia[0].link" target="_blank">
-          <img
-            src="@//assets/images/global/icons/global/contactUs/facebook.svg"
+      <li v-for="soical in props.socialMedia" :key="soical.id">
+        <a :href="'https://' + soical.link" target="_blank">
+          <img :src="soical.image.cover"
         /></a>
       </li>
-      <li>
+      <!-- <li>
         <a :href="'https://' + props.socialMedia[1].link" target="_blank">
           <img src="@//assets/images/global/icons/global/contactUs/twitter.svg"
         /></a>
@@ -78,7 +71,7 @@ onMounted(() => {
         <a :href="'https://' + props.socialMedia[3].link" target="_blank">
           <img src="@//assets/images/global/icons/global/contactUs/youtube.svg"
         /></a>
-      </li>
+      </li> -->
     </ul>
   </div>
 </template>
@@ -116,6 +109,10 @@ onMounted(() => {
       border-radius: 100%;
       padding: 10px;
       margin-right: 20px;
+      img {
+        width: 25px;
+        height: 25px;
+      }
     }
   }
 }

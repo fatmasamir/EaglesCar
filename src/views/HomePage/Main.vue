@@ -29,7 +29,9 @@ onMounted(() => {
   Homepage.get_faqs();
   Homepage.get_testimonials();
   Homepage.get_services();
-  Profile.get_profile();
+  if (localStorage.getItem("access_token")) {
+    Profile.get_profile();
+  }
 });
 </script>
 <template>

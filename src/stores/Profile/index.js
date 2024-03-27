@@ -1,9 +1,11 @@
 import callServer from "@/assets/scripts/callServer/callServer";
 import { defineStore } from "pinia";
 import { ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { useToast } from "vue-toastification";
 const toast = useToast();
 export const UseProfile = defineStore("Profile", () => {
+  const i18n = useI18n();
   let Profile = ref({});
   let Counteries = ref();
   let Years = ref();
@@ -36,16 +38,20 @@ export const UseProfile = defineStore("Profile", () => {
     seats: "",
     plate_number: "",
     expiration_date: "",
-    short_description: "",
+    description: "",
     license: "",
-    insurance_yearly_cost: "",
-    insurance_excess_value: "",
+    insurance: "",
     identity_back: "",
     identity_face: "",
     Short_term: 0,
     long_term: 0,
     with_driver: 0,
-    without_driver: 0,
+    Featurer1: "",
+    Featurer2: "",
+    Featurer3: "",
+    media: [],
+    country_id: null,
+    price: 0,
   });
   // "title[en]": "",
   // "properties[transmission]": "",
@@ -283,6 +289,81 @@ export const UseProfile = defineStore("Profile", () => {
       is_waiting_verify.value = false;
     }
   }
+  // set_ChangePassword
+  async function add_cars() {
+    is_waiting.value = true;
+    let data = new FormData();
+    // if (i18n.locale.value == "en") {
+    //   // data.append("title[en]", AccountVerified.value.title);
+    //   data.append("short_description[en]", AccountVerified.value.description);
+    //   data.append("features[0][en]", AccountVerified.value.Featurer1);
+    //   data.append("features[1][en]", AccountVerified.value.Featurer2);
+    //   data.append("features[2][en]", AccountVerified.value.Featurer3);
+    // } else {
+    //   // data.append("title[ar]", AccountVerified.value.title);
+    //   data.append("short_description[ar]", AccountVerified.value.description);
+    //   data.append("features[0][ar]", AccountVerified.value.Featurer1);
+    //   data.append("features[1][ar]", AccountVerified.value.Featurer2);
+    //   data.append("features[2][ar]", AccountVerified.value.Featurer2);
+    // }
+    // data.append("title[ar]", AccountVerified.value.title);
+    data.append("title[en]", AccountVerified.value.title);
+    // data.append("description[ar]", AccountVerified.value.description);
+    data.append("description[en]", AccountVerified.value.description);
+    data.append("short_description[en]", AccountVerified.value.description);
+    // data.append("features.0.ar", AccountVerified.value.Featurer1);
+    // data.append("features.1.ar", AccountVerified.value.Featurer2);
+    // data.append("features.2.ar", AccountVerified.value.Featurer2);
+    data.append("features.0.en", AccountVerified.value.Featurer1);
+    data.append("features.1.en", AccountVerified.value.Featurer2);
+    data.append("features.2.en", AccountVerified.value.Featurer3);
+    data.append("available", 1);
+    data.append("features[0][en]", AccountVerified.value.Featurer1);
+    data.append("features[1][en]", AccountVerified.value.Featurer2);
+    data.append("features[2][en]", AccountVerified.value.Featurer3);
+    data.append("properties[transmission]", AccountVerified.value.transmission);
+    data.append("properties[brand]", AccountVerified.value.brand);
+    data.append("properties[model]", AccountVerified.value.model);
+    data.append("properties[year]", AccountVerified.value.year);
+    data.append("mileage", AccountVerified.value.mileage);
+    data.append("price", AccountVerified.value.price);
+    data.append("properties[door]", AccountVerified.value.door);
+    data.append("properties[color]", AccountVerified.value.color);
+    data.append("properties[fuelType]", AccountVerified.value.fuelType);
+    data.append("seats", AccountVerified.value.seats);
+    data.append("plate_number", AccountVerified.value.plate_number);
+    data.append("expiration_date", AccountVerified.value.expiration_date);
+    data.append("license", AccountVerified.value.license);
+    data.append("insurance", AccountVerified.value.insurance);
+    data.append("identity_back", AccountVerified.value.identity_back);
+    data.append("identity_face", AccountVerified.value.identity_face);
+    data.append("short_term", AccountVerified.value.Short_term);
+    data.append("with_driver", AccountVerified.value.with_driver);
+    data.append("long_term", AccountVerified.value.long_term);
+    data.append("country_id", AccountVerified.value.country_id);
+
+    const response = await callServer({
+      url: "api/user/cars",
+      method: "POST",
+      type: "",
+      data,
+      auth: true,
+    });
+    if (!response.ok) {
+      let errors = null;
+      await response.json().then((data) => {
+        toast.error(data.message);
+      });
+      is_waiting.value = false;
+      this.router.push("/profile");
+      throw errors;
+    } else {
+      toast.success("Successfully  ... ");
+      is_waiting.value = false;
+      get_profile();
+      this.router.push("/profile");
+    }
+  }
   return {
     get_profile,
     Profile,
@@ -314,5 +395,6 @@ export const UseProfile = defineStore("Profile", () => {
     Borrowings,
     getborrowingsconfirmed,
     BorrowingsConfirmed,
+    add_cars,
   };
 });

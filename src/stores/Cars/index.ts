@@ -5,21 +5,39 @@ import { useToast } from "vue-toastification";
 const toast = useToast();
 export const UseCars = defineStore("Cars", () => {
   let Cars = ref([]);
+  let CarsUser = ref([]);
   let CarsConfirmed = ref([]);
   let Car = ref({});
   let unfounedCars = ref(false);
   let is_waitingSend = ref(false);
-
   //Get Bloges
   async function get_Cars() {
     const response = await callServer({
-      url: "api/user/cars",
+      url: "api/cars",
       auth: true,
     });
     if (response.ok) {
       response.json().then((data) => {
         Cars.value = data.data;
         if (Cars.value.length == 0) {
+          unfounedCars.value = true;
+        }
+        console.log("Bloges.value", Cars.value);
+      });
+    } else {
+      toast.error("Has Error");
+    }
+  }
+  //Get Bloges
+  async function get_user_Cars() {
+    const response = await callServer({
+      url: "api/user/cars",
+      auth: true,
+    });
+    if (response.ok) {
+      response.json().then((data) => {
+        CarsUser.value = data.data;
+        if (CarsUser.value.length == 0) {
           unfounedCars.value = true;
         }
         console.log("Bloges.value", Cars.value);
@@ -86,11 +104,13 @@ export const UseCars = defineStore("Cars", () => {
     get_Cars,
     Cars,
     get_Car,
+    get_user_Cars,
     Car,
     unfounedCars,
     is_waitingSend,
     sendRequest,
     CarsConfirmed,
     get_Cars_confirmed,
+    CarsUser,
   };
 });

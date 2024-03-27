@@ -183,4 +183,10 @@ onMounted(() => {
     font-size: 20px;
   }
 }
+.is-ar {
+  .plusListYourCar {
+    margin-left: 0px;
+    margin-right: 15px;
+  }
+}
 </style>

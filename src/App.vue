@@ -2,6 +2,7 @@
 import { onMounted, ref, watch } from "@vue/runtime-core";
 import { useLang } from "@/stores/lang";
 import { useLight } from "@/stores/light";
+import { UseProfile } from "@/stores/Profile";
 
 //Language
 const Language = useLang();
@@ -12,6 +13,8 @@ const Light = useLight();
 //loading
 const loading = ref(true);
 
+//Bloges
+const Profile = UseProfile();
 //onMounted
 onMounted(() => {
   //onMounted
@@ -24,6 +27,9 @@ onMounted(() => {
   setTimeout(function () {
     loading.value = false;
   }, 1000);
+  if (localStorage.getItem("access_token")) {
+    Profile.get_profile();
+  }
 });
 </script>
 <template>
