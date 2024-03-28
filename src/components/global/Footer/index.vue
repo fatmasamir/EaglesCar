@@ -4,8 +4,12 @@ import { onMounted, ref } from "vue";
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
 import AOS from "aos";
 const { t } = useI18n();
+import { UseCars } from "@/stores/Cars";
+//Bloges
+const Cars = UseCars();
 onMounted(() => {
   AOS.init();
+  Cars.get_brand_car();
 });
 </script>
 <template>
@@ -110,36 +114,12 @@ onMounted(() => {
         <div class="col-lg-2">
           <h5>{{ t("Top_cars") }}</h5>
           <ul class="about_us">
-            <li>
-              <router-link to="/favourit-car">
+            <li v-for="(brand, index) in Cars.Brands" :key="brand.id">
+              <router-link :to="'/favourit-car/' + brand.slug" v-if="index < 5">
                 <img
                   src="../../../assets/images/global/icons/global/Homepage/icons/Frame.svg"
                 />
-                {{ t("Nissan") }}</router-link
-              >
-            </li>
-            <li>
-              <router-link to="/favourit-car">
-                <img
-                  src="../../../assets/images/global/icons/global/Homepage/icons/Frame.svg"
-                />
-                {{ t("Honda") }}</router-link
-              >
-            </li>
-            <li>
-              <router-link to="/favourit-car">
-                <img
-                  src="../../../assets/images/global/icons/global/Homepage/icons/Frame.svg"
-                />
-                {{ t("Audi") }}</router-link
-              >
-            </li>
-            <li>
-              <router-link to="/favourit-car">
-                <img
-                  src="../../../assets/images/global/icons/global/Homepage/icons/Frame.svg"
-                />
-                {{ t("Range_Rover") }}</router-link
+                {{ brand.title }}</router-link
               >
             </li>
           </ul>
