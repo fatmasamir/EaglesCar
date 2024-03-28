@@ -5,11 +5,15 @@ import { useToast } from "vue-toastification";
 const toast = useToast();
 export const UseCars = defineStore("Cars", () => {
   let Cars = ref([]);
+  let mostpopular = ref([]);
+  let Brands = ref([]);
   let CarsUser = ref([]);
   let CarsConfirmed = ref([]);
   let Car = ref({});
+  let BrandInfo = ref({});
   let unfounedCars = ref(false);
   let is_waitingSend = ref(false);
+
   //Get Bloges
   async function get_Cars() {
     const response = await callServer({
@@ -99,6 +103,46 @@ export const UseCars = defineStore("Cars", () => {
         }
       });
     }
+  } //Get get_most_popular
+  async function get_most_popular() {
+    const response = await callServer({
+      url: "api/cars/mostpopular",
+      auth: true,
+    });
+    if (response.ok) {
+      response.json().then((data) => {
+        mostpopular.value = data.data;
+      });
+    } else {
+      toast.error("Has Error");
+    }
+  } //Get get_most_popular
+  async function get_brand_car() {
+    const response = await callServer({
+      url: "api/brands",
+      auth: true,
+    });
+    if (response.ok) {
+      response.json().then((data) => {
+        Brands.value = data.data;
+        console.log("Brands", Brands);
+      });
+    } else {
+      toast.error("Has Error");
+    }
+  } //Get get_most_popular
+  async function get_brand_car_info(slug) {
+    const response = await callServer({
+      url: "api/cars/brand/" + slug,
+      auth: true,
+    });
+    if (response.ok) {
+      response.json().then((data) => {
+        BrandInfo.value = data;
+      });
+    } else {
+      toast.error("Has Error");
+    }
   }
   return {
     get_Cars,
@@ -108,9 +152,15 @@ export const UseCars = defineStore("Cars", () => {
     Car,
     unfounedCars,
     is_waitingSend,
+    get_brand_car,
     sendRequest,
+    get_brand_car_info,
     CarsConfirmed,
     get_Cars_confirmed,
+    get_most_popular,
     CarsUser,
+    mostpopular,
+    Brands,
+    BrandInfo,
   };
 });

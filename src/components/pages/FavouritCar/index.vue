@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, defineProps } from "vue";
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
 import CardCarsDetalies from "../../global/CardCarsDetalies/index.vue";
 import AOS from "aos";
 const { t } = useI18n();
+// props
+let props = defineProps(["BrandInfo"]);
 const data = ref([
   {
     id: 0,
@@ -81,7 +83,7 @@ onMounted(() => {
   <section class="CarRental">
     <div class="container">
       <div class="row">
-        <div class="col-md-4" v-for="info in data" :key="info.id">
+        <div class="col-md-4" v-for="info in props.BrandInfo" :key="info.id">
           <CardCarsDetalies :data="info"></CardCarsDetalies>
         </div>
       </div>
@@ -91,6 +93,7 @@ onMounted(() => {
 <style scoped lang="scss">
 .CarRental {
   margin-top: 150px;
+  margin-bottom: 150px;
   height: auto;
   .the_block {
     .image_car img {

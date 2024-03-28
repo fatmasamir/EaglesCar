@@ -313,5 +313,6 @@ const ar = {
   sendRequest: "ارسل طلب",
   StartDate: "تاريخ البدء",
   add_car: "إضافه  عربيه",
+  most_popular: "الأكتر شيوعا",
 };
 export default ar;

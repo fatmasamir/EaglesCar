@@ -307,7 +307,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     //FavouritCar
-    path: "/favourit-car",
+    path: "/favourit-car/:slug",
     name: "FavouritCar",
     component: FavouritCar,
     beforeEnter(to, from) {
