@@ -49,7 +49,18 @@ const location = defineInputBinds("location");
 let onSubmit = handleSubmit(async (values) => {
   try {
     console.log("value = ", values, route.params.id);
-    Cars.sendRequest(JSON.stringify(values), route.params.id);
+    let data = {
+      start_date: values.start_date,
+      return_date: values.return_date,
+      receipt_hour: values.receipt_hour,
+      return_hour: values.return_hour,
+      name: values.name,
+      phone: values.phone,
+      nationality: values.nationality,
+      location: values.location,
+      status: 0,
+    };
+    Cars.sendRequest(JSON.stringify(data), route.params.id);
   } catch (err) {
     console.log(err);
   }
