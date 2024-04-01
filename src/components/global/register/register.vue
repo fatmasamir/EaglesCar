@@ -42,10 +42,10 @@ onMounted(() => {
           <div class="auth_header text-start">
             <h3>{{ t("Register") }}</h3>
             <p>{{ t("Register_msg") }}</p>
-            <ContinueSocial type="Register" />
+            <!-- <ContinueSocial type="Register" />
             <div class="Or">
               <p>{{ t("OR") }}</p>
-            </div>
+            </div> -->
           </div>
           <FormRegister />
         </div>

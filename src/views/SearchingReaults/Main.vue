@@ -20,11 +20,13 @@ onMounted(() => {
   <section class="Pages">
     <NavBar></NavBar>
     <Header :TiltePage="route.params.slug"></Header>
-    <SearchingReaults
-      v-if="Cars.CarsFillter.length != 0"
-      :CarsFillter="Cars.CarsFillter"
-    ></SearchingReaults>
-    <NotFound v-else />
+    <div v-if="Cars.CarsFillter">
+      <SearchingReaults
+        v-if="Cars.CarsFillter.length != 0"
+        :CarsFillter="Cars.CarsFillter"
+      ></SearchingReaults>
+      <NotFound v-else />
+    </div>
     <Footer></Footer>
   </section>
 </template>

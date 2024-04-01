@@ -180,22 +180,13 @@ onMounted(() => {
       </div>
       <div class="col-md-6">
         <SimpleInput>
-          <select
-            id="exampleFormControlInput1"
+          <input
+            type="text"
+            id="location"
+            :placeholder="t('location')"
             v-bind="location"
             :class="{ 'is-invalid': errors.location }"
-          >
-            <option value="" disabled selected>
-              {{ t("Pick_up_Location") }}
-            </option>
-            <option
-              :value="country.id"
-              v-for="country in Profile.Counteries"
-              :key="country.id"
-            >
-              {{ country.title }}
-            </option>
-          </select>
+          />
           <div class="invalid-feedback">
             {{ errors.location }}
           </div></SimpleInput

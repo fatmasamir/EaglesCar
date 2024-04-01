@@ -71,10 +71,10 @@ onMounted(() => {
           <div class="auth_header text-start">
             <h3>{{ t("Login") }}</h3>
             <p>{{ t("login_msg") }}</p>
-            <ContinueSocial type="Login" />
+            <!--  <ContinueSocial type="Login" />
             <div class="Or">
               <p>{{ t("OR") }}</p>
-            </div>
+            </div>-->
           </div>
           <ul class="tab row">
             <li @click="ShowLoginEmail = true" class="col-sm-6">
