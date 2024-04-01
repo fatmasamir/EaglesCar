@@ -15,10 +15,8 @@ onMounted(() => {
     <h3>{{ t("Contact_Info") }}</h3>
     <ul class="list_contact" v-if="props.ContactInformation">
       <li v-for="info in props.ContactInformation" :key="info.id">
-        <a :href="'mailto:' + info.link">
-          <img :src="info.image.cover" />
-          {{ i18n.locale.value == "en" ? info.title.en : info.title.ar }}</a
-        >
+        <img :src="info.image.cover" />
+        {{ i18n.locale.value == "en" ? info.title.en : info.title.ar }}
       </li>
       <!-- <li>
         <a
@@ -90,13 +88,10 @@ onMounted(() => {
     margin: 20px 0px;
     li {
       margin-bottom: 20px;
-      a {
-        color: black;
-        img {
-          width: 35px;
-          height: 35px;
-          margin-right: 10px;
-        }
+      img {
+        width: 35px;
+        height: 35px;
+        margin-right: 10px;
       }
     }
   }

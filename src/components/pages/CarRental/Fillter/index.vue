@@ -4,12 +4,39 @@ import { onMounted, ref } from "vue";
 import SimpleInput from "@/components/global/CusomInputs/SimpleInput/SimpleInput.vue";
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
 import AOS from "aos";
+import { useForm } from "vee-validate";
+import { UseCars } from "@/stores/Cars";
+import * as Yup from "yup";
+import { useRouter } from "vue-router";
+// router
+const router = useRouter();
 
 //useI18n
 const { t } = useI18n();
+//UseCars
+const Cars = UseCars();
+// meta
+const { meta } = useForm();
 
-//Driver
-const Driver = ref(true);
+// formRegister
+const { errors, handleSubmit, defineInputBinds } = useForm({
+  validationSchema: Yup.object({
+    query: Yup.string().required(t("requiredFiled")),
+  }),
+});
+
+//first_name ,last_name
+const query = defineInputBinds("query");
+// //Driver
+// const Driver = ref(true);
+
+let onSubmit = handleSubmit((values) => {
+  if (values) {
+    console.log("values", JSON.stringify(values));
+
+    router.push("/search-results/" + values.query);
+  }
+});
 
 //onMounted
 onMounted(() => {
@@ -18,9 +45,10 @@ onMounted(() => {
 </script>
 <template>
   <section class="Fillter">
-    <h4>{{ t("Search_filter") }} <span></span></h4>
-    <div class="row">
-      <div class="col-lg-12">
+    <form @submit.prevent="onSubmit">
+      <h4>{{ t("Search_filter") }} <span></span></h4>
+      <div class="row">
+        <!-- <div class="col-lg-12">
         <label
           ><img
             src="../../../../assets/images/global/icons/global/Homepage/location.svg"
@@ -34,38 +62,40 @@ onMounted(() => {
             {{ t("Without_driver") }}
           </div>
         </div>
-      </div>
-      <div class="col-lg-12">
+      </div> -->
+        <div class="col-lg-12">
+          <label
+            ><img
+              src="../../../../assets/images/global/icons/global/Homepage/location.svg"
+            />{{ t("NameCarsOrBrands") }}</label
+          >
+          <SimpleInput>
+            <input
+              type="text"
+              :placeholder="t('NameCarsOrBrands')"
+              v-bind="query"
+              class="mb-0"
+              :class="{ 'is-invalid': errors.query }"
+            />
+            <div class="invalid-feedback">{{ errors.query }}</div></SimpleInput
+          >
+        </div>
+        <!-- <div class="col-lg-12">
         <label
           ><img
             src="../../../../assets/images/global/icons/global/Homepage/location.svg"
-          />{{ t("Car_type") }}</label
+          />{{ t("title") }}</label
         >
         <SimpleInput>
           <select class="form-control">
             <option disabled selected value="">
-              {{ t("Choose_Your_Type") }}
+              {{ t("title") }}
             </option>
             <option>anythink</option>
           </select></SimpleInput
         >
-      </div>
-      <div class="col-lg-12">
-        <label
-          ><img
-            src="../../../../assets/images/global/icons/global/Homepage/location.svg"
-          />{{ t("Car_model") }}</label
-        >
-        <SimpleInput>
-          <select class="form-control">
-            <option disabled selected value="">
-              {{ t("Choose_Car_model") }}
-            </option>
-            <option>anythink</option>
-          </select></SimpleInput
-        >
-      </div>
-      <div class="col-lg-12 range">
+      </div> -->
+        <!-- <div class="col-lg-12 range">
         <label
           ><img
             src="../../../../assets/images/global/icons/global/Homepage/location.svg"
@@ -83,8 +113,8 @@ onMounted(() => {
           <output id="rangevalue">50</output>
         </div>
         <div class="info"><span>2018</span><span>2023</span></div>
-      </div>
-      <div class="col-lg-12">
+      </div> -->
+        <!-- <div class="col-lg-12">
         <label
           ><img
             src="../../../../assets/images/global/icons/global/Homepage/location.svg"
@@ -153,13 +183,12 @@ onMounted(() => {
               src="../../../../assets/images/global/icons/global/Homepage/location.svg"
             /></button
         ></SimpleButton>
+      </div>-->
+        <div class="col-lg-12 Reset">
+          <button class="color-main">{{ t("Reset_all") }}</button>
+        </div>
       </div>
-      <div class="col-lg-12 Reset">
-        <router-link to="/" class="color-main">{{
-          t("Reset_all")
-        }}</router-link>
-      </div>
-    </div>
+    </form>
   </section>
 </template>
 <style scoped lang="scss">
@@ -272,11 +301,17 @@ onMounted(() => {
       margin-top: 10px;
     }
     .Reset {
-      a {
+      button {
         display: block;
         margin: auto;
+        background: white;
+        border: 0px;
+        padding: 10px 0px;
         width: 100%;
         text-align: center;
+        &hover {
+          color: #c59b08;
+        }
       }
       margin: 10px auto;
     }

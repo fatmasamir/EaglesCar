@@ -19,8 +19,7 @@ onMounted(() => {
   <section class="BrandCars">
     <div class="container">
       <div class="row text-center">
-        <h6 class="color-main p-0">{{ t("Research cars") }}</h6>
-        <h3>{{ t("by make brands") }}</h3>
+        <h3>{{ t("by brands") }}</h3>
         <ul class="listBrand" v-if="props.Brands != 0">
           <li v-for="brand in props.Brands" :key="brand.id">
             <router-link :to="'/favourit-car/' + brand.slug">

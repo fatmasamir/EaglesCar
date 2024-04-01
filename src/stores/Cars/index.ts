@@ -8,11 +8,13 @@ export const UseCars = defineStore("Cars", () => {
   let mostpopular = ref([]);
   let Brands = ref([]);
   let CarsUser = ref([]);
+  let CarsFillter = ref([]);
   let CarsConfirmed = ref([]);
   let Car = ref({});
   let BrandInfo = ref({});
   let unfounedCars = ref(false);
   let is_waitingSend = ref(false);
+  let is_waiting = ref(false);
 
   //Get Bloges
   async function get_Cars() {
@@ -144,6 +146,29 @@ export const UseCars = defineStore("Cars", () => {
       toast.error("Has Error");
     }
   }
+  // sendRequest
+  async function FillterCars(data) {
+    is_waiting.value = true;
+    const response = await callServer({
+      url: "api/cars/search",
+      method: "POST",
+      data,
+    });
+
+    if (response.ok) {
+      response.json().then((data) => {
+        is_waiting.value = false;
+        CarsFillter.value = data.data;
+      });
+    } else {
+      is_waiting.value = false;
+      response.json().then((data) => {
+        for (let key in data.errors) {
+          toast.error(data.errors[key][0]);
+        }
+      });
+    }
+  }
   return {
     get_Cars,
     Cars,
@@ -162,5 +187,7 @@ export const UseCars = defineStore("Cars", () => {
     mostpopular,
     Brands,
     BrandInfo,
+    FillterCars,
+    CarsFillter,
   };
 });

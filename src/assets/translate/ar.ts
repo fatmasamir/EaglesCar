@@ -314,5 +314,8 @@ const ar = {
   StartDate: "تاريخ البدء",
   add_car: "إضافه  عربيه",
   most_popular: "الأكتر شيوعا",
+  Cars_Slug: " ",
+  NameCarsOrBrands: "اسم العربية او البراند",
+  message: "رساله",
 };
 export default ar;

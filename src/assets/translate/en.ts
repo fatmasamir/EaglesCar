@@ -332,6 +332,9 @@ expectations.`,
   Confirmed_Car: "Confirmed Cars",
   add_car: "Add Car",
   most_popular: "Most Popular",
+  Cars_Slug: "Cars Slug",
+  NameCarsOrBrands: "Name Car Or Brands",
+  serach_car: "Search For A Car",
 };
 
 export default en;

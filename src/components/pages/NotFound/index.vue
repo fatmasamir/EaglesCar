@@ -3,7 +3,8 @@
     <div class="container">
       <div class="content">
         <img src="@/assets/images/global/icons\global/notFound.svg" />
-        <h5>No internet connection</h5>
+        <!-- <h5>No internet connection</h5> -->
+        <h5>Not Available</h5>
       </div>
     </div>
   </div>

@@ -86,7 +86,7 @@ onMounted(() => {
 </script>
 <template>
   <div class="row" v-if="props.Cars.length != 0">
-    <div class="col-md-6" v-for="info in props.Cars" :key="info.id">
+    <div class="col-md-4" v-for="info in props.Cars" :key="info.id">
       <!-- <router-link to="/car-detalies"> -->
       <CardCarsDetalies :data="info"></CardCarsDetalies>
     </div>

@@ -45,7 +45,7 @@ onMounted(() => {
           v-if="props.Mostpopular.length != 0"
         >
           <swiper-slide v-for="list in props.Mostpopular" :key="list.id">
-            <router-link :to="'/blog-detailes/' + list.slug">
+            <router-link :to="'/car-detalies/' + list.slug">
               <img :src="list.media[0].cover" v-if="list.media.length" />
               <div class="info">
                 <!-- <span>{{ list.date }}</span> -->

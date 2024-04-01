@@ -39,6 +39,9 @@ import HowItWorks from "../views/HowItWorks/Main.vue";
 //FavouritCar page
 import FavouritCar from "../views/FavouritCar/Main.vue";
 
+//PrivacyPolicy page
+import SearchingReaults from "../views/SearchingReaults/Main.vue";
+
 //CarRental page
 import CarRental from "../views/CarRental/Main.vue";
 
@@ -315,6 +318,22 @@ const routes: Array<RouteRecordRaw> = [
         document.title = `السيارة المفضلة - Eagles car`;
       } else {
         document.title = "Favourit Car Page - Eagles car";
+      }
+      // if (!localStorage.getItem("access_token")) {
+      //   return `/login`;
+      // }
+    },
+  },
+  {
+    //SearchingReaults
+    path: "/search-results/:slug",
+    name: "SearchingReaults",
+    component: SearchingReaults,
+    beforeEnter(to, from) {
+      if (localStorage.getItem("lang") == "ar") {
+        document.title = `نتيحه البحث  - Eagles car`;
+      } else {
+        document.title = "Searching Reaults Page - Eagles car";
       }
       // if (!localStorage.getItem("access_token")) {
       //   return `/login`;

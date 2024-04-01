@@ -21,15 +21,15 @@ onMounted(() => {
     <div class="container">
       <div class="LookingFor"><FillterHeader /></div>
       <div class="row">
-        <div class="col-lg-4"><Fillter /></div>
-        <div class="col-lg-8"><CardsDetailes :Cars="props.Cars" /></div>
+        <!-- <div class="col-lg-4"><Fillter /></div> -->
+        <div class="col-lg-12"><CardsDetailes :Cars="props.Cars" /></div>
       </div>
     </div>
   </section>
 </template>
 <style scoped lang="scss">
 .CarRental {
-  padding-top: 250px;
+  padding-top: 152px;
   position: relative;
   .LookingFor {
     position: absolute;
@@ -42,7 +42,7 @@ onMounted(() => {
 /*media" */
 @media screen and (max-width: 990px) {
   .CarRental {
-    padding-top: 500px;
+    // padding-top: 500px;
     .LookingFor {
     }
     .row {
