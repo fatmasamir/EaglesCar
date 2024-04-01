@@ -5,11 +5,14 @@ import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.
 import AOS from "aos";
 const { t } = useI18n();
 import { UseCars } from "@/stores/Cars";
+import { UseContactus } from "@/stores/Contactus/index";
 //Bloges
 const Cars = UseCars();
+const Contactusg = UseContactus();
 onMounted(() => {
   AOS.init();
   Cars.get_brand_car();
+  Contactusg.get_socialMedia();
 });
 </script>
 <template>
@@ -26,35 +29,10 @@ onMounted(() => {
             {{ t("paraFooter") }}
           </p>
           <ul class="social_media">
-            <li>
-              <router-link to="#">
-                <img
-                  src="../../../assets/images/global/icons/global/Homepage/icons/icon4.svg"
-              /></router-link>
-            </li>
-            <li>
-              <router-link to="#">
-                <img
-                  src="../../../assets/images/global/icons/global/Homepage/icons/icon3.svg"
-              /></router-link>
-            </li>
-            <li>
-              <router-link to="#">
-                <img
-                  src="../../../assets/images/global/icons/global/Homepage/icons/icon2.svg"
-              /></router-link>
-            </li>
-            <li>
-              <router-link to="#">
-                <img
-                  src="../../../assets/images/global/icons/global/Homepage/icons/icon1.svg"
-              /></router-link>
-            </li>
-            <li>
-              <router-link to="#">
-                <img
-                  src="../../../assets/images/global/icons/global/Homepage/icons/icon.svg"
-              /></router-link>
+            <li v-for="soical in Contactusg.socialMedia" :key="soical.id">
+              <a :href="'https://' + soical.link" target="_blank">
+                <img :src="soical.image.cover"
+              /></a>
             </li>
           </ul>
         </div>
@@ -99,14 +77,6 @@ onMounted(() => {
                   src="../../../assets/images/global/icons/global/Homepage/icons/Frame.svg"
                 />
                 {{ t("Support") }}</router-link
-              >
-            </li>
-            <li>
-              <router-link to="#">
-                <img
-                  src="../../../assets/images/global/icons/global/Homepage/icons/Frame.svg"
-                />
-                {{ t("Top_cars") }}</router-link
               >
             </li>
           </ul>
@@ -201,6 +171,18 @@ Footer {
         margin-bottom: 20px;
       }
     }
+  }
+}
+.social_media {
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  li {
+    padding: 0px;
+  }
+  img {
+    width: 20px;
+    height: 20px;
   }
 }
 /*media" */

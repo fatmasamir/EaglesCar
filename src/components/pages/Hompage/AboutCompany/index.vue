@@ -31,10 +31,7 @@ onMounted(() => {
         <img
           src="../../../../assets/images/global/icons/global/Homepage/about_header.svg"
         />
-        <router-link to="/" class="whatsapp">
-          <img
-            src="../../../../assets/images/global/icons/global/Homepage/whatsapp.svg"
-        /></router-link>
+
         <router-link
           to="/"
           class="video"
@@ -73,14 +70,6 @@ onMounted(() => {
         margin-left: auto;
         display: block;
         border-radius: 8px;
-      }
-      .whatsapp {
-        position: fixed;
-        bottom: 10px;
-        right: 20px;
-        width: 60px;
-        height: 60px;
-        z-index: 999;
       }
       .video {
         background: #f4a71d;

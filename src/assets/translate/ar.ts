@@ -317,5 +317,7 @@ const ar = {
   Cars_Slug: " ",
   NameCarsOrBrands: "اسم العربية او البراند",
   message: "رساله",
+  byBrand: "إبحث بإسم العلامة التجارية",
+  Pick_up_Location: "اختر موقعا",
 };
 export default ar;

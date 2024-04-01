@@ -15,24 +15,22 @@ let props = defineProps(["Car"]);
     <h4 class="mb-4">{{ props.Car.title }}</h4>
     <hr />
     <div class="row d-flex">
-      <div class="col-lg-6">
-        <p class="priceCar">
-          {{ props.Car.price }} LE
-          <span>
-            (per <span v-if="props.Car.per == 1">hour</span>
-            <span v-else-if="props.Car.per == 2">day</span>
-            <span v-else-if="props.Car.per == 3">week </span>
-            <span v-else-if="props.Car.per == 4">month</span>
-            <span v-else-if="props.Car.per == 5">year</span>)
-          </span>
-        </p>
+      <div class="col-lg-9 d-flex align-items-center">
+        <p class="priceCar">{{ props.Car.price }} LE</p>
+        <span>
+          (per <span v-if="props.Car.per == 1">hour</span>
+          <span v-else-if="props.Car.per == 2">day</span>
+          <span v-else-if="props.Car.per == 3">week </span>
+          <span v-else-if="props.Car.per == 4">month</span>
+          <span v-else-if="props.Car.per == 5">year</span>)
+        </span>
         <!-- <p>
           <img
             src="../../../../../assets/images/global/icons/global/cardDetailes/star.svg"
           />Add to favorites
         </p> -->
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-3">
         <div class="buttons">
           <!-- <div class="rating_number">
             <img
@@ -60,7 +58,7 @@ let props = defineProps(["Car"]);
           :to="'/send-request/' + Car.slug + '/' + Car.id"
           class="btn"
         >
-          {{ t("Send_request") }}
+          {{ t("Book_car") }}
         </router-link></SimpleButton
       >
     </div>

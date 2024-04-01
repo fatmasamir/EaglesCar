@@ -37,6 +37,9 @@ onMounted(() => {
     <b-spinner label="Spinning"></b-spinner>
   </div>
   <router-view></router-view>
+  <router-link to="/" class="whatsapp">
+    <img src="@/assets/images/global/icons/global/Homepage/whatsapp.svg"
+  /></router-link>
 </template>
 <style scoped lang="scss">
 .loading {
@@ -51,6 +54,17 @@ onMounted(() => {
   span {
     width: 40px;
     height: 40px;
+  }
+}
+.whatsapp {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  z-index: 999;
+  img {
+    width: 45px;
   }
 }
 </style>

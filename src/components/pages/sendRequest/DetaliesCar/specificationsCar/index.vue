@@ -14,23 +14,24 @@ let props = defineProps(["Car"]);
   <div class="specificationsCar">
     <h4 class="mb-4">{{ props.Car.title }}</h4>
     <hr />
-    <div class="row">
-      <div class="col-lg-6">
-        <h6><span class="color-main">$40,000</span> (per week)</h6>
+    <div class="row m-0 p-0">
+      <div class="col-lg-8 d-flex align-items-center">
+        <p class="priceCar">{{ props.Car.price }} LE</p>
+        <span>
+          (per <span v-if="props.Car.per == 1">hour</span>
+          <span v-else-if="props.Car.per == 2">day</span>
+          <span v-else-if="props.Car.per == 3">week </span>
+          <span v-else-if="props.Car.per == 4">month</span>
+          <span v-else-if="props.Car.per == 5">year</span>)
+        </span>
         <!-- <p>
           <img
             src="../../../../../assets/images/global/icons/global/cardDetailes/star.svg"
           />Add to favorites
         </p> -->
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-4 m-0 p-0">
         <div class="buttons">
-          <div class="rating_number">
-            <img
-              src="../../../../../assets/images/global/icons/global/carRental/star.svg"
-            />
-            3
-          </div>
           <SimpleButton type="send" v-if="props.Car.available == 1">
             <button to="/" type="submit" class="btn">
               {{ t("Available") }}
@@ -61,8 +62,7 @@ let props = defineProps(["Car"]);
     vertical-align: sub;
   }
   .buttons {
-    display: flex;
-    align-items: center;
+    text-align: right;
     .rating_number {
       background: black;
       color: white;

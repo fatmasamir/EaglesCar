@@ -28,7 +28,7 @@ const props = defineProps(["Cars"]);
                 >
                 <span v-else class="Refused"> Refused</span>
               </div>
-              <p v-html="item.description"></p>
+              <p v-html="item.short_description"></p>
               <hr />
               <div class="end">
                 <span

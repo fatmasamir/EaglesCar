@@ -335,6 +335,9 @@ expectations.`,
   Cars_Slug: "Cars Slug",
   NameCarsOrBrands: "Name Car Or Brands",
   serach_car: "Search For A Car",
+  byBrand: "Find By Brand",
+  Book_car: "Book this car",
+  Pick_up_Location: "Pick-up Location",
 };
 
 export default en;

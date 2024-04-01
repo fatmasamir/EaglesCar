@@ -158,7 +158,6 @@ onMounted(() => {
       <div class="col-md-6">
         <SimpleInput>
           <select
-            type="data"
             id="exampleFormControlInput1"
             v-bind="nationality"
             :class="{ 'is-invalid': errors.nationality }"
@@ -181,8 +180,14 @@ onMounted(() => {
       </div>
       <div class="col-md-6">
         <SimpleInput>
-          <select type="data" id="exampleFormControlInput1" v-bind="location">
-            <option disabled selected>Location:</option>
+          <select
+            id="exampleFormControlInput1"
+            v-bind="location"
+            :class="{ 'is-invalid': errors.location }"
+          >
+            <option value="" disabled selected>
+              {{ t("Pick_up_Location") }}
+            </option>
             <option
               :value="country.id"
               v-for="country in Profile.Counteries"
@@ -199,7 +204,7 @@ onMounted(() => {
     </div>
     <SimpleButton type="send">
       <button type="submit" v-if="!Profile.is_waitingSend">
-        {{ t("Send_request") }}
+        {{ t("Book_car") }}
       </button>
       <button type="submit" disabled v-else>
         {{ t("wait") }}

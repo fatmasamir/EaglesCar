@@ -26,15 +26,15 @@ const ChooseTabAccount = (nameTab) => {
         @ChooseTabAccount="ChooseTabAccount"
       />
       <CarLicense
-        v-if="itemChooseAddCar == 'Car license'"
+        v-if="itemChooseAddCar == 'Car_license'"
         @ChooseTabAccount="ChooseTabAccount"
       />
       <PhotoPrices
-        v-if="itemChooseAddCar == 'Photo and prices'"
+        v-if="itemChooseAddCar == 'Photo_and_prices'"
         @ChooseTabAccount="ChooseTabAccount"
       />
       <ParkingAddress
-        v-if="itemChooseAddCar == 'Parking address'"
+        v-if="itemChooseAddCar == 'Features'"
         @ChooseTabAccount="ChooseTabAccount"
       />
     </div>

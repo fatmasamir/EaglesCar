@@ -3,45 +3,98 @@ import { ref, defineEmits } from "vue";
 import { useI18n } from "vue-i18n";
 import SimpleInput from "@/components/global/CusomInputs/SimpleInput/SimpleInput.vue";
 import SimpleButton from "@/components/global/Buttons/simpleButton/SimpleButton.vue";
+import { UseProfile } from "@/stores/Profile/index";
+import { useForm } from "vee-validate";
+import * as Yup from "yup";
 
+import { useRouter } from "vue-router";
+//Bloges
+const Profile = UseProfile();
+const router = useRouter();
 // emit
 let emits = defineEmits(["ChooseTabAccount"]);
 //i18n
 const { t } = useI18n();
+// meta
+const { meta } = useForm();
 
+// formLogin
+const { errors, handleSubmit, defineInputBinds, resetForm } = useForm({
+  validationSchema: Yup.object({
+    price: Yup.string().required(t("requiredFiled")),
+  }),
+});
+
+//Car_title
+const price = defineInputBinds("price");
+const media = ref([]);
 // ListCar
-let ListCar = ref([]);
+let ListCar = ref({
+  Short_term: false,
+  long_term: false,
+  with_driver: false,
+  without_driver: false,
+});
 let ListShort_term = ref([]);
 let ListShortTerms = ref(false);
 let error = ref(false);
-
+// fileSelectedInsurance
+let fileSelectedMedia = (event) => {
+  let files = event.target.files;
+  for (let i = 0; i < files.length; i++) {
+    media.value.push(files[i]);
+  }
+  console.log(media.value);
+};
 // Changecheckbox submit
 let Changecheckbox = (e) => {
   const valueChecked = e.target.checked;
   if (valueChecked) {
-    for (let key in ListCar.value) {
-      if (ListCar.value[key] == "Short_term") {
-        ListShortTerms.value = true;
-        error.value = false;
-      } else if (ListCar.value[key] == "Long_term") {
-        error.value = false;
-      }
+    if (ListCar.value.Short_term) {
+      ListShortTerms.value = true;
+      ListShortTerms.value = true;
+      ListCar.value.long_term = false;
     }
   } else {
     ListShortTerms.value = false;
-    ListShort_term.value = [];
-    error.value = true;
+    ListCar.value.with_driver = false;
+    ListCar.value.without_driver = false;
   }
 };
+// Changecheckbox submit
+let ChangecheckboxLong = (e) => {
+  const valueChecked = e.target.checked;
+  if (valueChecked) {
+    if (ListCar.value.long_term) {
+      ListShortTerms.value = false;
+      ListCar.value.with_driver = false;
+      ListCar.value.without_driver = false;
+      ListCar.value.Short_term = false;
+    }
+  }
+};
+const ChooseTabGoToMyCar = () => {
+  router.push("/");
+};
 // handel submit
-let onSubmit = () => {
+let onSubmit = handleSubmit((values) => {
+  Profile.AccountVerified.price = values.price;
   if (ListCar.value.length !== 0) {
-    emits("ChooseTabAccount", "Parking address");
-    console.log("ChooseTabAccount ====");
+    Profile.AccountVerified.Short_term = ListCar.value.Short_term ? 1 : 0;
+    Profile.AccountVerified.long_term = ListCar.value.long_term ? 1 : 0;
+    Profile.AccountVerified.with_driver = ListCar.value.with_driver ? 1 : 0;
+    Profile.AccountVerified.media = media.value;
+    // for (let key in ListCar.value) {
+    //   console.log(ListCar.value[key]);
+    //   if (ListCar.value[key] == "Short_term") {
+    //     Profile.AccountVerified.plate_number = values.Plate_number;
+    //   }
+    // }
+    emits("ChooseTabAccount", "Features");
   } else {
     error.value = true;
   }
-};
+});
 </script>
 <template>
   <form @submit.prevent="onSubmit">
@@ -63,37 +116,34 @@ let onSubmit = () => {
             />
             {{ t("upload") }}</SimpleButton
           >
-          <input type="file" />
+          <input
+            type="file"
+            name="filefield"
+            multiple="multiple"
+            @change="fileSelectedMedia"
+          />
         </SimpleInput>
       </div>
     </div>
     <div class="box mt-3 mb-3 Insurance">
       <h4>{{ t("Recommended_daily_price") }}</h4>
       <div class="row">
-        <div class="col-md-6 px-0">
-          <div class="ranking">
-            <img
-              src="@/assets/images/global/icons/global/profile/ranking.svg"
-            />
-            <p>
-              {{ t("Our_Recommended_daily_price") }}
-              <span class="color-main">{{
-                t("Our_Recommended_daily_price_number")
-              }}</span>
-            </p>
-          </div>
-        </div>
         <div class="col-md-6 pr-0">
           <SimpleInput>
             <label>{{ t("Market_value_your_car") }}</label>
             <input
-              type="text"
-              id="Market_value_your_car"
+              type="number"
               name="Market_value_your_car"
+              v-bind="price"
               placeholder="0000000"
+              required
+              :class="{ 'is-invalid': errors.price }"
             />
             <span class="currency">EGP</span>
           </SimpleInput>
+          <div class="invalid-feedback">
+            {{ errors.price }}
+          </div>
         </div>
       </div>
     </div>
@@ -105,8 +155,8 @@ let onSubmit = () => {
           <div class="content">
             <input
               type="checkbox"
-              value="Short_term"
-              v-model="ListCar"
+              value="0"
+              v-model="ListCar.Short_term"
               @change="Changecheckbox($event)"
             />
             <p>
@@ -119,8 +169,8 @@ let onSubmit = () => {
             <li>
               <input
                 type="checkbox"
-                value="With_driver"
-                v-model="ListShort_term"
+                v-model="ListCar.with_driver"
+                @change="Changecheckbox($event)"
               />
               <p>
                 {{ t("With_driver") }}
@@ -130,7 +180,8 @@ let onSubmit = () => {
               <input
                 type="checkbox"
                 value="Without_driver"
-                v-model="ListShort_term"
+                v-model="ListCar.without_driver"
+                @change="Changecheckbox($event)"
               />
               <p>
                 {{ t("Without_driver") }}
@@ -142,9 +193,9 @@ let onSubmit = () => {
           <div class="content">
             <input
               type="checkbox"
-              value="Long_term"
-              v-model="ListCar"
-              @change="Changecheckbox($event)"
+              value="0"
+              v-model="ListCar.long_term"
+              @change="ChangecheckboxLong($event)"
             />
             <p>
               <span class="color-gray">{{ t("Long_term") }}</span> (
@@ -154,11 +205,11 @@ let onSubmit = () => {
           </div>
         </li>
       </ul>
-      <span v-if="error" class="color-denger">{{ t("requiredFiled") }}</span>
+      <!-- <span v-if="error" class="color-denger">{{ t("requiredFiled") }}</span> -->
     </div>
     <div class="col-12 text-center mb-5 mt-5 direction_ar">
       <SimpleButton type="sub_button">
-        <button>
+        <button @click="ChooseTabGoToMyCar">
           {{ t("Finish_later") }}
         </button>
       </SimpleButton>
@@ -174,7 +225,7 @@ let onSubmit = () => {
   </form>
 </template>
 <style scoped lang="scss">
-@import "../../Profile/_stylingProfile.scss";
+@import "../../Profile/stylingProfile";
 .simple-button.sub_button,
 .simple-button.send {
   width: max-content;

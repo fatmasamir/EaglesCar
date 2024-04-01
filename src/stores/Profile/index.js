@@ -312,7 +312,10 @@ export const UseProfile = defineStore("Profile", () => {
     data.append("title[en]", AccountVerified.value.title);
     // data.append("description[ar]", AccountVerified.value.description);
     data.append("description[en]", AccountVerified.value.description);
-    data.append("short_description[en]", AccountVerified.value.description);
+    data.append(
+      "short_description[en]",
+      AccountVerified.value.description.slice(0, 20)
+    );
     // data.append("features.0.ar", AccountVerified.value.Featurer1);
     // data.append("features.1.ar", AccountVerified.value.Featurer2);
     // data.append("features.2.ar", AccountVerified.value.Featurer2);
