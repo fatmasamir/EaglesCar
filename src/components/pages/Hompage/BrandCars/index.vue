@@ -163,6 +163,11 @@ onMounted(() => {
       }
     }
   }
+  .BrandCars .listBrand li[data-v-96097d3b] {
+    width: 42%;
+    margin: 2%;
+    padding: 25px;
+  }
 }
 
 /*ar version */
